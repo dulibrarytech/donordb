@@ -77,11 +77,21 @@
 
 
 <footer id="footer-bar">
+
 	<?php $this->load->view("partials/footer-bar.php"); ?>
+
+	<!--Load javascript functions-->
+	<?php $this->load->view("partials/javascript-partial.php"); ?>
+
+	<!--Validate user / Primary login-->
+	<script>
+		authentication.validateSession();
+	</script>
+	
 </footer>
 
 
-<?php $this->load->view("partials/javascript-partial.php"); ?>
+
 
 
 
