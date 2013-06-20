@@ -13,13 +13,14 @@ function doAjax(ajaxObj) {
 	$.ajax(ajaxObj);
 };
 
-function submitLName() {
+function submitLName(form) {
 
 	var lname = $("#input-box").val();
 	
 	if(lname == "")
 		alert("Please enter a last name");
 
+	// Try to use the form submit in html, and form.submit() here 
 	else
 		location.href = _searchUrl + "/donorSearch?keyword=" + lname;	
 }
@@ -29,7 +30,3 @@ function submitDate(response) {
 	alert(response);
 }
 
-function loginForm() {
-
-	// TODO: disable lname and date submit.  remove menubar links.  re-activate them in a function called upon authentication success
-}

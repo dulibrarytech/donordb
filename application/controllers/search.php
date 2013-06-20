@@ -20,29 +20,23 @@ class search extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('search-form');
+		$this->load->view('lookup-view');
 	}
 
 	public function donorSearch()
 	{
-		$keyword = $this->input->get('keyword');
 		
-		$resultViewData['resultsTable'] 		= /*$this->searchModel->keywordSearch($keyword)*/$keyword;
-		// //$resultViewData['resultsTableHeader']	= '<thead><tr><th><!--EMPTY--></th><th>First Name</th><th>Last Name</th><th><!--EMPTY--></th></tr></thead>';
-	 	$resultViewData['searchType']  			= /* *** Add var if first/last name can be specified for search *** */ "Name Search Results:"; 		
-
-		$this->load->view('search-results', $resultViewData); 
 	}
 
 	public function dateSearch()
 	{
-		$fromDate = $this->input->post('fromDate');
-		$toDate = $this->input->post('toDate');
+		// $fromDate = $this->input->post('fromDate');
+		// $toDate = $this->input->post('toDate');
 		
-		$resultViewData['resultsTable'] = $this->searchModel->dateSpanSearch($fromDate, $toDate);
-		$resultViewData['searchType']   = /* *** Add var if first/last name can be specified for search *** */ "Date Search Results:"; 		
+		// $resultViewData['resultsTable'] = $this->searchModel->dateSpanSearch($fromDate, $toDate);
+		// $resultViewData['searchType']   = /* *** Add var if first/last name can be specified for search *** */ "Date Search Results:"; 		
 
-		$this->load->view('search-results', $resultViewData); 
+		// $this->load->view('search-results', $resultViewData); 
 	}
 
 	public function browseDonors() 

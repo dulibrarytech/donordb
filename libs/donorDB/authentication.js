@@ -13,14 +13,10 @@ authentication = (function($) {
 	var validateSession;
 
 	validateSession = function() {
-		alert("VS");
-		if(sessionStorage.login != null) {
 
-			
-		}
-		else {
+		if(sessionStorage.login == null) {
 
-
+			//$( "#dialog-form" ).dialog( "open" );
 		}
 	};
 

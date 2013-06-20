@@ -4,13 +4,6 @@
 
 <head>
 
-	<!-- Date Picker widget -->
-  	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery-ui.css" />
-  	<script src="<?php echo base_url();?>assets/js/jquery-1.9.1.js"></script>
-  	<script src="<?php echo base_url();?>assets/js/jquery-ui.js"></script>
- 	<!--link rel="stylesheet" href="/resources/demos/style.css" /-->
- 	<script src="<?php echo base_url();?>assets/js/jquery.js"></script>
-
 	<!-- -->
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/main.css" />

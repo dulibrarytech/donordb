@@ -13,8 +13,12 @@ function donorEvents() {
 	$("#last-name-input").validate({
 
         errorClass: "invalid",
-        submitHandler: function() {
-            submitLName();
+        rules: {
+	
+  		}
+        submitHandler: function(form) {
+        	
+            submitLName(form);
         }
     });
 }

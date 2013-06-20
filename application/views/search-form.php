@@ -8,6 +8,11 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/main.css" />
 
+	<!-- Date Picker widget | Login form -->
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery-ui.css" />
+	<script src="<?php echo base_url();?>assets/js/jquery-1.9.1.js"></script>
+	<script src="<?php echo base_url();?>assets/js/jquery-ui.js"></script>
+
 	<style>
 
 		/* last name input */
@@ -31,7 +36,6 @@
 
 <body>
 
-	postwith();
 	<div id="app-title" class="container">
 		<div class="container">
 			<div id="app-title-box">
@@ -65,13 +69,11 @@
 				<button type="submit" class="btn" id="submit_date" style="margin-left: 20px; margin-bottom: 9px;">Submit</button> 
 		</form>
 
-		<p class="copyright-text" style="margin-top: 5px;">University of Denver, Anderson Academic Commons &copy2013</p>
+		<div class="copyright-text">
+			<p>University of Denver, Anderson Academic Commons &copy2013</p>
+		</div>
 
 	</div>
-
-	<!--div id="footer-bar"-->	
-		<!--?php $this->load->view("partials/footer-bar.php"); ?-->
-	<!--/div-->
 
 </body>
 
@@ -85,6 +87,7 @@
 
 	<!--Validate user / Primary login-->
 	<script>
+		alert("validating session...");
 		authentication.validateSession();
 	</script>
 	

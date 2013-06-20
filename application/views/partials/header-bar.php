@@ -17,7 +17,7 @@
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner" id="header-bar-base">
                 <div class="container">
-                    <img alt="du logo full" class="logo" width="140" height="40" src="<?php echo base_url();?>img/du-logo.gif" />
+                    <img alt="du logo full" id="logo" width="140" height="40" src="<?php echo base_url();?>img/du-logo.gif" />
 					<span class="pull-right smalltext" style="text-align: right;" />
                 </div> <!-- /container -->
             </div>
