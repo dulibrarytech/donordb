@@ -13,7 +13,7 @@
     <div class="container bannersNav" id="nav-bar">
         <!--section id="page-banners"-->
         <ul class="nav nav-tabs">
-            <li class="navbar-item"><a class="active" title="Donor Application Home" href="<?php echo base_url();?>index.php/search">Search Donors</a></li>
+            <li class="navbar-item"><a class="active" title="Donor Application Home" href="<?php echo base_url();?>index.php/search">Home</a></li>
 
             <li class="navbar-item"><a title="Browse Donors" href="<?php echo base_url();?>index.php/search/browseDonors">Browse Donors</a></li>
 

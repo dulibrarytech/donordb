@@ -14,17 +14,22 @@ authentication = (function($) {
 
 	validateSession = function() {
 
-		if(sessionStorage.login == null) {
+		  if(sessionStorage.login == null) {
 
-			//$( "#dialog-form" ).dialog( "open" );
-		}
+          loginForm.doModal();
+
+          // have validated username.  check against local user db, and return roleid and userid
+		  }
 	};
 
 	return {
 
-		validateSession: function() {
-			validateSession();
-		}
+		  validateSession: function() {
+			   validateSession();
+		  }
 	};
 
 }(jQuery));
+
+
+

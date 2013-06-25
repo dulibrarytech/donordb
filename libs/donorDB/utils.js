@@ -22,7 +22,10 @@ function submitLName(form) {
 
 	// Try to use the form submit in html, and form.submit() here 
 	else
-		location.href = _searchUrl + "/donorSearch?keyword=" + lname;	
+	{
+		var test = $.post();
+		alert(test);
+	}	
 }
 
 function submitDate(response) {

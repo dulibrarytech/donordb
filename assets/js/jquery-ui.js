@@ -9222,6 +9222,7 @@ $.widget( "ui.dialog", {
 			props = $.isFunction( props ) ?
 				{ click: props, text: name } :
 				props;
+
 			// Default to a non-submitting button
 			props = $.extend( { type: "button" }, props );
 			// Change the context for the click callback to be the main element
@@ -9233,9 +9234,11 @@ $.widget( "ui.dialog", {
 				icons: props.icons,
 				text: props.showText
 			};
+
 			delete props.icons;
 			delete props.showText;
 			$( "<button></button>", props )
+				.addClass(name) /*JR Edit*/
 				.button( buttonOptions )
 				.appendTo( that.uiButtonSet );
 		});

@@ -14,13 +14,11 @@ searchView = (function($) {
 
 	initPage = function() {
 
+		$("#table-section").hide();
+		$(".content-window").css("height", "425px");
+
 		$("#page-label").text("Search Donors");
-
-
-		//authentication.validateSession();
 	};
-
-	//TODO: Authenticate here
 
 	return {
 

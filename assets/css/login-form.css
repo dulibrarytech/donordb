@@ -1,0 +1,82 @@
+/*
+* Donor Application
+*
+* Login popup dialog Style Sheet (jquery)
+*
+* University of Denver, June 2013
+*/
+
+#dialog-form body { 
+
+	font-size: 62.5%; 
+}
+
+#dialog-form label, input { 
+
+	display:block;
+	margin-left: 25px; 
+}
+
+#dialog-form input.text { 
+
+	margin-bottom:12px; 
+	/*width:95%;*/ 
+	padding: .4em; 
+	height: 30px;
+	width: 250px;
+}
+
+#dialog-form input {
+
+	margin-left: 25px;
+}
+
+#dialog-form fieldset { 
+
+	padding:0; 
+	border:0; 
+	margin-top:25px; 
+}
+
+#dialog-form h1 { 
+
+	font-size: 1.2em; 
+	margin: .6em 0; 
+}
+
+#dialog-form .ui-dialog .ui-state-error { 
+
+	padding: .3em; 
+}
+
+#dialog-form .validateTips { 
+
+	border: 1px 
+	solid transparent; 
+	padding: 0.3em; 
+}
+
+.Login {
+
+	width: 100px;
+	margin-left: 26px;
+	float: left;
+}
+
+.Cancel {
+
+	width: 100px;
+	margin-right: 28px;
+	float: right;
+}
+
+.ui-dialog-titlebar-close {
+
+	visibility: hidden;
+}
+
+
+
+
+
+
