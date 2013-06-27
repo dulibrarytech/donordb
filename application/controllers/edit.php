@@ -12,6 +12,7 @@ class edit extends CI_Controller {
     function __construct() 
     {
         parent::__construct();
+
         $this->load->helper('url');
         $this->load->helper('form');
 
@@ -21,7 +22,7 @@ class edit extends CI_Controller {
 
 	public function index()
 	{
-		echo "hit edit/index";
+		$this->load->view('edit-view');
 	}
 
 	public function editDonor() 
@@ -37,11 +38,10 @@ class edit extends CI_Controller {
 	}
 
 	public function addGift() 
-	{
-		// Get current donor ID.  
-		$donorID = $this->uri->segment(3);
+	{ 
+		$data['pageLoader'] = "<script>addGiftView.initPage();</script>";
 
-		$this->load->view('gift-entry-form');
+		$this->load->view('edit-view', $data);
 	}
 
 	public function enterGift($donorID)
@@ -51,10 +51,8 @@ class edit extends CI_Controller {
 
 	public function addDonor() 
 	{
-		$this->load->model('titleModel');
-		$data['titleData'] = $this->titleModel->listAllTitles();
-
-		$this->load->view('add-donor', $data);
+		// $this->load->model('titleModel');
+		// $data['titleData'] = $this->titleModel->listAllTitles();
 	}
 
 	public function inputDonorInfo()

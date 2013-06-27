@@ -1,25 +1,11 @@
 function donorEvents() {
 
-	// $('#submit_lname').click( function () {
-
-	// 	submitLName();
-	// });
-
-	// $("#last-name-input").submit( function() {
-
-	// 	submitLName();
-	// });
-
-	$("#last-name-input").validate({
+	// Search Form submit
+	$("#search-form").validate({
 
         errorClass: "invalid",
-        rules: {
-	
-  		}
-        submitHandler: function(form) {
-        	
-            submitLName(form);
+        submitHandler: function() {
+            submitSearch();
         }
     });
-
 }

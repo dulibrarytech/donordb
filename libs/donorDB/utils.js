@@ -13,23 +13,27 @@ function doAjax(ajaxObj) {
 	$.ajax(ajaxObj);
 };
 
-function submitLName(form) {
+function submitSearch(form) {
 
-	var lname = $("#input-box").val();
-	
-	if(lname == "")
-		alert("Please enter a last name");
+	var searchType 	= $('input:radio[name=searchType]:checked').val(),
+	    lastName 	= $('#lname_input_box').val(),
+	    fromDate 	= $('#fromDate').val(),
+	    toDate 		= $('#toDate').val();
 
-	// Try to use the form submit in html, and form.submit() here 
+	if(lastName == "" && fromDate == "" && toDate == "") 
+		alert("Please enter a last name or set a date range");
 	else
 	{
-		var test = $.post();
-		alert(test);
-	}	
+
+	}
+	
 }
 
-function submitDate(response) {
 
-	alert(response);
-}
+
+
+
+
+
+
 

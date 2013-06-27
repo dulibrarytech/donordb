@@ -13,14 +13,14 @@
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery-ui.css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/login-form.css">
 
+	<!-- Positioning -->
 	<style>
 		#lname_label 		{ margin-left: 25px; }
 		#lname_input_box 	{ margin-top:9px; margin-left: 25px; }
-		#submit_lname 		{ margin-top:2px; margin-left: 20px; }
 		#date_label 		{ margin-left: 25px; padding-bottom: 9px }
 		#fromDate			{ margin-left: 25px; }
 		#toDate				{ margin-left: 85px; }
-		#submit_date		{ margin-left: 20px; margin-bottom: 9px; }
+		#search_submit		{ margin-left: 475px; margin-bottom: 9px; }
 	</style>
 
 </head>
@@ -45,31 +45,35 @@
 	<!-- Main Content Window -->
 	<div class="container content-window">
 
+		<!-- Menu Bar -->
 		<?php $this->load->view("partials/menu-bar.php"); ?>
-
-		<!-- Large menu buttons -->
-
 
 		<div class="container generic-label" id="page-label"></div>	
 
-		<!-- Last name search form -->
-		<form id="lname_input" class="well" method="post">  <!-- action? -->
-			<label class="form-label-text" id="lname_label">Search by Last Name:</label>  
+		<form id="search-form" method="post">
+			<!-- Search type radio selector -->
+			<div class="well" id="search-type-section">
+				<table id="search-type"><tr>
+					<td style="width: 22px;"></td><td style="padding-right: 250px;">Record Type:</td><td class="span3"><input type="radio" name="searchType" value="donor" checked="checked"/></td><td>Donor</td><td class="span4"></td><td><input type="radio" name="searchType" value="gift"/></td><td>Gift</td>
+				</tr></table>
+			</div>
 
-			<input type="text" class="input-xlarge" id="lname_input_box" placeholder="Search all donors" name="lastName">  
+			<!-- search form -->
+			<div class="well" id="search-form-name">  <!-- action? -->
+				<label class="form-label-text" id="lname_label">Search by Last Name:</label>  
 
-		    <button type="submit" class="btn" id="submit_lname">Submit</button>  
-		</form>  
+				<input type="text" class="input-xlarge" id="lname_input_box" placeholder="Leave blank to search all donors" name="lastName">  
+			</div>
 
-		<!-- Date span search form -->
-		<form id="date_input" class="well" method="post">  <!-- action? -->
-			<label class="form-label-text" id="date_label">Display Results in Date Range:</label>
+			<div class="well" id="search-form-date">
+				<label class="form-label-text" id="date_label">Display Results in Date Range:</label>
 
-			<input type="text" class="input-small" id="fromDate" name="fromDate" placeholder="From"/>
+				<input type="text" class="input-small" id="fromDate" name="fromDate" placeholder="From"/>
 
-			<input type="text" class="input-small" id="toDate" name="toDate" placeholder="To"/>
+				<input type="text" class="input-small" id="toDate" name="toDate" placeholder="To"/>
 
-			<button type="submit" class="btn" id="submit_date">Submit</button> 
+				<button type="submit" class="btn" id="search_submit">Submit</button> 
+			</div>
 		</form>
 
 		<!-- Table section -->
@@ -118,10 +122,10 @@
 	<!--Load javascript functions-->
 	<?php $this->load->view("partials/javascript-partial.php"); ?>
 	
-	<script>
-		searchView.initPage();
-		authentication.validateSession();
-	</script>
+	<script>//authentication.validateSession();</script>
+
+	<!-- Run page loader for requested page (set in CI controller) -->
+	<?php echo $pageLoader; ?>
 </footer>
 
 

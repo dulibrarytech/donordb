@@ -13,13 +13,15 @@
     <div class="container bannersNav" id="nav-bar">
         <!--section id="page-banners"-->
         <ul class="nav nav-tabs">
-            <li class="navbar-item"><a class="active" title="Donor Application Home" href="<?php echo base_url();?>index.php/search">Home</a></li>
+            <li class="navbar-item"><a class="active" title="Application Home" href="<?php echo base_url();?>index.php/search">Search</a></li>
+
+            <li class="navbar-item"><a title="Add Gift" href="<?php echo base_url();?>index.php/edit/addGift">Add Gift</a></li>
 
             <li class="navbar-item"><a title="Browse Donors" href="<?php echo base_url();?>index.php/search/browseDonors">Browse Donors</a></li>
 
-            <li class="navbar-item"><a title="" href="<?php echo base_url();?>index.php/edit/addDonor">Add Donor</a></li>
+            <li class="navbar-item"><a title="" href="<?php echo base_url();?>index.php/interface/addDonor">Add Donor Info</a></li>
 
-            <li class="navbar-item" style="border: none"><a title="" href="<?php echo base_url();?>index.php/edit/titleList">Title List</a></li>
+            <li class="navbar-item" style="border: none"><a title="" href="<?php echo base_url();?>index.php/interface/titleList">Title List</a></li>
         </ul>
         <!--/section-->
     </div>

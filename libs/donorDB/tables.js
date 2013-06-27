@@ -10,24 +10,24 @@
 
 function loadAllDonors() {
 
-	var requestObj = {
+	// var requestObj = {
 
-    		type: 		"POST",
-    		//url: 		donorDB.configObj._searchUrl . "queryDatabaseAllDonors",
-    		url: 		_searchUrl + "/queryDatabaseAllDonors",
-    		dataType: 	"json",
-    		cache: 		true,
-    		success: 	function (response) {
-    						buildBrowseAllTable(response);
-    					},
-    		error: 		function(textStatus, errorThrown) {
-    						alert( errorThrown );
-    					}
-    	};
+ //    		type: 		"POST",
+ //    		//url: 		donorDB.configObj._searchUrl . "queryDatabaseAllDonors",
+ //    		url: 		_searchUrl + "/queryDatabaseAllDonors",
+ //    		dataType: 	"json",
+ //    		cache: 		true,
+ //    		success: 	function (response) {
+ //    						buildBrowseAllTable(response);
+ //    					},
+ //    		error: 		function(textStatus, errorThrown) {
+ //    						alert( errorThrown );
+ //    					}
+ //    	};
   
-    	$("#table-content").html("<h2><center>Loading...</center></h2>");
+ //    	$("#table-content").html("<h2><center>Loading...</center></h2>");
 
-    	doAjax(requestObj);
+ //    	doAjax(requestObj);
 }
 
 function buildBrowseAllTable(responseObj) {
@@ -51,8 +51,23 @@ function buildBrowseAllTable(responseObj) {
 
 	results += '</table>';
 
-	$("#table-content").html(results);
+	return results;
+	//$("#table-content").html(results);
 };
+
+function buildDonorSearchResultsTable(responseObj) {
+
+	var results = "";
+
+	return results;
+}
+
+function buildGiftSearchResultsTable(responseObj) {
+
+	var results = "";
+	
+	return results;
+}
 
 
 

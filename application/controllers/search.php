@@ -20,38 +20,28 @@ class search extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('lookup-view');
+		// TODO: any necessary initial security measures
+
+		$data['pageLoader'] = "<script>searchView.initPage();</script>";
+
+		$this->load->view('lookup-view', $data);
 	}
 
-	public function donorSearch()
+	public function recordSearch()
 	{
-		
-	}
-
-	public function dateSearch()
-	{
-		// $fromDate = $this->input->post('fromDate');
-		// $toDate = $this->input->post('toDate');
-		
-		// $resultViewData['resultsTable'] = $this->searchModel->dateSpanSearch($fromDate, $toDate);
-		// $resultViewData['searchType']   = /* *** Add var if first/last name can be specified for search *** */ "Date Search Results:"; 		
-
-		// $this->load->view('search-results', $resultViewData); 
+		// TODO: case select; get post data; send to model search function; json encode and echo results 
 	}
 
 	public function browseDonors() 
 	{
+		// TODO: get results table and echo the json encode
+
 		//$resultViewData['resultsTable'] = $this->searchModel->browseAllDonors();
-		$this->load->view('browse-donors'); 
+		//$this->load->view('browse-donors'); 
 	}
 
 	public function queryDatabaseAllDonors()
 	{
 		echo json_encode($this->searchModel->browseAllDonors());
-	}
-
-	public function queryDatabaseSearchDonors()
-	{
-
 	}
 }
