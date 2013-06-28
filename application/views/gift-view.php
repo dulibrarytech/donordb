@@ -46,12 +46,15 @@
 		<!-- Menu Bar -->
 		<?php $this->load->view("partials/menu-bar.php"); ?>
 
-		<div class="container generic-label">
-			Add a Gift
-		</div>
+		<div class="container generic-label"></div>
 
 		<!-- Add Gift form -->
 		<form id="add-gift-form" method="post">
+
+			<div class="well" id="display-donor-section">
+				<label class="form-label-text left-edge-field" id="donor_name_label">Donor Name:</label>  
+				<input type="text" class="input-xlarge left-edge-field" id="donor_name_box" placeholder="Last name" name="selectName"> 
+			</div>
 
 			<div class="well" id="select-donor-section">
 				<table><tr>

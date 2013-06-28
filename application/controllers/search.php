@@ -29,19 +29,25 @@ class search extends CI_Controller {
 
 	public function recordSearch()
 	{
-		// TODO: case select; get post data; send to model search function; json encode and echo results 
+		// TODO: case select; get post data; send to model search function; json encode and echo results (array)
 	}
 
 	public function browseDonors() 
 	{
-		// TODO: get results table and echo the json encode
+		$data['pageLoader'] = "<script>browseDonorsView.initPage();</script>";
 
-		//$resultViewData['resultsTable'] = $this->searchModel->browseAllDonors();
-		//$this->load->view('browse-donors'); 
+		$this->load->view('table-view', $data);
 	}
 
 	public function queryDatabaseAllDonors()
 	{
 		echo json_encode($this->searchModel->browseAllDonors());
+	}
+
+	public function titleList()
+	{
+		// $resultViewData['resultsTable'] = $this->titleModel->createTitleTable();
+
+		// $this->load->view('title-list', $resultViewData);
 	}
 }

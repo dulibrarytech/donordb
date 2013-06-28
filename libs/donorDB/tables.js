@@ -7,67 +7,57 @@
  * 
  * University of Denver, June 2013
  */
+tables = (function($) {
 
-function loadAllDonors() {
+	buildBrowseAllTable = function(responseObj) {
 
-	// var requestObj = {
+		var results = "";
 
- //    		type: 		"POST",
- //    		//url: 		donorDB.configObj._searchUrl . "queryDatabaseAllDonors",
- //    		url: 		_searchUrl + "/queryDatabaseAllDonors",
- //    		dataType: 	"json",
- //    		cache: 		true,
- //    		success: 	function (response) {
- //    						buildBrowseAllTable(response);
- //    					},
- //    		error: 		function(textStatus, errorThrown) {
- //    						alert( errorThrown );
- //    					}
- //    	};
-  
- //    	$("#table-content").html("<h2><center>Loading...</center></h2>");
+		results = '<table class="table table-bordered table-striped">';
 
- //    	doAjax(requestObj);
-}
+		$.each(responseObj, function (key, value) {
+			
+			results += '<tr>';
+			results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonor/' + value.donorID + '">Edit</a> </td>';
 
-function buildBrowseAllTable(responseObj) {
+			results += '<td class="span4">' + value.firstName + '</td>';
+			results += '<td class="span4">' + value.lastName + '</td>';
 
-	var results = "";
+			results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGift/' + value.donorID + '">Add Gift</a> </td>';
+			results += '</tr>';
 
-	results = '<table class="table table-bordered table-striped">';
+		} );
 
-	$.each(responseObj, function (key, value) {
-		
-		results += '<tr>';
-		results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonor/' + value.donorID + '">Edit</a> </td>';
+		results += '</table>';
 
-		results += '<td class="span4">' + value.firstName + '</td>';
-		results += '<td class="span4">' + value.lastName + '</td>';
+		return results;
+	};
 
-		results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGift/' + value.donorID + '">Add Gift</a> </td>';
-		results += '<tr>';
+	buildDonorSearchResultsTable = function(responseObj) {
 
-	} );
+		var results = "";
 
-	results += '</table>';
+		return results;
+	}
 
-	return results;
-	//$("#table-content").html(results);
-};
+	buildGiftSearchResultsTable = function(responseObj) {
 
-function buildDonorSearchResultsTable(responseObj) {
+		var results = "";
 
-	var results = "";
+		return results;
+	}
 
-	return results;
-}
+	return {
 
-function buildGiftSearchResultsTable(responseObj) {
+		buildBrowseAllTable: function(responseObj) {	
+			return buildBrowseAllTable(responseObj);
+		},
+		buildDonorSearchResultsTable: function(responseObj) {	
+			loadDonor(donorID);
+		}
+	};
 
-	var results = "";
-	
-	return results;
-}
+}(jQuery));
 
 
 

@@ -10,14 +10,28 @@
 
 searchView = (function($) {
 
-	var initPage;
+	var initPage,
+		addEvents;
 
 	initPage = function() {
 
-		$("#table-section").hide();
 		$(".content-window").css("height", "500px");
 
-		$("#page-label").text("Search Records");
+		$(".generic-label").text("Search Records");
+
+		addEvents();
+	};
+
+	addEvents = function() {
+
+		$("#search-form").validate({
+
+	        errorClass: "invalid",
+	        submitHandler: function() {
+	            //submitSearch();
+	            alert("submit search");
+	        }
+	    });
 	};
 
 	return {
@@ -30,19 +44,38 @@ searchView = (function($) {
 }(jQuery));
 
 
-resultsView = (function($) {
+browseDonorsView = (function($) {
 
-	var initPage;
+	var initPage,
+		getData,
+
+		tableData;
 
 	initPage = function() {
 
-		
+		$(".generic-label").text("Donor Listing");
+		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>First Name</th> <th class='span4'>Last Name</th> <th><!--SPACE--></th> </thead>");
+
+		getData();
+	};
+
+	setLayout = function(results) {
+
+		$("#table-content").html(results);
+	};
+
+	getData = function() {
+
+		utils.requestAllDonorData();
 	};
 
 	return {
 
-		initPage: function() {	
+		initPage: function() {
 			initPage();
+		},
+		setLayout: function(results) {
+			setLayout(results);
 		}
 	};
 
@@ -51,12 +84,18 @@ resultsView = (function($) {
 
 addGiftView = (function($) {
 
-	var initPage;
+	var initPage,
+		loadDonor,
+		addEvents;
 
 	initPage = function() {
 
 		$('#select_donor_button').attr('disabled', 'disabled');
 		$('#gift_submit_button').attr('disabled', 'disabled');
+
+		$(".generic-label").text("Add a Gift");
+
+		$('#display-donor-section').hide();
 
 		$(".content-window").css("height", "580px");
 
@@ -92,3 +131,29 @@ addGiftView = (function($) {
 	};
 
 }(jQuery))
+
+
+giftDetailsView = (function($) {
+
+	var initPage;
+
+	initPage = function() {
+
+		$(".generic-label").text("Gift Details");
+
+		$('#select-donor-section').hide();
+		$('#gift_submit_button').hide();
+
+		$('#gift_date_box').attr('placeholder', '');
+
+		$(".content-window").css("height", "580px");
+	};
+
+	return {
+
+		initPage: function() {	
+			initPage();
+		}
+	};
+
+}(jQuery));

@@ -48,7 +48,7 @@
 		<!-- Menu Bar -->
 		<?php $this->load->view("partials/menu-bar.php"); ?>
 
-		<div class="container generic-label" id="page-label"></div>	
+		<div class="container generic-label"></div>	
 
 		<form id="search-form" method="post">
 			<!-- Search type radio selector -->
@@ -75,25 +75,6 @@
 				<button type="submit" class="btn" id="search_submit">Submit</button> 
 			</div>
 		</form>
-
-		<!-- Table section -->
-		<div id="table-section">
-
-			<!-- Stationary table header -->
-			<table class="table table-bordered" id="">
-				<thead> <th class="span2"><!--SPACE--></th> <th class="span4">First Name</th> <th class="span4">Last Name</th> <th><!--SPACE--></th> </thead>
-			</table>
-
-			<!-- Table content section -->
-			<div class="scrollable">
-				<div class="container" id="">
-
-		 			<div id="table-content"></div>
-
-				</div>
-			</div>
-
-		</div>
 
 	</div>
 
@@ -126,6 +107,7 @@
 
 	<!-- Run page loader for requested page (set in CI controller) -->
 	<?php echo $pageLoader; ?>
+	
 </footer>
 
 

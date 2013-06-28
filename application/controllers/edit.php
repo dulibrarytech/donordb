@@ -28,11 +28,11 @@ class edit extends CI_Controller {
 	public function editDonor() 
 	{
 		// Get current donor ID.  
-		$donorID = $this->uri->segment(3);
+		// $donorID = $this->uri->segment(3);
 
-		$data = $this->searchModel->getDonorInfo($donorID);
+		// $data = $this->searchModel->getDonorInfo($donorID);
 
-		$this->load->view('edit-donor-info', $data);
+		// $this->load->view('edit-donor-info', $data);
 
 		// json?
 	}
@@ -41,12 +41,14 @@ class edit extends CI_Controller {
 	{ 
 		$data['pageLoader'] = "<script>addGiftView.initPage();</script>";
 
-		$this->load->view('edit-view', $data);
+		$this->load->view('gift-view', $data);
 	}
 
 	public function enterGift($donorID)
 	{
+		$data['pageLoader'] = "<script>giftDetailsView.initPage();</script>";
 
+		$this->load->view('gift-view', $data);
 	}
 
 	public function addDonor() 
@@ -58,13 +60,6 @@ class edit extends CI_Controller {
 	public function inputDonorInfo()
 	{
 
-	}
-
-	public function titleList()
-	{
-		$resultViewData['resultsTable'] = $this->titleModel->createTitleTable();
-
-		$this->load->view('title-list', $resultViewData);
 	}
 
 	public function editTitle() 
