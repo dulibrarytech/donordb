@@ -53,8 +53,9 @@ class edit extends CI_Controller {
 
 	public function addDonor() 
 	{
-		// $this->load->model('titleModel');
-		// $data['titleData'] = $this->titleModel->listAllTitles();
+		$data['pageLoader'] = "<script>addDonorInfoView.initPage();</script>";
+
+		$this->load->view('info-view', $data);
 	}
 
 	public function inputDonorInfo()

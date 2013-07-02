@@ -12,10 +12,11 @@ utils = (function($) {
 
 	var doAjax,
 		requestAllDonorData,
-		submitSearch;
+		submitSearch,
+		getTitleArray;
 
 	doAjax = function(ajaxObj) {
-
+		alert("ajax");
 		$.ajax(ajaxObj);
 	};
 
@@ -58,6 +59,26 @@ utils = (function($) {
 		
 	};
 
+	getTitleArray = function(callback) {
+
+		alert("gta");
+		requestObj = {
+
+			type: "POST", 
+			url: _searchUrl + '/getTitleList',
+			dataType: "json",
+			cache: true,
+			success: function(response) {
+				callback(response);
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
+
+		doAjax(requestObj);
+	};
+
 	return {
 
 		requestAllDonorData: function() {
@@ -65,6 +86,12 @@ utils = (function($) {
 		},
 		submitSearch: function(form) {	
 			submitSearch(form);
+		},
+		getTitleArray: function() {
+			getTitleArray();
+		},
+		doAjax: function(requestObj) {
+			doAjax(requestObj);
 		}
 	};
 

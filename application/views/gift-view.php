@@ -13,8 +13,9 @@
 	<!-- Positioning -->   
 	<!-- TODO: Create 'left edge field' class to offset by 25px left margin? -->
 	<style>
-		#select_donor_button		{ margin-left: 20px; margin-top: 15px; }
-		#gift_add_donor				{ margin-left: 85px; margin-top: 15px; }
+		#select_donor_button		{ margin-left: 5px; margin-top: 15px; width: 120px; }
+		#anon_donation_button		{ margin-left: 147px; margin-top: 15px; }
+		#new_donor_button			{ margin-left: -10px; margin-top: 15px; }
 		#gift_description_box		{ width: 500px; height: 150px; }
 		#gift_date_label			{ margin-left: 43px; }
 		#gift_date_box				{ margin-left: 43px; }
@@ -35,7 +36,7 @@
 	<div id="app-title" class="container">
 		<div class="container">
 			<div id="app-title-box">
-				Donor Application
+				Acquisitions Donations
 			</div>
 		</div>
 	</div>
@@ -62,11 +63,14 @@
 						<label class="form-label-text left-edge-field" id="donor_select_label">Enter Donor Name:</label>  
 						<input type="text" class="input-xlarge left-edge-field" id="donor_select_box" placeholder="Last name" name="selectName"> 
 					</td>
-					<td class="span4">
-						<button type="submit" class="btn" id="select_donor_button">Select Donor</button>
+					<td class="span2">
+						<button type="submit" class="btn" id="select_donor_button">Lookup Donor</button>
 					</td>
 					<td class="span3">
-						<button type="button" class="btn" id="gift_add_donor">Add New Donor Info</button>
+						<button type="button" class="btn" id="new_donor_button">New Donor</button>
+					</td>
+					<td class="">
+						<button type="button" class="btn" id="anon_donation_button">Anonymous Donation</button>
 					</td>
 				</table></tr>
 			</div>

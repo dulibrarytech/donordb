@@ -189,7 +189,7 @@ table {
 .table th,
 .table td {
   padding: 8px;
-  line-height: 20px;
+  line-height: 10px;
   text-align: left;
   vertical-align: top;
   border-top: 0px solid #ffffff;
@@ -205,9 +205,27 @@ table {
   text-align: center;
 }
 
+.pre-scrollable {
+  max-height: 340px;
+  overflow-y: scroll;
+}
+
 .form-label-text {
 
 	color: #515155;
+}
+
+.donor-info-form {
+
+	padding: 0px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+}
+
+.inout_form-default {
+
+	width: 240px;
 }
 
 .btn-grey {

@@ -5,13 +5,8 @@
 
 <head>
 
-	
-
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/ootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/main.css" />
-
-	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery-ui.css" />
-	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/login-form.css">
 
 	<!-- Positioning -->
 	<style>
@@ -37,7 +32,7 @@
 	<div id="app-title" class="container">
 		<div class="container">
 			<div id="app-title-box">
-				Donor Application
+				Acquisitions Donations
 			</div>
 		</div>
 	</div>
@@ -58,13 +53,13 @@
 			</table>
 
 			<!-- Table content section -->
-			<div class="scrollable">
-				<div class="container" id="">
+			
+				<div class="container pre-scrollable">
 
 		 			<div id="table-content"></div>
 
 				</div>
-			</div>
+			
 		</div>
 
 	</div>

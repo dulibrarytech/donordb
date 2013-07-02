@@ -44,10 +44,8 @@ class search extends CI_Controller {
 		echo json_encode($this->searchModel->browseAllDonors());
 	}
 
-	public function titleList()
+	public function getTitleList()
 	{
-		// $resultViewData['resultsTable'] = $this->titleModel->createTitleTable();
-
-		// $this->load->view('title-list', $resultViewData);
+		echo json_encode("Here it is, the list, the titles, the title by list, the title list.");
 	}
 }

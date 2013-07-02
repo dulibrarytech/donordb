@@ -1,7 +1,7 @@
 /*
  * Donor Application
  *
- * View layout scripts / ajax functions
+ * Page layout scripts 
  *
  * Author: Jeff Rynhart
  * 
@@ -53,20 +53,25 @@ browseDonorsView = (function($) {
 
 	initPage = function() {
 
+		$(".content-window").css("height", "645px");
+
 		$(".generic-label").text("Donor Listing");
+
 		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>First Name</th> <th class='span4'>Last Name</th> <th><!--SPACE--></th> </thead>");
 
+		$(".pre-scrollable").css("max-height", "390px");
+
 		getData();
-	};
-
-	setLayout = function(results) {
-
-		$("#table-content").html(results);
 	};
 
 	getData = function() {
 
 		utils.requestAllDonorData();
+	};
+
+	setLayout = function(allDonorData) {
+
+		$("#table-content").html(allDonorData);
 	};
 
 	return {
@@ -90,14 +95,15 @@ addGiftView = (function($) {
 
 	initPage = function() {
 
-		$('#select_donor_button').attr('disabled', 'disabled');
-		$('#gift_submit_button').attr('disabled', 'disabled');
+		$(".content-window").css("height", "590px");
 
 		$(".generic-label").text("Add a Gift");
 
-		$('#display-donor-section').hide();
+		$('#select_donor_button').attr('disabled', 'disabled');
+		$('#gift_submit_button').attr('disabled', 'disabled');
 
-		$(".content-window").css("height", "580px");
+		$('#display-donor-section').hide();
+		$("#new_donor_button").css("visibility", "hidden");
 
 		addEvents();
 	};
@@ -139,14 +145,14 @@ giftDetailsView = (function($) {
 
 	initPage = function() {
 
+		$(".content-window").css("height", "580px");
+
 		$(".generic-label").text("Gift Details");
 
 		$('#select-donor-section').hide();
 		$('#gift_submit_button').hide();
 
 		$('#gift_date_box').attr('placeholder', '');
-
-		$(".content-window").css("height", "580px");
 	};
 
 	return {
@@ -157,3 +163,56 @@ giftDetailsView = (function($) {
 	};
 
 }(jQuery));
+
+
+addDonorInfoView = (function($) {
+
+	var initPage,
+		getTitleData,
+		createTitleDropdown;
+
+	initPage = function() {
+
+		$(".content-window").css("height", "740px");
+
+		$(".generic-label").text("Add New Donor Info");
+
+		//getTitleData();
+		var testData;
+		testData = utils.getTitleArray();
+		// alert(testData);
+	};
+
+	getTitleData = function() {
+
+		requestObj = {
+
+			type: "POST", 
+			url: _searchUrl + '/getTitleList',
+			dataType: "json",
+			cache: true,
+			success: function(result) {
+				createTitleDropdown(result);
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
+		utils.doAjax(requestObj);
+	};
+
+	createTitleDropdown = function(tableData) {
+
+		alert(tableData);
+	};
+
+	return {
+
+		initPage: function() {	
+			initPage();
+		}
+	};
+
+}(jQuery));
+
+

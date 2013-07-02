@@ -13,7 +13,7 @@ tables = (function($) {
 
 		var results = "";
 
-		results = '<table class="table table-bordered table-striped">';
+		results = '<table class="table table-bordered table-striped teststyle">'; 
 
 		$.each(responseObj, function (key, value) {
 			

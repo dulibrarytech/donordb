@@ -37,7 +37,7 @@
 	<div id="app-title" class="container">
 		<div class="container">
 			<div id="app-title-box">
-				Donor Application
+				Acquisitions Donations
 			</div>
 		</div>
 	</div>
