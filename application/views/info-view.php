@@ -52,7 +52,7 @@
 				<tr>
 					<td>
 						<label class="form-label-text">Title:</label>  
-						
+						<div id="dropdown-box"></div>
 					</td>
 				
 					<td>

@@ -9,7 +9,7 @@ class search extends CI_Controller {
  *
  * Author: Jeff Rynhart
  * 
- * University of Denver, May 2013
+ * University of Denver, June 2013
  */
     function __construct() 
     {
@@ -18,6 +18,9 @@ class search extends CI_Controller {
 		$this->load->model('searchModel');
     }
 
+	/*
+	 * Search View 
+	 */
 	public function index()
 	{
 		// TODO: any necessary initial security measures
@@ -29,7 +32,36 @@ class search extends CI_Controller {
 
 	public function recordSearch()
 	{
-		// TODO: case select; get post data; send to model search function; json encode and echo results (array)
+		switch($this->input->server("REQUEST_METHOD")) 
+		{
+
+            case "GET":
+			{
+                $this->load->view("lookup-view");
+
+                break;
+            }
+            case "POST":
+            {
+                $postData 	= $this->input->post();
+
+                $keyword 	= $this->input->post('searchTerm');
+                $fromDate 	= $this->input->post('fromDate');
+                $toDate 	= $this->input->post('toDate');
+
+     //            if($postData['searchType'] == "donor")
+					// echo json_encode($this->searchModel->donorSearch($keyword,$fromDate,$toDate)); 
+     //            else if($postData['searchType'] == "gift")
+     //            	echo json_encode($this->searchModel->giftSearch($keyword,$fromDate,$toDate)); 
+                echo json_encode($fromDate);
+                break;
+            }
+            default:
+           	{
+                header("HTTP/1.0 404 Not Found");
+                return;
+            }
+        }
 	}
 
 	public function browseDonors() 
@@ -41,11 +73,12 @@ class search extends CI_Controller {
 
 	public function queryDatabaseAllDonors()
 	{
-		echo json_encode($this->searchModel->browseAllDonors());
+		echo json_encode($this->searchModel->getAllDonors());
 	}
 
-	public function getTitleList()
+	public function queryDatabaseAllTitles()
 	{
-		echo json_encode("Here it is, the list, the titles, the title by list, the title list.");
+		echo json_encode($this->searchModel->getAllTitles());
 	}
+
 }

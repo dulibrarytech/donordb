@@ -14,54 +14,98 @@ class searchModel extends CI_Model
         $this->load->database();
     }
 
-    function keywordSearch($keyword)
+    public function donorSearch($keyword,$fromDate,$toDate)
    	{
-   		$this->db->select('donorID, FirstName, LastName');
+   		$searchResults = array();
+   		$index = 0;
+
+   		// If date values are null, be sure to include all gifts
+   		// if($fromDate == null)
+   		// 	$fromDate = "1900-01-01";
+   		// if($toDate == null)
+   		// 	$toDate =  // Current date
+
+   		// Search LastName field
+   		$this->db->select('donorID, Organization, FirstName, LastName');
  		$this->db->from('tbl_donorinfo');
  		$this->db->like('LastName', $keyword);		// *** Search by last name by default.  May add options later *** //
  		$this->db->order_by('LastName');
  		
  		$query = $this->db->get();
- 		$resultsTable = "";
 
- 		// if ($query->num_rows() > 0)
- 		// { 	
-		 // 	foreach ($query->result() as $results)
-		 // 	{
-		 // 		$resultsTable .= "<tr>";
-		 // 		$resultsTable .= "<td>";
-		 // 		$resultsTable .= anchor("edit/editDonor/" . $results->donorID, "Edit");
-		 // 		$resultsTable .= "&nbsp;";
-		 // 		$resultsTable .= "</td>";
-		 // 		$resultsTable .= "<td>";
-		 // 		$resultsTable .= $results->FirstName;
-		 // 		$resultsTable .= "</td>";
-		 // 		$resultsTable .= "<td>";
-		 // 		$resultsTable .= $results->LastName;
-		 // 		$resultsTable .= "</td>";
-		 // 		$resultsTable .= "<td>";
-		 // 		$resultsTable .= "&nbsp;";
-		 // 		$resultsTable .= anchor("edit/addGift/" . $results->donorID, "Add Gift");
-		 // 		$resultsTable .= "</td>";
-		 // 		$resultsTable .= "</tr>";
-		 // 	}
+ 		if ($query->num_rows() > 0)
+ 		{ 	
+		 	foreach ($query->result() as $results)
+		 	{
+		 		// if($results->FirstName == "" && $results->LastName == "" && $results->Organization == "")
+		 		// 	continue;
+
+		 		if($this->dateScreen($results->donorID,$fromDate,$toDate))
+		 		{
+			 		$searchResults[$index]['firstName']		= $results->FirstName;
+			 		$searchResults[$index]['lastName']		= $results->LastName;
+			 		$searchResults[$index]['donorID']		= $results->donorID;
+
+			 		$index++;
+			 	}
+		 	}
 		 		
- 		// 	return $resultsTable;
- 		// }
- 		// else
- 		// {
- 		// 	return 'No results found.';
- 		// }
+ 			return $searchResults;
+ 		}
+ 		else
+ 		{
+ 			// Search Organization field
+ 			$this->db->select('donorID, Organization, FirstName, LastName');
+	 		$this->db->from('tbl_donorinfo');
+	 		$this->db->like('Organization', $keyword);		
+	 		$this->db->order_by('LastName');
+	 		
+	 		$query = $this->db->get();
 
-		return $resultsTable;
+	 		if ($query->num_rows() > 0)
+ 			{
+ 				foreach ($query->result() as $results)
+		 		{ 
+ 					$searchResults[$index]['org']			= $results->Organization;
+		 			$searchResults[$index]['donorID']		= $results->donorID;
+		 		}
+ 			}
+ 			else
+ 			{
+ 				return 'No results found.';
+ 			}
+ 		}
+
+		return $searchResults;
    	}
 
-   	function dateSpanSearch($from, $to)
+   	public function giftsearch($keyword)
    	{
-
+   		return "gift search model";
    	}
 
-   	function browseAllDonors()
+   	private function dateScreen($donorID,$fromDate,$toDate)
+   	{
+   		$giftsInRange = false;
+
+   		$this->db->select('giftsID');
+   		$this->db->from('tbl_donorgifts');
+   		$this->db->where('donorID', $donorID);
+   		$this->db->where('dateOfGift >=', $fromDate);
+   		$this->db->where('dateOfGift <=', $toDate);
+
+   		$query = $this->db->get();
+
+   		if ($query->num_rows() > 0)
+ 		{
+			// Return true if this donor has donated any gifts within the range.
+			$giftsInRange = true;
+ 		} 
+
+ 		return $giftsInRange;
+   	}
+
+   	public function getAllDonors()
    	{
    		$donorInfo = array();
    		$index = 0;
@@ -69,14 +113,13 @@ class searchModel extends CI_Model
    		$this->db->select('donorID, FirstName, LastName');
  		$this->db->from('tbl_donorinfo');
  		$this->db->order_by('LastName');
- 		
  		$query = $this->db->get();
 
    		if ($query->num_rows() > 0)
  		{ 	
 		 	foreach ($query->result() as $results)
 		 	{
-		 		if($results->FirstName == "" || $results->LastName == "")
+		 		if($results->FirstName == "" && $results->LastName == "")
 		 			continue;
 
 		 		$donorInfo[$index]['firstName'] 	= $results->FirstName;
@@ -94,7 +137,37 @@ class searchModel extends CI_Model
    		return $donorInfo;
    	}
 
-   	function getDonorInfo($ID)
+   	public function getAllTitles() 
+   	{
+   		$titleInfo = array();
+   		$index = 0;
+
+   		$this->db->select('titleID, title');
+ 		$this->db->from('tbl_donortitle_lkup');
+ 		$query = $this->db->get();
+
+ 		if ($query->num_rows() > 0)
+ 		{ 	
+		 	foreach ($query->result() as $results)
+		 	{
+		 		if($results->title == "")
+		 			continue;
+
+		 		$titleInfo[$index]['title'] 	= $results->title;
+		 		$titleInfo[$index]['titleID']  	= $results->titleID;
+
+		 		$index++;
+		 	}
+ 		}
+ 		else
+ 		{
+ 			return 'Error connecting to database.';
+ 		}
+
+   		return $titleInfo;
+   	}
+
+   	public function getDonorInfo($ID)
    	{
    		$infoArray = array();
 

@@ -13,7 +13,7 @@
 	<!-- Positioning -->   
 	<!-- TODO: Create 'left edge field' class to offset by 25px left margin? -->
 	<style>
-		#select_donor_button		{ margin-left: 5px; margin-top: 15px; width: 120px; }
+		#select_donor_button		{ margin-left: 5px; margin-top: 15px; /*width: 120px;*/ }
 		#anon_donation_button		{ margin-left: 147px; margin-top: 15px; }
 		#new_donor_button			{ margin-left: -10px; margin-top: 15px; }
 		#gift_description_box		{ width: 500px; height: 150px; }
@@ -64,7 +64,7 @@
 						<input type="text" class="input-xlarge left-edge-field" id="donor_select_box" placeholder="Last name" name="selectName"> 
 					</td>
 					<td class="span2">
-						<button type="submit" class="btn" id="select_donor_button">Lookup Donor</button>
+						<button type="submit" class="btn" id="select_donor_button">Lookup</button>
 					</td>
 					<td class="span3">
 						<button type="button" class="btn" id="new_donor_button">New Donor</button>

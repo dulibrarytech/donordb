@@ -17,7 +17,6 @@ class edit extends CI_Controller {
         $this->load->helper('form');
 
 		$this->load->model('searchModel');
-		$this->load->model('titleModel');
     }
 
 	public function index()

@@ -45,21 +45,16 @@
 
 		<div class="container generic-label" id="page-label"></div>	
 
-		<!-- Table section -->
+		<!-- Results Table Section -->
 		<div id="table-section">
+			
 			<!-- Stationary table header -->
-			<table class="table table-bordered" id="table-header">
-				
-			</table>
+			<table class="table table-bordered" id="table-header"></table>
 
 			<!-- Table content section -->
-			
 				<div class="container pre-scrollable">
-
 		 			<div id="table-content"></div>
-
 				</div>
-			
 		</div>
 
 	</div>

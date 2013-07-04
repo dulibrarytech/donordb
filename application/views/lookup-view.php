@@ -50,23 +50,23 @@
 
 		<div class="container generic-label"></div>	
 
+		<!-- Search Section -->
 		<form id="search-form" method="post">
-			<!-- Search type radio selector -->
+			
 			<div class="well" id="search-type-section">
 				<table id="search-type"><tr>
 					<td style="width: 22px;"></td><td style="padding-right: 250px;">Record Type:</td><td class="span3"><input type="radio" name="searchType" value="donor" checked="checked"/></td><td>Donor</td><td class="span4"></td><td><input type="radio" name="searchType" value="gift"/></td><td>Gift</td>
 				</tr></table>
 			</div>
 
-			<!-- search form -->
-			<div class="well" id="search-form-name">  <!-- action? -->
-				<label class="form-label-text" id="lname_label">Search by Last Name:</label>  
+			<div class="well" id="search-form-name">  
+				<label class="form-label-text" id="lname_label">Last Name or Organization:</label>  
 
-				<input type="text" class="input-xlarge" id="lname_input_box" placeholder="Leave blank to search all donors" name="lastName">  
+				<input type="text" class="input-xlarge" id="lname_input_box" placeholder="Leave blank to search all donors" name="searchTerm">  
 			</div>
 
 			<div class="well" id="search-form-date">
-				<label class="form-label-text" id="date_label">Display Results in Date Range:</label>
+				<label class="form-label-text" id="date_label">Date Range:</label>
 
 				<input type="text" class="input-small" id="fromDate" name="fromDate" placeholder="From"/>
 
@@ -74,7 +74,19 @@
 
 				<button type="submit" class="btn" id="search_submit">Submit</button> 
 			</div>
+
 		</form>
+
+		<!-- Results Table Section -->
+		<div id="table-section">
+			<!-- Stationary table header -->
+			<table class="table table-bordered" id="table-header"></table>
+
+			<!-- Table content section -->
+			<div class="container pre-scrollable">
+	 			<div id="table-content"></div>
+			</div>
+		</div>
 
 	</div>
 

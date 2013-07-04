@@ -19,6 +19,8 @@ searchView = (function($) {
 
 		$(".generic-label").text("Search Records");
 
+		$("#table-section").hide();
+
 		addEvents();
 	};
 
@@ -28,20 +30,28 @@ searchView = (function($) {
 
 	        errorClass: "invalid",
 	        submitHandler: function() {
-	            //submitSearch();
-	            alert("submit search");
+
+	            utils.submitSearch(createResultsTable);
 	        }
 	    });
+	};
+
+	createResultsTable = function(tableData) {
+
+		alert(tableData);
 	};
 
 	return {
 
 		initPage: function() {	
 			initPage();
+		},
+		createResultsTable : function(tableData) {
+			createResultsTable(tableData);
 		}
 	};
 
-}(jQuery));
+}(jQuery)); // searchView()
 
 
 browseDonorsView = (function($) {
@@ -61,17 +71,31 @@ browseDonorsView = (function($) {
 
 		$(".pre-scrollable").css("max-height", "390px");
 
-		getData();
+		utils.getDonorDataArray(createTable);
 	};
 
-	getData = function() {
+	createTable = function(tableData) {
 
-		utils.requestAllDonorData();
-	};
+		var results = '<table class="table table-bordered table-striped">';
 
-	setLayout = function(allDonorData) {
+		results = '<table class="table table-bordered table-striped">'; 
 
-		$("#table-content").html(allDonorData);
+		$.each(tableData, function (key, value) {
+			
+			results += '<tr>';
+			results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonor/' + value.donorID + '">Edit</a> </td>';
+
+			results += '<td class="span4">' + value.firstName + '</td>';
+			results += '<td class="span4">' + value.lastName + '</td>';
+
+			results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGift/' + value.donorID + '">Add Gift</a> </td>';
+			results += '</tr>';
+
+		} );
+
+		results += '</table>';
+
+		$("#table-content").html(results);
 	};
 
 	return {
@@ -79,12 +103,12 @@ browseDonorsView = (function($) {
 		initPage: function() {
 			initPage();
 		},
-		setLayout: function(results) {
-			setLayout(results);
+		createTable: function(tableData) {
+			createTable(tableData);
 		}
 	};
 
-}(jQuery));
+}(jQuery)); // browseDonorsView()
 
 
 addGiftView = (function($) {
@@ -136,7 +160,7 @@ addGiftView = (function($) {
 		}
 	};
 
-}(jQuery))
+}(jQuery)) // addGiftView()
 
 
 giftDetailsView = (function($) {
@@ -162,13 +186,12 @@ giftDetailsView = (function($) {
 		}
 	};
 
-}(jQuery));
+}(jQuery)); // giftDetailsView()
 
 
 addDonorInfoView = (function($) {
 
 	var initPage,
-		getTitleData,
 		createTitleDropdown;
 
 	initPage = function() {
@@ -177,42 +200,35 @@ addDonorInfoView = (function($) {
 
 		$(".generic-label").text("Add New Donor Info");
 
-		//getTitleData();
-		var testData;
-		testData = utils.getTitleArray();
-		// alert(testData);
-	};
-
-	getTitleData = function() {
-
-		requestObj = {
-
-			type: "POST", 
-			url: _searchUrl + '/getTitleList',
-			dataType: "json",
-			cache: true,
-			success: function(result) {
-				createTitleDropdown(result);
-			},
-			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
-            }
-		};
-		utils.doAjax(requestObj);
+		utils.getTitleArray(createTitleDropdown);
 	};
 
 	createTitleDropdown = function(tableData) {
 
-		alert(tableData);
+		var dropdown = "<select class='input-medium' name='title'><option selected='yes' value='no_title'></option>";
+
+		$.each(tableData, function (key, value) {
+			
+			dropdown += "<option>" + value.title + "</option>";
+
+		} );
+
+		dropdown += "<option>[Add New Title]</option>";
+		dropdown += "</select>";
+
+		$("#dropdown-box").html(dropdown);
 	};
 
 	return {
 
 		initPage: function() {	
 			initPage();
+		},
+		createTitleDropdown: function(tableData) {	
+			createTitleDropdown(tableData);
 		}
 	};
 
-}(jQuery));
+}(jQuery)); // addDonorInfoView()
 
 

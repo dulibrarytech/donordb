@@ -16,11 +16,10 @@ utils = (function($) {
 		getTitleArray;
 
 	doAjax = function(ajaxObj) {
-		alert("ajax");
 		$.ajax(ajaxObj);
 	};
 
-	requestAllDonorData = function() {
+	getDonorDataArray = function(callback) {
 
 		var resultTable;
 
@@ -31,9 +30,7 @@ utils = (function($) {
 			dataType: "json",
 			cache: true,
 			success: function (response) {
-
-				resultTable = tables.buildBrowseAllTable(response);
-				browseDonorsView.setLayout(resultTable);
+				callback(response);
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );
@@ -43,29 +40,34 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
-	submitSearch = function(form) {
+	submitSearch = function(callback) {
 
-		var searchType 	= $('input:radio[name=searchType]:checked').val(),
-		    lastName 	= $('#lname_input_box').val(),
-		    fromDate 	= $('#fromDate').val(),
-		    toDate 		= $('#toDate').val();
+		searchForm = "#search-form";
 
-		if(lastName == "" && fromDate == "" && toDate == "") 
-			alert("Please enter a last name or set a date range");
-		else
-		{
+		requestObj = {
 
-		}
+			type: "POST", 
+			url: _searchUrl + '/recordSearch',
+			data: $(searchForm).serialize(),
+			dataType: "json",
+			cache: true,
+			success: function(response) {
+				callback(response);
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
 		
+		doAjax(requestObj);
 	};
 
 	getTitleArray = function(callback) {
 
-		alert("gta");
 		requestObj = {
 
 			type: "POST", 
-			url: _searchUrl + '/getTitleList',
+			url: _searchUrl + '/queryDatabaseAllTitles',
 			dataType: "json",
 			cache: true,
 			success: function(response) {
@@ -81,17 +83,14 @@ utils = (function($) {
 
 	return {
 
-		requestAllDonorData: function() {
-			requestAllDonorData();
+		getDonorDataArray: function(callback) {
+			getDonorDataArray(callback);
 		},
-		submitSearch: function(form) {	
-			submitSearch(form);
+		submitSearch: function(callback) {	
+			submitSearch(callback);
 		},
-		getTitleArray: function() {
-			getTitleArray();
-		},
-		doAjax: function(requestObj) {
-			doAjax(requestObj);
+		getTitleArray: function(callback) {
+			getTitleArray(callback);
 		}
 	};
 
