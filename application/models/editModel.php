@@ -20,7 +20,12 @@ class editModel extends CI_Model
 
     public function createDonorRecord($newDonorData)
     {
-    	
+    	return true;
+    }
+
+    public function createGiftRecord($newGiftData)
+    {
+    	return false;
     }
 
 } // editModel

@@ -44,15 +44,14 @@ class search extends CI_Controller {
             }
             case "POST":
             {
-                $postData 	= $this->input->post();
-
                 $keyword 	= $this->input->post('searchTerm');
                 $fromDate 	= $this->input->post('fromDate');
                 $toDate 	= $this->input->post('toDate');
+                $searchType = $this->input->post('searchType');
 
-                if($postData['searchType'] == "donor")
+                if($searchType == "donor")
 					echo json_encode($this->searchModel->donorSearch($keyword,$fromDate,$toDate)); 
-                else if($postData['searchType'] == "gift")
+                else if($searchType == "gift")
                 	echo json_encode($this->searchModel->giftSearch($keyword,$fromDate,$toDate)); 
 
                 break;

@@ -37,7 +37,7 @@ searchView = (function($) {
 
 	        errorClass: "invalid",
 	        submitHandler: function() {
-	        		
+
 	            utils.submitSearch(createTable);
 	        }
 	    });
@@ -255,6 +255,8 @@ addNewDonorView = (function($) {
 		$(".content-window").css("height", "740px");
 
 		$(".generic-label").text("Add New Donor Info");
+
+		$("#add_donor_message").hide();
 
 		addEvents();
 

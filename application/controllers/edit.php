@@ -16,7 +16,7 @@ class edit extends CI_Controller {
         $this->load->helper('url');
         $this->load->helper('form');
 
-		$this->load->model('searchModel');
+		$this->load->model('editModel');
     }
 
 	public function index()
@@ -59,7 +59,46 @@ class edit extends CI_Controller {
 
 	public function inputDonorInfo()
 	{
+		switch($this->input->server("REQUEST_METHOD")) 
+		{
 
+            case "GET":
+			{
+                $this->load->view("lookup-view");
+
+                break;
+            }
+            case "POST":
+            {
+                $donorSuccess = false;
+                $giftSuccess = false;
+
+                $donorData = $this->input->post();
+                
+                $donorSuccess = $this->editModel->createDonorRecord($donorData);
+
+                // If box checked, no gift needs to be added at this time
+                $addGiftCheck = $this->input->post('addGiftCheckbox');
+                if($addGiftCheck == "") {
+
+                	$giftSuccess = $this->editModel->createGiftRecord($donorData);
+                }
+                else if($addGiftCheck == "checked")
+                	$giftSuccess = true; // Do not add a gift, set true to ignore this bool 
+
+                if($donorSuccess && $giftSuccess) 
+                	echo "Database was successfully updated.";
+                else
+                	echo "Error in updating database";
+
+                break;
+            }
+            default:
+           	{
+                header("HTTP/1.1 404 Not Found");
+                return;
+            }
+        }
 	}
 
 	public function editTitle() 

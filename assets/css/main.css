@@ -232,10 +232,10 @@ table {
 	padding-left: 20px;
 }
 
-/*.inout_form-default {
+.input_form-default {
 
 	width: 240px;
-}*/
+}
 
 .btn-grey {
 
@@ -379,6 +379,12 @@ table {
 	max-width: 96%;
 }
 
+#add_donor_message {
+
+	color: #F71A03;
+	font-weight: bold;
+	font-family: "Times New Roman", Times, serif;
+}
 
 
 

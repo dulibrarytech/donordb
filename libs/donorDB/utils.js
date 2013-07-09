@@ -64,18 +64,17 @@ utils = (function($) {
 	};
 
 	submitNewDonorInfo = function() {
-
-		var donorInfoForm = "#donor-info-form";
-
+			
 		requestObj = {
 
 			type: "POST", 
-			url: _editUrl + '/recordSearch',
-			data: $(donorInfoForm).serialize(),
-			dataType: "json",
+			url: _editUrl + '/inputDonorInfo',
+			data: $("#donor-input-form").serialize(),
+			dataType: "text",
 			cache: true,
 			success: function(response) {
 				alert(response);
+				$("#add_donor_message").hide();
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );
@@ -83,6 +82,7 @@ utils = (function($) {
 		};
 		
 		doAjax(requestObj);
+		$("#add_donor_message").show();
 	};
 
 	resetSearch = function() {
