@@ -52,7 +52,7 @@ class edit extends CI_Controller {
 
 	public function addDonor() 
 	{
-		$data['pageLoader'] = "<script>addDonorInfoView.initPage();</script>";
+		$data['pageLoader'] = "<script>addNewDonorView.initPage();</script>";
 
 		$this->load->view('info-view', $data);
 	}

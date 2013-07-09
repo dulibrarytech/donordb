@@ -28,10 +28,11 @@ input[type="text"] {
 }
 
 table {
-  max-width: 100%;
-  background-color: transparent;
-  border-collapse: collapse;
-  border-spacing: 0;
+
+  	max-width: 100%;
+  	background-color: transparent;
+  	border-collapse: collapse;
+  	border-spacing: 0;
 }
 
 
@@ -165,13 +166,14 @@ table {
 .table {
 
     background-color: #C0C0C0;
-    width: 96%;
+    width: 100%;
     margin-left: 20px;
     margin-right: 20px;
-    margin-bottom: 20px;
+
 }
 
 .table-bordered {
+
   border: 1px solid #dddddd;
   border-collapse: separate;
   *border-collapse: collapse;
@@ -183,11 +185,13 @@ table {
 
 .table-striped tbody > tr:nth-child(odd) > td,
 .table-striped tbody > tr:nth-child(odd) > th {
+
   background-color: #f9f9f9;
 }
 
 .table th,
 .table td {
+
   padding: 8px;
   line-height: 10px;
   text-align: left;
@@ -196,18 +200,23 @@ table {
 }
 
 .table th {
+
   font-weight: bold;
 }
 
 .table thead th {
+
   vertical-align: bottom;
   line-height: 30px;
   text-align: center;
+  font-size: 16px;
+
 }
 
 .pre-scrollable {
-  max-height: 340px;
+  /*max-height: 250px;*/
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .form-label-text {
@@ -215,20 +224,21 @@ table {
 	color: #515155;
 }
 
-.donor-info-form {
+.donor-info-form-section {
 
-	padding: 0px;
+	/*padding: 0px;*/
 	padding-top: 5px;
 	padding-bottom: 5px;
 	padding-left: 20px;
 }
 
-.inout_form-default {
+/*.inout_form-default {
 
 	width: 240px;
-}
+}*/
 
 .btn-grey {
+
   display: inline-block;
   *display: inline;
   padding: 4px 12px;
@@ -252,7 +262,7 @@ table {
   background-repeat: repeat-x;
   border: 1px solid #C0C0C0;
   /**border: 0;*/
-  color: #000000;
+  color: #515155;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   border-bottom-color: #C0C0C0;
   -webkit-border-radius: 4px;
@@ -362,6 +372,11 @@ table {
 #search-type-section {
 
 	margin-bottom: 20px;
+}
+
+#table-header {
+
+	max-width: 96%;
 }
 
 

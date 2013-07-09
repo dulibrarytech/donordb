@@ -49,12 +49,12 @@
 		<div id="table-section">
 			
 			<!-- Stationary table header -->
-			<table class="table table-bordered" id="table-header"></table>
+			<div class="table table-bordered" id="table-header"></div>
 
 			<!-- Table content section -->
-				<div class="container pre-scrollable">
-		 			<div id="table-content"></div>
-				</div>
+			<div class="container pre-scrollable">
+	 			<div id="table-content"></div>
+			</div>
 		</div>
 
 	</div>

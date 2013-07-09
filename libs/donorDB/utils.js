@@ -13,6 +13,7 @@ utils = (function($) {
 	var doAjax,
 		requestAllDonorData,
 		submitSearch,
+		submitNewDonorInfo,
 		getTitleArray;
 
 	doAjax = function(ajaxObj) {
@@ -42,7 +43,7 @@ utils = (function($) {
 
 	submitSearch = function(callback) {
 
-		searchForm = "#search-form";
+		var searchForm = "#search-form";
 
 		requestObj = {
 
@@ -60,6 +61,33 @@ utils = (function($) {
 		};
 		
 		doAjax(requestObj);
+	};
+
+	submitNewDonorInfo = function() {
+
+		var donorInfoForm = "#donor-info-form";
+
+		requestObj = {
+
+			type: "POST", 
+			url: _editUrl + '/recordSearch',
+			data: $(donorInfoForm).serialize(),
+			dataType: "json",
+			cache: true,
+			success: function(response) {
+				alert(response);
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
+		
+		doAjax(requestObj);
+	};
+
+	resetSearch = function() {
+
+		window.location.href = _searchUrl;
 	};
 
 	getTitleArray = function(callback) {
@@ -88,6 +116,13 @@ utils = (function($) {
 		},
 		submitSearch: function(callback) {	
 			submitSearch(callback);
+		},
+		submitNewDonorInfo: function() {
+			
+			submitNewDonorInfo();
+		},
+		resetSearch: function() {	
+			resetSearch();
 		},
 		getTitleArray: function(callback) {
 			getTitleArray(callback);

@@ -21,6 +21,7 @@
 		#fromDate			{ margin-left: 25px; }
 		#toDate				{ margin-left: 85px; }
 		#search_submit		{ margin-left: 475px; margin-bottom: 9px; }
+		#post-search-buttons{ margin-left: 20px; }
 	</style>
 
 </head>
@@ -80,12 +81,18 @@
 		<!-- Results Table Section -->
 		<div id="table-section">
 			<!-- Stationary table header -->
-			<table class="table table-bordered" id="table-header"></table>
+			<div class="table table-bordered" id="table-header"></div>
 
 			<!-- Table content section -->
 			<div class="container pre-scrollable">
 	 			<div id="table-content"></div>
 			</div>
+
+		</div>
+
+		<div id="post-search-buttons">
+			<button class="btn-grey" id="search_return">Return To Search</button>
+			<button class="btn-grey" id="search_new">New Search</button>
 		</div>
 
 	</div>

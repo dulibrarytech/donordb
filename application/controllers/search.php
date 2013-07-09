@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class search extends CI_Controller {
 
 /*
  * Donor Application
@@ -11,6 +10,8 @@ class search extends CI_Controller {
  * 
  * University of Denver, June 2013
  */
+class search extends CI_Controller {
+
     function __construct() 
     {
         parent::__construct();
@@ -49,16 +50,16 @@ class search extends CI_Controller {
                 $fromDate 	= $this->input->post('fromDate');
                 $toDate 	= $this->input->post('toDate');
 
-     //            if($postData['searchType'] == "donor")
-					// echo json_encode($this->searchModel->donorSearch($keyword,$fromDate,$toDate)); 
-     //            else if($postData['searchType'] == "gift")
-     //            	echo json_encode($this->searchModel->giftSearch($keyword,$fromDate,$toDate)); 
-                echo json_encode($fromDate);
+                if($postData['searchType'] == "donor")
+					echo json_encode($this->searchModel->donorSearch($keyword,$fromDate,$toDate)); 
+                else if($postData['searchType'] == "gift")
+                	echo json_encode($this->searchModel->giftSearch($keyword,$fromDate,$toDate)); 
+
                 break;
             }
             default:
            	{
-                header("HTTP/1.0 404 Not Found");
+                header("HTTP/1.1 404 Not Found");
                 return;
             }
         }
