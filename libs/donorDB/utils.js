@@ -41,7 +41,7 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
-	submitSearch = function(callback) {
+	submitSearch = function(callback,type) {
 
 		var searchForm = "#search-form";
 
@@ -49,11 +49,11 @@ utils = (function($) {
 
 			type: "POST", 
 			url: _searchUrl + '/recordSearch',
-			data: $(searchForm).serialize(),
+			data: $(searchForm).serialize() + "&searchType=" + type,
 			dataType: "json",
 			cache: true,
 			success: function(response) {
-				callback(response);
+				alert(response);
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );
@@ -114,11 +114,10 @@ utils = (function($) {
 		getDonorDataArray: function(callback) {
 			getDonorDataArray(callback);
 		},
-		submitSearch: function(callback) {	
-			submitSearch(callback);
+		submitSearch: function(callback,type) {	
+			submitSearch(callback,type);
 		},
-		submitNewDonorInfo: function() {
-			
+		submitNewDonorInfo: function() {		
 			submitNewDonorInfo();
 		},
 		resetSearch: function() {	

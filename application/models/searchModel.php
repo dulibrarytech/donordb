@@ -15,18 +15,13 @@ class searchModel extends CI_Model
     {
         parent::__construct();
         $this->load->database();
+        $this->load->helper('date');
     }
 
-    public function donorSearch($keyword,$fromDate,$toDate)
+    public function donorSearch($keyword)
    	{
    		  $searchResults = array();
    		  $index = 0;
-
-   		  //If date values are null, be sure to include all gifts
-   		  if($fromDate == null)
-   			    $fromDate = "1900-01-01";
-   		  if($toDate == null)
-   			    $toDate =  "2013-07-07";
 
      	  // Search LastName field
      	  $this->db->select('donorID, Organization, FirstName, LastName');
@@ -41,15 +36,11 @@ class searchModel extends CI_Model
       		 	foreach ($query->result() as $results)
       		 	{
 
-        		 		// Only add this record to the search results array if it passes the date screen
-                if($this->dateScreen($results->donorID,$fromDate,$toDate))
-        		 		{
-          			 		$searchResults[$index]['firstName']		= $results->FirstName;
-          			 		$searchResults[$index]['lastName']		= $results->LastName;
-          			 		$searchResults[$index]['donorID']		= $results->donorID;
+      			 		$searchResults[$index]['firstName']		= $results->FirstName;
+      			 		$searchResults[$index]['lastName']		= $results->LastName;
+      			 		$searchResults[$index]['donorID']		= $results->donorID;
 
-          			 		$index++;
-        			 	}
+      			 		$index++;
             }
   		 	} 		 		
      		else
@@ -68,23 +59,69 @@ class searchModel extends CI_Model
         		 		{ 
            					$searchResults[$index]['org']			= $results->Organization;
           		 			$searchResults[$index]['donorID']		= $results->donorID;
+
+                    $index++;
         		 		}
        			}
        			else
        			{
-         				return 'No results found.';
+         				$searchResults = "No results found";
        			}
      		}
 
     		return $searchResults;
     }
 
-   	public function giftsearch($keyword)
+   	public function giftsearch($keyword,$fromDate,$toDate)
    	{
-     		return "gift search model";
+        $searchResults = array();
+        $index = 0;
+
+        if($fromDate == null)
+            $fromDate = "1864-01-01";   // Shouldn't be any before this!
+        if($toDate == null)
+        {
+            $datestring = "%Y-%m-%d";
+            $time = time();
+
+            $toDate =  mdate($datestring,$time);
+        }
+
+        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorinfo.FirstName, tbl_donorinfo.LastName');
+        $this->db->from('tbl_donorgifts');
+        $this->db->join('tbl_donorinfo', 'tbl_donorinfo.donorID = tbl_donorgifts.donorID', 'inner');
+        $this->db->where('dateOfGift >=', $fromDate);
+        $this->db->where('dateOfGift <=', $toDate);
+
+        if($keyword != "")
+        {
+            $this->db->like('tbl_donorinfo.LastName', $keyword);    
+            //$this->db->order_by('LastName');
+        }
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0)
+        {
+            foreach ($query->result() as $results)
+            { 
+                $searchResults[$index]['giftsID']     = $results->giftsID;
+                $searchResults[$index]['giftDate']    = $results->dateOfGift; 
+                $searchResults[$index]['firstName']   = $results->FirstName;
+                $searchResults[$index]['lastName']    = $results->LastName;
+
+                $index++;
+            }
+        }
+        else
+        {
+            $searchResults = "No results found";
+        }
+
+        return $searchResults;
    	}
 
-   	// Will check all records of gifts that the input donor has donated.  If one gift date falls within the given date range, return true
+   	// Will check all records of gifts that the donor has donated.  If one gift date falls within the given date range, return true
     private function dateScreen($donorID,$fromDate,$toDate)
    	{
      		$giftsInRange = false;

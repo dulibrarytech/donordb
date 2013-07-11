@@ -102,13 +102,13 @@
 
 					<tr>
 						<td>
-							<label class="form-label-text">Phone 1:</label>
-							<input type="text" id="phone1_input_box" class="input_form-default" name="phone1"/>  
+							<label class="form-label-text">Country:</label>
+							<input type="text" id="country_input_box" class="input_form-default" name="country" placeholder="USA"/>  
 						</td>
 
 						<td>
-							<label class="form-label-text">Phone 2:</label>
-							<input type="text" id="phone2_input_box" class="input_form-default" name="phone2"/>  
+							<label class="form-label-text">Phone:</label>
+							<input type="text" id="phone_input_box" class="input_form-default" name="phone"/>  
 						</td>
 
 						<td>

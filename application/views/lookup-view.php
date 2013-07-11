@@ -53,12 +53,6 @@
 
 		<!-- Search Section -->
 		<form id="search-form" method="post">
-			
-			<div class="well" id="search-type-section">
-				<table id="search-type"><tr>
-					<td style="width: 22px;"></td><td style="padding-right: 250px;">Record Type:</td><td class="span3"><input type="radio" name="searchType" value="donor" checked="checked"/></td><td>Donor</td><td class="span4"></td><td><input type="radio" name="searchType" value="gift"/></td><td>Gift</td>
-				</tr></table>
-			</div>
 
 			<div class="well" id="search-form-name">  
 				<label class="form-label-text" id="lname_label">Last Name or Organization:</label>  

@@ -70,23 +70,23 @@ class edit extends CI_Controller {
             }
             case "POST":
             {
-                $donorSuccess = false;
-                $giftSuccess = false;
+                $donorID = 0;
+                $giftID = 0;
 
                 $donorData = $this->input->post();
                 
-                $donorSuccess = $this->editModel->createDonorRecord($donorData);
+                $donorID = $this->editModel->createDonorRecord($donorData);
 
                 // If box checked, no gift needs to be added at this time
                 $addGiftCheck = $this->input->post('addGiftCheckbox');
                 if($addGiftCheck == "") {
 
-                	$giftSuccess = $this->editModel->createGiftRecord($donorData);
+                	$giftID = $this->editModel->createGiftRecord($donorID, $donorData);
                 }
                 else if($addGiftCheck == "checked")
-                	$giftSuccess = true; // Do not add a gift, set true to ignore this bool 
+                	$giftID = 1;
 
-                if($donorSuccess && $giftSuccess) 
+                if($donorID > 0 && $giftID > 0) 
                 	echo "Database was successfully updated.";
                 else
                 	echo "Error in updating database";

@@ -12,18 +12,18 @@ searchView = (function($) {
 
 	var initPage,
 		addEvents,
-		createResultsTable,
+		createDonorTable,
+		createGiftTable,
 		toggleResultsView;
 
 	initPage = function() {
 
-		$(".content-window").css("height", "500px");
+		$(".content-window").css("height", "425px");
 		$(".pre-scrollable").css("max-height", "315px");
 		$("#table-section").css("height", "405px");
 
 		$(".generic-label").text("Search Records");
 
-		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
 		$("#search_return").hide();
 		$("#table-section").hide();
 		$("#post-search-buttons").hide();
@@ -33,12 +33,26 @@ searchView = (function($) {
 
 	addEvents = function() {
 
+		var fromDate, 
+			toDate;
+
 		$("#search-form").validate({
 
 	        errorClass: "invalid",
 	        submitHandler: function() {
 
-	            utils.submitSearch(createTable);
+	        	fromDate = $("#fromDate").val();
+	        	toDate = $("#toDate").val();
+
+	        	// If a date field has been populated, search results should display gifts by date.  If not, display donor results
+	        	if(fromDate != "" || toDate != "") {
+	        		alert("gift search");
+	        		utils.submitSearch(createGiftTable,"gift");
+	        	}
+	        	else {
+	        		alert("donor search");
+	        		utils.submitSearch(createDonorTable,"donor");
+	        	}
 	        }
 	    });
 
@@ -53,11 +67,9 @@ searchView = (function($) {
 	    });
 	};
 
-	createTable = function(tableData) {
+	createDonorTable = function(tableData) {
 
-		var results = '<table class="table table-bordered table-striped">';
-
-		results = '<table class="table table-bordered table-striped">'; 
+		var results = '<table class="table table-bordered table-striped">'; 
 
 		if(typeof tableData == "object") {
 
@@ -76,13 +88,46 @@ searchView = (function($) {
 		}	
 		else if(typeof tableData == "string") {
 
-			// Display message
+			// Display message only
 			results = '<tr><td class="span12" style="text-align: center; font-weight: bold;">' + tableData + '</td></tr>';
 		}	
 
 		results += '</table>';
 
 		toggleResultsView();
+		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
+		$("#table-content").html(results);
+	};
+
+	createGiftTable = function(tableData) {
+
+		var results = '<table class="table table-bordered table-striped">';
+
+		if(typeof tableData == "object") {
+
+			$.each(tableData, function (key, value) {
+				
+				results += '<tr>';
+				results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonor/' + value.donorID + '">Edit</a> </td>';
+
+				results += '<td class="span4">' + value.lastName + '</td>';
+				results += '<td class="span4">' + value.firstName + '</td>';
+
+				results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGift/' + value.donorID + '">Add Gift</a> </td>';
+				results += '</tr>';
+
+			} );
+		}	
+		else if(typeof tableData == "string") {
+
+			// Display message only
+			results = '<tr><td class="span12" style="text-align: center; font-weight: bold;">' + tableData + '</td></tr>';
+		}	
+
+		results += '</table>';
+
+		toggleResultsView();
+		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Gift Date</th> <th class='span4'>Last Name</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
 		$("#table-content").html(results);
 	};
 
@@ -93,10 +138,10 @@ searchView = (function($) {
 		$("#search_return").toggle();
 		$("#post-search-buttons").toggle();
 
-		if( $(".content-window").css("height") == "500px" ) 
+		if( $(".content-window").css("height") == "425px" ) 
 			$(".content-window").css("height", "600px");
 		else 
-			$(".content-window").css("height", "500px");
+			$(".content-window").css("height", "425px");
 	};
 
 	return {
@@ -104,8 +149,11 @@ searchView = (function($) {
 		initPage: function() {	
 			initPage();
 		},
-		createResultsTable : function(tableData) {
+		createDonorTable : function(tableData) {
 			createResultsTable(tableData);
+		},
+		createGiftTable : function(tableData) {
+			createGiftTable(tableData);
 		}
 	};
 
@@ -115,7 +163,7 @@ searchView = (function($) {
 browseDonorsView = (function($) {
 
 	var initPage,
-		createTable;
+		createDonorTable;
 
 	initPage = function() {
 
@@ -126,10 +174,10 @@ browseDonorsView = (function($) {
 
 		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
 
-		utils.getDonorDataArray(createTable);
+		utils.getDonorDataArray(createDonorTable);
 	};
 
-	createTable = function(tableData) {
+	createDonorTable = function(tableData) {
 
 		var results = '<table class="table table-bordered table-striped">';
 
@@ -158,8 +206,8 @@ browseDonorsView = (function($) {
 		initPage: function() {
 			initPage();
 		},
-		createTable: function(tableData) {
-			createTable(tableData);
+		createDonorTable: function(tableData) {
+			createDonorTable(tableData);
 		}
 	};
 
