@@ -15,7 +15,7 @@
         <ul class="nav nav-tabs">
             <li class="navbar-item"><a class="active" title="Application Home" href="<?php echo base_url();?>index.php/search">Search</a></li>
 
-            <li class="navbar-item"><a title="Add Gift" href="<?php echo base_url();?>index.php/edit/addGift">Add Gift</a></li>
+            <li class="navbar-item"><a title="New Gift" href="<?php echo base_url();?>index.php/edit/newGiftView">New Gift</a></li>
 
             <li class="navbar-item"><a title="Browse Donors" href="<?php echo base_url();?>index.php/search/browseDonors">Browse Donors</a></li>
 

@@ -53,7 +53,7 @@ utils = (function($) {
 			dataType: "json",
 			cache: true,
 			success: function(response) {
-				alert(response);
+				callback(response);
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );
@@ -74,7 +74,7 @@ utils = (function($) {
 			cache: true,
 			success: function(response) {
 				alert(response);
-				$("#add_donor_message").hide();
+				views.toggleSubmitMessage();
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );
@@ -82,12 +82,31 @@ utils = (function($) {
 		};
 		
 		doAjax(requestObj);
-		$("#add_donor_message").show();
+		views.toggleSubmitMessage();
 	};
 
 	resetSearch = function() {
 
 		window.location.href = _searchUrl;
+	};
+
+	getActiveNameString = function(callback) {
+
+		requestObj = {
+
+			type: "POST", 
+			url: _searchUrl + '/getActiveDonorNameString',
+			dataType: "json",
+			cache: true,
+			success: function(response) {
+				callback(response);
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
+
+		doAjax(requestObj);
 	};
 
 	getTitleArray = function(callback) {
@@ -125,6 +144,9 @@ utils = (function($) {
 		},
 		getTitleArray: function(callback) {
 			getTitleArray(callback);
+		},
+		getActiveNameString: function(callback) {
+			getActiveNameString(callback);
 		}
 	};
 

@@ -46,11 +46,9 @@ searchView = (function($) {
 
 	        	// If a date field has been populated, search results should display gifts by date.  If not, display donor results
 	        	if(fromDate != "" || toDate != "") {
-	        		alert("gift search");
 	        		utils.submitSearch(createGiftTable,"gift");
 	        	}
 	        	else {
-	        		alert("donor search");
 	        		utils.submitSearch(createDonorTable,"donor");
 	        	}
 	        }
@@ -81,7 +79,7 @@ searchView = (function($) {
 				results += '<td class="span4">' + value.lastName + '</td>';
 				results += '<td class="span4">' + value.firstName + '</td>';
 
-				results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGift/' + value.donorID + '">Add Gift</a> </td>';
+				results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
 				results += '</tr>';
 
 			} );
@@ -108,12 +106,13 @@ searchView = (function($) {
 			$.each(tableData, function (key, value) {
 				
 				results += '<tr>';
-				results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonor/' + value.donorID + '">Edit</a> </td>';
+				results += '<td class="span1" style="text-align: center"> <a href="' + _editUrl + '/editGift/' + value.giftsID + '">Edit</a> </td>';
 
+				results += '<td class="span2">' + value.giftDate + '</td>';
 				results += '<td class="span4">' + value.lastName + '</td>';
 				results += '<td class="span4">' + value.firstName + '</td>';
 
-				results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGift/' + value.donorID + '">Add Gift</a> </td>';
+				results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
 				results += '</tr>';
 
 			} );
@@ -127,7 +126,7 @@ searchView = (function($) {
 		results += '</table>';
 
 		toggleResultsView();
-		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Gift Date</th> <th class='span4'>Last Name</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
+		$("#table-header").html("<thead> <th class='span1'><!--SPACE--></th> <th class='span2'>Gift Date</th> <th class='span4'>Last Name</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
 		$("#table-content").html(results);
 	};
 
@@ -191,7 +190,7 @@ browseDonorsView = (function($) {
 			results += '<td class="span4">' + value.lastName + '</td>';
 			results += '<td class="span4">' + value.firstName + '</td>';
 
-			results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGift/' + value.donorID + '">Add Gift</a> </td>';
+			results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
 			results += '</tr>';
 
 		} );
@@ -214,7 +213,7 @@ browseDonorsView = (function($) {
 }(jQuery)); // browseDonorsView()
 
 
-addGiftView = (function($) {
+newGiftView = (function($) {
 
 	var initPage,
 		loadDonor,
@@ -263,33 +262,42 @@ addGiftView = (function($) {
 		}
 	};
 
-}(jQuery)) // addGiftView()
+}(jQuery)) // newGiftView()
 
 
-giftDetailsView = (function($) {
+addGiftView = (function($) {
 
 	var initPage;
 
 	initPage = function() {
 
-		$(".content-window").css("height", "580px");
+		$(".content-window").css("height", "600px");
 
-		$(".generic-label").text("Gift Details");
+		$(".generic-label").text("Add a Gift");
 
 		$('#select-donor-section').hide();
-		$('#gift_submit_button').hide();
 
 		$('#gift_date_box').attr('placeholder', '');
+
+		utils.getActiveNameString(setNameString);
+	};
+
+	setNameString = function(name) {
+
+		$("#donor-name-label").text(name);
 	};
 
 	return {
 
 		initPage: function() {	
 			initPage();
+		},
+		setNameString: function(name) {	
+			setNameString(name);
 		}
 	};
 
-}(jQuery)); // giftDetailsView()
+}(jQuery)); // addGiftView()
 
 
 addNewDonorView = (function($) {
@@ -323,6 +331,11 @@ addNewDonorView = (function($) {
 	    });
 	};
 
+	toggleSubmitMessage = function() {
+
+		$("#add_donor_message").toggle();
+	};
+
 	createTitleDropdown = function(tableData) {
 
 		var dropdown = "<select class='input-medium' name='title'><option selected='yes' value='no_title'></option>";
@@ -346,6 +359,9 @@ addNewDonorView = (function($) {
 		},
 		createTitleDropdown: function(tableData) {	
 			createTitleDropdown(tableData);
+		},
+		toggleSubmitMessage: function() {
+			toggleSubmitMessage();
 		}
 	};
 

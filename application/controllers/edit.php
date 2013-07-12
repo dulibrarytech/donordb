@@ -17,6 +17,7 @@ class edit extends CI_Controller {
         $this->load->helper('form');
 
 		$this->load->model('editModel');
+		$this->load->model('searchModel');
     }
 
 	public function index()
@@ -24,30 +25,34 @@ class edit extends CI_Controller {
 		$this->load->view('edit-view');
 	}
 
-	public function editDonor() 
-	{
-		// Get current donor ID.  
-		// $donorID = $this->uri->segment(3);
-
-		// $data = $this->searchModel->getDonorInfo($donorID);
-
-		// $this->load->view('edit-donor-info', $data);
-
-		// json?
-	}
-
-	public function addGift() 
+	public function newGiftView() 
 	{ 
-		$data['pageLoader'] = "<script>addGiftView.initPage();</script>";
+		$data['pageLoader'] = "<script>newGiftView.initPage();</script>";
 
 		$this->load->view('gift-view', $data);
 	}
 
-	public function enterGift($donorID)
+	public function addGiftView()
 	{
-		$data['pageLoader'] = "<script>giftDetailsView.initPage();</script>";
+		$donorID = $this->uri->segment(3);
+
+		$data['pageLoader'] = "<script>addGiftView.initPage();</script>";
+		//$data['nameString'] = $this->searchModel->getNameString($donorID);
+
+		$this->phpsessions->set('activeDonorID', $donorID);
+		$this->phpsessions->set('activeDonorNameString', $this->searchModel->getNameString($donorID));
 
 		$this->load->view('gift-view', $data);
+	}
+
+	public function addGift()
+	{
+
+	}
+
+	public function editGift() 
+	{
+		// do I want to edit the gift separately?  Can I just bring up the donor info page with the requested gift date defaulted in the date box?
 	}
 
 	public function addDonor() 
@@ -77,7 +82,7 @@ class edit extends CI_Controller {
                 
                 $donorID = $this->editModel->createDonorRecord($donorData);
 
-                // If box checked, no gift needs to be added at this time
+                // If box is checked, no gift needs to be added at this time
                 $addGiftCheck = $this->input->post('addGiftCheckbox');
                 if($addGiftCheck == "") {
 
@@ -99,6 +104,18 @@ class edit extends CI_Controller {
                 return;
             }
         }
+	}
+
+	public function editDonorView() 
+	{
+		// Get current donor ID.  
+		// $donorID = $this->uri->segment(3);
+
+		// $data = $this->searchModel->getDonorInfo($donorID);
+
+		// $this->load->view('edit-donor-info', $data);
+
+		// json?
 	}
 
 	public function editTitle() 

@@ -1,5 +1,6 @@
 <?php
-	
+	// if(!isset($nameString))
+	// 	$nameString = null;
 ?>
 
 <head>
@@ -19,7 +20,7 @@
 		#gift_description_box		{ width: 500px; height: 150px; }
 		#gift_date_label			{ margin-left: 43px; }
 		#gift_date_box				{ margin-left: 43px; }
-		#gift_submit_button			{ margin-left: 45px; margin-top: 140px; width: 90px;}
+		#gift_submit_button			{ margin-left: 25px; margin-top: 0px; width: 90px;}
 	</style>
 
 </head>
@@ -53,15 +54,14 @@
 		<form id="add-gift-form" method="post">
 
 			<div class="well" id="display-donor-section">
-				<label class="form-label-text left-edge-field" id="donor_name_label">Donor Name:</label>  
-				<input type="text" class="input-xlarge left-edge-field" id="donor_name_box" placeholder="Last name" name="selectName"> 
+				<label class="form-label-text left-edge-field" id="donor-name-label"></label>   
 			</div>
 
 			<div class="well" id="select-donor-section">
 				<table><tr>
 					<td>
-						<label class="form-label-text left-edge-field" id="donor_select_label">Enter Donor Name:</label>  
-						<input type="text" class="input-xlarge left-edge-field" id="donor_select_box" placeholder="Last name" name="selectName"> 
+						<label class="form-label-text left-edge-field" id="donor_select_label">Existing Donor:</label>  
+						<input type="text" class="input-xlarge left-edge-field" id="donor_select_box" placeholder="Name or Organization" name="selectName"> 
 					</td>
 					<td class="span2">
 						<button type="submit" class="btn" id="select_donor_button">Lookup</button>
@@ -89,11 +89,10 @@
 						<label class="form-label-text left-edge-field" id="gift_description_label">Description:</label> 
 						<textarea class="textarea left-edge-field" id="gift_description_box" name="giftDescription" cols="70" rows="50"></textarea>
 					</td>
-					<td>
-						<button type="submit" class="btn" id="gift_submit_button">Add Gift</button>
-					</td></tr>
 				</table>
 			</div>
+
+			<button type="submit" class="btn-grey" id="gift_submit_button">Add Gift</button>
 
 		</form>  
 

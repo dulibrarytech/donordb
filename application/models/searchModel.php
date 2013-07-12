@@ -87,12 +87,14 @@ class searchModel extends CI_Model
             $toDate =  mdate($datestring,$time);
         }
 
-        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorinfo.FirstName, tbl_donorinfo.LastName');
+        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorinfo.donorID, tbl_donorinfo.FirstName, tbl_donorinfo.LastName');
         $this->db->from('tbl_donorgifts');
         $this->db->join('tbl_donorinfo', 'tbl_donorinfo.donorID = tbl_donorgifts.donorID', 'inner');
         $this->db->where('dateOfGift >=', $fromDate);
         $this->db->where('dateOfGift <=', $toDate);
+        $this->db->order_by("dateOfGift", "desc");
 
+        // If there is keyword data, return records that are like the keyword
         if($keyword != "")
         {
             $this->db->like('tbl_donorinfo.LastName', $keyword);    
@@ -106,9 +108,10 @@ class searchModel extends CI_Model
             foreach ($query->result() as $results)
             { 
                 $searchResults[$index]['giftsID']     = $results->giftsID;
-                $searchResults[$index]['giftDate']    = $results->dateOfGift; 
+                $searchResults[$index]['giftDate']    = $this->truncateDateString($results->dateOfGift); 
                 $searchResults[$index]['firstName']   = $results->FirstName;
                 $searchResults[$index]['lastName']    = $results->LastName;
+                $searchResults[$index]['donorID']     = $results->donorID;
 
                 $index++;
             }
@@ -142,6 +145,12 @@ class searchModel extends CI_Model
 
      		return $giftsInRange;
    	}
+
+    // Removes the timestamp from the date string
+    private function truncateDateString($dateString)
+    {
+        return substr($dateString,0,-9);
+    }
 
    	public function getAllDonors()
    	{
@@ -217,20 +226,65 @@ class searchModel extends CI_Model
 
      		foreach ($query->result() as $result)
     		{
-    			  $infoArray['titleID'] 		= $result->titleID;
-    	   		$infoArray['FirstName'] 	= $result->FirstName;
-    	   		$infoArray['LastName']	 	= $result->LastName;
-    	   		$infoArray['Address1'] 		= $result->Address1;
-    	   		$infoArray['Address2'] 		= $result->Address2;
-    	   		$infoArray['City'] 			= $result->City;
-    	   		$infoArray['State'] 		= $result->State;
-    	   		$infoArray['PostalCode'] 	= $result->PostalCode;
-    	   		$infoArray['phone'] 		= $result->phone;
-    	   		$infoArray['email'] 		= $result->email;
+    			  $donorInfo['titleID'] 		= $result->titleID;
+    	   		$donorInfo['firstName'] 	= $result->FirstName;
+    	   		$donorInfo['lastName']	 	= $result->LastName;
+            $donorInfo['org']         = $result->Organization;
+    	   		$donorInfo['addr1'] 		  = $result->Address1;
+    	   		$donorInfo['addr2'] 		  = $result->Address2;
+    	   		$donorInfo['city'] 			  = $result->City;
+    	   		$donorInfo['state'] 		  = $result->State;
+            $donorInfo['country']     = $result->Country;
+    	   		$donorInfo['zip'] 	      = $result->PostalCode;
+    	   		$donorInfo['phone'] 		  = $result->phone;
+    	   		$donorInfo['email'] 		  = $result->email;
     		}
 
-     		return $infoArray;
+     		return $donorInfo;
    	}
+
+    public function getGiftInfo($ID)
+    {
+        // This should retrieve all 3 gift data 'areas' in an array
+    }
+
+    public function getNameString($ID)
+    {
+        $nameString = "";
+
+        $this->db->select('FirstName, LastName, Organization');
+        $this->db->from('tbl_donorinfo');
+        $this->db->where('donorID', $ID);
+
+        $query = $this->db->get();
+
+        foreach ($query->result() as $result)
+        {
+            $fName   = $result->FirstName;
+            $lName   = $result->LastName;
+            $org     = $result->Organization;
+        }
+
+        if($lName != "" && $lName != null)
+        {
+            $nameString = $lName;
+
+            if($fName != "" && $fName != null)
+            {
+                $nameString .= ", " . $fName;
+            }
+            if($org != "" && $org != null)
+            {
+                $nameString .= " (" . $org . ")";
+            }
+        }
+        else
+        {
+            $nameString = $org;
+        }
+            
+        return $nameString;
+    }
 
 
 } // SearchModel

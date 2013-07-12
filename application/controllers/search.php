@@ -64,6 +64,11 @@ class search extends CI_Controller {
         }
 	}
 
+	public function getActiveDonorNameString()
+	{
+		echo json_encode($this->phpsessions->get('activeDonorNameString'));
+	}
+
 	public function browseDonors() 
 	{
 		$data['pageLoader'] = "<script>browseDonorsView.initPage();</script>";
