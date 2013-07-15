@@ -16,6 +16,7 @@
 		#description_area		{ width: 455px; height: 75px;}
 		#gift_quantity_label	{ margin-left: 20px; }
 		#gift_quantity_box		{ margin-left: 20px; }
+		#lower_controls			{ background-color: #ffffff; width: 40%; }
 	</style>
 
 </head>
@@ -150,14 +151,19 @@
 							<!-- Spacer -->
 						</td>
 						<td colspan="2">
-							<input type="checkbox" id="add_gift_checkbox" name="addGiftCheckbox" value="checked">&nbsp&nbspDo not add a gift at this time</input>
+							<input type="checkbox" id="important_gift_check" name="importantFlag" value="on">&nbsp&nbspImportant</input>
+							<input type='hidden' name='importantFlag' value="off">
 						</td>
 					</tr>
 				</table>
 			</div>
 
 			<!-- This table creates a row with the submit button and an 'adding donor info' status message to the right of the button-->
-			<table class="table" style="background-color: #ffffff; width: 40%;"><tr><td class="span1"><button type="submit" class="btn-grey" id="add_info_button">Save</button></td><td class="span4" id="add_info_message">Adding new donor info...</td></tr></table>
+			<table class="table" id="lower_controls"><tr>
+				<td class=""><button type="submit" class="btn-grey" id="add_info_button">Save</button></td>
+				<td class="" id="add_info_message">Adding new donor info...</td>
+				<!--td class=""><input type="checkbox" id="add_gift_checkbox" name="addGiftCheckbox">&nbsp&nbspDo not add a gift at this time</input></td></tr-->
+			</table>
 		</form>
 
 	</div>

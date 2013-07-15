@@ -9,6 +9,11 @@ class edit extends CI_Controller {
  * 
  * University of Denver, May 2013
  */
+
+/*
+ * TODO: Fix text format of this file
+ *
+ */
     function __construct() 
     {
         parent::__construct();
@@ -25,24 +30,21 @@ class edit extends CI_Controller {
 		$this->load->view('edit-view');
 	}
 
-	public function newGiftView() 
-	{ 
-		$data['pageLoader'] = "<script>newGiftView.initPage();</script>";
+	// public function newGiftView() 
+	// { 
+	// 	$data['pageLoader'] = "<script>newGiftView.initPage();</script>";
 
-		$this->load->view('gift-view', $data);
-	}
+	// 	$this->load->view('gift-view', $data);
+	// }
 
-	public function addGiftView()
+	public function addGiftView($donorID)
 	{
 		$datestring = "%Y-%m-%d";
         $time = time();
         $date =  mdate($datestring,$time);   
 
-		$donorID = $this->uri->segment(3);
-
 		$data['pageLoader'] = "<script>addGiftView.initPage();</script>";
 		$data['date'] = $date;
-		//$data['nameString'] = $this->searchModel->getNameString($donorID);
 
 		$this->phpsessions->set('activeDonorID', $donorID);
 		$this->phpsessions->set('activeDonorNameString', $this->searchModel->getNameString($donorID));
@@ -52,43 +54,48 @@ class edit extends CI_Controller {
 
 	public function addGift()
 	{
-		// switch($this->input->server("REQUEST_METHOD")) 
-		// {
+		switch($this->input->server("REQUEST_METHOD")) 
+		{
 
-  //           case "GET":
-		// 	{
-  //               $this->load->view("lookup-view");
+      case "GET":
+			{
+            $this->load->view("lookup-view");
 
-  //               break;
-  //           }
-  //           case "POST":
-  //           {
-  //               $giftID = 0;
-  //               $donorID = $this->phpsessions->get('activeDonorID');
+            break;
+        }
+        case "POST":
+        {
+            $giftID = 0;
+            $donorID = $this->phpsessions->get('activeDonorID');
 
-  //               $giftData = $this->input->post();
+            $giftData = $this->input->post();
 
-  //               $giftID = $this->editModel->createGiftRecord($donorID,$giftData);
+            $giftID = $this->editModel->createGiftRecord($donorID,$giftData);
 
-  //               if($giftID > 0) 
-  //               	echo "Database was successfully updated.";
-  //               else
-  //               	echo "Error in updating database";
+            if($giftID > 0) 
+            	echo "Database was successfully updated.";
+            else
+            	echo "Error in updating database";
 
-  //               break;
-  //           }
-  //           default:
-  //          	{
-  //               header("HTTP/1.1 404 Not Found");
-  //               return;
-  //           }
-  //       }
-		echo json_encode($this->input->post());
+            break;
+        }
+        default:
+       	{
+            header("HTTP/1.1 404 Not Found");
+            return;
+        }
+    }
 	}
 
-	public function editGift() 
+	public function editGift($donorID,$giftID) 
 	{
-		// do I want to edit the gift separately?  Can I just bring up the donor info page with the requested gift date defaulted in the date box?
+		  $data['pageLoader'] = "<script>editGiftView.initPage();</script>";
+
+      $this->phpsessions->set('activeDonorID', $donorID);
+      $this->phpsessions->set('activeDonorNameString', $this->searchModel->getNameString($donorID));
+      $this->phpsessions->set('activeGiftID', $giftID);
+
+      $this->load->view('gift-view', $data);
 	}
 
 	public function addDonor() 
@@ -103,7 +110,7 @@ class edit extends CI_Controller {
 		switch($this->input->server("REQUEST_METHOD")) 
 		{
 
-            case "GET":
+      case "GET":
 			{
                 $this->load->view("lookup-view");
 

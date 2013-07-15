@@ -11,10 +11,14 @@
 utils = (function($) {
 
 	var doAjax,
-		requestAllDonorData,
+		getDonorDataArray,
 		submitSearch,
 		submitNewDonorInfo,
-		getTitleArray;
+		submitGift,
+		getActiveNameString,
+		getCurrentDate,
+		getTitleArray,
+		getCurrentDate;
 
 	doAjax = function(ajaxObj) {
 		$.ajax(ajaxObj);
@@ -74,7 +78,8 @@ utils = (function($) {
 			cache: true,
 			success: function(response) {
 				alert(response);
-				//views.toggleSubmitMessage();
+				addNewDonorView.toggleSubmitMessage();
+				addNewDonorView.resetForm();
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );
@@ -82,22 +87,22 @@ utils = (function($) {
 		};
 		
 		doAjax(requestObj);
-		//views.toggleSubmitMessage();
+		addNewDonorView.toggleSubmitMessage();
 	};
 
 	submitGift = function() {
 
-		//alert($("#donor-input-form").serialize());
 		requestObj = {
 
 			type: "POST", 
 			url: _editUrl + '/addGift',
-			data: $("#donor-input-form").serialize(),
-			dataType: "json",
+			data: $("#add-gift-form").serialize(),
+			dataType: "text",
 			cache: true,
 			success: function(response) {
 				alert(response);
-				//views.toggleSubmitMessage();
+				addGiftView.toggleSubmitMessage();
+				addGiftView.resetForm();
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );
@@ -105,12 +110,7 @@ utils = (function($) {
 		};
 		
 		doAjax(requestObj);
-		//views.toggleSubmitMessage();
-	};
-
-	resetSearch = function() {
-
-		window.location.href = _searchUrl;
+		addGiftView.toggleSubmitMessage();
 	};
 
 	getActiveNameString = function(callback) {
@@ -130,6 +130,17 @@ utils = (function($) {
 		};
 
 		doAjax(requestObj);
+	};
+
+	getCurrentDate = function() {
+
+		var date = new Date(),
+			month = date.getMonth() + 1; 
+
+		if(month < 10)
+			month = "0" + month;
+
+		return date.getFullYear() + "-" + month + "-" + date.getDate();
 	};
 
 	getTitleArray = function(callback) {
@@ -165,14 +176,14 @@ utils = (function($) {
 		submitGift: function() {		
 			submitGift();
 		},
-		resetSearch: function() {	
-			resetSearch();
-		},
 		getTitleArray: function(callback) {
 			getTitleArray(callback);
 		},
 		getActiveNameString: function(callback) {
 			getActiveNameString(callback);
+		},
+		getCurrentDate: function() {
+			return getCurrentDate();
 		}
 	};
 

@@ -59,7 +59,9 @@ class editModel extends CI_Model
 
             'donorID'           => $donorID,
             'dateOfGift'        => $newGiftData['giftDate'],
-            'numberOfGifts'     => $newGiftData['giftQuantity']
+            'numberOfGifts'     => $newGiftData['giftQuantity'],
+            'letter'            => 1,
+            'important'         => ($newGiftData['importantFlag'] == "on") ? 1 : 0
         );
 
         if($this->db->insert('tbl_donorgifts', $data))
