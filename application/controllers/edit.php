@@ -34,9 +34,14 @@ class edit extends CI_Controller {
 
 	public function addGiftView()
 	{
+		$datestring = "%Y-%m-%d";
+        $time = time();
+        $date =  mdate($datestring,$time);   
+
 		$donorID = $this->uri->segment(3);
 
 		$data['pageLoader'] = "<script>addGiftView.initPage();</script>";
+		$data['date'] = $date;
 		//$data['nameString'] = $this->searchModel->getNameString($donorID);
 
 		$this->phpsessions->set('activeDonorID', $donorID);
@@ -47,7 +52,38 @@ class edit extends CI_Controller {
 
 	public function addGift()
 	{
+		// switch($this->input->server("REQUEST_METHOD")) 
+		// {
 
+  //           case "GET":
+		// 	{
+  //               $this->load->view("lookup-view");
+
+  //               break;
+  //           }
+  //           case "POST":
+  //           {
+  //               $giftID = 0;
+  //               $donorID = $this->phpsessions->get('activeDonorID');
+
+  //               $giftData = $this->input->post();
+
+  //               $giftID = $this->editModel->createGiftRecord($donorID,$giftData);
+
+  //               if($giftID > 0) 
+  //               	echo "Database was successfully updated.";
+  //               else
+  //               	echo "Error in updating database";
+
+  //               break;
+  //           }
+  //           default:
+  //          	{
+  //               header("HTTP/1.1 404 Not Found");
+  //               return;
+  //           }
+  //       }
+		echo json_encode($this->input->post());
 	}
 
 	public function editGift() 

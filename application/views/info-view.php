@@ -5,7 +5,7 @@
 
 <head>
 
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/ootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/main.css" />
 
 	<!-- Positioning -->
@@ -103,7 +103,7 @@
 					<tr>
 						<td>
 							<label class="form-label-text">Country:</label>
-							<input type="text" id="country_input_box" class="input_form-default" name="country" placeholder="USA"/>  
+							<input type="text" id="country_input_box" class="input_form-default" name="country" value="USA"/>  
 						</td>
 
 						<td>
@@ -134,7 +134,7 @@
 						</td>
 						<td class="span3">
 							<label class="form-label-text">Gift Date:</label>  
-							<input type="text" class="input-small" id="gift_date_box" name="giftDate"/> 
+							<input type="text" class="input-small" id="gift-date-box" name="giftDate"/> 
 
 
 						</td>
@@ -157,7 +157,7 @@
 			</div>
 
 			<!-- This table creates a row with the submit button and an 'adding donor info' status message to the right of the button-->
-			<table class="table" style="background-color: #ffffff; width: 40%;"><tr><td class="span1"><button type="submit" class="btn-grey" id="add_info_button">Save</button></td><td class="span4" id="add_donor_message">Adding new donor info...</td></tr></table>
+			<table class="table" style="background-color: #ffffff; width: 40%;"><tr><td class="span1"><button type="submit" class="btn-grey" id="add_info_button">Save</button></td><td class="span4" id="add_info_message">Adding new donor info...</td></tr></table>
 		</form>
 
 	</div>

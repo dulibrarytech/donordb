@@ -5,7 +5,7 @@
 
 <head>
 
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/ootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/main.css" />
 
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery-ui.css" />
@@ -19,8 +19,8 @@
 		#new_donor_button			{ margin-left: -10px; margin-top: 15px; }
 		#gift_description_box		{ width: 500px; height: 150px; }
 		#gift_date_label			{ margin-left: 43px; }
-		#gift_date_box				{ margin-left: 43px; }
-		#gift_submit_button			{ margin-left: 25px; margin-top: 0px; width: 90px;}
+		#gift-date-box				{ margin-left: 43px; }
+		#gift_submit_button			{ margin-left: 22px; margin-top: 0px; width: 90px;}
 	</style>
 
 </head>
@@ -61,7 +61,7 @@
 				<table><tr>
 					<td>
 						<label class="form-label-text left-edge-field" id="donor_select_label">Existing Donor:</label>  
-						<input type="text" class="input-xlarge left-edge-field" id="donor_select_box" placeholder="Name or Organization" name="selectName"> 
+						<input type="text" class="input-xlarge left-edge-field" id="donor_select_box" placeholder="Name or Organization" name="selectName" /> 
 					</td>
 					<td class="span2">
 						<button type="submit" class="btn" id="select_donor_button">Lookup</button>
@@ -79,11 +79,11 @@
 				<table>
 					<tr><td class="span9">
 						<label class="form-label-text left-edge-field" id="gift_quantity_label">Quantity:</label>  
-						<input type="text" class="input-small left-edge-field" id="gift_quantity_box" placeholder="#" name="giftQuantity">
+						<input type="text" class="input-small left-edge-field" id="gift_quantity_box" placeholder="#" name="giftQuantity" />
 					</td>
 					<td>
 						<label class="form-label-text" id="gift_date_label">Date of Gift:</label>  
-						<input type="text" class="input-small" id="gift_date_box" placeholder="Select date" name="giftDate">
+						<input type="text" class="input-small" id="gift-date-box" value="<?php echo $date ?>" name="giftDate" />
 					</td></tr>
 					<tr><td class="span9">
 						<label class="form-label-text left-edge-field" id="gift_description_label">Description:</label> 

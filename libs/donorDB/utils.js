@@ -74,7 +74,7 @@ utils = (function($) {
 			cache: true,
 			success: function(response) {
 				alert(response);
-				views.toggleSubmitMessage();
+				//views.toggleSubmitMessage();
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );
@@ -82,7 +82,30 @@ utils = (function($) {
 		};
 		
 		doAjax(requestObj);
-		views.toggleSubmitMessage();
+		//views.toggleSubmitMessage();
+	};
+
+	submitGift = function() {
+
+		//alert($("#donor-input-form").serialize());
+		requestObj = {
+
+			type: "POST", 
+			url: _editUrl + '/addGift',
+			data: $("#donor-input-form").serialize(),
+			dataType: "json",
+			cache: true,
+			success: function(response) {
+				alert(response);
+				//views.toggleSubmitMessage();
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
+		
+		doAjax(requestObj);
+		//views.toggleSubmitMessage();
 	};
 
 	resetSearch = function() {
@@ -138,6 +161,9 @@ utils = (function($) {
 		},
 		submitNewDonorInfo: function() {		
 			submitNewDonorInfo();
+		},
+		submitGift: function() {		
+			submitGift();
 		},
 		resetSearch: function() {	
 			resetSearch();

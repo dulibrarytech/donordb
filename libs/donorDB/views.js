@@ -213,6 +213,7 @@ browseDonorsView = (function($) {
 }(jQuery)); // browseDonorsView()
 
 
+// Will be 'ananymous gift' view only
 newGiftView = (function($) {
 
 	var initPage,
@@ -267,7 +268,9 @@ newGiftView = (function($) {
 
 addGiftView = (function($) {
 
-	var initPage;
+	var initPage,
+		setNameString,
+		addEvents;
 
 	initPage = function() {
 
@@ -277,14 +280,28 @@ addGiftView = (function($) {
 
 		$('#select-donor-section').hide();
 
-		$('#gift_date_box').attr('placeholder', '');
+		$('#gift-date-box').attr('placeholder', '');
 
 		utils.getActiveNameString(setNameString);
+
+		addEvents();
 	};
 
 	setNameString = function(name) {
 
 		$("#donor-name-label").text(name);
+	};
+
+	addEvents = function() {
+
+		$("#add-gift-form").validate({
+
+	        errorClass: "invalid",
+	        submitHandler: function() {
+
+	        	utils.submitGift();
+	        }
+	    });
 	};
 
 	return {
@@ -312,7 +329,7 @@ addNewDonorView = (function($) {
 
 		$(".generic-label").text("Add New Donor Info");
 
-		$("#add_donor_message").hide();
+		$("#add_info_message").hide();
 
 		addEvents();
 
@@ -333,7 +350,7 @@ addNewDonorView = (function($) {
 
 	toggleSubmitMessage = function() {
 
-		$("#add_donor_message").toggle();
+		$("#add_info_message").toggle();
 	};
 
 	createTitleDropdown = function(tableData) {
