@@ -52,7 +52,7 @@ class edit extends CI_Controller {
 		$this->load->view('gift-view', $data);
 	}
 
-	public function addGift()
+	public function addGift($donorID = null)
 	{
 		switch($this->input->server("REQUEST_METHOD")) 
 		{
@@ -66,7 +66,9 @@ class edit extends CI_Controller {
         case "POST":
         {
             $giftID = 0;
-            $donorID = $this->phpsessions->get('activeDonorID');
+
+            if($donorID == null)
+              $donorID = $this->phpsessions->get('activeDonorID');
 
             $giftData = $this->input->post();
 
@@ -87,7 +89,7 @@ class edit extends CI_Controller {
     }
 	}
 
-	public function editGift($donorID,$giftID) 
+	public function editGiftView($donorID,$giftID) 
 	{
 		  $data['pageLoader'] = "<script>editGiftView.initPage();</script>";
 
@@ -105,7 +107,7 @@ class edit extends CI_Controller {
 		$this->load->view('info-view', $data);
 	}
 
-	public function inputDonorInfo()
+	public function inputDonorInfo($donorID = null)
 	{
 		switch($this->input->server("REQUEST_METHOD")) 
 		{
@@ -123,7 +125,8 @@ class edit extends CI_Controller {
 
                 $donorData = $this->input->post();
                 
-                $donorID = $this->editModel->createDonorRecord($donorData);
+                if($donorID == null)
+                  $donorID = $this->editModel->createDonorRecord($donorData);
 
                 // If box is checked, no gift needs to be added at this time
                 $addGiftCheck = $this->input->post('addGiftCheckbox');

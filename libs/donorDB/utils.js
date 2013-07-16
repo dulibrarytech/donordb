@@ -15,10 +15,12 @@ utils = (function($) {
 		submitSearch,
 		submitNewDonorInfo,
 		submitGift,
+		getGiftData,
 		getActiveNameString,
 		getCurrentDate,
 		getTitleArray,
-		getCurrentDate;
+		getCurrentDate,
+		getGiftDatesForActiveDonor;
 
 	doAjax = function(ajaxObj) {
 		$.ajax(ajaxObj);
@@ -113,6 +115,25 @@ utils = (function($) {
 		addGiftView.toggleSubmitMessage();
 	};
 
+	getGiftData = function(callback) {
+
+		requestObj = {
+
+			type: "POST", 
+			url: _searchUrl + '/queryDatabaseGiftData',
+			dataType: "json",
+			cache: true,
+			success: function(response) {
+				callback(response);
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
+		
+		doAjax(requestObj);
+	};
+
 	getActiveNameString = function(callback) {
 
 		requestObj = {
@@ -162,6 +183,25 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
+	getGiftDatesForActiveDonor = function(callback) {
+
+		requestObj = {
+
+			type: "POST", 
+			url: _searchUrl + '/queryDatabaseDonorGifts',
+			dataType: "json",
+			cache: true,
+			success: function(response) {
+				callback(response);
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
+
+		doAjax(requestObj);
+	};
+
 	return {
 
 		getDonorDataArray: function(callback) {
@@ -176,6 +216,9 @@ utils = (function($) {
 		submitGift: function() {		
 			submitGift();
 		},
+		getGiftData: function(callback) {		
+			getGiftData(callback);
+		},
 		getTitleArray: function(callback) {
 			getTitleArray(callback);
 		},
@@ -184,6 +227,9 @@ utils = (function($) {
 		},
 		getCurrentDate: function() {
 			return getCurrentDate();
+		},
+		getGiftDatesForActiveDonor: function(callback) {
+			getGiftDatesForActiveDonor(callback);
 		}
 	};
 

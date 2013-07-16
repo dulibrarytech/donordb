@@ -94,11 +94,11 @@ class searchModel extends CI_Model
         $this->db->where('dateOfGift <=', $toDate);
         $this->db->order_by("dateOfGift", "desc");
 
-        // If there is keyword data, return records that are like the keyword
+        // If there is keyword data, return records that are like the keyword.
         if($keyword != "")
         {
             $this->db->like('tbl_donorinfo.LastName', $keyword);    
-            //$this->db->order_by('LastName');
+            //$this->db->order_by('LastName', 'desc');
         }
 
         $query = $this->db->get();
@@ -200,7 +200,7 @@ class searchModel extends CI_Model
         		 		if($results->title == "")
           		 			continue;
 
-        		 		$titleInfo[$index]['title'] 	= $results->title;
+        		 		$titleInfo[$index]['title'] 	  = $results->title;
         		 		$titleInfo[$index]['titleID']  	= $results->titleID;
 
         		 		$index++;
@@ -214,9 +214,30 @@ class searchModel extends CI_Model
      		return $titleInfo;
    	}
 
-   	public function getDonorInfo($ID)
+    public function getTitleID($titleText)
+    {
+        $ID = 0;
+
+        $this->db->select('titleID');
+        $this->db->from('tbl_donortitle_lkup');
+        $this->db->where('title', $titleText);
+
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0)
+        {
+            foreach ($query->result() as $results)
+            {
+                $ID = $results->titleID;
+            }
+        }
+        
+        return $ID;
+    }
+
+   	public function getDonorData($ID)
    	{
-     		$infoArray = array();
+     		$donorInfo = array();
 
      		$this->db->select();
      		$this->db->from('tbl_donorinfo');
@@ -243,44 +264,93 @@ class searchModel extends CI_Model
      		return $donorInfo;
    	}
 
-    public function getGiftInfo($ID)
+    public function getGiftData($giftID)
     {
-        // This should retrieve all 3 gift data 'areas' in an array
+        $giftInfo = array();
+
+        if($giftID != null)
+        {
+            $this->db->select('tbl_donorgifts.dateOfGift, tbl_donorgifts.numberOfGifts, tbl_donorgifts.letter, tbl_donorgifts.important, tbl_donorgiftdescriptions.giftDescription1');
+            $this->db->from('tbl_donorgifts');
+            $this->db->join('tbl_donorgiftdescriptions', 'tbl_donorgifts.giftsID = tbl_donorgiftdescriptions.giftsID', 'inner');
+            $this->db->where('tbl_donorgifts.giftsID', $giftID);
+            $this->db->order_by("dateOfGift", "desc");
+
+            $query = $this->db->get();
+
+            foreach ($query->result() as $result)
+            {
+                $giftInfo['giftQuantity']     = $result->numberOfGifts;
+                $giftInfo['giftDescription']  = $result->giftDescription1;
+                $giftInfo['giftDate']         = $result->dateOfGift;
+                $giftInfo['letterFlag']       = $result->letter;
+                $giftInfo['importantFlag']    = $result->important;
+            }
+        }
+
+        return $giftInfo;
+    }
+
+    public function getDonorGifts($donorID)
+    {
+        $giftData = array();
+
+        if($donorID != null)
+        {
+            $this->db->select();
+            $this->db->from('tbl_donorgifts');
+            $this->db->where('donorID', $donorID);
+
+            $query = $this->db->get();
+
+            if ($query->num_rows() > 0)
+            { 
+                foreach ($query->result() as $result)
+                {
+                    $giftData[$result->giftsID] = $this->truncateDateString($result->dateOfGift);
+                }
+            }
+        }
+
+        return $giftData;
     }
 
     public function getNameString($ID)
     {
         $nameString = "";
 
-        $this->db->select('FirstName, LastName, Organization');
-        $this->db->from('tbl_donorinfo');
-        $this->db->where('donorID', $ID);
-
-        $query = $this->db->get();
-
-        foreach ($query->result() as $result)
+        if($ID != null)
         {
-            $fName   = $result->FirstName;
-            $lName   = $result->LastName;
-            $org     = $result->Organization;
-        }
+          $this->db->select('FirstName, LastName, Organization');
+          $this->db->from('tbl_donorinfo');
+          $this->db->where('donorID', $ID);
 
-        if($lName != "" && $lName != null)
-        {
-            $nameString = $lName;
+          $query = $this->db->get();
 
-            if($fName != "" && $fName != null)
-            {
-                $nameString .= ", " . $fName;
-            }
-            if($org != "" && $org != null)
-            {
-                $nameString .= " (" . $org . ")";
-            }
-        }
-        else
-        {
-            $nameString = $org;
+          foreach ($query->result() as $result)
+          {
+              $fName   = $result->FirstName;
+              $lName   = $result->LastName;
+              $org     = $result->Organization;
+          }
+
+          if($lName != "" && $lName != null)
+          {
+              $nameString = $lName;
+
+              if($fName != "" && $fName != null)
+              {
+                  $nameString .= ", " . $fName;
+              }
+              if($org != "" && $org != null)
+              {
+                  $nameString .= " (" . $org . ")";
+              }
+          }
+          else
+          {
+              $nameString = $org;
+          }
         }
             
         return $nameString;

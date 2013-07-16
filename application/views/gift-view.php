@@ -14,14 +14,14 @@
 	<!-- Positioning -->   
 	<!-- TODO: Create 'left edge field' class to offset by 25px left margin? -->
 	<style>
-		#select_donor_button		{ margin-left: 5px; margin-top: 15px; /*width: 120px;*/ }
-		#anon_donation_button		{ margin-left: 147px; margin-top: 15px; }
-		#new_donor_button			{ margin-left: -10px; margin-top: 15px; }
 		#gift_description_box		{ width: 500px; height: 150px; }
 		#gift_date_label			{ margin-left: 43px; }
 		#gift-date-box				{ margin-left: 43px; }
 		#gift_submit_button			{ margin-left: -7px; margin-top: 0px; width: 90px;}
 		#important_gift_check		{ vertical-align: top; padding-left: 45px; }
+
+		#dropdown-box-section		{ margin-left: 42px; width: 150px; }
+		#dropdown-box 				{ width: 120px; }
 
 		#lower_controls				{ background-color: #ffffff; width: 40%; padding: -10px; margin-top: -10px; }
 		#add_info_message			{ padding-top: 15px; }
@@ -70,6 +70,8 @@
 					<td>
 						<label class="form-label-text" id="gift_date_label">Date of Gift:</label>  
 						<input type="text" class="input-small" id="gift-date-box" name="giftDate" />
+
+						<div id="dropdown-box-section"></div>
 					</td></tr>
 					<tr><td class="span9">
 						<label class="form-label-text left-edge-field" id="gift_description_label">Description:</label> 
@@ -77,14 +79,14 @@
 					</td>
 					<td id="important_gift_check">
 						<input type='hidden' name='importantFlag' value="off">
-						<input type="checkbox" name="importantFlag">Important</input>
+						<input type="checkbox" name="importantFlag" id="important-checkbox">Important</input>
 					</td>
 				</table>
 			</div>
 
 			<!-- This table creates a row with the submit button and an 'adding donor info' status message to the right of the button-->
 			<table class="table" id="lower_controls"><tr>
-				<td class="span2"><button type="submit" class="btn-grey" id="gift_submit_button">Add Gift</button></td>
+				<td class="span2"><button type="submit" class="btn-grey" id="gift_submit_button"></button></td>
 				<td id="add_info_message">Adding new gift info...</td>
 				<!--td class=""><input type="checkbox" id="add_gift_checkbox" name="addGiftCheckbox">&nbsp&nbspDo not add a gift at this time</input></td></tr-->
 			</table>

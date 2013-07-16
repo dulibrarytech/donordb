@@ -112,7 +112,7 @@ searchView = (function($) {
 			$.each(tableData, function (key, value) {
 				
 				results += '<tr>';
-				results += '<td class="span1" style="text-align: center"> <a href="' + _editUrl + '/editGift/' + value.donorID + '/' + value.giftsID +'">Edit</a> </td>';
+				results += '<td class="span1" style="text-align: center"> <a href="' + _editUrl + '/editGiftView/' + value.donorID + '/' + value.giftsID +'">Edit</a> </td>';
 
 				results += '<td class="span2">' + value.giftDate + '</td>';
 				results += '<td class="span4">' + value.lastName + '</td>';
@@ -222,7 +222,10 @@ browseDonorsView = (function($) {
 editGiftView = (function($) {
 
 	var initPage,
-		addEvents;
+		addEvents,
+		setNameString,
+		setGiftFormData,
+		createGiftDateDropDown;
 
 	initPage = function() {
 
@@ -230,22 +233,81 @@ editGiftView = (function($) {
 
 		$(".generic-label").text("View / Edit Gift");
 
-		$('#gift_submit_button').attr('disabled', 'disabled');
+		$('#gift_submit_button').html("Update");
+		$('#add_info_message').html("Updating data...");
 
-		$("#new_donor_button").css("visibility", "hidden");
+		$('#add_info_message').hide();
+		$("#gift-date-box").hide();
 
 		addEvents();
+
+		utils.getGiftDatesForActiveDonor(createGiftDateDropDown);
+		utils.getGiftData(setGiftFormData);
 	};
 
 	addEvents = function() {
 
+		$("#add-gift-form").validate({
 
+	        errorClass: "invalid",
+	        submitHandler: function() {
+
+	        	//utils.submitGift();
+	        }
+	    });
+	};
+
+	setNameString = function(name) {
+
+		$("#donor-name-label").text(name);
+	};
+
+	setGiftFormData = function(giftData) {
+
+		$("#gift_quantity_box").attr('value', giftData['giftQuantity']);
+
+		$("#gift_description_box").text(giftData['giftDescription']);
+
+		if(giftData['importantFlag'] == 1)
+			$("#important-checkbox").attr('checked', 'checked');
+
+		setNameString(giftData['nameString']);
+	};
+
+	createGiftDateDropDown = function(giftDates) {
+
+		var dropdownHTML = '<select class="input" id="dropdown-box">';
+			activeGift = giftDates['activeGiftID'];
+
+		$.each(giftDates, function (key, value) {
+
+			if(key == "activeGiftID") 
+				return true;
+
+			if(key == activeGift)
+				dropdownHTML += '<option selected="selected">' + value + "</option>";
+			else
+				dropdownHTML += '<option>' + value + "</option>";
+		} );
+
+		dropdownHTML += '</select>';
+
+		$("#dropdown-box-section").html(dropdownHTML);
 	};
 
 	return {
 
 		initPage: function() {	
 			initPage();
+		},
+		setNameString: function(name) {	
+			setNameString(name);
+		},
+		setGiftFormData: function(giftData) {
+			setGiftFormData(giftData);
+		},
+		createGiftDateDropDown: function(giftDates) {	
+			createGiftDateDropDown(giftDateData);
 		}
 	};
 
@@ -267,7 +329,9 @@ addGiftView = (function($) {
 		$(".generic-label").text("Add a Gift");
 		$('#gift-date-box').attr('value', utils.getCurrentDate());
 
-		$('#select-donor-section').hide();
+		$('#gift_submit_button').html("Add Gift");
+		$('#add_info_message').html("Adding new gift info...");
+
 		$('#add_info_message').hide();
 
 		utils.getActiveNameString(setNameString);
@@ -360,11 +424,11 @@ addNewDonorView = (function($) {
 		$("#add_info_message").toggle();
 	};
 
-	createTitleDropdown = function(tableData) {
+	createTitleDropdown = function(titleData) {
 
 		var dropdown = "<select class='input-medium' name='title'><option selected='yes' value='no_title'></option>";
 
-		$.each(tableData, function (key, value) {
+		$.each(titleData, function (key, value) {
 			
 			dropdown += "<option>" + value.title + "</option>";
 
@@ -386,8 +450,8 @@ addNewDonorView = (function($) {
 		initPage: function() {	
 			initPage();
 		},
-		createTitleDropdown: function(tableData) {	
-			createTitleDropdown(tableData);
+		createTitleDropdown: function(titleData) {	
+			createTitleDropdown(titleData);
 		},
 		toggleSubmitMessage: function() {
 			toggleSubmitMessage();

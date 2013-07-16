@@ -16,13 +16,14 @@ class editModel extends CI_Model
     {
         parent::__construct();
         $this->load->database();
+        $this->load->model('searchModel');
     }
 
     public function createDonorRecord($newDonorData)
     {
     	$ID = 0;
 
-        $titleID = $this->getTitleID($newDonorData['title']);
+        $titleID = $this->searchModel->getTitleID($newDonorData['title']);
 
         $country = "USA";
         if($newDonorData['country'] != "")
@@ -82,25 +83,14 @@ class editModel extends CI_Model
         return $ID;
     }
 
-    private function getTitleID($titleText)
+    public function editGiftRecord($giftID, $giftData)
     {
-        $ID = 0;
 
-        $this->db->select('titleID');
-        $this->db->from('tbl_donortitle_lkup');
-        $this->db->where('title', $titleText);
+    }
 
-        $query = $this->db->get();
+    public function editDonorRecord($donorID, $donorData)
+    {
 
-        if($query->num_rows() > 0)
-        {
-            foreach ($query->result() as $results)
-            {
-                $ID = $results->titleID;
-            }
-        }
-        
-        return $ID;
     }
 
 } // editModel

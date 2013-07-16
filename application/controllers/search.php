@@ -64,16 +64,16 @@ class search extends CI_Controller {
         }
 	}
 
-	public function getActiveDonorNameString()
-	{
-		echo json_encode($this->phpsessions->get('activeDonorNameString'));
-	}
-
 	public function browseDonors() 
 	{
 		$data['pageLoader'] = "<script>browseDonorsView.initPage();</script>";
 
 		$this->load->view('table-view', $data);
+	}
+
+	public function getActiveDonorNameString()
+	{
+		echo json_encode($this->phpsessions->get('activeDonorNameString'));
 	}
 
 	public function queryDatabaseAllDonors()
@@ -84,6 +84,41 @@ class search extends CI_Controller {
 	public function queryDatabaseAllTitles()
 	{
 		echo json_encode($this->searchModel->getAllTitles());
+	}
+
+	public function queryDatabaseGiftData($giftID = null)
+	{
+		if($giftID == null)
+			$giftID = $this->phpsessions->get('activeGiftID');
+
+		// Main gift data
+		$dataArray = $this->searchModel->getGiftData($giftID);
+
+		// Add namestring for view display
+		$dataArray['nameString'] = $this->phpsessions->get('activeDonorNameString');
+
+		echo json_encode($dataArray);
+	}
+
+	public function queryDatabaseDonorData($donorID = null)
+	{
+		if($donorID == null)
+			$donorID = $this->phpsessions->get('activeDonorID');
+
+		echo json_encode($this->searchModel->getDonorData($donorID));
+	}
+
+	public function queryDatabaseDonorGifts($donorID = null)
+	{
+		if($donorID == null)
+			$donorID = $this->phpsessions->get('activeDonorID');
+
+		$giftDataArray = $this->searchModel->getDonorGifts($donorID);
+
+		// Send over the current active giftID
+		$giftDataArray['activeGiftID'] = $this->phpsessions->get('activeGiftID');
+
+		echo json_encode($giftDataArray);
 	}
 
 }
