@@ -223,13 +223,15 @@ editGiftView = (function($) {
 
 	var initPage,
 		addEvents,
+		blockForm,
+		unblockForm,
 		setNameString,
 		setGiftFormData,
 		createGiftDateDropDown;
 
 	initPage = function() {
 
-		$(".content-window").css("height", "590px");
+		$(".content-window").css("height", "600px");
 
 		$(".generic-label").text("View / Edit Gift");
 
@@ -252,9 +254,41 @@ editGiftView = (function($) {
 	        errorClass: "invalid",
 	        submitHandler: function() {
 
-	        	//utils.submitGift();
+	        	utils.submitGiftEdit();
 	        }
 	    });
+
+	    $("#dropdown-box-section").change( function() {
+
+	    	var newDate = $("#dropdown-box").val();
+	    	
+	    	utils.changeActiveGift(newDate,setGiftFormData);
+	    });
+	};
+
+	blockForm = function(message) {
+
+		$("#gift_quantity_box").attr('value', "");
+		$("#gift_quantity_box").attr('placeholder', "");
+
+		$("#gift_description_box").text(message);
+
+		$("#gift_quantity_box").prop('disabled', 'true');
+		$("#gift_description_box").prop('disabled', 'true');
+		$("#edit-date-box").prop('disabled', 'true');
+		$("#important-checkbox").prop('disabled', 'true');
+		$("#gift_submit_button").hide();
+	};
+
+	unblockForm = function() {
+
+		$("#gift_description_box").text("");
+
+		$("#gift_quantity_box").prop('disabled', 'false');
+		$("#gift_description_box").prop('disabled', 'false');
+		$("#edit-date-box").prop('disabled', 'false');
+		$("#important-checkbox").prop('disabled', 'false');
+		$("#gift_submit_button").show();
 	};
 
 	setNameString = function(name) {
@@ -263,6 +297,8 @@ editGiftView = (function($) {
 	};
 
 	setGiftFormData = function(giftData) {
+
+		unblockForm();
 
 		$("#gift_quantity_box").attr('value', giftData['giftQuantity']);
 
@@ -300,6 +336,9 @@ editGiftView = (function($) {
 		initPage: function() {	
 			initPage();
 		},
+		blockForm: function(message) {
+			blockForm(message);
+		},
 		setNameString: function(name) {	
 			setNameString(name);
 		},
@@ -333,6 +372,7 @@ addGiftView = (function($) {
 		$('#add_info_message').html("Adding new gift info...");
 
 		$('#add_info_message').hide();
+		$(".change_date_elts").hide();
 
 		utils.getActiveNameString(setNameString);
 
@@ -361,7 +401,7 @@ addGiftView = (function($) {
 		$("#add_info_message").toggle();
 	};
 
-	resetForm = function() {gift_quantity_label
+	resetForm = function() {
 
 		$("#gift_quantity_box").text("");
 		$("#gift_description_box").text("");

@@ -18,4 +18,10 @@
             altField: "#gift-date-box", 
             altFormat: "yy-mm-dd"
         });
+
+        $( "#edit-date-box" ).datepicker({
+
+            altField: "#edit-date-box", 
+            altFormat: "yy-mm-dd"
+        });
   	});

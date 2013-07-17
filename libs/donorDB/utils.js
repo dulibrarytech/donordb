@@ -11,16 +11,19 @@
 utils = (function($) {
 
 	var doAjax,
-		getDonorDataArray,
+
 		submitSearch,
 		submitNewDonorInfo,
 		submitGift,
+		submitDonorEdit,
+		submitGiftEdit,
+		getDonorDataArray,
 		getGiftData,
 		getActiveNameString,
 		getCurrentDate,
 		getTitleArray,
-		getCurrentDate,
-		getGiftDatesForActiveDonor;
+		getGiftDatesForActiveDonor,
+		changeActiveGift;
 
 	doAjax = function(ajaxObj) {
 		$.ajax(ajaxObj);
@@ -115,6 +118,29 @@ utils = (function($) {
 		addGiftView.toggleSubmitMessage();
 	};
 
+	submitGiftEdit = function() {
+
+		alert($("#add-gift-form").serialize());
+		// requestObj = {
+
+		// 	type: "POST", 
+		// 	url: _editUrl + '/addGift',
+		// 	data: $("#add-gift-form").serialize(),
+		// 	dataType: "text",
+		// 	cache: true,
+		// 	success: function(response) {
+		// 		alert(response);
+		// 		editGiftView.toggleSubmitMessage();
+		// 	},
+		// 	error: function ( textStatus, errorThrown ) {
+  //               alert( errorThrown );
+  //           }
+		// };
+		
+		// doAjax(requestObj);
+		// editGiftView.toggleSubmitMessage();
+	};
+
 	getGiftData = function(callback) {
 
 		requestObj = {
@@ -202,11 +228,33 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
+	changeActiveGift = function(date,callback) {
+
+		requestObj = {
+
+			type: "POST", 
+			url: _editUrl + '/setSessionActiveGift/' + date,
+			dataType: "text",
+			cache: true,
+			success: function(response) {
+
+				if(response == "ID set")
+					getGiftData(callback);
+				else {
+					editGiftView.blockForm(response);
+				}
+
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
+		
+		doAjax(requestObj);
+	};
+
 	return {
 
-		getDonorDataArray: function(callback) {
-			getDonorDataArray(callback);
-		},
 		submitSearch: function(callback,type) {	
 			submitSearch(callback,type);
 		},
@@ -215,6 +263,15 @@ utils = (function($) {
 		},
 		submitGift: function() {		
 			submitGift();
+		},
+		submitDonorEdit: function() {
+			submitDonorEdit();
+		},
+		submitGiftEdit: function() {
+			submitGiftEdit();
+		},
+		getDonorDataArray: function(callback) {
+			getDonorDataArray(callback);
 		},
 		getGiftData: function(callback) {		
 			getGiftData(callback);
@@ -230,6 +287,9 @@ utils = (function($) {
 		},
 		getGiftDatesForActiveDonor: function(callback) {
 			getGiftDatesForActiveDonor(callback);
+		},
+		changeActiveGift: function(date, callback) {
+			changeActiveGift(date,callback);
 		}
 	};
 

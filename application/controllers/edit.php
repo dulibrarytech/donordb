@@ -100,6 +100,11 @@ class edit extends CI_Controller {
       $this->load->view('gift-view', $data);
 	}
 
+  public function inputGiftEdit()
+  {
+    
+  }
+
 	public function addDonor() 
 	{
 		$data['pageLoader'] = "<script>addNewDonorView.initPage();</script>";
@@ -164,8 +169,30 @@ class edit extends CI_Controller {
 		// json?
 	}
 
+  public function inputDonorEdit()
+  {
+
+  }
+
 	public function editTitle() 
 	{
 		echo "edit title function<br />";
 	}
+
+  public function setSessionActiveGift($giftDate)
+  {
+      $donorID = $this->phpsessions->get('activeDonorID');
+      $giftID = $this->searchModel->getGiftIDForGiftDate($donorID,$giftDate);
+
+      $message = "Gift record not found for date: " . $giftDate;
+
+      if($giftID > 0)
+      {
+          $this->phpsessions->set('activeGiftID', $giftID);
+
+          $message = "ID set";
+      }
+
+      echo $message;
+  }
 }

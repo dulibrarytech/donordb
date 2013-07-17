@@ -307,7 +307,8 @@ class searchModel extends CI_Model
             { 
                 foreach ($query->result() as $result)
                 {
-                    $giftData[$result->giftsID] = $this->truncateDateString($result->dateOfGift);
+                    if($result->dateOfGift != null)
+                      $giftData[$result->giftsID] = $this->truncateDateString($result->dateOfGift);
                 }
             }
         }
@@ -354,6 +355,28 @@ class searchModel extends CI_Model
         }
             
         return $nameString;
+    }
+
+    public function getGiftIDForGiftDate($donorID, $giftDate)
+    {
+        $ID = 0;
+
+        if($donorID != null && $giftDate != null)
+        {
+            $this->db->select('giftsID');
+            $this->db->from('tbl_donorgifts');
+            $this->db->where('donorID',$donorID);
+            $this->db->where('dateOfGift',$giftDate);
+
+            $query = $this->db->get();
+
+            foreach ($query->result() as $result)
+            {
+                $ID = $result->giftsID;
+            }
+        }
+
+        return $ID;
     }
 
 

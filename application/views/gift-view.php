@@ -18,7 +18,10 @@
 		#gift_date_label			{ margin-left: 43px; }
 		#gift-date-box				{ margin-left: 43px; }
 		#gift_submit_button			{ margin-left: -7px; margin-top: 0px; width: 90px;}
-		#important_gift_check		{ vertical-align: top; padding-left: 45px; }
+		#edit_date_cell				{ vertical-align: bottom;  }
+		#important-checkbox			{ margin-top: 12px; }
+
+		.change_date_elts			{ margin-left: 90px; }
 
 		#dropdown-box-section		{ margin-left: 42px; width: 150px; }
 		#dropdown-box 				{ width: 120px; }
@@ -67,6 +70,10 @@
 						<label class="form-label-text left-edge-field" id="gift_quantity_label">Quantity:</label>  
 						<input type="text" class="input-small left-edge-field" id="gift_quantity_box" placeholder="#" name="giftQuantity" />
 					</td>
+					<td id="important_gift_check">
+						<input type='hidden' name='importantFlag' value="off">
+						<input type="checkbox" name="importantFlag" id="important-checkbox">Hand-Typed Letter</input>
+					</td>
 					<td>
 						<label class="form-label-text" id="gift_date_label">Date of Gift:</label>  
 						<input type="text" class="input-small" id="gift-date-box" name="giftDate" />
@@ -77,9 +84,9 @@
 						<label class="form-label-text left-edge-field" id="gift_description_label">Description:</label> 
 						<textarea class="textarea left-edge-field" id="gift_description_box" name="giftDescription" cols="70" rows="50"></textarea>
 					</td>
-					<td id="important_gift_check">
-						<input type='hidden' name='importantFlag' value="off">
-						<input type="checkbox" name="importantFlag" id="important-checkbox">Important</input>
+					<td id="edit_date_cell" colspan="2">
+						<label class="form-label-text change_date_elts" id="change_date_label">Change Date:</label>  
+						<input type="text" class="input-small change_date_elts" id="edit-date-box" name="giftDateEdit" />
 					</td>
 				</table>
 			</div>
