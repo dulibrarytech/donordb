@@ -227,6 +227,7 @@ editGiftView = (function($) {
 		unblockForm,
 		setNameString,
 		setGiftFormData,
+		toggleSubmitMessage,
 		createGiftDateDropDown;
 
 	initPage = function() {
@@ -261,11 +262,13 @@ editGiftView = (function($) {
 	    $("#dropdown-box-section").change( function() {
 
 	    	var newDate = $("#dropdown-box").val();
-	    	
+			$("#edit-date-box").val(newDate);
+
 	    	utils.changeActiveGift(newDate,setGiftFormData);
 	    });
 	};
 
+	// Blocks all fields and displays 'message' in the description section
 	blockForm = function(message) {
 
 		$("#gift_quantity_box").attr('value', "");
@@ -277,6 +280,7 @@ editGiftView = (function($) {
 		$("#gift_description_box").prop('disabled', 'true');
 		$("#edit-date-box").prop('disabled', 'true');
 		$("#important-checkbox").prop('disabled', 'true');
+
 		$("#gift_submit_button").hide();
 	};
 
@@ -284,10 +288,11 @@ editGiftView = (function($) {
 
 		$("#gift_description_box").text("");
 
-		$("#gift_quantity_box").prop('disabled', 'false');
-		$("#gift_description_box").prop('disabled', 'false');
-		$("#edit-date-box").prop('disabled', 'false');
-		$("#important-checkbox").prop('disabled', 'false');
+		$("#gift_quantity_box").prop('enabled', 'true');
+		$("#gift_description_box").prop('enabled', 'true');
+		$("#edit-date-box").prop('enabled', 'true');
+		$("#important-checkbox").prop('enabled', 'true');
+
 		$("#gift_submit_button").show();
 	};
 
@@ -310,6 +315,11 @@ editGiftView = (function($) {
 		setNameString(giftData['nameString']);
 	};
 
+	toggleSubmitMessage = function() {
+
+		$("#add_info_message").toggle();
+	};
+
 	createGiftDateDropDown = function(giftDates) {
 
 		var dropdownHTML = '<select class="input" id="dropdown-box">';
@@ -329,6 +339,8 @@ editGiftView = (function($) {
 		dropdownHTML += '</select>';
 
 		$("#dropdown-box-section").html(dropdownHTML);
+		var gdate = $("#dropdown-box").val();
+		$("#edit-date-box").val(gdate);
 	};
 
 	return {
@@ -344,6 +356,9 @@ editGiftView = (function($) {
 		},
 		setGiftFormData: function(giftData) {
 			setGiftFormData(giftData);
+		},
+		toggleSubmitMessage: function() {
+			toggleSubmitMessage();
 		},
 		createGiftDateDropDown: function(giftDates) {	
 			createGiftDateDropDown(giftDateData);
@@ -403,8 +418,8 @@ addGiftView = (function($) {
 
 	resetForm = function() {
 
-		$("#gift_quantity_box").text("");
-		$("#gift_description_box").text("");
+		$("#gift_description_box").val("");
+		$("#gift_quantity_box").val("");
 	};
 
 	return {
@@ -441,6 +456,9 @@ addNewDonorView = (function($) {
 		$(".generic-label").text("Add New Donor Info");
 
 		$("#add_info_message").hide();
+
+		$('#gift-date-box').attr('value', utils.getCurrentDate());
+		$('#add_info_message').html("Adding new donor info...");
 
 		addEvents();
 
@@ -482,7 +500,7 @@ addNewDonorView = (function($) {
 
 	resetForm = function() {
 
-		window.location.href = _editUrl + "/addDonor";
+		window.location.href = _editUrl + "/addDonorView";
 	};
 
 	return {
@@ -504,3 +522,123 @@ addNewDonorView = (function($) {
 }(jQuery)); // addNewDonorView()
 
 
+editDonorView = (function($) {
+
+	var initPage,
+		addEvents,
+		toggleSubmitMessage,
+		createTitleDropdown,
+		createGiftDateDropDown,
+		setDonorFormData;
+
+	initPage = function() {
+
+		$(".content-window").css("height", "740px");
+
+		$(".generic-label").text("Add New Donor Info");
+
+		$("#add_info_message").hide();
+
+		$('#gift-date-box').attr('value', utils.getCurrentDate());
+		$('#add_info_message').html("Adding new donor info...");
+
+		addEvents();
+
+		//utils.getTitleArray(createTitleDropdown);
+		utils.getGiftDatesForActiveDonor(createGiftDateDropDown);
+		utils.getGiftData(setGiftFormData);
+	};
+
+	addEvents = function() {
+
+		$("#donor-input-form").validate({
+
+	        errorClass: "invalid",
+	        submitHandler: function() {
+
+	            //utils.submitNewDonorInfo();
+	        }
+	    });
+	};
+
+	toggleSubmitMessage = function() {
+
+		$("#add_info_message").toggle();
+	};
+
+	createTitleDropdown = function(titleData) {
+
+		var dropdown = "<select class='input-medium' name='title'><option selected='yes' value='no_title'></option>";
+
+		$.each(titleData, function (key, value) {
+			
+			dropdown += "<option>" + value.title + "</option>";
+
+		} );
+
+		dropdown += "<option>[Add New Title]</option>";
+		dropdown += "</select>";
+
+		$("#dropdown-box").html(dropdown);
+	};
+
+	createGiftDateDropDown = function(giftDates) {
+
+		var dropdownHTML = '<select class="input" id="dropdown-box">';
+			activeGift = giftDates['activeGiftID'];
+
+		$.each(giftDates, function (key, value) {
+
+			if(key == "activeGiftID") 
+				return true;
+
+			if(key == activeGift)
+				dropdownHTML += '<option selected="selected">' + value + "</option>";
+			else
+				dropdownHTML += '<option>' + value + "</option>";
+		} );
+
+		dropdownHTML += '</select>';
+
+		$("#dropdown-box-section").html(dropdownHTML);
+		var gdate = $("#dropdown-box").val();
+		$("#edit-date-box").val(gdate);
+	};
+
+	setDonorFormData = function(giftData) {
+
+		
+
+
+
+		// Gift section
+		$("#gift_quantity_box").attr('value', giftData['giftQuantity']);
+
+		$("#gift_description_box").text(giftData['giftDescription']);
+
+		if(giftData['importantFlag'] == 1)
+			$("#important-checkbox").attr('checked', 'checked');
+
+		setNameString(giftData['nameString']);
+	};
+
+	return {
+
+		initPage: function() {	
+			initPage();
+		},
+		createTitleDropdown: function(titleData) {	
+			createTitleDropdown(titleData);
+		},
+		toggleSubmitMessage: function() {
+			toggleSubmitMessage();
+		},
+		createGiftDateDropDown: function(giftDates) {	
+			createGiftDateDropDown(giftDateData);
+		},
+		setDonorFormData: function(giftData) {
+			setDonorFormData(giftData);
+		}
+	};
+
+}(jQuery)); // editDonorView()

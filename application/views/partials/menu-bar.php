@@ -17,7 +17,7 @@
 
             <li class="navbar-item"><a title="Browse Donors" href="<?php echo base_url();?>index.php/search/browseDonors">Browse Donors</a></li>
 
-            <li class="navbar-item"><a title="" href="<?php echo base_url();?>index.php/edit/addDonor">Add Donor Info</a></li>
+            <li class="navbar-item"><a title="" href="<?php echo base_url();?>index.php/edit/addDonorView">Add Donor Info</a></li>
 
             <li class="navbar-item" style="border: none"><a title="New Gift" href="<?php echo base_url();?>index.php/edit/newGiftView">Anonymous Gift</a></li>
 

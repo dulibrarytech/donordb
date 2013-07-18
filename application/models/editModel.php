@@ -62,9 +62,10 @@ class editModel extends CI_Model
             'dateOfGift'        => $newGiftData['giftDate'],
             'numberOfGifts'     => $newGiftData['giftQuantity'],
             'letter'            => 1,
-            'important'         => ($newGiftData['importantFlag'] == "on") ? 1 : 0
+            'important'         => $newGiftData['importantFlag']
         );
 
+        // TODO: Join tables, then do an insert
         if($this->db->insert('tbl_donorgifts', $data))
         {
             $ID = $this->db->insert_id();
@@ -85,7 +86,20 @@ class editModel extends CI_Model
 
     public function editGiftRecord($giftID, $giftData)
     {
+        $success = 0;
 
+        $data = array(
+
+            'tbl_donorgifts.dateOfGift'         => $giftData['giftDateEdit'],
+            'tbl_donorgifts.numberOfGifts'      => $giftData['giftQuantity'],
+            'tbl_donorgiftdescriptions.giftDescription1'  => $giftData['giftDescription'],
+            'tbl_donorgifts.important'          => $giftData['importantFlag']
+        );
+
+        $this->db->where('tbl_donorgifts.giftsID', $giftID);
+        $success = $this->db->update('tbl_donorgiftdescriptions join tbl_donorgifts on tbl_donorgiftdescriptions.giftsID = tbl_donorgifts.giftsID', $data);
+
+        return $success;
     }
 
     public function editDonorRecord($donorID, $donorData)

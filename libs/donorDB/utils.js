@@ -120,25 +120,24 @@ utils = (function($) {
 
 	submitGiftEdit = function() {
 
-		alert($("#add-gift-form").serialize());
-		// requestObj = {
+		requestObj = {
 
-		// 	type: "POST", 
-		// 	url: _editUrl + '/addGift',
-		// 	data: $("#add-gift-form").serialize(),
-		// 	dataType: "text",
-		// 	cache: true,
-		// 	success: function(response) {
-		// 		alert(response);
-		// 		editGiftView.toggleSubmitMessage();
-		// 	},
-		// 	error: function ( textStatus, errorThrown ) {
-  //               alert( errorThrown );
-  //           }
-		// };
+			type: "POST", 
+			url: _editUrl + '/inputGiftEdit',
+			data: $("#add-gift-form").serialize(),
+			dataType: "text",
+			cache: true,
+			success: function(response) {
+				alert(response);
+				editGiftView.toggleSubmitMessage();
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
 		
-		// doAjax(requestObj);
-		// editGiftView.toggleSubmitMessage();
+		doAjax(requestObj);
+		editGiftView.toggleSubmitMessage();
 	};
 
 	getGiftData = function(callback) {

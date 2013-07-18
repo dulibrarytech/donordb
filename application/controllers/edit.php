@@ -52,7 +52,8 @@ class edit extends CI_Controller {
 		$this->load->view('gift-view', $data);
 	}
 
-	public function addGift($donorID = null)
+	// input gift info
+  public function addGift($donorID = null)
 	{
 		switch($this->input->server("REQUEST_METHOD")) 
 		{
@@ -100,12 +101,41 @@ class edit extends CI_Controller {
       $this->load->view('gift-view', $data);
 	}
 
-  public function inputGiftEdit()
+  public function inputGiftEdit($giftID = null)
   {
-    
+      switch($this->input->server("REQUEST_METHOD")) 
+      {
+          case "GET":
+          {
+              $this->load->view("lookup-view");
+
+              break;
+          }
+          case "POST":
+          {
+              if($giftID == null)
+                  $giftID = $this->phpsessions->get('activeGiftID');
+
+              $giftData = $this->input->post();
+
+              $msg = $this->editModel->editGiftRecord($giftID,$giftData);
+
+              if(1) 
+                echo $msg;
+              else
+                echo "Error in updating database.";
+
+              break;
+          }
+          default:
+          {
+              header("HTTP/1.1 404 Not Found");
+              return;
+          }
+      }
   }
 
-	public function addDonor() 
+	public function addDonorView() 
 	{
 		$data['pageLoader'] = "<script>addNewDonorView.initPage();</script>";
 
