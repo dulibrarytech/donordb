@@ -17,6 +17,7 @@ utils = (function($) {
 		submitGift,
 		submitDonorEdit,
 		submitGiftEdit,
+		submitNewTitle,
 		getDonorDataArray,
 		getGiftData,
 		getActiveNameString,
@@ -93,6 +94,27 @@ utils = (function($) {
 		
 		doAjax(requestObj);
 		addNewDonorView.toggleSubmitMessage();
+	};
+
+	submitNewTitle = function(title,callback) {
+
+		requestObj = {
+
+			type: "POST", 
+			url: _editUrl + '/addTitle',
+			data: {"title" : title},
+			dataType: "json",
+			cache: true,
+			success: function(response) {
+				alert(response['message']);
+				callback(title,response['ID']);
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
+		
+		doAjax(requestObj);
 	};
 
 	submitGift = function() {
@@ -268,6 +290,9 @@ utils = (function($) {
 		},
 		submitGiftEdit: function() {
 			submitGiftEdit();
+		},
+		submitNewTitle: function(title,callback) {
+			submitNewTitle(title,callback);
 		},
 		getDonorDataArray: function(callback) {
 			getDonorDataArray(callback);

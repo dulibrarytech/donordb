@@ -447,6 +447,10 @@ addNewDonorView = (function($) {
 		addEvents,
 		toggleSubmitMessage,
 		createTitleDropdown,
+		showAddTitleBox,
+		removeAddTitleBox,
+		enterNewTitle,
+		getTitleDropdownEntries,
 		resetForm;
 
 	initPage = function() {
@@ -456,6 +460,7 @@ addNewDonorView = (function($) {
 		$(".generic-label").text("Add New Donor Info");
 
 		$("#add_info_message").hide();
+		$("#title-edit-box").hide();
 
 		$('#gift-date-box').attr('value', utils.getCurrentDate());
 		$('#add_info_message').html("Adding new donor info...");
@@ -475,6 +480,22 @@ addNewDonorView = (function($) {
 	            utils.submitNewDonorInfo();
 	        }
 	    });
+
+	    $("#dropdown-box").change( function() {
+
+	    	var titleVal = $("#title-dropdown").val();
+	    	if(titleVal == "add_title")
+	    		showAddTitleBox();
+	    });
+
+	    // Disable the enter keypress from submitting the form
+	    $('#donor-input-form').on('keypress',function(e){
+		    var p = e.which;
+		    if(p==13){
+		        e.preventDefault();
+		        return false;
+		    }
+		});
 	};
 
 	toggleSubmitMessage = function() {
@@ -482,20 +503,108 @@ addNewDonorView = (function($) {
 		$("#add_info_message").toggle();
 	};
 
-	createTitleDropdown = function(titleData) {
+	createTitleDropdown = function(titleData,index) {
 
-		var dropdown = "<select class='input-medium' name='title'><option selected='yes' value='no_title'></option>";
+		var dropdown;
+
+		if(typeof(index) == "undefined")
+			index = 0;
+
+		// if(index == 0)
+		// 	dropdown = "<select class='input-medium' id='title-dropdown' name='title'><option selected='yes' value='no_title'></option>";
+		// else
+			dropdown = "<select class='input-medium' id='title-dropdown' name='title'><option value='no_title'></option>";
+
+		dropdown += "<option value='add_title'>[Add New Title]</option>";
 
 		$.each(titleData, function (key, value) {
 			
-			dropdown += "<option>" + value.title + "</option>";
-
+			if(key == index)
+				dropdown += "<option selected value='" + key + "'>" + value + "</option>";
+			else 
+				dropdown += "<option value='" + key + "'>" + value + "</option>";
 		} );
 
-		dropdown += "<option>[Add New Title]</option>";
 		dropdown += "</select>";
 
 		$("#dropdown-box").html(dropdown);
+	};
+
+	showAddTitleBox = function() {
+
+		$("#dropdown-box").hide();
+		$("#title-edit-box").show();
+
+		// Enter key event
+		$('#title-edit-box').on('keypress',function(e){
+		    var p = e.which;
+		    if(p==13){
+
+		        enterNewTitle();
+		        return false;
+		    }
+		});
+
+		$('#title-edit-box').on('focusout',function(){
+
+		    enterNewTitle();
+		});
+
+		$("#title-edit-box").focus();
+	};
+
+	// Remove edit box and repopulate the dropdown, selecting the newly added title
+	removeAddTitleBox = function(newTitle,newTitleIndex) {
+
+		if(typeof(newTitleIndex) == "undefined")
+			newTitleIndex = 0;
+
+		$("#dropdown-box").show();
+		$("#title-edit-box").hide();
+
+		// Remove the handlers
+		$('#title-edit-box').off('keypress');
+		$('#title-edit-box').off('focusout');
+
+		$("#title-edit-box").blur();
+
+		// Get array of existing titles in the dropdown, add new title
+		dataArray = getTitleDropdownEntries();
+		dataArray[newTitleIndex] = newTitle;
+
+		// Refresh
+		createTitleDropdown(dataArray,newTitleIndex);
+	};
+
+	enterNewTitle = function() {
+
+		boxText = $("#title-edit-box").val();
+		if(boxText != "" && boxText != null) {
+
+			utils.submitNewTitle(boxText,removeAddTitleBox);
+		}
+		else {
+
+			removeAddTitleBox();
+		}
+	};
+
+	// Returns an object with all of the ID:title pairs that are currently in the dropdown box
+	getTitleDropdownEntries = function() {
+
+		var dataObj = {}; 
+
+		$("#dropdown-box option").each(function(i){
+
+        	if($(this).val() == 'no_title' || $(this).val() == 'add_title')
+        		return true;
+
+        	ID = $(this).val();
+        	title = $(this).text();
+        	dataObj[ID] = title;
+    	});
+
+    	return dataObj;
 	};
 
 	resetForm = function() {
@@ -508,11 +617,17 @@ addNewDonorView = (function($) {
 		initPage: function() {	
 			initPage();
 		},
-		createTitleDropdown: function(titleData) {	
-			createTitleDropdown(titleData);
+		createTitleDropdown: function(titleData,index) {	
+			createTitleDropdown(titleData,index);
 		},
 		toggleSubmitMessage: function() {
 			toggleSubmitMessage();
+		},
+		showAddTitleBox: function() {
+			showAddTitleBox();
+		},
+		removeAddTitleBox: function(newTitle,newTitleIndex) {
+			removeAddTitleBox(newTitle,newTitleIndex);
 		},
 		resetForm: function() {
 			resetForm();
@@ -524,121 +639,6 @@ addNewDonorView = (function($) {
 
 editDonorView = (function($) {
 
-	var initPage,
-		addEvents,
-		toggleSubmitMessage,
-		createTitleDropdown,
-		createGiftDateDropDown,
-		setDonorFormData;
 
-	initPage = function() {
-
-		$(".content-window").css("height", "740px");
-
-		$(".generic-label").text("Add New Donor Info");
-
-		$("#add_info_message").hide();
-
-		$('#gift-date-box').attr('value', utils.getCurrentDate());
-		$('#add_info_message').html("Adding new donor info...");
-
-		addEvents();
-
-		//utils.getTitleArray(createTitleDropdown);
-		utils.getGiftDatesForActiveDonor(createGiftDateDropDown);
-		utils.getGiftData(setGiftFormData);
-	};
-
-	addEvents = function() {
-
-		$("#donor-input-form").validate({
-
-	        errorClass: "invalid",
-	        submitHandler: function() {
-
-	            //utils.submitNewDonorInfo();
-	        }
-	    });
-	};
-
-	toggleSubmitMessage = function() {
-
-		$("#add_info_message").toggle();
-	};
-
-	createTitleDropdown = function(titleData) {
-
-		var dropdown = "<select class='input-medium' name='title'><option selected='yes' value='no_title'></option>";
-
-		$.each(titleData, function (key, value) {
-			
-			dropdown += "<option>" + value.title + "</option>";
-
-		} );
-
-		dropdown += "<option>[Add New Title]</option>";
-		dropdown += "</select>";
-
-		$("#dropdown-box").html(dropdown);
-	};
-
-	createGiftDateDropDown = function(giftDates) {
-
-		var dropdownHTML = '<select class="input" id="dropdown-box">';
-			activeGift = giftDates['activeGiftID'];
-
-		$.each(giftDates, function (key, value) {
-
-			if(key == "activeGiftID") 
-				return true;
-
-			if(key == activeGift)
-				dropdownHTML += '<option selected="selected">' + value + "</option>";
-			else
-				dropdownHTML += '<option>' + value + "</option>";
-		} );
-
-		dropdownHTML += '</select>';
-
-		$("#dropdown-box-section").html(dropdownHTML);
-		var gdate = $("#dropdown-box").val();
-		$("#edit-date-box").val(gdate);
-	};
-
-	setDonorFormData = function(giftData) {
-
-		
-
-
-
-		// Gift section
-		$("#gift_quantity_box").attr('value', giftData['giftQuantity']);
-
-		$("#gift_description_box").text(giftData['giftDescription']);
-
-		if(giftData['importantFlag'] == 1)
-			$("#important-checkbox").attr('checked', 'checked');
-
-		setNameString(giftData['nameString']);
-	};
-
-	return {
-
-		initPage: function() {	
-			initPage();
-		},
-		createTitleDropdown: function(titleData) {	
-			createTitleDropdown(titleData);
-		},
-		toggleSubmitMessage: function() {
-			toggleSubmitMessage();
-		},
-		createGiftDateDropDown: function(giftDates) {	
-			createGiftDateDropDown(giftDateData);
-		},
-		setDonorFormData: function(giftData) {
-			setDonorFormData(giftData);
-		}
-	};
 
 }(jQuery)); // editDonorView()

@@ -84,7 +84,7 @@ class searchModel extends CI_Model
             $datestring = "%Y-%m-%d";
             $time = time();
 
-            $toDate =  mdate($datestring,$time);
+            $toDate = mdate($datestring,$time);
         }
 
         $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorinfo.donorID, tbl_donorinfo.FirstName, tbl_donorinfo.LastName');
@@ -187,7 +187,7 @@ class searchModel extends CI_Model
    	public function getAllTitles() 
    	{
      		$titleInfo = array();
-     		$index = 0;
+     		//$index = 0;
 
      		$this->db->select('titleID, title');
    		  $this->db->from('tbl_donortitle_lkup');
@@ -200,10 +200,10 @@ class searchModel extends CI_Model
         		 		if($results->title == "")
           		 			continue;
 
-        		 		$titleInfo[$index]['title'] 	  = $results->title;
-        		 		$titleInfo[$index]['titleID']  	= $results->titleID;
+        		 		$titleInfo[$results->titleID]	= $results->title;
+        		 		//$titleInfo[$index]['titleID']  	= $results->titleID;
 
-        		 		$index++;
+        		 		//$index++;
       		 	}
      		}
      		else

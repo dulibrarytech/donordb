@@ -204,9 +204,46 @@ class edit extends CI_Controller {
 
   }
 
-	public function editTitle() 
+	public function addTitle() 
 	{
-		echo "edit title function<br />";
+		  switch($this->input->server("REQUEST_METHOD")) 
+      {
+
+        case "GET":
+        {
+              $this->load->view("lookup-view");
+
+              break;
+          }
+          case "POST":
+          {
+              $titleID = 0;
+
+              $newTitle = $this->input->post('title');
+
+              $titleID = $this->editModel->addTitle($newTitle);
+
+              if($titleID > 0) 
+              {
+                  $response['message'] = "Database was successfully updated.";
+                  $response['ID'] = $titleID;
+              }
+              else
+              {
+                  $response['message'] = "Error in updating database";
+                  $response['ID'] = 0;
+              }
+
+              echo json_encode($response);
+
+              break;
+          }
+          default:
+          {
+              header("HTTP/1.1 404 Not Found");
+              return;
+          }
+      }
 	}
 
   public function setSessionActiveGift($giftDate)

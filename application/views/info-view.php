@@ -53,8 +53,10 @@
 
 					<tr>
 						<td>
-							<label class="form-label-text">Title:</label>  
+							<label class="form-label-text" id="title-label">Title:</label>  
 							<div id="dropdown-box"></div>
+
+							<input type="text" class="input-medium" id="title-edit-box" placeholder="Enter new title:" />
 						</td>
 					
 						<td>

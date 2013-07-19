@@ -23,7 +23,7 @@ class editModel extends CI_Model
     {
     	$ID = 0;
 
-        $titleID = $this->searchModel->getTitleID($newDonorData['title']);
+        //$titleID = $this->searchModel->getTitleID($newDonorData['title']);
 
         $country = "USA";
         if($newDonorData['country'] != "")
@@ -31,7 +31,7 @@ class editModel extends CI_Model
 
         $data = array(
 
-            'titleID'       => $titleID,
+            'titleID'       => $newDonorData['title'],//$titleID,
             'FirstName'     => $newDonorData['fName'],
             'LastName'      => $newDonorData['lName'],
             'Organization'  => $newDonorData['org'],
@@ -104,7 +104,25 @@ class editModel extends CI_Model
 
     public function editDonorRecord($donorID, $donorData)
     {
+        $success = 0;
 
+        return $success;
+    }
+
+    public function addTitle($title)
+    {
+        $ID = 0;
+
+        $data = array(
+
+            'title' => $title
+        );
+
+        // If the db insert operation is successfull, get the ID of the new record
+        if($this->db->insert('tbl_donortitle_lkup', $data))
+            $ID = $this->db->insert_id();
+
+        return $ID;
     }
 
 } // editModel
