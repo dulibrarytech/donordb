@@ -36,9 +36,6 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
-// Paths
-define('EDIT_DONOR_PATH',		'"<?php echo base_url();?>edit/editDonor"');
-define('ADD_GIFT_PATH',			'"<?php echo base_url();?>edit/addGift"');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

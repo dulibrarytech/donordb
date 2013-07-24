@@ -13,3 +13,6 @@
 
 <!-- Page Load Scripts -->
 <script src="<?php echo base_url();?>libs/donorDB/views.js"></script>
+
+<!-- External Libs -->
+<script src="<?php echo base_url();?>libs/dateUtils.js"></script>

@@ -13,7 +13,7 @@
 <div id="container" class="container">
 <div id="top-nav">
 
-    <div class="navbar-wrapper" style="z-index: 5000;">
+    <div class="navbar-wrapper" style="z-index: -1;">
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner" id="header-bar-base">
                 <div class="container">

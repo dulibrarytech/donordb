@@ -8,15 +8,18 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/main.css" />
 
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery-ui.css" />
+
 	<!-- Positioning -->
 	<style>
 		#add_info_button 		{ margin-left: -7px; margin-top: -10px; }
 		#upper_well				{ padding-bottom: 0px; }
 		#lower_well				{ padding-bottom: 0px; }
 		#description_area		{ width: 455px; height: 75px;}
-		#gift_quantity_label	{ margin-left: 20px; }
-		#gift_quantity_box		{ margin-left: 20px; }
+		#gift_quantity_label	{ margin-left: 5px; }
+		#gift_quantity_box		{ margin-left: 5px; }
 		#lower_controls			{ background-color: #ffffff; width: 40%; }
+		#edit-gift-button		{ margin-left: 18px; margin-top: 10px; }
 	</style>
 
 </head>
@@ -139,7 +142,7 @@
 							<label class="form-label-text">Gift Date:</label>  
 							<input type="text" class="input-small" id="gift-date-box" name="giftDate"/> 
 
-
+							<div id="gift-date-box-section"></div>
 						</td>
 					
 						<td class="span3">
@@ -149,12 +152,11 @@
 					</tr>
 
 					<tr>
-						<td class="span2">
-							<!-- Spacer -->
-						</td>
 						<td colspan="2">
-							<input type="checkbox" id="important_gift_check" name="importantFlag" value="on">&nbsp&nbspImportant</input>
-							<input type='hidden' name='importantFlag' value="off">
+
+						</td>
+						<td>
+							<button type="submit" class="btn" id="edit-gift-button">Edit Gift</button>
 						</td>
 					</tr>
 				</table>

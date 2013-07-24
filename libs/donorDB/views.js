@@ -80,7 +80,7 @@ searchView = (function($) {
 			$.each(tableData, function (key, value) {
 				
 				results += '<tr>';
-				results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonor/' + value.donorID + '">Edit</a> </td>';
+				results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
 				results += '<td class="span4">' + value.lastName + '</td>';
 				results += '<td class="span4">' + value.firstName + '</td>';
@@ -191,7 +191,7 @@ browseDonorsView = (function($) {
 		$.each(tableData, function (key, value) {
 			
 			results += '<tr>';
-			results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonor/' + value.donorID + '">Edit</a> </td>';
+			results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
 			results += '<td class="span4">' + value.lastName + '</td>';
 			results += '<td class="span4">' + value.firstName + '</td>';
@@ -261,10 +261,13 @@ editGiftView = (function($) {
 
 	    $("#dropdown-box-section").change( function() {
 
-	    	var newDate = $("#dropdown-box").val();
-			$("#edit-date-box").val(newDate);
+	  //   	var newDate = $("#dropdown-box").val();
+			// $("#edit-date-box").val(newDate);
+			var gdate = $("#dropdown-box>option:selected").text();
+			$("#edit-date-box").val(gdate);
 
-	    	utils.changeActiveGift(newDate,setGiftFormData);
+			var giftID = $("#dropdown-box>option:selected").val();
+	    	utils.setActiveGift(giftID,setGiftFormData);
 	    });
 	};
 
@@ -331,15 +334,16 @@ editGiftView = (function($) {
 				return true;
 
 			if(key == activeGift)
-				dropdownHTML += '<option selected="selected">' + value + "</option>";
+				dropdownHTML += "<option selected value='" + key + "'>" + value + "</option>";
 			else
-				dropdownHTML += '<option>' + value + "</option>";
+				dropdownHTML += "<option value='" + key + "'>" + value + "</option>";
 		} );
 
 		dropdownHTML += '</select>';
 
 		$("#dropdown-box-section").html(dropdownHTML);
-		var gdate = $("#dropdown-box").val();
+
+		var gdate = $("#dropdown-box>option:selected").text();
 		$("#edit-date-box").val(gdate);
 	};
 
@@ -381,7 +385,7 @@ addGiftView = (function($) {
 		$(".content-window").css("height", "600px");
 
 		$(".generic-label").text("Add a Gift");
-		$('#gift-date-box').attr('value', utils.getCurrentDate());
+		$('#gift-date-box').attr('value', dateUtils.getCurrentDate());
 
 		$('#gift_submit_button').html("Add Gift");
 		$('#add_info_message').html("Adding new gift info...");
@@ -462,8 +466,10 @@ addNewDonorView = (function($) {
 		$("#add_info_message").hide();
 		$("#title-edit-box").hide();
 
-		$('#gift-date-box').attr('value', utils.getCurrentDate());
+		$('#gift-date-box').attr('value', dateUtils.getCurrentDate());
+
 		$('#add_info_message').html("Adding new donor info...");
+		$("#add_info_button").html("Save");
 
 		addEvents();
 
@@ -530,9 +536,11 @@ addNewDonorView = (function($) {
 		$("#dropdown-box").html(dropdown);
 	};
 
+	// Remove dropdown and add box to enter a new title.  Add handlers to submit new title data
 	showAddTitleBox = function() {
 
 		$("#dropdown-box").hide();
+		$("#title-edit-box").val("");
 		$("#title-edit-box").show();
 
 		// Enter key event
@@ -554,10 +562,7 @@ addNewDonorView = (function($) {
 	};
 
 	// Remove edit box and repopulate the dropdown, selecting the newly added title
-	removeAddTitleBox = function(newTitle,newTitleIndex) {
-
-		if(typeof(newTitleIndex) == "undefined")
-			newTitleIndex = 0;
+	removeAddTitleBox = function() {
 
 		$("#dropdown-box").show();
 		$("#title-edit-box").hide();
@@ -567,30 +572,31 @@ addNewDonorView = (function($) {
 		$('#title-edit-box').off('focusout');
 
 		$("#title-edit-box").blur();
-
-		// Get array of existing titles in the dropdown, add new title
-		dataArray = getTitleDropdownEntries();
-		dataArray[newTitleIndex] = newTitle;
-
-		// Refresh
-		createTitleDropdown(dataArray,newTitleIndex);
 	};
 
 	enterNewTitle = function() {
 
 		boxText = $("#title-edit-box").val();
+
 		if(boxText != "" && boxText != null) {
 
-			utils.submitNewTitle(boxText,removeAddTitleBox);
+			utils.submitNewTitle(boxText,insertTitleToDropdownList);
 		}
-		else {
+		else 
+			$("#title-dropdown>option:eq(0)").attr('selected', 'true');	// select top index
+			
 
-			removeAddTitleBox();
-		}
+		removeAddTitleBox();
 	};
 
 	// Returns an object with all of the ID:title pairs that are currently in the dropdown box
-	getTitleDropdownEntries = function() {
+	insertTitleToDropdownList = function(newTitle,newTitleIndex) {
+
+		if(typeof(newTitleIndex) == "undefined")
+			return false;
+
+		if(typeof(newTitle) == "undefined")
+			newTitle = "<no data>";
 
 		var dataObj = {}; 
 
@@ -604,7 +610,9 @@ addNewDonorView = (function($) {
         	dataObj[ID] = title;
     	});
 
-    	return dataObj;
+    	dataObj[newTitleIndex] = newTitle;
+
+    	createTitleDropdown(dataObj,newTitleIndex);
 	};
 
 	resetForm = function() {
@@ -639,6 +647,261 @@ addNewDonorView = (function($) {
 
 editDonorView = (function($) {
 
+	var initPage,
+		setActiveGift,
+		addEvents,
+		toggleSubmitMessage,
+		createTitleDropdown,
+		showAddTitleBox,
+		removeAddTitleBox,
+		enterNewTitle,
+		createGiftDateDropDown,
+		setGiftFormData,
+		setDonorFormData,
+		getTitleDropdownEntries;
 
+	initPage = function() {
+
+		$(".content-window").css("height", "740px");
+
+		$(".generic-label").text("View / Edit Donor Info");
+
+		$("#add_info_message").hide();
+		$("#title-edit-box").hide();
+		$('#gift-date-box').hide();
+
+		$('#add_info_message').html("Updating donor info...");
+		$("#add_info_button").html("Update");
+
+		addEvents();
+
+		utils.getTitleArray(createTitleDropdown);
+		utils.getGiftDatesForActiveDonor(createGiftDateDropDown);
+
+		utils.getGiftData(setGiftFormData);
+
+		utils.getActiveDonorData(setDonorFormData); 
+	};
+
+	setActiveGift = function() {
+
+		var giftID = $("#gift-date-box-dropdown>option:selected").val();
+
+		if(giftID == "" || giftID == null)
+			giftID = -1; 
+
+		utils.setActiveGift(giftID);
+	};
+
+	addEvents = function() {
+
+		$("#donor-input-form").validate({
+
+	        errorClass: "invalid",
+	        submitHandler: function() {
+
+	            //utils.submitNewDonorInfo();   ***edit donor function
+	        }
+	    });
+
+	    $("#dropdown-box").change( function() {
+
+	    	var titleVal = $("#title-dropdown").val();
+	    	if(titleVal == "add_title")
+	    		showAddTitleBox();
+	    });
+
+	    // Disable the enter keypress from submitting the form
+	    $('#donor-input-form').on('keypress',function(e){
+		    var p = e.which;
+		    if(p==13){
+		        e.preventDefault();
+		        return false;
+		    }
+		});
+
+		$("#gift-date-box-section").change( function() {
+
+	    	setActiveGift();
+	    	utils.getGiftData(setGiftFormData);
+	    });
+	};
+
+	toggleSubmitMessage = function() {
+
+		$("#add_info_message").toggle();
+	};
+
+	createTitleDropdown = function(titleData,index) {
+
+		var dropdown;
+
+		if(typeof(index) == "undefined")
+			index = 0;
+
+		// if(index == 0)
+		// 	dropdown = "<select class='input-medium' id='title-dropdown' name='title'><option selected='yes' value='no_title'></option>";
+		// else
+			dropdown = "<select class='input-medium' id='title-dropdown' name='title'><option value='no_title'></option>";
+
+		dropdown += "<option value='add_title'>[Add New Title]</option>";
+
+		$.each(titleData, function (key, value) {
+			
+			if(key == index)
+				dropdown += "<option selected value='" + key + "'>" + value + "</option>";
+			else 
+				dropdown += "<option value='" + key + "'>" + value + "</option>";
+		} );
+
+		dropdown += "</select>";
+
+		$("#dropdown-box").html(dropdown);
+	};
+
+	createGiftDateDropDown = function(giftDates) {
+
+		var dropdownHTML = '<select class="input-medium" id="gift-date-box-dropdown">';
+			activeGift = giftDates['activeGiftID'];
+
+		$.each(giftDates, function (key, value) {
+
+			if(key == "activeGiftID") 
+				return true;
+
+			if(key == activeGift) 
+				dropdownHTML += "<option selected value='" + key + "'>" + value + "</option>";		
+			else
+				dropdownHTML += "<option value='" + key + "'>" + value + "</option>";
+
+		} );
+
+		dropdownHTML += '</select>';
+
+		$("#gift-date-box-section").html(dropdownHTML);
+
+		setActiveGift();
+	};
+
+	// Remove dropdown and add box to enter a new title.  Add handlers to submit new title data
+	showAddTitleBox = function() {
+
+		$("#dropdown-box").hide();
+		$("#title-edit-box").val("");
+		$("#title-edit-box").show();
+
+		// Enter key event
+		$('#title-edit-box').on('keypress',function(e){
+		    var p = e.which;
+		    if(p==13){
+
+		        enterNewTitle();
+		        return false;
+		    }
+		});
+
+		$('#title-edit-box').on('focusout',function(){
+
+		    enterNewTitle();
+		});
+
+		$("#title-edit-box").focus();
+	};
+
+	// Remove edit box and repopulate the dropdown, selecting the newly added title
+	removeAddTitleBox = function() {
+
+		$("#dropdown-box").show();
+		$("#title-edit-box").hide();
+
+		// Remove the handlers
+		$('#title-edit-box').off('keypress');
+		$('#title-edit-box').off('focusout');
+
+		$("#title-edit-box").blur();
+	};
+
+	enterNewTitle = function() {
+
+		boxText = $("#title-edit-box").val();
+
+		if(boxText != "" && boxText != null) {
+
+			utils.submitNewTitle(boxText,insertTitleToDropdownList);
+		}
+		else 
+			$("#title-dropdown>option:eq(0)").attr('selected', 'true'); // select top index
+
+		removeAddTitleBox();
+	};
+
+	// Returns an object with all of the ID:title pairs that are currently in the dropdown box
+	insertTitleToDropdownList = function(newTitle,newTitleIndex) {
+
+		if(typeof(newTitleIndex) == "undefined")
+			return false;
+
+		if(typeof(newTitle) == "undefined")
+			newTitle = "<no data>";
+
+		var dataObj = {}; 
+
+		$("#dropdown-box option").each(function(i){
+
+        	if($(this).val() == 'no_title' || $(this).val() == 'add_title')
+        		return true;
+
+        	ID = $(this).val();
+        	title = $(this).text();
+        	dataObj[ID] = title;
+    	});
+
+    	dataObj[newTitleIndex] = newTitle;
+
+    	createTitleDropdown(dataObj,newTitleIndex);
+	};
+
+	setGiftFormData = function(giftData) {
+
+		$("#gift_quantity_box").attr('value', giftData['giftQuantity']);
+
+		$("#description_area").text(giftData['giftDescription']);
+
+		if(giftData['importantFlag'] == 1)
+			$("#important-checkbox").attr('checked', 'checked');
+	};
+
+	setDonorFormData = function(donorData) {
+
+		
+	};
+
+	return {
+
+		initPage: function() {	
+			initPage();
+		},
+		createTitleDropdown: function(titleData,index) {	
+			createTitleDropdown(titleData,index);
+		},
+		toggleSubmitMessage: function() {
+			toggleSubmitMessage();
+		},
+		showAddTitleBox: function() {
+			showAddTitleBox();
+		},
+		removeAddTitleBox: function(newTitle,newTitleIndex) {
+			removeAddTitleBox(newTitle,newTitleIndex);
+		},
+		setGiftFormData: function(giftData) {
+			setGiftFormData(giftData);
+		},
+		setDonorFormData: function(donorData) {
+			setDonorFormData(donorData);
+		},
+		createGiftDateDropDown: function(giftDates) {	
+			createGiftDateDropDown(giftDateData);
+		}
+	};
 
 }(jQuery)); // editDonorView()

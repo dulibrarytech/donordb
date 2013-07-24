@@ -187,16 +187,14 @@ class edit extends CI_Controller {
         }
 	}
 
-	public function editDonorView() 
+	public function editDonorView($donorID) 
 	{
-		// Get current donor ID.  
-		// $donorID = $this->uri->segment(3);
+      $data['pageLoader'] = "<script>editDonorView.initPage();</script>";
 
-		// $data = $this->searchModel->getDonorInfo($donorID);
+      $this->phpsessions->set('activeDonorID', $donorID);
+      $this->phpsessions->set('activeDonorNameString', $this->searchModel->getNameString($donorID));
 
-		// $this->load->view('edit-donor-info', $data);
-
-		// json?
+      $this->load->view('info-view', $data);
 	}
 
   public function inputDonorEdit()
@@ -246,12 +244,12 @@ class edit extends CI_Controller {
       }
 	}
 
-  public function setSessionActiveGift($giftDate)
+  public function setSessionActiveGift($giftID)
   {
       $donorID = $this->phpsessions->get('activeDonorID');
-      $giftID = $this->searchModel->getGiftIDForGiftDate($donorID,$giftDate);
+      //$giftID = $this->searchModel->getGiftIDForGiftDate($donorID,$giftDate);
 
-      $message = "Gift record not found for date: " . $giftDate;
+      $message = "Gift record not found for selected date...";
 
       if($giftID > 0)
       {

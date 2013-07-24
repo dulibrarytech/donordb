@@ -201,9 +201,6 @@ class searchModel extends CI_Model
           		 			continue;
 
         		 		$titleInfo[$results->titleID]	= $results->title;
-        		 		//$titleInfo[$index]['titleID']  	= $results->titleID;
-
-        		 		//$index++;
       		 	}
      		}
      		else

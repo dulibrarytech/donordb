@@ -19,12 +19,13 @@ utils = (function($) {
 		submitGiftEdit,
 		submitNewTitle,
 		getDonorDataArray,
+		getActiveDonorData,
 		getGiftData,
 		getActiveNameString,
 		getCurrentDate,
 		getTitleArray,
 		getGiftDatesForActiveDonor,
-		changeActiveGift;
+		setActiveGift;
 
 	doAjax = function(ajaxObj) {
 		$.ajax(ajaxObj);
@@ -49,6 +50,11 @@ utils = (function($) {
 		};
 
 		doAjax(requestObj);
+	};
+
+	getActiveDonorData = function(callback) {
+
+
 	};
 
 	submitSearch = function(callback,type) {
@@ -106,8 +112,8 @@ utils = (function($) {
 			dataType: "json",
 			cache: true,
 			success: function(response) {
-				alert(response['message']);
-				callback(title,response['ID']);
+				//alert(response['message']);
+				callback(title,response['ID']); 
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );
@@ -200,16 +206,16 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
-	getCurrentDate = function() {
+	// getCurrentDate = function() {
 
-		var date = new Date(),
-			month = date.getMonth() + 1; 
+	// 	var date = new Date(),
+	// 		month = date.getMonth() + 1; 
 
-		if(month < 10)
-			month = "0" + month;
+	// 	if(month < 10)
+	// 		month = "0" + month;
 
-		return date.getFullYear() + "-" + month + "-" + date.getDate();
-	};
+	// 	return date.getFullYear() + "-" + month + "-" + date.getDate();
+	// };
 
 	getTitleArray = function(callback) {
 
@@ -249,12 +255,12 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
-	changeActiveGift = function(date,callback) {
+	setActiveGift = function(giftID,callback) {
 
 		requestObj = {
 
 			type: "POST", 
-			url: _editUrl + '/setSessionActiveGift/' + date,
+			url: _editUrl + '/setSessionActiveGift/' + giftID,
 			dataType: "text",
 			cache: true,
 			success: function(response) {
@@ -297,6 +303,9 @@ utils = (function($) {
 		getDonorDataArray: function(callback) {
 			getDonorDataArray(callback);
 		},
+		getActiveDonorData: function(callback) {
+			getActiveDonorData(callback);
+		},
 		getGiftData: function(callback) {		
 			getGiftData(callback);
 		},
@@ -312,8 +321,8 @@ utils = (function($) {
 		getGiftDatesForActiveDonor: function(callback) {
 			getGiftDatesForActiveDonor(callback);
 		},
-		changeActiveGift: function(date, callback) {
-			changeActiveGift(date,callback);
+		setActiveGift: function(giftID, callback) {
+			setActiveGift(giftID,callback);
 		}
 	};
 
