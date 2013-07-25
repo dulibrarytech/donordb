@@ -20,6 +20,8 @@
 		#gift_quantity_box		{ margin-left: 5px; }
 		#lower_controls			{ background-color: #ffffff; width: 40%; }
 		#edit-gift-button		{ margin-left: 18px; margin-top: 10px; }
+		#important-checkbox		{ margin-left: 50px; margin-top:-5px; }
+		#important-box-text		{ margin-top: 15px; }
 	</style>
 
 </head>
@@ -152,8 +154,11 @@
 					</tr>
 
 					<tr>
-						<td colspan="2">
-
+						<td id="important_gift_check" colspan="2">
+							<div id="important-box-text">
+								<input type='hidden' name='importantFlag' value="0">
+								<input type="checkbox" name="importantFlag" id="important-checkbox" value="1">Hand-Typed Letter</input>
+							</div>
 						</td>
 						<td>
 							<button type="submit" class="btn" id="edit-gift-button">Edit Gift</button>
@@ -165,7 +170,7 @@
 			<!-- This table creates a row with the submit button and an 'adding donor info' status message to the right of the button-->
 			<table class="table" id="lower_controls"><tr>
 				<td class=""><button type="submit" class="btn-grey" id="add_info_button">Save</button></td>
-				<td class="" id="add_info_message">Adding new donor info...</td>
+				<td><div id="add_info_message"></div></td>
 				<!--td class=""><input type="checkbox" id="add_gift_checkbox" name="addGiftCheckbox">&nbsp&nbspDo not add a gift at this time</input></td></tr-->
 			</table>
 		</form>

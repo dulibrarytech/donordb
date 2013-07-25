@@ -137,12 +137,16 @@ class edit extends CI_Controller {
 
 	public function addDonorView() 
 	{
-		$data['pageLoader'] = "<script>addNewDonorView.initPage();</script>";
+		  $data['pageLoader'] = "<script>addNewDonorView.initPage();</script>";
 
-		$this->load->view('info-view', $data);
+      $this->phpsessions->set('activeDonorID', null);
+      $this->phpsessions->set('activeDonorNameString', "");
+      $this->phpsessions->set('activeGiftID', null);
+
+		  $this->load->view('info-view', $data);
 	}
 
-	public function inputDonorInfo($donorID = null)
+	public function inputDonorInfo(/*$donorID = null*/)
 	{
 		switch($this->input->server("REQUEST_METHOD")) 
 		{
@@ -160,17 +164,16 @@ class edit extends CI_Controller {
 
                 $donorData = $this->input->post();
                 
-                if($donorID == null)
-                  $donorID = $this->editModel->createDonorRecord($donorData);
+                $donorID = $this->editModel->createDonorRecord($donorData);
 
-                // If box is checked, no gift needs to be added at this time
-                $addGiftCheck = $this->input->post('addGiftCheckbox');
-                if($addGiftCheck == "") {
+                // // If box is checked, no gift needs to be added at this time
+                // $addGiftCheck = $this->input->post('addGiftCheckbox');
+                // if($addGiftCheck == "") {
 
-                	$giftID = $this->editModel->createGiftRecord($donorID, $donorData);
-                }
-                else if($addGiftCheck == "checked")
-                	$giftID = 1;
+                $giftID = $this->editModel->createGiftRecord($donorID, $donorData);
+                // }
+                // else if($addGiftCheck == "checked")
+                // 	$giftID = 1;
 
                 if($donorID > 0 && $giftID > 0) 
                 	echo "Database was successfully updated.";
@@ -197,9 +200,36 @@ class edit extends CI_Controller {
       $this->load->view('info-view', $data);
 	}
 
-  public function inputDonorEdit()
+  public function inputDonorEdit($donorID = null)
   {
+      switch($this->input->server("REQUEST_METHOD")) 
+      {
+          case "GET":
+          {
+              $this->load->view("lookup-view");
 
+              break;
+          }
+          case "POST":
+          {
+              if($donorID == null)
+                  $donorID = $this->phpsessions->get('activeDonorID');
+
+              $donorData = $this->input->post();
+
+              if($this->editModel->editDonorRecord($donorID,$donorData)) 
+                echo "Database updated successfully";
+              else
+                echo "Error in updating database.";
+
+              break;
+          }
+          default:
+          {
+              header("HTTP/1.1 404 Not Found");
+              return;
+          }
+      }
   }
 
 	public function addTitle() 
@@ -246,7 +276,7 @@ class edit extends CI_Controller {
 
   public function setSessionActiveGift($giftID)
   {
-      $donorID = $this->phpsessions->get('activeDonorID');
+      //$donorID = $this->phpsessions->get('activeDonorID');
       //$giftID = $this->searchModel->getGiftIDForGiftDate($donorID,$giftDate);
 
       $message = "Gift record not found for selected date...";

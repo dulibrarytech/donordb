@@ -450,6 +450,7 @@ addNewDonorView = (function($) {
 	var initPage,
 		addEvents,
 		toggleSubmitMessage,
+		setMessage,
 		createTitleDropdown,
 		showAddTitleBox,
 		removeAddTitleBox,
@@ -465,10 +466,12 @@ addNewDonorView = (function($) {
 
 		$("#add_info_message").hide();
 		$("#title-edit-box").hide();
+		$("#edit-gift-button").hide();
 
 		$('#gift-date-box').attr('value', dateUtils.getCurrentDate());
+		$("#description_area").prop('enabled', 'true');
+		$("#gift_quantity_box").prop('enabled', 'true');
 
-		$('#add_info_message').html("Adding new donor info...");
 		$("#add_info_button").html("Save");
 
 		addEvents();
@@ -484,6 +487,8 @@ addNewDonorView = (function($) {
 	        submitHandler: function() {
 
 	            utils.submitNewDonorInfo();
+	            $('#add_info_message').html("Adding new donor info...");
+	            toggleSubmitMessage();
 	        }
 	    });
 
@@ -507,6 +512,11 @@ addNewDonorView = (function($) {
 	toggleSubmitMessage = function() {
 
 		$("#add_info_message").toggle();
+	};
+
+	setMessage = function(message) {
+
+		$("#add_info_message").html(message);
 	};
 
 	createTitleDropdown = function(titleData,index) {
@@ -637,6 +647,9 @@ addNewDonorView = (function($) {
 		removeAddTitleBox: function(newTitle,newTitleIndex) {
 			removeAddTitleBox(newTitle,newTitleIndex);
 		},
+		setMessage: function(message) {
+			setMessage(message);
+		},
 		resetForm: function() {
 			resetForm();
 		}
@@ -651,6 +664,7 @@ editDonorView = (function($) {
 		setActiveGift,
 		addEvents,
 		toggleSubmitMessage,
+		setMessage,
 		createTitleDropdown,
 		showAddTitleBox,
 		removeAddTitleBox,
@@ -670,17 +684,15 @@ editDonorView = (function($) {
 		$("#title-edit-box").hide();
 		$('#gift-date-box').hide();
 
-		$('#add_info_message').html("Updating donor info...");
 		$("#add_info_button").html("Update");
+
+		$("#description_area").prop('disabled', 'true');
+		$("#gift_quantity_box").prop('disabled', 'true');
 
 		addEvents();
 
-		utils.getTitleArray(createTitleDropdown);
-		utils.getGiftDatesForActiveDonor(createGiftDateDropDown);
-
-		utils.getGiftData(setGiftFormData);
-
-		utils.getActiveDonorData(setDonorFormData); 
+		utils.getGiftDatesForActiveDonor(createGiftDateDropDown); 
+		utils.getActiveDonorData(setDonorFormData);
 	};
 
 	setActiveGift = function() {
@@ -690,7 +702,7 @@ editDonorView = (function($) {
 		if(giftID == "" || giftID == null)
 			giftID = -1; 
 
-		utils.setActiveGift(giftID);
+		utils.setActiveGift(giftID,setGiftFormData);
 	};
 
 	addEvents = function() {
@@ -700,7 +712,9 @@ editDonorView = (function($) {
 	        errorClass: "invalid",
 	        submitHandler: function() {
 
-	            //utils.submitNewDonorInfo();   ***edit donor function
+	            utils.submitDonorEdit();
+	            $('#add_info_message').html("Updating donor info...");   
+	            toggleSubmitMessage();
 	        }
 	    });
 
@@ -723,13 +737,17 @@ editDonorView = (function($) {
 		$("#gift-date-box-section").change( function() {
 
 	    	setActiveGift();
-	    	utils.getGiftData(setGiftFormData);
 	    });
 	};
 
 	toggleSubmitMessage = function() {
 
 		$("#add_info_message").toggle();
+	};
+
+	setMessage = function(message) {
+
+		$("#add_info_message").html(message);
 	};
 
 	createTitleDropdown = function(titleData,index) {
@@ -739,16 +757,12 @@ editDonorView = (function($) {
 		if(typeof(index) == "undefined")
 			index = 0;
 
-		// if(index == 0)
-		// 	dropdown = "<select class='input-medium' id='title-dropdown' name='title'><option selected='yes' value='no_title'></option>";
-		// else
-			dropdown = "<select class='input-medium' id='title-dropdown' name='title'><option value='no_title'></option>";
-
+		dropdown = "<select class='input-medium' id='title-dropdown' name='title'><option value='no_title'></option>";
 		dropdown += "<option value='add_title'>[Add New Title]</option>";
 
 		$.each(titleData, function (key, value) {
 			
-			if(key == index)
+			if(key == index) 
 				dropdown += "<option selected value='" + key + "'>" + value + "</option>";
 			else 
 				dropdown += "<option value='" + key + "'>" + value + "</option>";
@@ -770,7 +784,8 @@ editDonorView = (function($) {
 				return true;
 
 			if(key == activeGift) 
-				dropdownHTML += "<option selected value='" + key + "'>" + value + "</option>";		
+				dropdownHTML += "<option selected value='" + key + "'>" + value + "</option>";
+						
 			else
 				dropdownHTML += "<option value='" + key + "'>" + value + "</option>";
 
@@ -873,7 +888,22 @@ editDonorView = (function($) {
 
 	setDonorFormData = function(donorData) {
 
-		
+		var titleID = donorData['titleID'];
+
+		utils.getTitleArray(createTitleDropdown,titleID);
+
+		$("#title-dropdown>option:selected").val(donorData['titleID']);		
+		$("#fname_input_box").val(donorData['firstName']);
+		$("#lName_input_box").val(donorData['lastName']);
+		$("#org_input_box").val(donorData['org']);
+		$("#addr1_input_box").val(donorData['addr1']);
+		$("#addr2_input_box").val(donorData['addr2']);
+		$("#city_input_box").val(donorData['city']);
+		$("#state_input_box").val(donorData['state']);
+		$("#zip_input_box").val(donorData['zip']);
+		$("#country_input_box").val(donorData['country']);
+		$("#phone_input_box").val(donorData['phone']);
+		$("#email_input_box").val(donorData['email']);
 	};
 
 	return {
@@ -898,6 +928,9 @@ editDonorView = (function($) {
 		},
 		setDonorFormData: function(donorData) {
 			setDonorFormData(donorData);
+		},
+		setMessage: function(message) {
+			setMessage(message);
 		},
 		createGiftDateDropDown: function(giftDates) {	
 			createGiftDateDropDown(giftDateData);

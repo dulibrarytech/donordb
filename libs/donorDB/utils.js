@@ -54,7 +54,21 @@ utils = (function($) {
 
 	getActiveDonorData = function(callback) {
 
+		requestObj = {
 
+			type: "POST", 
+			url: _searchUrl + '/queryDatabaseDonorData',
+			dataType: "json",
+			cache: true,
+			success: function (response) {
+				callback(response);
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
+
+		doAjax(requestObj);
 	};
 
 	submitSearch = function(callback,type) {
@@ -89,9 +103,8 @@ utils = (function($) {
 			dataType: "text",
 			cache: true,
 			success: function(response) {
-				alert(response);
-				addNewDonorView.toggleSubmitMessage();
-				addNewDonorView.resetForm();
+				addNewDonorView.setMessage(response);
+				setTimeout( function(){ addNewDonorView.toggleSubmitMessage(); }, 4000 );
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );
@@ -99,7 +112,6 @@ utils = (function($) {
 		};
 		
 		doAjax(requestObj);
-		addNewDonorView.toggleSubmitMessage();
 	};
 
 	submitNewTitle = function(title,callback) {
@@ -168,6 +180,27 @@ utils = (function($) {
 		editGiftView.toggleSubmitMessage();
 	};
 
+	submitDonorEdit = function() {
+
+		requestObj = {
+
+			type: "POST", 
+			url: _editUrl + '/inputDonorEdit',
+			data: $("#donor-input-form").serialize(),
+			dataType: "text",
+			cache: true,
+			success: function(response) {
+				editDonorView.setMessage(response);
+				setTimeout( function(){ editDonorView.toggleSubmitMessage(); }, 4000 );
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
+		
+		doAjax(requestObj);
+	};
+
 	getGiftData = function(callback) {
 
 		requestObj = {
@@ -206,18 +239,7 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
-	// getCurrentDate = function() {
-
-	// 	var date = new Date(),
-	// 		month = date.getMonth() + 1; 
-
-	// 	if(month < 10)
-	// 		month = "0" + month;
-
-	// 	return date.getFullYear() + "-" + month + "-" + date.getDate();
-	// };
-
-	getTitleArray = function(callback) {
+	getTitleArray = function(callback,index) {
 
 		requestObj = {
 
@@ -226,7 +248,7 @@ utils = (function($) {
 			dataType: "json",
 			cache: true,
 			success: function(response) {
-				callback(response);
+				callback(response,index);
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );
@@ -309,8 +331,8 @@ utils = (function($) {
 		getGiftData: function(callback) {		
 			getGiftData(callback);
 		},
-		getTitleArray: function(callback) {
-			getTitleArray(callback);
+		getTitleArray: function(callback,index) {
+			getTitleArray(callback,index);
 		},
 		getActiveNameString: function(callback) {
 			getActiveNameString(callback);

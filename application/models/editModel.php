@@ -106,6 +106,25 @@ class editModel extends CI_Model
     {
         $success = 0;
 
+        $data = array(
+
+            'titleID'        => $donorData['title'],
+            'FirstName'      => $donorData['fName'],
+            'LastName'       => $donorData['lName'],
+            'Organization'   => $donorData['org'],
+            'Address1'       => $donorData['addr1'],
+            'Address2'       => $donorData['addr2'],
+            'City'           => $donorData['city'],
+            'State'          => $donorData['state'],
+            'Country'        => $donorData['country'],
+            'PostalCode'     => $donorData['zip'],
+            'phone'          => $donorData['phone'],
+            'email'          => $donorData['email']
+        );
+
+        $this->db->where('donorID', $donorID);
+        $success = $this->db->update('tbl_donorinfo', $data);
+
         return $success;
     }
 

@@ -242,22 +242,27 @@ class searchModel extends CI_Model
 
      		$query = $this->db->get();
 
-     		foreach ($query->result() as $result)
-    		{
-    			  $donorInfo['titleID'] 		= $result->titleID;
-    	   		$donorInfo['firstName'] 	= $result->FirstName;
-    	   		$donorInfo['lastName']	 	= $result->LastName;
-            $donorInfo['org']         = $result->Organization;
-    	   		$donorInfo['addr1'] 		  = $result->Address1;
-    	   		$donorInfo['addr2'] 		  = $result->Address2;
-    	   		$donorInfo['city'] 			  = $result->City;
-    	   		$donorInfo['state'] 		  = $result->State;
-            $donorInfo['country']     = $result->Country;
-    	   		$donorInfo['zip'] 	      = $result->PostalCode;
-    	   		$donorInfo['phone'] 		  = $result->phone;
-    	   		$donorInfo['email'] 		  = $result->email;
-    		}
-
+        if ($query->num_rows() > 0)
+        {
+            foreach ($query->result() as $result)
+            {
+                $donorInfo['titleID']     = $result->titleID;
+                $donorInfo['firstName']   = $result->FirstName;
+                $donorInfo['lastName']    = $result->LastName;
+                $donorInfo['org']         = $result->Organization;
+                $donorInfo['addr1']       = $result->Address1;
+                $donorInfo['addr2']       = $result->Address2;
+                $donorInfo['city']        = $result->City;
+                $donorInfo['state']       = $result->State;
+                $donorInfo['country']     = $result->Country;
+                $donorInfo['zip']         = $result->PostalCode;
+                $donorInfo['phone']       = $result->phone;
+                $donorInfo['email']       = $result->email;
+            }
+        }
+        else
+            $donorInfo['lastName'] = "No data found / or database error";
+     		
      		return $donorInfo;
    	}
 
@@ -275,14 +280,20 @@ class searchModel extends CI_Model
 
             $query = $this->db->get();
 
-            foreach ($query->result() as $result)
+            if ($query->num_rows() > 0)
             {
-                $giftInfo['giftQuantity']     = $result->numberOfGifts;
-                $giftInfo['giftDescription']  = $result->giftDescription1;
-                $giftInfo['giftDate']         = $result->dateOfGift;
-                $giftInfo['letterFlag']       = $result->letter;
-                $giftInfo['importantFlag']    = $result->important;
+                foreach ($query->result() as $result)
+                {
+                    $giftInfo['giftQuantity']     = $result->numberOfGifts;
+                    $giftInfo['giftDescription']  = $result->giftDescription1;
+                    $giftInfo['giftDate']         = $result->dateOfGift;
+                    $giftInfo['letterFlag']       = $result->letter;
+                    $giftInfo['importantFlag']    = $result->important;
+                }
             }
+            else
+                $giftInfo['giftDescription'] = "No data found / or database error";
+            
         }
 
         return $giftInfo;
