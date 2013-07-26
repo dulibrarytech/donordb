@@ -26,7 +26,7 @@
 		#dropdown-box-section		{ margin-left: 42px; width: 150px; }
 		#dropdown-box 				{ width: 120px; }
 
-		#lower_controls				{ background-color: #ffffff; width: 40%; padding: -10px; margin-top: -10px; }
+		#lower_controls				{ background-color: #ffffff; width: 60%; padding: -10px; margin-top: -10px; }
 		#add_info_message			{ padding-top: 15px; }
 	</style>
 
@@ -94,7 +94,7 @@
 			<!-- This table creates a row with the submit button and an 'adding donor info' status message to the right of the button-->
 			<table class="table" id="lower_controls"><tr>
 				<td class="span2"><button type="submit" class="btn-grey" id="gift_submit_button"></button></td>
-				<td id="add_info_message">Adding new gift info...</td>
+				<td id="add_info_message"></td>
 				<!--td class=""><input type="checkbox" id="add_gift_checkbox" name="addGiftCheckbox">&nbsp&nbspDo not add a gift at this time</input></td></tr-->
 			</table>
 
@@ -103,7 +103,7 @@
 	</div>
 
 	<div class="copyright-text">
-		<p>University of Denver, Anderson Academic Commons &copy2013</p>
+		<p>University of Denver, University Libraries &copy2013</p>
 	</div>
 
 </body>

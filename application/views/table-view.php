@@ -60,7 +60,7 @@
 	</div>
 
 	<div class="copyright-text">
-		<p>University of Denver, Anderson Academic Commons &copy2013</p>
+		<p>University of Denver, University Libraries &copy2013</p>
 	</div>
 
 </body>

@@ -11,6 +11,7 @@
 utils = (function($) {
 
 	var doAjax,
+		MESSAGE_DELAY = 4000,
 
 		submitSearch,
 		submitNewDonorInfo,
@@ -104,7 +105,8 @@ utils = (function($) {
 			cache: true,
 			success: function(response) {
 				addNewDonorView.setMessage(response);
-				setTimeout( function(){ addNewDonorView.toggleSubmitMessage(); }, 4000 );
+				setTimeout( function(){ addNewDonorView.toggleSubmitMessage(); }, MESSAGE_DELAY );
+				addNewDonorView.resetForm();
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );
@@ -145,8 +147,8 @@ utils = (function($) {
 			dataType: "text",
 			cache: true,
 			success: function(response) {
-				alert(response);
-				addGiftView.toggleSubmitMessage();
+				addGiftView.setMessage(response);
+				setTimeout( function(){ addGiftView.toggleSubmitMessage(); }, MESSAGE_DELAY );
 				addGiftView.resetForm();
 			},
 			error: function ( textStatus, errorThrown ) {
@@ -155,7 +157,6 @@ utils = (function($) {
 		};
 		
 		doAjax(requestObj);
-		addGiftView.toggleSubmitMessage();
 	};
 
 	submitGiftEdit = function() {
@@ -168,8 +169,8 @@ utils = (function($) {
 			dataType: "text",
 			cache: true,
 			success: function(response) {
-				alert(response);
-				editGiftView.toggleSubmitMessage();
+				editGiftView.setMessage(response);
+				setTimeout( function(){ editGiftView.toggleSubmitMessage(); }, MESSAGE_DELAY );
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );
@@ -177,7 +178,6 @@ utils = (function($) {
 		};
 		
 		doAjax(requestObj);
-		editGiftView.toggleSubmitMessage();
 	};
 
 	submitDonorEdit = function() {
@@ -191,7 +191,7 @@ utils = (function($) {
 			cache: true,
 			success: function(response) {
 				editDonorView.setMessage(response);
-				setTimeout( function(){ editDonorView.toggleSubmitMessage(); }, 4000 );
+				setTimeout( function(){ editDonorView.toggleSubmitMessage(); }, MESSAGE_DELAY );
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );

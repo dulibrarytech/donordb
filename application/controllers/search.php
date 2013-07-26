@@ -118,11 +118,17 @@ class search extends CI_Controller {
 		// Send over the current active giftID
 		//$giftDataArray['activeGiftID'] = $this->phpsessions->get('activeGiftID');
 
-		// Set the active gift to the first giftID in the gift array.  
-		reset($giftDataArray);
-		$firstKey = key($giftDataArray);
-		$this->phpsessions->set('activeGiftID', $firstKey);
-		$giftDataArray['activeGiftID'] = $firstKey;
+		// Set the active gift to the first giftID in the gift array, if it has not yet been set 
+		$giftID = $this->phpsessions->get('activeGiftID');
+		if($giftID != null)
+			$giftDataArray['activeGiftID'] = $giftID;
+		else
+		{
+			reset($giftDataArray);
+			$firstKey = key($giftDataArray);
+			$this->phpsessions->set('activeGiftID', $firstKey);
+			$giftDataArray['activeGiftID'] = $firstKey;
+		}
 
 		echo json_encode($giftDataArray);
 	}

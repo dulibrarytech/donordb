@@ -99,7 +99,7 @@
 
 						<td>
 							<label class="form-label-text">State:</label>
-							<input type="text" id="state_input_box" class="input-small" name="state"/>  
+							<input type="text" id="state_input_box" class="input-medium" name="state"/>  
 						</td>
 
 						<td>
@@ -161,7 +161,7 @@
 							</div>
 						</td>
 						<td>
-							<button type="submit" class="btn" id="edit-gift-button">Edit Gift</button>
+							<button type="button" class="btn" id="edit-gift-button">Edit Gift</button>
 						</td>
 					</tr>
 				</table>
@@ -178,7 +178,7 @@
 	</div>
 
 	<div class="copyright-text">
-		<p>University of Denver, Anderson Academic Commons &copy2013</p>
+		<p>University of Denver, University Libraries &copy2013</p>
 	</div>
 
 </body>

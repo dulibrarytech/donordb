@@ -90,13 +90,18 @@ class edit extends CI_Controller {
     }
 	}
 
-	public function editGiftView($donorID,$giftID) 
+	public function editGiftView($donorID = null, $giftID = null) 
 	{
 		  $data['pageLoader'] = "<script>editGiftView.initPage();</script>";
 
-      $this->phpsessions->set('activeDonorID', $donorID);
-      $this->phpsessions->set('activeDonorNameString', $this->searchModel->getNameString($donorID));
-      $this->phpsessions->set('activeGiftID', $giftID);
+      if($donorID != null)
+      {
+          $this->phpsessions->set('activeDonorID', $donorID);
+          $this->phpsessions->set('activeDonorNameString', $this->searchModel->getNameString($donorID));
+      }
+      if($giftID != null)
+          $this->phpsessions->set('activeGiftID', $giftID);
+
 
       $this->load->view('gift-view', $data);
 	}
@@ -118,10 +123,8 @@ class edit extends CI_Controller {
 
               $giftData = $this->input->post();
 
-              $msg = $this->editModel->editGiftRecord($giftID,$giftData);
-
-              if(1) 
-                echo $msg;
+              if($this->editModel->editGiftRecord($giftID,$giftData)) 
+                echo "Database was successfully updated.";
               else
                 echo "Error in updating database.";
 
@@ -190,12 +193,18 @@ class edit extends CI_Controller {
         }
 	}
 
-	public function editDonorView($donorID) 
+	public function editDonorView($donorID, $giftID = null) 
 	{
       $data['pageLoader'] = "<script>editDonorView.initPage();</script>";
 
       $this->phpsessions->set('activeDonorID', $donorID);
       $this->phpsessions->set('activeDonorNameString', $this->searchModel->getNameString($donorID));
+
+      // If a giftID arg is passed in, set the active gift now.  If not, this is a general donor info view, no active gift yet
+      if($giftID != null)
+        $this->phpsessions->set('activeGiftID', $giftID);
+      else
+        $this->phpsessions->set('activeGiftID', null);
 
       $this->load->view('info-view', $data);
 	}
