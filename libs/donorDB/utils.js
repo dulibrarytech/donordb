@@ -105,8 +105,10 @@ utils = (function($) {
 			cache: true,
 			success: function(response) {
 				addNewDonorView.setMessage(response);
-				setTimeout( function(){ addNewDonorView.toggleSubmitMessage(); }, MESSAGE_DELAY );
-				addNewDonorView.resetForm();
+				setTimeout( function(){ 
+					addNewDonorView.toggleSubmitMessage(); 
+					addNewDonorView.resetForm();
+				}, MESSAGE_DELAY );
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );

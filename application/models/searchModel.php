@@ -36,16 +36,17 @@ class searchModel extends CI_Model
       		 	foreach ($query->result() as $results)
       		 	{
 
-      			 		$searchResults[$index]['firstName']		= $results->FirstName;
-      			 		$searchResults[$index]['lastName']		= $results->LastName;
-      			 		$searchResults[$index]['donorID']		= $results->donorID;
+      			 		$searchResults[$index]['firstName']		 = $results->FirstName;
+      			 		$searchResults[$index]['lastName']		 = $results->LastName;
+      			 		$searchResults[$index]['donorID']		   = $results->donorID;
+                $searchResults[$index]['org']          = $results->Organization;
 
       			 		$index++;
             }
   		 	} 		 		
      		else
      		{
-       			// Search Organization field
+            // Search Organization field
        			$this->db->select('donorID, Organization, FirstName, LastName');
       	 		$this->db->from('tbl_donorinfo');
       	 		$this->db->like('Organization', $keyword);		
@@ -55,10 +56,12 @@ class searchModel extends CI_Model
 
       	 		if ($query->num_rows() > 0)
        			{
-         				foreach ($query->result() as $results)
+                // Display the organization in the last name column, even if a last name is present in the record
+                foreach ($query->result() as $results)
         		 		{ 
-           					$searchResults[$index]['org']			= $results->Organization;
-          		 			$searchResults[$index]['donorID']		= $results->donorID;
+           					$searchResults[$index]['lastName']    = $results->Organization;
+                    $searchResults[$index]['firstName']   = "";
+          		 			$searchResults[$index]['donorID']     = $results->donorID;
 
                     $index++;
         		 		}
@@ -157,7 +160,7 @@ class searchModel extends CI_Model
      		$donorInfo = array();
      		$index = 0;
 
-     		$this->db->select('donorID, FirstName, LastName');
+     		$this->db->select('donorID, FirstName, LastName, Organization');
      		$this->db->from('tbl_donorinfo');
      		$this->db->order_by('LastName');
      		$query = $this->db->get();
@@ -166,11 +169,9 @@ class searchModel extends CI_Model
    		  { 	
       		 	foreach ($query->result() as $results)
       		 	{
-        		 		if($results->FirstName == "" && $results->LastName == "")
-          		 			continue;
-
         		 		$donorInfo[$index]['firstName'] 	= $results->FirstName;
         		 		$donorInfo[$index]['lastName']  	= $results->LastName;
+                $donorInfo[$index]['org']         = $results->Organization;
         		 		$donorInfo[$index]['donorID']  		= $results->donorID;
 
         		 		$index++;

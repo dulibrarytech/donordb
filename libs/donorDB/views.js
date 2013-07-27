@@ -82,7 +82,11 @@ searchView = (function($) {
 				results += '<tr>';
 				results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
-				results += '<td class="span4">' + value.lastName + '</td>';
+				if(value.lastName == "" || value.lastName == null)
+					results += '<td class="span4">' + value.org + '</td>';
+				else
+					results += '<td class="span4">' + value.lastName + '</td>';
+				
 				results += '<td class="span4">' + value.firstName + '</td>';
 
 				results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
@@ -99,7 +103,7 @@ searchView = (function($) {
 		results += '</table>';
 
 		toggleResultsView();
-		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
+		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
 		$("#table-content").html(results);
 	};
 
@@ -115,7 +119,12 @@ searchView = (function($) {
 				results += '<td class="span1" style="text-align: center"> <a href="' + _editUrl + '/editGiftView/' + value.donorID + '/' + value.giftsID +'">Edit</a> </td>';
 
 				results += '<td class="span2">' + value.giftDate + '</td>';
-				results += '<td class="span4">' + value.lastName + '</td>';
+
+				if(value.lastName == "" || value.lastName == null)
+					results += '<td class="span4">' + value.org + '</td>';
+				else
+					results += '<td class="span4">' + value.lastName + '</td>';
+
 				results += '<td class="span4">' + value.firstName + '</td>';
 
 				results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
@@ -132,7 +141,7 @@ searchView = (function($) {
 		results += '</table>';
 
 		toggleResultsView();
-		$("#table-header").html("<thead> <th class='span1'><!--SPACE--></th> <th class='span2'>Gift Date</th> <th class='span4'>Last Name</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
+		$("#table-header").html("<thead> <th class='span1'><!--SPACE--></th> <th class='span2'>Gift Date</th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
 		$("#table-content").html(results);
 	};
 
@@ -177,7 +186,7 @@ browseDonorsView = (function($) {
 
 		$(".generic-label").text("Donor Listing");
 
-		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
+		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
 
 		utils.getDonorDataArray(createDonorTable);
 	};
@@ -193,7 +202,11 @@ browseDonorsView = (function($) {
 			results += '<tr>';
 			results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
-			results += '<td class="span4">' + value.lastName + '</td>';
+			if(value.lastName == "" || value.lastName == null)	
+				results += '<td class="span4">' + value.org + '</td>';	
+			else
+				results += '<td class="span4">' + value.lastName + '</td>';
+
 			results += '<td class="span4">' + value.firstName + '</td>';
 
 			results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
@@ -721,7 +734,7 @@ editDonorView = (function($) {
 	setActiveGift = function() {
 
 		var giftID = $("#gift-date-box-dropdown>option:selected").val();
-		alert(giftID);
+
 		if(giftID == "" || giftID == null)
 			giftID = -1; 
 
@@ -812,8 +825,6 @@ editDonorView = (function($) {
 			activeGift = giftDates['activeGiftID'];
 
 		$.each(giftDates, function (key, value) {
-
-			alert("active: " + activeGift + " current key: " + key);
 
 			if(key == "activeGiftID") 
 				return true;
