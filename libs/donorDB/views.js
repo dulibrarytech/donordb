@@ -328,12 +328,14 @@ editGiftView = (function($) {
 
 		unblockForm();
 
-		$("#gift_quantity_box").attr('value', giftData['giftQuantity']);
+		$("#gift_quantity_box").val(giftData['giftQuantity']);
 
 		$("#gift_description_box").text(giftData['giftDescription']);
 
-		if(giftData['importantFlag'] == 1)
-			$("#important-checkbox").attr('checked', 'checked');
+		if(giftData['importantFlag'] == 1) 
+			$('#important-checkbox').prop('checked', true);
+		else 
+			$('#important-checkbox').prop('checked', false);
 
 		setNameString(giftData['nameString']);
 	};
@@ -926,20 +928,14 @@ editDonorView = (function($) {
 
 	setGiftFormData = function(giftData) {
 
-		alert(giftData['importantFlag']);
-
-		$("#gift_quantity_box").attr('value', giftData['giftQuantity']);
+		$("#gift_quantity_box").val(giftData['giftQuantity']);
 
 		$("#description_area").text(giftData['giftDescription']);
 
-		if(giftData['importantFlag'] == 1) {
-
-			$('#important-checkbox').attr('checked', true);
-		}
-		else {
-
-			$('input[name=importantFlag]').attr('checked', false);
-		}
+		if(giftData['importantFlag'] == 1) 
+			$('#important-checkbox').prop('checked', true);
+		else 
+			$('#important-checkbox').prop('checked', false);
 	};
 
 	setDonorFormData = function(donorData) {
