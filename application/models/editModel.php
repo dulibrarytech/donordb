@@ -116,8 +116,8 @@ class editModel extends CI_Model
             'Address2'       => $donorData['addr2'],
             'City'           => $donorData['city'],
             'State'          => $donorData['state'],
-            'Country'        => $donorData['country'],
             'PostalCode'     => $donorData['zip'],
+            'Country'        => $donorData['country'],
             'phone'          => $donorData['phone'],
             'email'          => $donorData['email']
         );

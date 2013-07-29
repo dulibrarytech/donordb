@@ -148,7 +148,7 @@
 						</td>
 					
 						<td class="span3">
-							<label class="form-label-text" id="gift_quantity_label">Gift Quantity:</label> 
+							<label class="form-label-text" id="gift_quantity_label" for="gift_quantity_box">Gift Quantity:</label> 
 							<input type="text" class="input-small" id="gift_quantity_box" name="giftQuantity"/>  
 						</td>
 					</tr>
@@ -156,8 +156,8 @@
 					<tr>
 						<td id="important_gift_check" colspan="2">
 							<div id="important-box-text">
-								<input type='hidden' name='importantFlag' value="0">
-								<input type="checkbox" name="importantFlag" id="important-checkbox" value="1">Hand-Typed Letter</input>
+								<input type='hidden' name='importantFlag' value="false"/>
+								<input type="checkbox" name="importantFlag" id="important-checkbox" value="true"/>
 							</div>
 						</td>
 						<td>

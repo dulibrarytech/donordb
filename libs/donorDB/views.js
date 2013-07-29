@@ -198,7 +198,9 @@ browseDonorsView = (function($) {
 		results = '<table class="table table-bordered table-striped">'; 
 
 		$.each(tableData, function (key, value) {
-			
+
+
+
 			results += '<tr>';
 			results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
@@ -355,8 +357,6 @@ editGiftView = (function($) {
 
 			if(key == "activeGiftID") 
 				return true;
-
-			alert("active: " + activeGift + " current key: " + key);
 
 			if(key == activeGift)
 				dropdownHTML += "<option selected value='" + key + "'>" + value + "</option>";
@@ -926,12 +926,20 @@ editDonorView = (function($) {
 
 	setGiftFormData = function(giftData) {
 
+		alert(giftData['importantFlag']);
+
 		$("#gift_quantity_box").attr('value', giftData['giftQuantity']);
 
 		$("#description_area").text(giftData['giftDescription']);
 
-		if(giftData['importantFlag'] == 1)
-			$("#important-checkbox").attr('checked', 'checked');
+		if(giftData['importantFlag'] == 1) {
+
+			$('#important-checkbox').attr('checked', true);
+		}
+		else {
+
+			$('input[name=importantFlag]').attr('checked', false);
+		}
 	};
 
 	setDonorFormData = function(donorData) {
