@@ -24,9 +24,11 @@ class searchModel extends CI_Model
    		  $index = 0;
 
      	  // Search LastName field
-     	  $this->db->select('donorID, Organization, FirstName, LastName');
+     	  $this->db->select('donorID, Organization, FirstName, LastName, anonymous');
    		  $this->db->from('tbl_donorinfo');
    		  $this->db->like('LastName', $keyword);		// *** Search by last name by default.  May add options later *** //
+        $this->db->where('anonymous !=', 1);
+        $this->db->where('donorID !=', 1);
    		  $this->db->order_by('LastName');
    		
      		$query = $this->db->get();
@@ -47,9 +49,11 @@ class searchModel extends CI_Model
      		else
      		{
             // Search Organization field
-       			$this->db->select('donorID, Organization, FirstName, LastName');
+       			$this->db->select('donorID, Organization, FirstName, LastName, anonymous');
       	 		$this->db->from('tbl_donorinfo');
-      	 		$this->db->like('Organization', $keyword);		
+      	 		$this->db->like('Organization', $keyword);	
+            $this->db->where('anonymous !=', 1);
+            $this->db->where('donorID !=', 1);	
       	 		$this->db->order_by('LastName');
       	 		
       	 		$query = $this->db->get();
@@ -90,11 +94,13 @@ class searchModel extends CI_Model
             $toDate = mdate($datestring,$time);
         }
 
-        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorinfo.donorID, tbl_donorinfo.FirstName, tbl_donorinfo.LastName');
+        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorinfo.donorID, tbl_donorinfo.FirstName, tbl_donorinfo.LastName, tbl_donorinfo.anonymous');
         $this->db->from('tbl_donorgifts');
         $this->db->join('tbl_donorinfo', 'tbl_donorinfo.donorID = tbl_donorgifts.donorID', 'inner');
         $this->db->where('dateOfGift >=', $fromDate);
         $this->db->where('dateOfGift <=', $toDate);
+        $this->db->where('anonymous !=', 1);
+        $this->db->where('tbl_donorinfo.donorID !=', 1);
         $this->db->order_by("dateOfGift", "desc");
 
         // If there is keyword data, return records that are like the keyword.
@@ -126,6 +132,16 @@ class searchModel extends CI_Model
 
         return $searchResults;
    	}
+
+    // Searches the gift description text of all gifts from anonymous donors.
+    // If no keyword is specified, will return all anonymous gift records within the date range.
+    public function anonymousGiftSearch($keyword = "",$fromDate,$toDate)
+    {
+        if($fromDate != null && $toDate != null)
+        {
+
+        }
+    }
 
    	// Will check all records of gifts that the donor has donated.  If one gift date falls within the given date range, return true
     private function dateScreen($donorID,$fromDate,$toDate)
@@ -162,6 +178,8 @@ class searchModel extends CI_Model
 
      		$this->db->select('donorID, FirstName, LastName, Organization');
      		$this->db->from('tbl_donorinfo');
+        $this->db->where('anonymous !=', 1);
+        $this->db->where('donorID !=', 1);
      		$this->db->order_by('LastName');
      		$query = $this->db->get();
 

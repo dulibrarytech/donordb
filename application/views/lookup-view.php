@@ -15,13 +15,15 @@
 
 	<!-- Positioning -->
 	<style>
-		#lname_label 		{ margin-left: 25px; }
-		#lname_input_box 	{ margin-top:9px; margin-left: 25px; }
-		#date_label 		{ margin-left: 25px; padding-bottom: 9px }
-		#fromDate			{ margin-left: 25px; }
-		#toDate				{ margin-left: 85px; }
-		#search_submit		{ margin-left: 475px; margin-bottom: 9px; }
-		#post-search-buttons{ margin-left: 20px; }
+		#lname_label 			{ margin-left: 25px; }
+		#lname_input_box 		{ margin-top:9px; margin-left: 25px; }
+		#date_label 			{ margin-left: 25px; padding-bottom: 9px }
+		#fromDate				{ margin-left: 25px; }
+		#toDate					{ margin-left: 85px; }
+		#search_submit			{ margin-left: 475px; margin-bottom: 9px; }
+		#post-search-buttons	{ margin-left: 20px; }
+		#anon_check_label		{ margin-left: 320px; margin-top: 5px; }
+		#anonymous-gift-check	{ margin-left: 530px; margin-top: -25px; }
 	</style>
 
 </head>
@@ -54,10 +56,17 @@
 		<!-- Search Section -->
 		<form id="search-form" method="post">
 
-			<div class="well" id="search-form-name">  
-				<label class="form-label-text" id="lname_label">Last Name or Organization:</label>  
-
-				<input type="text" class="input-xlarge" id="lname_input_box" placeholder="Leave blank to search all donors" name="searchTerm">  
+			<div class="well" id="search-form-name"> 
+				<table><tr>
+					<td>
+						<label class="form-label-text" id="lname_label">Last Name or Organization:</label>  
+						<input type="text" class="input-xlarge" id="lname_input_box" placeholder="Leave blank to search all donors" name="searchTerm">   
+					</td>
+					<td>
+						<label class="form-label-text" id="anon_check_label">Search Anonymous Records</label> 
+						<input type="checkbox" class="checkbox" id="anonymous-gift-check" name="anonymousCheck"/>
+					</td>
+				</td></table>
 			</div>
 
 			<div class="well" id="search-form-date">

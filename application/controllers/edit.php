@@ -39,17 +39,28 @@ class edit extends CI_Controller {
 
 	public function addGiftView($donorID)
 	{
-		$datestring = "%Y-%m-%d";
-        $time = time();
-        $date =  mdate($datestring,$time);   
+      if(!isset($donorID) || $donorID == null)
+      {
+          $this->load->view("lookup-view");
+      }
+      else
+      {
+          $datestring = "%Y-%m-%d";
+              $time = time();
+              $date =  mdate($datestring,$time);   
 
-		$data['pageLoader'] = "<script>addGiftView.initPage();</script>";
-		$data['date'] = $date;
+          $data['pageLoader'] = "<script>addGiftView.initPage();</script>";
+          $data['date'] = $date;
 
-		$this->phpsessions->set('activeDonorID', $donorID);
-		$this->phpsessions->set('activeDonorNameString', $this->searchModel->getNameString($donorID));
+          $this->phpsessions->set('activeDonorID', $donorID);
 
-		$this->load->view('gift-view', $data);
+          if($donorID == 1)
+            $this->phpsessions->set('activeDonorNameString', "Anonymous Donor");
+          else
+            $this->phpsessions->set('activeDonorNameString', $this->searchModel->getNameString($donorID));
+
+          $this->load->view('gift-view', $data);
+      }          
 	}
 
 	// input gift info
@@ -149,7 +160,18 @@ class edit extends CI_Controller {
 		  $this->load->view('info-view', $data);
 	}
 
-	public function inputDonorInfo(/*$donorID = null*/)
+  public function addAnonymousDonorInfoView() 
+  {
+      $data['pageLoader'] = "<script>addAnonymousDonorInfo.initPage();</script>";
+
+      $this->phpsessions->set('activeDonorID', null);
+      $this->phpsessions->set('activeDonorNameString', "");
+      $this->phpsessions->set('activeGiftID', null);
+
+      $this->load->view('info-view', $data);
+  }
+
+	public function inputDonorInfo()
 	{
 		switch($this->input->server("REQUEST_METHOD")) 
 		{

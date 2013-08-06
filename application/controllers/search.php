@@ -33,6 +33,7 @@ class search extends CI_Controller {
 
 	public function recordSearch()
 	{
+		
 		switch($this->input->server("REQUEST_METHOD")) 
 		{
 

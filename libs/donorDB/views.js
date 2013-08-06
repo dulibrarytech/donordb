@@ -45,6 +45,8 @@ searchView = (function($) {
 	        	fromDate = $("#fromDate").val();
 	        	toDate = $("#toDate").val();
 
+	        	//if()
+
 	        	// If a date field has been populated, search results should display gifts by date.  If not, display donor results
 	        	if(fromDate != "" || toDate != "") {
 	        		utils.submitSearch(createGiftTable,"gift");
@@ -432,6 +434,9 @@ addGiftView = (function($) {
 	setNameString = function(name) {
 
 		$("#donor-name-label").text(name);
+
+		if(name == "Anonymous Donor")
+			$("#important_gift_check").hide();
 	};
 
 	addEvents = function() {

@@ -72,7 +72,7 @@
 					</td>
 					<td id="important_gift_check">
 						<input type='hidden' name='importantFlag' value="0">
-						<input type="checkbox" name="importantFlag" id="important-checkbox" value="1">Hand-Typed Letter</input>
+						<input type="checkbox" name="importantFlag" class="checkbox" id="important-checkbox" value="1">Hand-Typed Letter</input>
 					</td>
 					<td>
 						<label class="form-label-text" id="gift_date_label">Date of Gift:</label>  
