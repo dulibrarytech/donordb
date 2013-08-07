@@ -64,7 +64,7 @@
 					</td>
 					<td>
 						<label class="form-label-text" id="anon_check_label">Search Anonymous Records</label> 
-						<input type="checkbox" class="checkbox" id="anonymous-gift-check" name="anonymousCheck"/>
+						<input type="checkbox" class="checkbox" id="anonymous-gift-check" value="0" name="anonymousCheck"/>
 					</td>
 				</td></table>
 			</div>

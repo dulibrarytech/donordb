@@ -45,6 +45,9 @@ class editModel extends CI_Model
             'email'         => $newDonorData['email']
         );
 
+        if(isset($newDonorData['anonymousFlag']))
+            $data['anonymous'] = $newDonorData['anonymousFlag'];
+
         // If the db insert operation is successfull, get the ID of the new record
         if($this->db->insert('tbl_donorinfo', $data))
             $ID = $this->db->insert_id();
@@ -56,16 +59,19 @@ class editModel extends CI_Model
     {
     	$ID = 0;
 
+        if(!isset($newGiftData['letterFlag']))
+            $newGiftData['letterFlag'] = 1;
+
         $data = array(
 
             'donorID'           => $donorID,
             'dateOfGift'        => $newGiftData['giftDate'],
             'numberOfGifts'     => $newGiftData['giftQuantity'],
-            'letter'            => 1,
+            'letter'            => $newGiftData['letterFlag'],
             'important'         => $newGiftData['importantFlag']
         );
 
-        // TODO: Join tables, then do an insert
+        // TODO: Join tables, then do an insert (Future-not required)
         if($this->db->insert('tbl_donorgifts', $data))
         {
             $ID = $this->db->insert_id();

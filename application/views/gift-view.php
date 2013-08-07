@@ -15,11 +15,12 @@
 	<!-- TODO: Create 'left edge field' class to offset by 25px left margin? -->
 	<style>
 		#gift_description_box		{ width: 500px; height: 150px; }
-		#gift_date_label			{ margin-left: 43px; }
-		#gift-date-box				{ margin-left: 43px; }
+		#gift_date_label			{ margin-left: 75px; }
+		#gift-date-box				{ margin-left: 75px; }
 		#gift_submit_button			{ margin-left: -7px; margin-top: 0px; width: 90px;}
 		#edit_date_cell				{ vertical-align: bottom;  }
 		#important-checkbox			{ margin-top: 12px; }
+		#add_anon_info_button		{ margin-left: 88px; margin-bottom: 8px; }
 
 		.change_date_elts			{ margin-left: 92px; }
 
@@ -87,6 +88,8 @@
 					<td id="edit_date_cell" colspan="2">
 						<label class="form-label-text change_date_elts" id="change_date_label">Change Date:</label>  
 						<input type="text" class="input-small change_date_elts" id="edit-date-box" name="giftDateEdit" />
+
+						<input type="button" class="btn" id="add_anon_info_button" value="Add info"/>
 					</td>
 				</table>
 			</div>

@@ -35,26 +35,48 @@ searchView = (function($) {
 	addEvents = function() {
 
 		var fromDate, 
-			toDate;
+			toDate,
+			anonymous;
 
 		$("#search-form").validate({
 
 	        errorClass: "invalid",
 	        submitHandler: function() {
 
-	        	fromDate = $("#fromDate").val();
-	        	toDate = $("#toDate").val();
+	        	fromDate	= $("#fromDate").val();
+	        	toDate 		= $("#toDate").val();
+	        	anonymous 	= $("#anonymous-gift-check").val();
 
-	        	//if()
-
-	        	// If a date field has been populated, search results should display gifts by date.  If not, display donor results
-	        	if(fromDate != "" || toDate != "") {
-	        		utils.submitSearch(createGiftTable,"gift");
+	        	if(anonymous == '1') {
+	        		utils.submitSearch(createGiftTable,"anonymous");
 	        	}
 	        	else {
-	        		utils.submitSearch(createDonorTable,"donor");
+
+	        		//If a date field has been populated, search results should display gifts by date.  If not, display donor results
+		        	if(fromDate != "" || toDate != "") {
+		        		utils.submitSearch(createGiftTable,"gift");
+		        	}
+		        	else {
+		        		utils.submitSearch(createDonorTable,"donor");
+		        	}
 	        	}
 	        }
+	    });
+
+	    $("#anonymous-gift-check").click(function() { 
+
+	    	if($("#anonymous-gift-check").val() == '0') {
+
+	    		$("#anonymous-gift-check").val('1');
+	    		$("#lname_label").text('Search anonymous gift descriptions:');
+	    		$("#lname_input_box").prop('placeholder', '');
+	    	}
+	    	else {
+
+	    		$("#anonymous-gift-check").val('0');
+	    		$("#lname_label").text('Last Name or Organization:');
+	    		$("#lname_input_box").prop('placeholder', 'Leave blank to search all donors');
+	    	}
 	    });
 
 	    $("#search_return").click(function() { 
@@ -258,6 +280,7 @@ editGiftView = (function($) {
 
 		$('#add_info_message').hide();
 		$("#gift-date-box").hide();
+		$("#add_anon_info_button").hide();
 
 		addEvents();
 
@@ -425,6 +448,7 @@ addGiftView = (function($) {
 
 		$('#add_info_message').hide();
 		$(".change_date_elts").hide();
+		$("#add_anon_info_button").hide();
 
 		utils.getActiveNameString(setNameString);
 
@@ -435,8 +459,11 @@ addGiftView = (function($) {
 
 		$("#donor-name-label").text(name);
 
-		if(name == "Anonymous Donor")
+		if(name == "Anonymous Donor") {
+
 			$("#important_gift_check").hide();
+			$("#add_anon_info_button").show();
+		}
 	};
 
 	addEvents = function() {
@@ -450,6 +477,11 @@ addGiftView = (function($) {
 	            $('#add_info_message').html("Adding new gift info...");
 	            toggleSubmitMessage();
 	        }
+	    });
+
+	    $("#add_anon_info_button").click( function() {
+
+	    	window.location.href = _editUrl + "/addDonorView/1";
 	    });
 	};
 
@@ -502,13 +534,28 @@ addNewDonorView = (function($) {
 		removeAddTitleBox,
 		enterNewTitle,
 		getTitleDropdownEntries,
-		resetForm;
+		resetForm,
 
-	initPage = function() {
+		anonymousView = 0;
+
+	initPage = function(anonymous) {
+
+		anonymousView = anonymous;
 
 		$(".content-window").css("height", "740px");
 
-		$(".generic-label").text("Add New Donor Info");
+		if(anonymous == 1) {
+
+			$(".generic-label").text("Add Anonymous Donor Info");
+			$("#lower_well").hide();
+			$(".content-window").css("height", "555px");
+		}		
+		else {
+
+			$(".generic-label").text("Add New Donor Info");
+			$(".content-window").css("height", "740px");
+		}
+			
 
 		$("#add_info_message").hide();
 		$("#title-edit-box").hide();
@@ -520,19 +567,19 @@ addNewDonorView = (function($) {
 
 		$("#add_info_button").html("Save");
 
-		addEvents();
+		addEvents(anonymous);
 
 		utils.getTitleArray(createTitleDropdown);
 	};
 
-	addEvents = function() {
+	addEvents = function(anonymous) {
 
 		$("#donor-input-form").validate({
 
 	        errorClass: "invalid",
 	        submitHandler: function() {
 
-	            utils.submitNewDonorInfo();
+	            utils.submitNewDonorInfo(anonymous);
 	            $('#add_info_message').html("Adding new donor info...");
 	            toggleSubmitMessage();
 	        }
@@ -670,13 +717,13 @@ addNewDonorView = (function($) {
 
 	resetForm = function() {
 
-		window.location.href = _editUrl + "/addDonorView";
+		window.location.href = _editUrl + "/addDonorView/" + anonymousView;
 	};
 
 	return {
 
-		initPage: function() {	
-			initPage();
+		initPage: function(anonymous) {	
+			initPage(anonymous);
 		},
 		createTitleDropdown: function(titleData,index) {	
 			createTitleDropdown(titleData,index);
@@ -736,6 +783,7 @@ editDonorView = (function($) {
 
 		utils.getGiftDatesForActiveDonor(createGiftDateDropDown); 
 		utils.getActiveDonorData(setDonorFormData);
+		utils.getGiftData(setGiftFormData);
 	};
 
 	setActiveGift = function() {

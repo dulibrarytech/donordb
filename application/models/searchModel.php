@@ -79,7 +79,7 @@ class searchModel extends CI_Model
     		return $searchResults;
     }
 
-   	public function giftsearch($keyword,$fromDate,$toDate)
+   	public function giftsearch($keyword = "",$fromDate,$toDate)
    	{
         $searchResults = array();
         $index = 0;
@@ -137,10 +137,90 @@ class searchModel extends CI_Model
     // If no keyword is specified, will return all anonymous gift records within the date range.
     public function anonymousGiftSearch($keyword = "",$fromDate,$toDate)
     {
-        if($fromDate != null && $toDate != null)
-        {
+        $searchResults = array();
+        $index = 0;
 
+        if($fromDate == null)
+           $fromDate = "1864-01-01";   // Shouldn't be any before this!
+        if($toDate == null)
+        {
+            $datestring = "%Y-%m-%d";
+            $time = time();
+
+            $toDate = mdate($datestring,$time);
         }
+
+        // Get all dates from donor 1 (generic anonymous donor)
+        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorgifts.donorID, tbl_donorgiftdescriptions.giftDescription1');
+        $this->db->from('tbl_donorgifts');
+        $this->db->join('tbl_donorgiftdescriptions', 'tbl_donorgiftdescriptions.giftsID = tbl_donorgifts.giftsID', 'inner');
+        $this->db->where('tbl_donorgifts.donorID', '1');
+        $this->db->where('dateOfGift >=', $fromDate);
+        $this->db->where('dateOfGift <=', $toDate);
+        $this->db->order_by("dateOfGift", "desc");
+
+        // If there is keyword data, return records that are like the keyword.
+        if($keyword != "")
+        {
+            $this->db->like('tbl_donorgiftdescriptions.giftDescription1', $keyword);    
+        }
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0)
+        {
+            foreach ($query->result() as $results)
+            { 
+                $searchResults[$index]['giftsID']     = $results->giftsID;
+                $searchResults[$index]['giftDate']    = $this->truncateDateString($results->dateOfGift); 
+                $searchResults[$index]['lastName']    = "Anonymous Donor";
+                $searchResults[$index]['firstName']   = "";
+                $searchResults[$index]['donorID']     = $results->donorID;  // should always be 1 here
+
+                $index++;
+            }
+        }
+
+        $query = null;
+
+        // Search for gifts from donors marked as 'anonymous' (anonymous donors with recorded info)
+        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorinfo.donorID, tbl_donorinfo.FirstName, tbl_donorinfo.LastName, tbl_donorinfo.anonymous, tbl_donorgiftdescriptions.giftDescription1');
+        $this->db->from('tbl_donorgifts');
+        $this->db->join('tbl_donorinfo', 'tbl_donorinfo.donorID = tbl_donorgifts.donorID', 'inner');
+        $this->db->join('tbl_donorgiftdescriptions', 'tbl_donorgiftdescriptions.giftsID = tbl_donorgifts.giftsID', 'inner');
+        $this->db->where('dateOfGift >=', $fromDate);
+        $this->db->where('dateOfGift <=', $toDate);
+        $this->db->where('anonymous', '1');
+        $this->db->where('tbl_donorinfo.donorID !=', '1');
+        $this->db->order_by("dateOfGift", "desc");
+
+        //If there is keyword data, return records that are like the keyword.
+        if($keyword != "")
+        {
+            $this->db->like('tbl_donorgiftdescriptions.giftDescription1', $keyword);    
+        }
+
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0)
+        {
+            foreach ($query->result() as $results)
+            { 
+                $searchResults[$index]['giftsID']     = $results->giftsID;
+                $searchResults[$index]['giftDate']    = $this->truncateDateString($results->dateOfGift); 
+                $searchResults[$index]['lastName']    = $results->FirstName;
+                $searchResults[$index]['firstName']   = $results->LastName;
+                $searchResults[$index]['donorID']     = $results->donorID;
+
+                $index++;
+            }
+        }
+        else
+        {
+            $searchResults = "No results found";
+        }
+
+        return $searchResults;
     }
 
    	// Will check all records of gifts that the donor has donated.  If one gift date falls within the given date range, return true

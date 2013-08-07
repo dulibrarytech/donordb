@@ -30,14 +30,7 @@ class edit extends CI_Controller {
 		$this->load->view('edit-view');
 	}
 
-	// public function newGiftView() 
-	// { 
-	// 	$data['pageLoader'] = "<script>newGiftView.initPage();</script>";
-
-	// 	$this->load->view('gift-view', $data);
-	// }
-
-	public function addGiftView($donorID)
+	public function addGiftView($donorID, $nameString = "")
 	{
       if(!isset($donorID) || $donorID == null)
       {
@@ -54,10 +47,19 @@ class edit extends CI_Controller {
 
           $this->phpsessions->set('activeDonorID', $donorID);
 
-          if($donorID == 1)
-            $this->phpsessions->set('activeDonorNameString', "Anonymous Donor");
+          // If nameString arg is passed in, set it here.  Otherwise, set it based on the donorID
+          if($nameString != "")
+          {
+              $this->phpsessions->set('activeDonorNameString', $nameString);
+          }
           else
-            $this->phpsessions->set('activeDonorNameString', $this->searchModel->getNameString($donorID));
+          {
+              if($donorID == 1)
+                  $this->phpsessions->set('activeDonorNameString', "Anonymous Donor");
+              else
+                  $this->phpsessions->set('activeDonorNameString', $this->searchModel->getNameString($donorID));
+          }
+          
 
           $this->load->view('gift-view', $data);
       }          
@@ -84,10 +86,17 @@ class edit extends CI_Controller {
 
             $giftData = $this->input->post();
 
+            // Anonymous donor
+            if($donorID == 1)
+                $giftData['letterFlag'] = 0;
+
             $giftID = $this->editModel->createGiftRecord($donorID,$giftData);
 
             if($giftID > 0) 
-            	echo "Database was successfully updated.";
+            {
+                $this->phpsessions->set('activeGiftID', $giftID);
+                echo "Database was successfully updated.";
+            }            	
             else
             	echo "Error in updating database";
 
@@ -149,9 +158,9 @@ class edit extends CI_Controller {
       }
   }
 
-	public function addDonorView() 
+	public function addDonorView($anonymous = 0) 
 	{
-		  $data['pageLoader'] = "<script>addNewDonorView.initPage();</script>";
+		  $data['pageLoader'] = "<script>addNewDonorView.initPage(" . $anonymous . ");</script>";
 
       $this->phpsessions->set('activeDonorID', null);
       $this->phpsessions->set('activeDonorNameString', "");
@@ -159,17 +168,6 @@ class edit extends CI_Controller {
 
 		  $this->load->view('info-view', $data);
 	}
-
-  public function addAnonymousDonorInfoView() 
-  {
-      $data['pageLoader'] = "<script>addAnonymousDonorInfo.initPage();</script>";
-
-      $this->phpsessions->set('activeDonorID', null);
-      $this->phpsessions->set('activeDonorNameString', "");
-      $this->phpsessions->set('activeGiftID', null);
-
-      $this->load->view('info-view', $data);
-  }
 
 	public function inputDonorInfo()
 	{
@@ -191,14 +189,7 @@ class edit extends CI_Controller {
                 
                 $donorID = $this->editModel->createDonorRecord($donorData);
 
-                // // If box is checked, no gift needs to be added at this time
-                // $addGiftCheck = $this->input->post('addGiftCheckbox');
-                // if($addGiftCheck == "") {
-
                 $giftID = $this->editModel->createGiftRecord($donorID, $donorData);
-                // }
-                // else if($addGiftCheck == "checked")
-                // 	$giftID = 1;
 
                 if($donorID > 0 && $giftID > 0) 
                 	echo "Database was successfully updated.";
@@ -305,12 +296,16 @@ class edit extends CI_Controller {
       }
 	}
 
-  public function setSessionActiveGift($giftID)
+  public function setSessionActiveGift($giftID,$data = null)
   {
       //$donorID = $this->phpsessions->get('activeDonorID');
       //$giftID = $this->searchModel->getGiftIDForGiftDate($donorID,$giftDate);
 
-      $message = "Gift record not found for selected date...";
+      $message = "Set Active Gift Error";
+
+      $this->phpsessions->set('activeGiftDate', null);
+      $this->phpsessions->set('activeGiftQuantity', null);
+      $this->phpsessions->set('activeGiftDescription', null);
 
       if($giftID > 0)
       {
@@ -320,5 +315,26 @@ class edit extends CI_Controller {
       }
 
       echo $message;
+  }
+
+  public function setTempGiftData($data = null)
+  {
+      $message = "Set Gift Data Error";
+
+      $this->phpsessions->set('tempGiftDate', null);
+      $this->phpsessions->set('tempGiftQuantity', null);
+      $this->phpsessions->set('tempGiftDescription', null);
+
+      if(is_array($data))
+      {
+          if(isset($data['giftDate']))
+            $this->phpsessions->set('activeGiftDate', $data['giftDate']);
+          if(isset($data['giftQuantity']))
+            $this->phpsessions->set('activeGiftQuantity', $data['giftQuantity']);
+          if(isset($data['giftQuantity']))
+            $this->phpsessions->set('activeGiftDescription', $data['giftDescription']);
+
+           $message = "gift data set";
+      }
   }
 }

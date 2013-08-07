@@ -33,7 +33,7 @@ class search extends CI_Controller {
 
 	public function recordSearch()
 	{
-		
+
 		switch($this->input->server("REQUEST_METHOD")) 
 		{
 
@@ -54,6 +54,10 @@ class search extends CI_Controller {
 					echo json_encode($this->searchModel->donorSearch($keyword)); 
                 else if($searchType == "gift")
                 	echo json_encode($this->searchModel->giftSearch($keyword,$fromDate,$toDate)); 
+                else if($searchType == "anonymous")
+                	echo json_encode($this->searchModel->anonymousGiftSearch($keyword,$fromDate,$toDate));
+                else
+                	echo json_encode("Search type error!");
 
                 break;
             }

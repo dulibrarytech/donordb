@@ -12,16 +12,15 @@
 
 	<!-- Positioning -->
 	<style>
-		#add_info_button 		{ margin-left: -7px; margin-top: -10px; }
-		#upper_well				{ padding-bottom: 0px; }
-		#lower_well				{ padding-bottom: 0px; }
-		#description_area		{ width: 455px; height: 75px;}
-		#gift_quantity_label	{ margin-left: 5px; }
-		#gift_quantity_box		{ margin-left: 5px; }
-		#lower_controls			{ background-color: #ffffff; width: 40%; }
-		#edit-gift-button		{ margin-left: 18px; margin-top: 10px; }
-		#important-checkbox		{ margin-left: 50px; margin-top:-5px; }
-		#important-box-text		{ margin-top: 15px; }
+		#add_info_button 			{ margin-left: -7px; margin-top: -10px; }
+		#upper_well					{ padding-bottom: 0px; }
+		#lower_well					{ padding-bottom: 0px; }
+		#description_area			{ width: 455px; height: 75px;}
+		#gift_quantity_label		{ margin-left: 5px; }
+		#gift_quantity_box			{ margin-left: 5px; }
+		#lower_controls				{ background-color: #ffffff; width: 40%; }
+		#edit-gift-button			{ margin-left: 18px; margin-top: 10px; }
+		#important-checkbox			{ margin-left: 40px; margin-top:-5px; }
 	</style>
 
 </head>
@@ -156,8 +155,8 @@
 					<tr>
 						<td id="important_gift_check" colspan="2">
 							<div id="important-box-text">
-								<input type='hidden' name='importantFlag' value="false"/>
-								<input type="checkbox" name="importantFlag" id="important-checkbox" value="true"/>
+								<input type='hidden' name='importantFlag' value="0"/>
+								<input type="checkbox" name="importantFlag" id="important-checkbox" value="1">Hand-Typed Letter</input>
 							</div>
 						</td>
 						<td>

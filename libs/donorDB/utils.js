@@ -94,13 +94,18 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
-	submitNewDonorInfo = function() {
+	submitNewDonorInfo = function(anonymous) {
 			
+		var submitData = $("#donor-input-form").serialize();
+
+		if(anonymous == 1)
+			submitData += "&anonymousFlag=1&letterFlag=0";
+
 		requestObj = {
 
 			type: "POST", 
 			url: _editUrl + '/inputDonorInfo',
-			data: $("#donor-input-form").serialize(),
+			data: submitData,
 			dataType: "text",
 			cache: true,
 			success: function(response) {
@@ -309,8 +314,8 @@ utils = (function($) {
 		submitSearch: function(callback,type) {	
 			submitSearch(callback,type);
 		},
-		submitNewDonorInfo: function() {		
-			submitNewDonorInfo();
+		submitNewDonorInfo: function(anonymous) {		
+			submitNewDonorInfo(anonymous);
 		},
 		submitGift: function() {		
 			submitGift();
