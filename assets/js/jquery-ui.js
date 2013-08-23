@@ -9191,6 +9191,8 @@ $.widget( "ui.dialog", {
 			title.html("&#160;");
 		}
 		title.text( this.options.title );
+
+
 	},
 
 	_createButtonPane: function() {

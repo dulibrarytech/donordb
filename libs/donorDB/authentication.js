@@ -14,19 +14,68 @@ authentication = (function($) {
 
 	validateSession = function() {
 
-		  if(sessionStorage.login == null) {
+	  	// Get session profile from server
+	  	var userProfile = null;
 
-          loginForm.doModal();
+	  	// Go to login dialog if session is null or invalid
+	  	if(userProfile == null || userProfile.isValid === "false") {
 
-          // have validated username.  check against local user db, and return roleid and userid
-		  }
+          	loginForm.doModal();
+	  	}
+	};
+
+	authenticate = function(loginData) {
+
+	  	var qstring = "userName=" + loginData.userName + "&passWord=" + loginData.passWord;
+
+	  	requestObj = {
+            type: "POST",
+            url: _loginUrl,
+            data: qstring,
+            dataType: "json",
+            cache: true,
+            success: function (response) {
+                alert("success");
+                if(validateResponse(response)) {
+					alert("success valid");
+                	sessionStorage.setItem("
+                		", JSON.stringify(response));
+                	searchView.setRole(response.roleID);
+                }
+                else {
+                	alert("success invalid");
+                	sessionStorage.donorDB_profile = null;
+                	// MESSAGE 'Authentication failed'
+                	loginForm.resetForm();
+                }
+            },
+            error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+        };	
+
+        //$.ajax(requestObj);
+	};
+
+	validateResponse = function(response) {
+
+		if(typeof response.isValid != "undefined") {
+			return response.isValid;
+		}
+		else
+			return false;
 	};
 
 	return {
 
-		  validateSession: function() {
-			   validateSession();
-		  }
+		validateSession: function() {
+
+			validateSession();
+		},
+		authenticate: function(loginData) {
+
+			authenticate(loginData);
+		}
 	};
 
 }(jQuery));

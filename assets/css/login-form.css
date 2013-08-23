@@ -56,19 +56,19 @@
 	padding: 0.3em; 
 }
 
-.Login {
+.Submit {
 
-	width: 100px;
+	width: 70px;
 	margin-left: 26px;
 	float: left;
 }
 
-.Cancel {
+/*.Cancel {
 
 	width: 100px;
 	margin-right: 28px;
 	float: right;
-}
+}*/
 
 .ui-dialog-titlebar-close {
 

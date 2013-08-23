@@ -24,8 +24,6 @@ class search extends CI_Controller {
 	 */
 	public function index()
 	{
-		// TODO: any necessary initial security measures
-
 		$data['pageLoader'] = "<script>searchView.initPage();</script>";
 
 		$this->load->view('lookup-view', $data);
@@ -39,7 +37,9 @@ class search extends CI_Controller {
 
             case "GET":
 			{
-                $this->load->view("lookup-view");
+                $data['pageLoader'] = "<script>searchView.initPage();</script>";
+
+                $this->load->view('lookup-view', $data);
 
                 break;
             }

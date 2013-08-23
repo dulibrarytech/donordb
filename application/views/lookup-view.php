@@ -125,7 +125,7 @@
 	<!--Load javascript functions-->
 	<?php $this->load->view("partials/javascript-partial.php"); ?>
 	
-	<script>//authentication.validateSession();</script>
+	<!--script>authentication.validateSession();</script-->
 
 	<!-- Run page loader for requested page (set in CI controller) -->
 	<?php echo $pageLoader; ?>

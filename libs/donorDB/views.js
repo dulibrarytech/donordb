@@ -8,10 +8,14 @@
  * University of Denver, June 2013
  */
 
+/*
+ * The home page.  Will display user-specific elements
+ */
 searchView = (function($) {
 
 	var initPage,
 		addEvents,
+		setRole,
 		resetSearch,
 		createDonorTable,
 		createGiftTable,
@@ -88,6 +92,12 @@ searchView = (function($) {
 
 	    	resetSearch();
 	    });
+	};
+
+	// Set layout for user status.
+	setRole = function(roleID) {
+
+		// TODO switch roleID.  Add lists if necessary.
 	};
 
 	resetSearch = function() {
@@ -186,6 +196,9 @@ searchView = (function($) {
 
 		initPage: function() {	
 			initPage();
+		},
+		setRole: function(roleID) {
+			setRole(roleID);
 		},
 		createDonorTable : function(tableData) {
 			createResultsTable(tableData);
@@ -462,7 +475,7 @@ addGiftView = (function($) {
 		if(name == "Anonymous Donor") {
 
 			$("#important_gift_check").hide();
-			$("#add_anon_info_button").show();
+			// $("#add_anon_info_button").show();
 		}
 	};
 
