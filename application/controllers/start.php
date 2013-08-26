@@ -12,7 +12,7 @@
  * 
  * University of Denver, June 2013
  */
-class Start extends CI_Controller {
+class start extends CI_Controller {
 
     function __construct() 
     {

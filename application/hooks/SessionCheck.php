@@ -12,7 +12,7 @@
 
 class SessionCheck 
 {
-	require_once "/libraries/auth/phpsessions.php";
+	//require_once "/libraries/auth/phpsessions.php";
 
 	function __construct() 
     {
@@ -22,14 +22,14 @@ class SessionCheck
     function isSessionValid() 
     {
     	$CI =& get_instance();
-    	if($CI->router->class == 'Login' || $CI->router->class == 'Start')
+    	if($CI->router->class == 'login' || ($CI->router->class == 'search' && $CI->router->method == 'index'))
     	{
     		return;
     	}
     	else
     	{
     		$phpsessions = new Phpsessions();
-    		$userProfile = $phpsessions->get("user");
+    		$userProfile = $phpsessions->get("donorDB_profile");
 
     		if($userProfile == null || $userProfile->isValid === false)
     		{

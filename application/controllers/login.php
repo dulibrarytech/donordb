@@ -15,7 +15,7 @@ class Login extends CI_Controller {
 
             case "GET":
 
-                $data['pageLoader'] = "<script>searchView.initPage();</script>";
+                $data['pageLoader'] = "<script>authentication.validateSession();</script>";
 
                 $this->load->view('lookup-view', $data);
 
@@ -26,7 +26,6 @@ class Login extends CI_Controller {
                 $this->load->model("loginModel");
 
                 $profile = $this->loginModel->authenticate($this->input->post());
-
 
                 echo json_encode($profile);
 
@@ -46,5 +45,11 @@ class Login extends CI_Controller {
     {
         $this->phpsessions->delete("donorDB_profile");
         redirect("/");
+    }
+
+    public function getSessionProfile() {
+
+        echo json_encode("get session profile...");
+        //echo json_encode($this->phpsessions->get("donorDB_profile"));
     }
 }

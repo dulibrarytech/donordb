@@ -24,9 +24,13 @@ class search extends CI_Controller {
 	 */
 	public function index()
 	{
-		$data['pageLoader'] = "<script>searchView.initPage();</script>";
+		$userProfile = $this->phpsessions->get("donorDB_profile");
+    	if($userProfile == null || $userProfile->isValid === false)
+    		$data['pageLoader'] = "<script>authentication.validateSession();</script>";
+    	else
+    		$data['pageLoader'] = "<script>searchView.initPage();</script>";
 
-		$this->load->view('lookup-view', $data);
+    	$this->load->view('lookup-view', $data);
 	}
 
 	public function recordSearch()

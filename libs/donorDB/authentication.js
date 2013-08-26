@@ -10,18 +10,30 @@
 
 authentication = (function($) {
 
-	var validateSession;
+	var validateSession,
+		authenticate,
+		validateResponse,
+		setUserRole;
+
 
 	validateSession = function() {
 
-	  	// Get session profile from server
-	  	var userProfile = null;
+	  	searchView.initPage();
+	  	
+	  	requestObj = {
+            url: _loginUrl + "/getSessionProfile",
+            dataType: "json",
+            cache: true,
+            success: function (response) {
+            	alert(response);
+            	//setUserRole(response);
+            },
+            error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+        };
 
-	  	// Go to login dialog if session is null or invalid
-	  	if(userProfile == null || userProfile.isValid === "false") {
-
-          	loginForm.doModal();
-	  	}
+	  	$.ajax(requestObj);
 	};
 
 	authenticate = function(loginData) {
@@ -38,8 +50,7 @@ authentication = (function($) {
                 alert("success");
                 if(validateResponse(response)) {
 					alert("success valid");
-                	sessionStorage.setItem("
-                		", JSON.stringify(response));
+                	sessionStorage.setItem("donorDB_profile", JSON.stringify(response));
                 	searchView.setRole(response.roleID);
                 }
                 else {
@@ -54,7 +65,7 @@ authentication = (function($) {
             }
         };	
 
-        //$.ajax(requestObj);
+        $.ajax(requestObj);
 	};
 
 	validateResponse = function(response) {
@@ -64,6 +75,19 @@ authentication = (function($) {
 		}
 		else
 			return false;
+	};
+
+	// Run page setRole() function if the profile is valid, init login dialog if it is not.
+	setUserRole = function(userProfile) {
+
+	  	if(userProfile == null || userProfile.isValid === "false") {
+
+          	loginForm.doModal();
+	  	}
+	  	else {
+
+	  		searchView.setRole(sessionStorage.roleID);
+	  	}
 	};
 
 	return {

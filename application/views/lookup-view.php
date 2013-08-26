@@ -1,5 +1,5 @@
 <?php
-
+	//print_r($CI =& get_instance());
 ?>
 
 
