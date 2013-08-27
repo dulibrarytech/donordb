@@ -27,7 +27,6 @@ authentication = (function($) {
             cache: true,
             success: function (response) { 
 
-            	alert(response);
             	if(response == null || response.isValid === "false") {
             		loginForm.doModal();
             	}
@@ -50,7 +49,7 @@ authentication = (function($) {
 
 	  	requestObj = {
             type: "POST",
-            url: _loginUrl + "/index",
+            url: _loginUrl,
             data: qstring,
             dataType: "json",
             cache: true,
@@ -61,6 +60,7 @@ authentication = (function($) {
 					// alert("success valid");
      //            	sessionStorage.setItem("donorDB_profile", JSON.stringify(response));
      //            	searchView.setRole(response.roleID);
+     // 				// close dlg here?
      //            }
      //            else {
      //            	alert("success invalid");
@@ -74,7 +74,7 @@ authentication = (function($) {
             }
         };	
 
-        //$.ajax(requestObj);
+        $.ajax(requestObj);
 	};
 
 	validateResponse = function(response) {

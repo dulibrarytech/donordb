@@ -1,18 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Login_model extends CI_Model 
+class loginModel extends CI_Model 
 {
 
     public function __construct() 
     {
         parent::__construct();
+
+        // $this->load->library("encryption/encrypt");
+        // $this->salt = $this->config->item("encryption_key");
+        // $this->load->driver('cache', array('adapter' => 'apc'));
     }
 
-    /**
-     * authenticates user via ldap or active directory based on username
-     * @param userName
-     * @param passWord
-     */
     public function authenticate($post) 
     {
     	if (!is_array($post) || empty($post)) 
