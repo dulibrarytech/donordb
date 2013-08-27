@@ -6,7 +6,9 @@
 class Phpsessions {
 
     public function __construct() {
+
         //ini_set('session.cookie_lifetime', 60 * 60 * 24 * 7); // 7 day lifespan
+        
         if(!isset($_SESSION))
         {
             session_start();

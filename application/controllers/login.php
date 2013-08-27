@@ -25,9 +25,10 @@ class Login extends CI_Controller {
 
                 $this->load->model("loginModel");
 
-                $profile = $this->loginModel->authenticate($this->input->post());
+                //$profile = $this->loginModel->authenticate($this->input->post());
+                $profile = array('isValid' => true, 'roleID' => 1);
 
-                echo json_encode($profile);
+                echo json_encode("test encode line");
 
                 break;
 
@@ -49,7 +50,6 @@ class Login extends CI_Controller {
 
     public function getSessionProfile() {
 
-        echo json_encode("get session profile...");
-        //echo json_encode($this->phpsessions->get("donorDB_profile"));
+        echo json_encode($this->phpsessions->get("donorDB_profile"));
     }
 }

@@ -98,6 +98,9 @@ searchView = (function($) {
 	setRole = function(roleID) {
 
 		// TODO switch roleID.  Add lists if necessary.
+		if(roleID != null && (typeof roleID === 'number')) {
+
+		}
 	};
 
 	resetSearch = function() {

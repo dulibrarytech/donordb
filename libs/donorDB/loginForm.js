@@ -81,8 +81,9 @@ loginForm = (function($) {
                 passWord = $( "#password" ).val();
             
             var loginData = {userName: userName, passWord: passWord};
+
             authentication.authenticate(loginData);
-            closeDlg();
+            //closeDlg();
           }
         }
        }
