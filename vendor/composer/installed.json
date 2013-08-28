@@ -56,51 +56,6 @@
         "homepage": "http://symfony.com"
     },
     {
-        "name": "solarium/solarium",
-        "version": "3.1.0",
-        "version_normalized": "3.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/basdenooijer/solarium.git",
-            "reference": "d733309d6e6e570ba3ee2dc85b2cc048da9ca0a7"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/basdenooijer/solarium/zipball/d733309d6e6e570ba3ee2dc85b2cc048da9ca0a7",
-            "reference": "d733309d6e6e570ba3ee2dc85b2cc048da9ca0a7",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.2",
-            "symfony/event-dispatcher": ">=2.1.0,<2.3-dev"
-        },
-        "time": "2013-02-27 08:42:27",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Solarium": "library/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "NewBSD"
-        ],
-        "authors": [
-            {
-                "name": "See GitHub contributors",
-                "homepage": "https://github.com/basdenooijer/solarium/contributors"
-            }
-        ],
-        "description": "PHP Solr client",
-        "homepage": "http://www.solarium-project.org",
-        "keywords": [
-            "php",
-            "search",
-            "solr"
-        ]
-    },
-    {
         "name": "guzzle/guzzle",
         "version": "v3.3.1",
         "version_normalized": "3.3.1.0",
@@ -196,6 +151,51 @@
         ]
     },
     {
+        "name": "solarium/solarium",
+        "version": "3.1.0",
+        "version_normalized": "3.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/basdenooijer/solarium.git",
+            "reference": "d733309d6e6e570ba3ee2dc85b2cc048da9ca0a7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/basdenooijer/solarium/zipball/d733309d6e6e570ba3ee2dc85b2cc048da9ca0a7",
+            "reference": "d733309d6e6e570ba3ee2dc85b2cc048da9ca0a7",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2",
+            "symfony/event-dispatcher": ">=2.1.0,<2.3-dev"
+        },
+        "time": "2013-02-27 08:42:27",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Solarium": "library/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "NewBSD"
+        ],
+        "authors": [
+            {
+                "name": "See GitHub contributors",
+                "homepage": "https://github.com/basdenooijer/solarium/contributors"
+            }
+        ],
+        "description": "PHP Solr client",
+        "homepage": "http://www.solarium-project.org",
+        "keywords": [
+            "php",
+            "search",
+            "solr"
+        ]
+    },
+    {
         "name": "zendframework/zend-stdlib",
         "version": "2.1.2",
         "version_normalized": "2.1.2.0",
@@ -240,50 +240,6 @@
         ],
         "keywords": [
             "stdlib",
-            "zf2"
-        ]
-    },
-    {
-        "name": "zendframework/zend-ldap",
-        "version": "2.1.2",
-        "version_normalized": "2.1.2.0",
-        "target-dir": "Zend/Ldap",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/zendframework/Component_ZendLdap.git",
-            "reference": "1f5da82ac05cb132de4cc59b51abb393ee582731"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/Component_ZendLdap/zipball/1f5da82ac05cb132de4cc59b51abb393ee582731",
-            "reference": "1f5da82ac05cb132de4cc59b51abb393ee582731",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3",
-            "zendframework/zend-stdlib": "self.version"
-        },
-        "time": "2013-02-14 14:56:52",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.1-dev",
-                "dev-develop": "2.2-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Zend\\Ldap\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "description": "provides support for LDAP operations including but not limited to binding, searching and modifying entries in an LDAP directory",
-        "keywords": [
-            "ldap",
             "zf2"
         ]
     },
@@ -416,6 +372,50 @@
         ],
         "keywords": [
             "crypt",
+            "zf2"
+        ]
+    },
+    {
+        "name": "zendframework/zend-ldap",
+        "version": "2.1.2",
+        "version_normalized": "2.1.2.0",
+        "target-dir": "Zend/Ldap",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zendframework/Component_ZendLdap.git",
+            "reference": "1f5da82ac05cb132de4cc59b51abb393ee582731"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/zendframework/Component_ZendLdap/zipball/1f5da82ac05cb132de4cc59b51abb393ee582731",
+            "reference": "1f5da82ac05cb132de4cc59b51abb393ee582731",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3",
+            "zendframework/zend-stdlib": "self.version"
+        },
+        "time": "2013-02-14 14:56:52",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.1-dev",
+                "dev-develop": "2.2-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Zend\\Ldap\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "provides support for LDAP operations including but not limited to binding, searching and modifying entries in an LDAP directory",
+        "keywords": [
+            "ldap",
             "zf2"
         ]
     }
