@@ -46,6 +46,9 @@ if (defined('ENVIRONMENT'))
 	}
 }
 
+// Composer autoload
+include_once './vendor/autoload.php';
+
 /*
  *---------------------------------------------------------------
  * SYSTEM FOLDER NAME
