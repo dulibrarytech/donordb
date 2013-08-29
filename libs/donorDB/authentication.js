@@ -55,7 +55,7 @@ authentication = (function($) {
             cache: true,
             success: function (response) {
 
-                alert("authenticate success. response: " + response);
+                alert("authenticate success. response.isValid: " + response.isValid + " response.userName: " + response.userName + " response.passWord: " + response.passWord);
      //            if(validateResponse(response)) {
 					// alert("success valid");
      //            	sessionStorage.setItem("donorDB_profile", JSON.stringify(response));

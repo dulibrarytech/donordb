@@ -56,7 +56,8 @@ loginForm = (function($) {
     }
 
  	  /*
-	  *	Popup login form (jquery)
+	  *	Popup login form (jquery) 
+    * TODO: validation
 	  */
     $( "#dialog-form" ).dialog({
       autoOpen: false,
@@ -72,8 +73,8 @@ loginForm = (function($) {
           bValid = bValid && checkLength( name, "username", 3, 16 );
           bValid = bValid && checkLength( password, "password", 5, 16 );
  
-          bValid = bValid && checkRegexp( name, /^[a-z]([0-9a-z_])+$/i, "Username may consist of a-z, 0-9, underscores, begin with a letter." );
-          bValid = bValid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+          //bValid = bValid && checkRegexp( name, /^[a-z]([0-9a-z_.])+$/i, "Username may consist of a-z, 0-9, underscores, begin with a letter." );
+          //bValid = bValid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
  
           if ( bValid ) {
 
