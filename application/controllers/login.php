@@ -6,6 +6,8 @@ class Login extends CI_Controller
     public function __construct() 
     {
         parent::__construct();
+
+        $this->load->helper('url');
     }
 
     /**
@@ -35,12 +37,13 @@ class Login extends CI_Controller
     }
 
     /**
-     * logs the user out of the system and deletes user session
+     * logs the user out of the system and deletes user session.  Reload homepage and re-auth
      */
     public function logout() 
     {
         $this->phpsessions->delete("donorDB_profile");
-        redirect("/");
+
+        redirect('search');
     }
 
     public function getSessionProfile() 

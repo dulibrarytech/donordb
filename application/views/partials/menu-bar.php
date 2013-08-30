@@ -19,7 +19,9 @@
 
             <li class="navbar-item"><a title="" href="<?php echo base_url();?>index.php/edit/addDonorView">Add Donor Info</a></li>
 
-            <li class="navbar-item" style="border: none"><a title="New Gift" href="<?php echo base_url();?>index.php/edit/addGiftView/1">Anonymous Gift</a></li>
+            <li class="navbar-item"><a title="New Gift" href="<?php echo base_url();?>index.php/edit/addGiftView/1">Anonymous Gift</a></li>
+
+            <li class="navbar-item" style="border: none"><a title="Logout session" href="<?php echo base_url();?>index.php/login/logout">Logout</a></li>
 
         </ul>
         <!--/section-->

@@ -55,19 +55,16 @@ authentication = (function($) {
             cache: true,
             success: function (response) {
 
-                alert("authenticate success. response.isValid: " + response.isValid + " response.userName: " + response.userName + " response.passWord: " + response.passWord);
-     //            if(validateResponse(response)) {
-					// alert("success valid");
-     //            	sessionStorage.setItem("donorDB_profile", JSON.stringify(response));
-     //            	searchView.setRole(response.roleID);
-     // 				// close dlg here?
-     //            }
-     //            else {
-     //            	alert("success invalid");
-     //            	sessionStorage.donorDB_profile = null;
-     //            	// MESSAGE 'Authentication failed'
-     //            	loginForm.resetForm();
-     //            }
+                if(validateResponse(response)) {
+                	sessionStorage.setItem("donorDB_profile", JSON.stringify(response));
+                	//searchView.setRole(response.roleID);
+     				loginForm.closeDlg();
+                }
+                else {
+                	sessionStorage.donorDB_profile = null;
+                	alert("Failed to authenticate " + response['userName']);
+                	loginForm.resetForm();
+                }
             },
             error: function ( textStatus, errorThrown ) {
                 alert( "authenticate error: " + errorThrown );
