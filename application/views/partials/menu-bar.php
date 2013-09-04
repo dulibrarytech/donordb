@@ -25,7 +25,7 @@
 
             <li class="navbar-item" style="border: none;"><a title="New Donations" href="#">New Donations</a></li>
 
-            <!--li class="navbar-item" style="border: none"><a title="Logout session" href="<?php //echo base_url();?>index.php/login/logout">Logout</a></li-->
+            <!---li class="navbar-item" style="border: none"><a title="Logout session" href="<?php //echo base_url();?>index.php/login/logout">Logout</a></li-->
 
         </ul>
         <!--/section-->

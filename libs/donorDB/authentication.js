@@ -11,6 +11,7 @@
 authentication = (function($) {
 
 	var validateSession,
+		validateLocalSession,
 		authenticate,
 		validateResponse,
 		setUserRole;
@@ -20,8 +21,6 @@ authentication = (function($) {
 	 * If the session is null or invalid, loads the login dialog
 	 */
 	validateSession = function() {
-	  	
-	  	searchView.initPage();
 
 	  	requestObj = {
             url: _loginUrl + "/getSessionProfile",
@@ -33,7 +32,7 @@ authentication = (function($) {
             		loginForm.doModal();
             	}
             	else {
-            		searchView.setRole(response.roleID);
+            		searchView.setRole(response);
             	}
             },
             error: function ( textStatus, errorThrown ) {
@@ -42,6 +41,12 @@ authentication = (function($) {
         };
 
 	  	$.ajax(requestObj);
+	};
+
+	validateLocalSession = function() {
+
+		var profile = JSON.parse(sessionStorage.getItem('donorDB_profile'));
+		return (profile != null && profile['isValid'] == true)
 	};
 
 	authenticate = function(loginData) {
@@ -58,7 +63,7 @@ authentication = (function($) {
 
                 if(validateResponse(response)) {
                 	sessionStorage.setItem("donorDB_profile", JSON.stringify(response));
-                	searchView.setRole(response.roleID);
+                	searchView.setRole(response);
      				loginForm.closeDlg();
                 }
                 else {
@@ -102,6 +107,9 @@ authentication = (function($) {
 		validateSession: function() {
 
 			validateSession();
+		},
+		validateLocalSession: function() {
+			validateLocalSession();
 		},
 		authenticate: function(loginData) {
 

@@ -13,10 +13,12 @@
  */
 searchView = (function($) {
 
+	var LOGOUT_PATH = "index.php/login/logout";
+
 	var initPage,
 		addEvents,
 		setRole,
-		setUsernameLabel,
+		setUserLabel,
 		resetSearch,
 		createDonationList,
 		createDonorTable,
@@ -99,22 +101,33 @@ searchView = (function($) {
 	};
 
 	// Set layout for user status.
-	setRole = function(roleID) {
+	setRole = function(sessionProfile) {
 
-		// TODO switch roleID.  Add lists if necessary.
-		if(roleID != null && (typeof roleID === 'number')) {
+		if(sessionProfile != null && sessionProfile['isValid'] == true) {
 
 			// Set user name string
-			$("#username-label").html("Welcome, " + sessionStorage.donorDB_profile['firstName'] + " " + sessionStorage.donorDB_profile['lastName']);
+			var name = { first:sessionProfile['firstName'], last:sessionProfile['lastName']};
+			setUserLabel(name);
 
-			// TODO Switch roleID 
-			
+			// TODO switch roleID.  Add lists if necessary.
+			if(sessionProfile['roleID'] != null && (typeof sessionProfile['roleID'] === 'number')) {
+
+				
+
+				// TODO Switch roleID 
+				
+			}
 		}
+		else
+			// logout?
+		
 	};
 
-	setUsernameLabel = function(username) {
+	// sets the user name string / adds logout link
+	// name = array first last
+	setUserLabel = function(name) {
 
-
+			$("#username-label").html("Welcome, " + name['first'] + " " + name['last'] + "&nbsp&nbsp&nbsp&nbsp<a href='" + LOGOUT_PATH + "'>Logout</a>");		
 	};
 
 	resetSearch = function() {
@@ -219,8 +232,8 @@ searchView = (function($) {
 		initPage: function() {	
 			initPage();
 		},
-		setRole: function(roleID) {
-			setRole(roleID);
+		setRole: function(sessionProfile) {
+			setRole(sessionProfile);
 		},
 		createDonorTable : function(tableData) {
 			createResultsTable(tableData);
@@ -231,8 +244,8 @@ searchView = (function($) {
 		createDonationList : function(tableData) {
 			createDonationList(tableData);
 		},
-		setUsernameLabel : function(username) {
-			setUsernameLabel(username);
+		setUserLabel : function(name) {
+			setUserLabel(name);
 		}
 	};
 

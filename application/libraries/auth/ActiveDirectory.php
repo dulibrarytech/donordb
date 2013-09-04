@@ -16,47 +16,48 @@ class ActiveDirectory
      */
     public function authenticate($userName, $passWord) 
     {
-        $adOptions = array(
-            'larry' => array(
-                'host'=>$this->primary,
-                'accountDomainName'=>$this->domain,
-                'baseDn'=>$this->baseDn,
-            ),
-            'curly' => array(
-                'host'=>$this->secondary,
-                'accountDomainName'=>$this->domain,
-                'baseDn'=>$this->baseDn,
-            ),
-            'moe' => array(
-                'host'=>$this->tertiary,
-                'accountDomainName'=>$this->domain,
-                'baseDn'=>$this->baseDn,
-            ),
-        );
+        // $adOptions = array(
+        //     'larry' => array(
+        //         'host'=>$this->primary,
+        //         'accountDomainName'=>$this->domain,
+        //         'baseDn'=>$this->baseDn,
+        //     ),
+        //     'curly' => array(
+        //         'host'=>$this->secondary,
+        //         'accountDomainName'=>$this->domain,
+        //         'baseDn'=>$this->baseDn,
+        //     ),
+        //     'moe' => array(
+        //         'host'=>$this->tertiary,
+        //         'accountDomainName'=>$this->domain,
+        //         'baseDn'=>$this->baseDn,
+        //     ),
+        // );
 
-        $ldap = new Zend\Ldap\Ldap();
+        // $ldap = new Zend\Ldap\Ldap();
 
-        foreach ($adOptions as $name => $options) 
-        {
-            $ldap->setOptions($options);
+        // foreach ($adOptions as $name => $options) 
+        // {
+        //     $ldap->setOptions($options);
         
-            try 
-            {
-                $ldap->bind($userName, $passWord);
-                return TRUE;
-            } 
-            catch (Zend\Ldap\Exception\LdapException $zle) 
-            {
-                if ($zle->getCode() === Zend\Ldap\Exception\LdapException::LDAP_X_DOMAIN_MISMATCH) 
-                {
-                    continue;
-                } 
-                else 
-                {
-                    log_message("error", $zle->getMessage());
-                    return FALSE;
-                }
-            }
-        }
+        //     try 
+        //     {
+        //         $ldap->bind($userName, $passWord);
+        //         return TRUE;
+        //     } 
+        //     catch (Zend\Ldap\Exception\LdapException $zle) 
+        //     {
+        //         if ($zle->getCode() === Zend\Ldap\Exception\LdapException::LDAP_X_DOMAIN_MISMATCH) 
+        //         {
+        //             continue;
+        //         } 
+        //         else 
+        //         {
+        //             log_message("error", $zle->getMessage());
+        //             return FALSE;
+        //         }
+        //     }
+        // }
+        return TRUE;
     }
 } // end ad class

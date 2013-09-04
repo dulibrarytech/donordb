@@ -25,16 +25,20 @@ class search extends CI_Controller {
 	 */
 	public function index()
 	{
-		$userProfile = $this->phpsessions->get("donorDB_profile");
+		// $userProfile = $this->phpsessions->get("donorDB_profile");
 
-    	if($userProfile == null || $userProfile['isValid'] === false)
-    		$data['pageLoader'] = "<script>authentication.validateSession();</script>";
-    	else
-    		$data['pageLoader'] = "<script>searchView.initPage();</script>";
-    		// $data['pageLoader'] = "<script>
-    		// 							searchView.initPage();
-    		// 							searchView.setRole(sessionStorage.roleID);
-    		// 						</script>";
+  //   	if($userProfile == null || $userProfile['isValid'] === false)
+  //   		$data['pageLoader'] = "<script>authentication.validateSession();</script>";
+  //   	else
+  //   		$data['pageLoader'] = "<script>searchView.initPage();</script>";
+  //   		// $data['pageLoader'] = "<script>
+  //   		// 							searchView.initPage();
+  //   		// 							searchView.setRole(sessionStorage.getItem('donorDB_profile')); 
+  //   		// 						</script>";
+		$data['pageLoader'] = "<script>
+									searchView.initPage();
+									authentication.validateSession();
+								</script>";
 
     	$this->load->view('lookup-view', $data);
 	}
