@@ -21,7 +21,11 @@
 
             <li class="navbar-item"><a title="New Gift" href="<?php echo base_url();?>index.php/edit/addGiftView/1">Anonymous Gift</a></li>
 
-            <li class="navbar-item" style="border: none"><a title="Logout session" href="<?php echo base_url();?>index.php/login/logout">Logout</a></li>
+            <li class="navbar-item" id="settings-link"><a title="Settings" href="#">Settings</a></li> <!-- set 'style: border none' from jquery when 'view list' link is invisible -->
+
+            <li class="navbar-item" style="border: none;"><a title="New Donations" href="#">New Donations</a></li>
+
+            <!--li class="navbar-item" style="border: none"><a title="Logout session" href="<?php //echo base_url();?>index.php/login/logout">Logout</a></li-->
 
         </ul>
         <!--/section-->

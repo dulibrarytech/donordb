@@ -16,7 +16,9 @@ searchView = (function($) {
 	var initPage,
 		addEvents,
 		setRole,
+		setUsernameLabel,
 		resetSearch,
+		createDonationList,
 		createDonorTable,
 		createGiftTable,
 		toggleResultsView;
@@ -32,6 +34,8 @@ searchView = (function($) {
 		$("#search_return").hide();
 		$("#table-section").hide();
 		$("#post-search-buttons").hide();
+
+		$("#list-section").hide(); 
 
 		addEvents();
 	};
@@ -100,12 +104,27 @@ searchView = (function($) {
 		// TODO switch roleID.  Add lists if necessary.
 		if(roleID != null && (typeof roleID === 'number')) {
 
+			// Set user name string
+			$("#username-label").html("Welcome, " + sessionStorage.donorDB_profile['firstName'] + " " + sessionStorage.donorDB_profile['lastName']);
+
+			// TODO Switch roleID 
+			
 		}
+	};
+
+	setUsernameLabel = function(username) {
+
+
 	};
 
 	resetSearch = function() {
 
 		window.location.href = _searchUrl;
+	};
+
+	createDonationList = function(tableData) {
+
+
 	};
 
 	createDonorTable = function(tableData) {
@@ -208,6 +227,12 @@ searchView = (function($) {
 		},
 		createGiftTable : function(tableData) {
 			createGiftTable(tableData);
+		},
+		createDonationList : function(tableData) {
+			createDonationList(tableData);
+		},
+		setUsernameLabel : function(username) {
+			setUsernameLabel(username);
 		}
 	};
 

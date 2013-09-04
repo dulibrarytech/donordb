@@ -1,27 +1,33 @@
 
-  	$(function() {
-    	$( "#fromDate" ).datepicker({ 
+$(function() {
+    $( "#fromDate" ).datepicker({ 
 
-    		altField: "#fromDate", 
-    		altFormat: "yy-mm-dd" 
-    	});
+    	altField: "#fromDate", 
+    	altFormat: "yy-mm-dd" 
+    });
 
 
-    	$( "#toDate" ).datepicker({
+    $( "#toDate" ).datepicker({
 
-    		altField: "#toDate", 
-    		altFormat: "yy-mm-dd"
-    	});
+    	altField: "#toDate", 
+    	altFormat: "yy-mm-dd"
+    });
 
-        $( "#gift-date-box" ).datepicker({
+    $( "#gift-date-box" ).datepicker({
 
-            altField: "#gift-date-box", 
-            altFormat: "yy-mm-dd"
-        });
+        altField: "#gift-date-box", 
+        altFormat: "yy-mm-dd"
+    });
 
-        $( "#edit-date-box" ).datepicker({
+    $( "#edit-date-box" ).datepicker({
 
-            altField: "#edit-date-box", 
-            altFormat: "yy-mm-dd"
-        });
-  	});
+        altField: "#edit-date-box", 
+        altFormat: "yy-mm-dd"
+    });
+});
+
+
+$(function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+});

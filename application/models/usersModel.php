@@ -73,9 +73,9 @@ class usersModel extends CI_Model
       			{
       				$profile['isValid'] = TRUE;
 
-      				$profile['userID'] = $results->userID;
+      				$profile['userID'] = (int)$results->userID;
       				$profile['userName'] = $results->username;
-      				$profile['roleID'] = $results->roleID;
+      				$profile['roleID'] = (int)$results->roleID;
       				$profile['firstName'] = $results->firstname;
       				$profile['lastName'] = $results->lastname;
       				$profile['email'] = $results->email;

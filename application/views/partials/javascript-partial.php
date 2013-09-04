@@ -8,7 +8,7 @@
 <script src="<?php echo base_url();?>libs/donorDB/config.urls.js"></script>
 <script src="<?php echo base_url();?>libs/donorDB/loginForm.js"></script>
 <script src="<?php echo base_url();?>libs/donorDB/utils.js"></script>
-<script src="<?php echo base_url();?>libs/donorDB/tables.js"></script>
+<!--script src="<?php echo base_url();?>libs/donorDB/tables.js"></script-->
 <script src="<?php echo base_url();?>libs/donorDB/authentication.js"></script>
 
 <!-- Page Load Scripts -->
@@ -16,3 +16,5 @@
 
 <!-- External Libs -->
 <script src="<?php echo base_url();?>libs/dateUtils.js"></script>
+
+

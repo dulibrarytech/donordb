@@ -14,6 +14,7 @@
 body {
 
 	background-color: #e5e3e1;
+	/*overflow: hidden;*/
 }
 
 label {
@@ -108,7 +109,7 @@ table {
 .navbar-item {
 
 	border-right:1px solid #D0C8AC;
-	width: 140px;
+	/*width: 140px;*/
 	text-align: center;
 }
 
@@ -118,6 +119,7 @@ table {
 	padding: 20px;
 	font-size: 19px;
 	font-weight: bold;
+	width: 750px;
 }
 
 /* Main content area */
@@ -302,6 +304,48 @@ table {
   	color: #515155;
 }
 
+.donor-list-item {
+
+	width: 538px;
+}
+
+
+/* List */
+/*.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+	border: 1px solid #444444;
+	background: #222222 url(images/ui-bg_highlight-soft_35_222222_1x100.png) 50% 50% repeat-x;
+	font-weight: normal;
+	color: #eeeeee;
+}
+.ui-state-default a,
+.ui-state-default a:link,
+.ui-state-default a:visited {
+	color: #eeeeee;
+	text-decoration: none;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+	border: 1px solid #444444;
+	background: #222222 url(images/ui-bg_highlight-soft_35_222222_1x100.png) 50% 50% repeat-x;
+	font-weight: normal;
+	color: #eeeeee;
+}
+.ui-state-default a,
+.ui-state-default a:link,
+.ui-state-default a:visited {
+	color: #eeeeee;
+	text-decoration: none;
+}
+
+.ui-state-default .ui-icon {
+	background-image: url(images/ui-icons_cccccc_256x240.png);
+}*/
+
+
 
 /* IDs */
 #logo {
@@ -371,6 +415,11 @@ table {
 	margin-bottom: 5px;
 }
 
+#username-label {
+
+	font-size: 12px;
+}
+
 #search-type { 
 
 	font-weight: bold; 
@@ -395,7 +444,36 @@ table {
 	font-family: "Times New Roman", Times, serif;
 }
 
+#list-section {
 
+	height: 260px;
+	width: 600px;
+	overflow: auto;
+	margin-left: 175px;
+}
+
+#sortable { 
+
+	list-style-type: none; 
+	margin: 0; 
+	padding: 0; 
+	width: 60%; 
+}
+
+#sortable li { 
+	
+	margin: 0 3px 3px 3px; 
+	padding: 0.4em; 
+	padding-left: 1.5em; 
+	font-size: 1.4em; 
+	height: 18px; 
+}
+
+#sortable li span { 
+
+	position: absolute; 
+	margin-left: -1.3em; 
+}
 
 
 

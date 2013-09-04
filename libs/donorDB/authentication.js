@@ -21,6 +21,8 @@ authentication = (function($) {
 	 */
 	validateSession = function() {
 	  	
+	  	searchView.initPage();
+
 	  	requestObj = {
             url: _loginUrl + "/getSessionProfile",
             dataType: "json",
@@ -40,7 +42,6 @@ authentication = (function($) {
         };
 
 	  	$.ajax(requestObj);
-	  	searchView.initPage();
 	};
 
 	authenticate = function(loginData) {
@@ -57,7 +58,7 @@ authentication = (function($) {
 
                 if(validateResponse(response)) {
                 	sessionStorage.setItem("donorDB_profile", JSON.stringify(response));
-                	//searchView.setRole(response.roleID);
+                	searchView.setRole(response.roleID);
      				loginForm.closeDlg();
                 }
                 else {
