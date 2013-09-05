@@ -46,6 +46,7 @@ authentication = (function($) {
 	validateLocalSession = function() {
 
 		var profile = JSON.parse(sessionStorage.getItem('donorDB_profile'));
+
 		return (profile != null && profile['isValid'] == true)
 	};
 
@@ -63,7 +64,7 @@ authentication = (function($) {
 
                 if(validateResponse(response)) {
                 	sessionStorage.setItem("donorDB_profile", JSON.stringify(response));
-                	searchView.setRole(response);
+                	searchView.initSession();
      				loginForm.closeDlg();
                 }
                 else {
@@ -105,11 +106,10 @@ authentication = (function($) {
 	return {
 
 		validateSession: function() {
-
 			validateSession();
 		},
 		validateLocalSession: function() {
-			validateLocalSession();
+			return validateLocalSession();
 		},
 		authenticate: function(loginData) {
 

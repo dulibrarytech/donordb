@@ -42,7 +42,7 @@ class Login extends CI_Controller
     public function logout() 
     {
         $this->phpsessions->delete("donorDB_profile");
-
+        log_message("info", "logout: " . $userName);
         redirect('search');
     }
 

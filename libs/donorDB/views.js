@@ -13,9 +13,10 @@
  */
 searchView = (function($) {
 
-	var LOGOUT_PATH = "index.php/login/logout";
+	var LOGOUT_PATH = "login/logout";
 
 	var initPage,
+		initSession,
 		addEvents,
 		setRole,
 		setUserLabel,
@@ -41,6 +42,17 @@ searchView = (function($) {
 
 		addEvents();
 	};
+
+	initSession = function() {
+
+		if(authentication.validateLocalSession())
+		{
+			var profile = JSON.parse(sessionStorage.getItem('donorDB_profile'));
+
+			setRole(profile.roleID);
+			setUserLabel(profile.firstName,profile.lastName);
+		}
+	}
 
 	addEvents = function() {
 
@@ -101,33 +113,15 @@ searchView = (function($) {
 	};
 
 	// Set layout for user status.
-	setRole = function(sessionProfile) {
+	setRole = function(roleID) {
 
-		if(sessionProfile != null && sessionProfile['isValid'] == true) {
-
-			// Set user name string
-			var name = { first:sessionProfile['firstName'], last:sessionProfile['lastName']};
-			setUserLabel(name);
-
-			// TODO switch roleID.  Add lists if necessary.
-			if(sessionProfile['roleID'] != null && (typeof sessionProfile['roleID'] === 'number')) {
-
-				
-
-				// TODO Switch roleID 
-				
-			}
-		}
-		//else
-			// logout?
 		
 	};
 
-	// sets the user name string / adds logout link
-	// name = array first last
-	setUserLabel = function(name) {
+	// Sets the user name string / adds logout link
+	setUserLabel = function(fname,lname) {
 
-			$("#username-label").html("Welcome, " + name['first'] + " " + name['last'] + "&nbsp&nbsp&nbsp&nbsp<a href='" + LOGOUT_PATH + "'>Logout</a>");		
+		$("#username-label").html("Welcome, " + fname + " " + lname + "&nbsp&nbsp&nbsp&nbsp<a href='" + LOGOUT_PATH + "'>Logout</a>");		
 	};
 
 	resetSearch = function() {
@@ -232,8 +226,8 @@ searchView = (function($) {
 		initPage: function() {	
 			initPage();
 		},
-		setRole: function(sessionProfile) {
-			setRole(sessionProfile);
+		initSession: function() {
+			initSession();
 		},
 		createDonorTable : function(tableData) {
 			createResultsTable(tableData);
@@ -244,8 +238,8 @@ searchView = (function($) {
 		createDonationList : function(tableData) {
 			createDonationList(tableData);
 		},
-		setUserLabel : function(name) {
-			setUserLabel(name);
+		setUserLabel : function(fname,lname) {
+			setUserLabel(fname,lname);
 		}
 	};
 

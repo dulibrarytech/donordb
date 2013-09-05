@@ -84,7 +84,6 @@ loginForm = (function($) {
             var loginData = {userName: userName, passWord: passWord};
 
             authentication.authenticate(loginData);
-            //closeDlg();
           }
         }
        }
