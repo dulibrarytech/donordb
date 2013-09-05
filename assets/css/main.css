@@ -120,6 +120,7 @@ table {
 	font-size: 19px;
 	font-weight: bold;
 	width: 400px;
+	margin-left: 0px;
 }
 
 /* Main content area */
@@ -418,6 +419,8 @@ table {
 #username-label {
 
 	font-size: 12px;
+	text-align: right;
+	margin-right: 15px;
 }
 
 #search-type { 

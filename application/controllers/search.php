@@ -21,20 +21,10 @@ class search extends CI_Controller {
 
 	/*
 	 * Loads Search View 
-	 * If session is null or invalid, load the validator.  If session present, init and set the role here 
+	 * If 
 	 */
 	public function index()
 	{
-		// $userProfile = $this->phpsessions->get("donorDB_profile");
-
-  //   	if($userProfile == null || $userProfile['isValid'] === false)
-  //   		$data['pageLoader'] = "<script>authentication.validateSession();</script>";
-  //   	else
-  //   		$data['pageLoader'] = "<script>searchView.initPage();</script>";
-  //   		// $data['pageLoader'] = "<script>
-  //   		// 							searchView.initPage();
-  //   		// 							searchView.setRole(sessionStorage.getItem('donorDB_profile')); 
-  //   		// 						</script>";
 		$data['pageLoader'] = "<script>
 									searchView.initPage();
 									authentication.validateSession();
@@ -45,7 +35,6 @@ class search extends CI_Controller {
 
 	public function recordSearch()
 	{
-
 		switch($this->input->server("REQUEST_METHOD")) 
 		{
 

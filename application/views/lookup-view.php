@@ -51,7 +51,7 @@
 		<!-- Menu Bar -->
 		<?php $this->load->view("partials/menu-bar.php"); ?>
 
-		<table><tr>
+		<table style="width: 100%"><tr>
 			<td>
 				<div class="container generic-label"></div>	
 			</td>
@@ -153,7 +153,7 @@
 	
 	<!--script>authentication.validateSession();</script-->
 
-	<!-- Run page loader for requested page (set in CI controller) -->
+	<!-- Run page loader for requested page -->
 	<?php echo $pageLoader; ?>
 	
 </footer>

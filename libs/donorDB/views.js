@@ -118,7 +118,7 @@ searchView = (function($) {
 				
 			}
 		}
-		else
+		//else
 			// logout?
 		
 	};
