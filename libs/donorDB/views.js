@@ -24,6 +24,7 @@ searchView = (function($) {
 		createDonationList,
 		createDonorTable,
 		createGiftTable,
+		showNewDonationList,
 		toggleResultsView;
 
 	initPage = function() {
@@ -39,6 +40,9 @@ searchView = (function($) {
 		$("#post-search-buttons").hide();
 
 		$("#list-section").hide(); 
+
+		$("#new-donations-link").hide();
+		$("#settings-link").css("border", "none");
 
 		addEvents();
 	};
@@ -115,7 +119,28 @@ searchView = (function($) {
 	// Set layout for user status.
 	setRole = function(roleID) {
 
-		
+		switch(roleID)
+		{
+			case 1: 	// Acquisitions
+				
+				break;
+
+			case 2: 	// Admin
+
+				$("#new-donations-link").hide();
+				$("#settings-link").css("border-right", "1px solid #D0C8AC");
+				
+				break;
+
+			case 3: 	// External Relations
+
+				
+				break;
+
+			default:
+				
+				break;
+		}
 	};
 
 	// Sets the user name string / adds logout link
@@ -127,6 +152,14 @@ searchView = (function($) {
 	resetSearch = function() {
 
 		window.location.href = _searchUrl;
+	};
+
+	showNewDonationList = function() {
+
+		var roletest = authentication.getUserRole();
+		alert("showNewDonationList: role is: " + roletest);
+		//if(authentication.getUserRole() == 2)
+		//utils.getNewDonationList(createDonationList);
 	};
 
 	createDonationList = function(tableData) {
@@ -240,6 +273,9 @@ searchView = (function($) {
 		},
 		setUserLabel : function(fname,lname) {
 			setUserLabel(fname,lname);
+		},
+		showNewDonationList: function() {
+			showNewDonationList();
 		}
 	};
 

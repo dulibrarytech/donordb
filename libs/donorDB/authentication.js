@@ -14,7 +14,8 @@ authentication = (function($) {
 		validateLocalSession,
 		authenticate,
 		validateResponse,
-		setUserRole;
+		setUserRole,
+		getUserRole;
 
 	/*   
 	 * Runs initPage().  If session active and valid, will then run setRole() on the page based on the session roleID.
@@ -32,7 +33,7 @@ authentication = (function($) {
             		loginForm.doModal();
             	}
             	else {
-            		searchView.setRole(response);
+            		searchView.initSession();
             	}
             },
             error: function ( textStatus, errorThrown ) {
@@ -99,8 +100,15 @@ authentication = (function($) {
 	  	}
 	  	else {
 
-	  		searchView.setRole(sessionStorage.roleID);
+	  		searchView.setRole(userProfile.roleID);
 	  	}
+	};
+
+	getUserRole = function() {
+
+		var profile = JSON.parse(sessionStorage.getItem('donorDB_profile'));
+
+		return profile.roleID;
 	};
 
 	return {
@@ -112,8 +120,13 @@ authentication = (function($) {
 			return validateLocalSession();
 		},
 		authenticate: function(loginData) {
-
 			authenticate(loginData);
+		},
+		setUserRole: function() {
+			setUserRole();
+		},
+		getUserRole: function() {
+			return getUserRole();
 		}
 	};
 
