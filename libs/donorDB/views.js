@@ -127,7 +127,7 @@ searchView = (function($) {
 
 			case 2: 	// Admin
 
-				$("#new-donations-link").hide();
+				$("#new-donations-link").show();
 				$("#settings-link").css("border-right", "1px solid #D0C8AC");
 				
 				break;

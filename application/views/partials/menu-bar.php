@@ -23,7 +23,7 @@
 
             <li class="navbar-item" id="settings-link"><a title="Settings" href="#">Settings</a></li> <!-- call controller to  -->
 
-            <li class="navbar-item" id="new-donations-link" style="border: none;" onclick="searchView.showNewDonationList();"><a title="New Donations" href="#">New Donations</a></li>
+            <li class="navbar-item" id="new-donations-link" style="border: none;"><a title="New Donations" href="#" onclick="searchView.showNewDonationList();">New Donations</a></li>
 
             <!---li class="navbar-item" style="border: none"><a title="Logout session" href="<?php //echo base_url();?>index.php/login/logout">Logout</a></li-->
 

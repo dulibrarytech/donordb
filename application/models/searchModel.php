@@ -311,6 +311,11 @@ class searchModel extends CI_Model
      		return $titleInfo;
    	}
 
+    public function getAllNewDonations()
+    {
+        return "In search model";
+    }
+
     public function getTitleID($titleText)
     {
         $ID = 0;

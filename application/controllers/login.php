@@ -37,12 +37,16 @@ class Login extends CI_Controller
     }
 
     /**
-     * logs the user out of the system and deletes user session.  Reload homepage and re-auth
+     * Log the user out of the system and delete the user session.  Reload homepage and re-auth
      */
     public function logout() 
     {
-        $this->phpsessions->delete("donorDB_profile");
+        // Log the logout
+        $profile = $this->phpsessions->get("donorDB_profile");
+        $userName = $profile['userName'];
         log_message("info", "logout: " . $userName);
+
+        $this->phpsessions->delete("donorDB_profile");
         redirect('search');
     }
 

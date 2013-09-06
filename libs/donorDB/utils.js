@@ -26,6 +26,7 @@ utils = (function($) {
 		getCurrentDate,
 		getTitleArray,
 		getGiftDatesForActiveDonor,
+		getNewDonationList,
 		setActiveGift;
 
 	doAjax = function(ajaxObj) {
@@ -284,6 +285,25 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
+	getNewDonationList = function(callback) {
+
+		requestObj = {
+
+			type: "POST", 
+			url: _searchUrl + '/queryDatabaseNewDonations',
+			dataType: "json",
+			cache: true,
+			success: function(response) {
+				callback(response);
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
+
+		doAjax(requestObj);
+	};
+
 	setActiveGift = function(giftID,callback) {
 
 		requestObj = {
@@ -349,6 +369,9 @@ utils = (function($) {
 		},
 		getGiftDatesForActiveDonor: function(callback) {
 			getGiftDatesForActiveDonor(callback);
+		},
+		getNewDonationList: function(callback) {
+			getNewDonationList(callback);
 		},
 		setActiveGift: function(giftID, callback) {
 			setActiveGift(giftID,callback);

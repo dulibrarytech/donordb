@@ -94,6 +94,11 @@ class search extends CI_Controller {
 		echo json_encode($this->searchModel->getAllTitles());
 	}
 
+	public function queryDatabaseNewDonations()
+	{
+		echo json_encode($this->searchModel->getAllNewDonations());
+	}
+
 	public function queryDatabaseGiftData($giftID = null)
 	{
 		if($giftID == null)
