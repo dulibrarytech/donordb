@@ -23,7 +23,7 @@ class search extends CI_Controller {
 	 * Loads Search View 
 	 * If 
 	 */
-	public function index()
+	public function index($runScripts = true)
 	{
 		$data['pageLoader'] = "<script>
 									searchView.initPage();

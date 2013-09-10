@@ -53,7 +53,7 @@
 
 		<table style="width: 100%"><tr>
 			<td>
-				<div class="container generic-label"></div>	
+				<div class="container generic-label" id="page-label"></div>	
 			</td>
 			<td align="right" style="text-align: right;">
 				<div id="username-label"></div>
@@ -87,6 +87,8 @@
 			</div>
 
 		</form>
+
+		<div class="container generic-label" id="alert-section-label"></div>
 
 		<!-- Results Table Section -->
 		<div id="table-section">

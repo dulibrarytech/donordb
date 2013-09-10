@@ -74,15 +74,12 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
+	// For menu onclick event.  Currently not in use
 	showNewDonationList = function() {
 
 		if(authentication.getUserRole() == 2)  {
 
-			/* Check and see if the current page is 'lookup-view' */
-			var page = viewUtils.getPage();
-			alert("page: " + page);
-
-			//getNewDonationList(searchView.createNewDonationList);
+			// Show list or table
 		}		
 	};
 

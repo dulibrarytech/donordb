@@ -32,16 +32,12 @@ searchView = (function($) {
 		$(".pre-scrollable").css("max-height", "315px");
 		$("#table-section").css("height", "405px");
 
-		$(".generic-label").text("Search Records");
+		$("#page-label").text("Search Records");
 
 		$("#search_return").hide();
 		$("#table-section").hide();
 		$("#post-search-buttons").hide();
-
-		$("#list-section").hide(); 
-
-		$("#new-donations-link").hide();
-		$("#settings-link").css("border", "none");
+		$("#alert-section-label").hide();
 
 		addEvents();
 	};
@@ -122,17 +118,30 @@ searchView = (function($) {
 		{
 			case 1: 	// Acquisitions
 				
+				
+				// TODO: Display any kind of message or task list in the table section
+
 				break;
 
 			case 2: 	// Admin
 
-				$("#new-donations-link").show();
-				$("#settings-link").css("border-right", "1px solid #D0C8AC");
+				$(".content-window").css("height", "700px");
+				$("#table-section").css("height", "200px");
+				$("#table-section").show();
+				$("#alert-section-label").text("New Donations");
+				$("#alert-section-label").show();
+
+				utils.getNewDonationList(searchView.createNewDonationList);
 				
 				break;
 
 			case 3: 	// External Relations
 
+				// $(".content-window").css("height", "625px");
+				// $("#table-section").css("height", "200px");
+				// $("#table-section").show();
+				
+				// utils.getTypedLetterRequestList(searchView.createNewDonationList);
 				
 				break;
 
@@ -185,7 +194,7 @@ searchView = (function($) {
 
 		results += '</table>';
 
-		toggleResultsView(false);
+		//toggleResultsView(false);
 		$("#table-header").html("<thead> <th class='span1'><!--SPACE--></th> <th class='span2'>Gift Date</th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
 		$("#table-content").html(results);
 	};
@@ -314,7 +323,7 @@ browseDonorsView = (function($) {
 		$(".content-window").css("height", "710px");
 		$(".pre-scrollable").css("max-height", "420px");
 
-		$(".generic-label").text("Donor Listing");
+		$("#page-label").text("Donor Listing");
 
 		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
 
@@ -380,7 +389,7 @@ editGiftView = (function($) {
 
 		$(".content-window").css("height", "600px");
 
-		$(".generic-label").text("View / Edit Gift");
+		$("#page-label").text("View / Edit Gift");
 
 		$('#gift_submit_button').html("Update");
 
@@ -544,9 +553,9 @@ addGiftView = (function($) {
 
 	initPage = function() {
 
-		$(".content-window").css("height", "600px");
+		$(".content-window").css("height", "630px");
 
-		$(".generic-label").text("Add a Gift");
+		$("#page-label").text("Add a Gift");
 		$('#gift-date-box').attr('value', dateUtils.getCurrentDate());
 
 		$('#gift_submit_button').html("Add Gift");
@@ -652,13 +661,13 @@ addNewDonorView = (function($) {
 
 		if(anonymous == 1) {
 
-			$(".generic-label").text("Add Anonymous Donor Info");
+			$("#page-label").text("Add Anonymous Donor Info");
 			$("#lower_well").hide();
 			$(".content-window").css("height", "555px");
 		}		
 		else {
 
-			$(".generic-label").text("Add New Donor Info");
+			$("#page-label").text("Add New Donor Info");
 			$(".content-window").css("height", "740px");
 		}
 			
@@ -874,7 +883,7 @@ editDonorView = (function($) {
 
 		$(".content-window").css("height", "740px");
 
-		$(".generic-label").text("View / Edit Donor Info");
+		$("#page-label").text("View / Edit Donor Info");
 
 		$("#add_info_message").hide();
 		$("#title-edit-box").hide();

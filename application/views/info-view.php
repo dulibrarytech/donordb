@@ -50,7 +50,7 @@
 		<!-- Menu Bar -->
 		<?php $this->load->view("partials/menu-bar.php"); ?>
 
-		<div class="container generic-label"></div>	
+		<div class="container generic-label" id="page-label"></div>	
 
 		<form id="donor-input-form" method="post">
 			<div class="well donor-info-form-section" id="upper_well">  
