@@ -313,7 +313,37 @@ class searchModel extends CI_Model
 
     public function getAllNewDonations()
     {
-        return "In search model";
+        $newDonations = array();
+        $index = 0;
+
+        $this->db->trans_start();
+        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorgifts.donorID, tbl_donorinfo.Organization, tbl_donorinfo.FirstName, tbl_donorinfo.LastName');
+        $this->db->from('tbl_donorgifts');
+        $this->db->join('tbl_donorinfo', 'tbl_donorgifts.donorID = tbl_donorinfo.donorID', 'inner');
+        $this->db->where('tbl_donorgifts.letter', 1);
+        $this->db->where('tbl_donorgifts.important !=', 1);
+        $this->db->order_by("dateOfGift", "desc");
+        $query = $this->db->get();
+        $this->db->trans_complete();
+
+        if ($query->num_rows() > 0)
+        {
+            foreach ($query->result() as $results)
+            {
+                $newDonations[$index]['giftID']       = $results->giftsID;
+                $newDonations[$index]['giftDate']     = $this->truncateDateString($results->dateOfGift); 
+                $newDonations[$index]['org']          = $results->Organization;
+                $newDonations[$index]['donorID']      = $results->donorID;
+                $newDonations[$index]['firstName']    = $results->FirstName;
+                $newDonations[$index]['lastName']     = $results->LastName;
+
+                $index++;
+            }
+        }
+        else
+            $newDonations = "No new donations found.";
+
+        return $newDonations;
     }
 
     public function getTitleID($titleText)
@@ -391,7 +421,7 @@ class searchModel extends CI_Model
                 {
                     $giftInfo['giftQuantity']     = $result->numberOfGifts;
                     $giftInfo['giftDescription']  = $result->giftDescription1;
-                    $giftInfo['giftDate']         = $result->dateOfGift;
+                    $giftInfo['giftDate']         = $this->truncateDateString($result->dateOfGift); 
                     $giftInfo['letterFlag']       = $result->letter;
                     $giftInfo['importantFlag']    = $result->important;
                 }

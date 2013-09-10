@@ -19,6 +19,7 @@ utils = (function($) {
 		submitDonorEdit,
 		submitGiftEdit,
 		submitNewTitle,
+		showNewDonationList,
 		getDonorDataArray,
 		getActiveDonorData,
 		getGiftData,
@@ -71,6 +72,18 @@ utils = (function($) {
 		};
 
 		doAjax(requestObj);
+	};
+
+	showNewDonationList = function() {
+
+		if(authentication.getUserRole() == 2)  {
+
+			/* Check and see if the current page is 'lookup-view' */
+			var page = viewUtils.getPage();
+			alert("page: " + page);
+
+			//getNewDonationList(searchView.createNewDonationList);
+		}		
 	};
 
 	submitSearch = function(callback,type) {
@@ -348,6 +361,9 @@ utils = (function($) {
 		},
 		submitNewTitle: function(title,callback) {
 			submitNewTitle(title,callback);
+		},
+		showNewDonationList: function() {
+			showNewDonationList();
 		},
 		getDonorDataArray: function(callback) {
 			getDonorDataArray(callback);

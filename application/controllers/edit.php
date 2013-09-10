@@ -337,4 +337,10 @@ class edit extends CI_Controller {
            $message = "gift data set";
       }
   }
+
+  public function generateLetter($giftID)
+  {
+
+      
+  }
 }

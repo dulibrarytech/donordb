@@ -83,6 +83,12 @@ table {
 	border-bottom-color:white!important;
 }
 
+/* Link without an href attribute */
+#new-donations-link a:not([href]) {
+
+	cursor: pointer;
+}
+
 .bannersNav a {
 	
 	color: #000000;

@@ -10,6 +10,8 @@
 
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery-ui.css" />
 
+	<meta name="page" content="info-view">
+
 	<!-- Positioning -->
 	<style>
 		#add_info_button 			{ margin-left: -7px; margin-top: -10px; }

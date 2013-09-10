@@ -21,10 +21,9 @@ searchView = (function($) {
 		setRole,
 		setUserLabel,
 		resetSearch,
-		createDonationList,
+		createNewDonationList,
 		createDonorTable,
 		createGiftTable,
-		showNewDonationList,
 		toggleResultsView;
 
 	initPage = function() {
@@ -107,7 +106,7 @@ searchView = (function($) {
 
 	    $("#search_return").click(function() { 
 
-	    	toggleResultsView();
+	    	toggleResultsView(true);
 	    });
 
 	    $("#search_new").click(function() { 
@@ -154,17 +153,41 @@ searchView = (function($) {
 		window.location.href = _searchUrl;
 	};
 
-	showNewDonationList = function() {
+	createNewDonationList = function(tableData) {
 
-		var roletest = authentication.getUserRole();
-		alert("showNewDonationList: role is: " + roletest);
-		//if(authentication.getUserRole() == 2)
-		//utils.getNewDonationList(createDonationList);
-	};
+		var results = '<table class="table table-bordered table-striped">'; 
 
-	createDonationList = function(tableData) {
+		if(typeof tableData == "object") {
 
+			$.each(tableData, function (key, value) {
+				
+				results += '<tr>';
+				results += '<td class="span1" style="text-align: center"> <a href="' + _editUrl + '/editGiftView/' + value.donorID + '/' + value.giftsID +'">Edit</a> </td>';
 
+				results += '<td class="span2">' + value.giftDate + '</td>';
+
+				if(value.lastName == "" || value.lastName == null)
+					results += '<td class="span4">' + value.org + '</td>';
+				else
+					results += '<td class="span4">' + value.lastName + '</td>';
+
+				results += '<td class="span4">' + value.firstName + '</td>';
+
+				results += '<td style="text-align: center"> <a href="' + _editUrl + '/generateLetter/' + value.giftID + '">Letter</a> </td>';
+				results += '</tr>';
+			} );
+		}	
+		else if(typeof tableData == "string") {
+
+			// Display message only
+			results = '<tr><td class="span12" style="text-align: center; font-weight: bold;">' + tableData + '</td></tr>';
+		}
+
+		results += '</table>';
+
+		toggleResultsView(false);
+		$("#table-header").html("<thead> <th class='span1'><!--SPACE--></th> <th class='span2'>Gift Date</th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
+		$("#table-content").html(results);
 	};
 
 	createDonorTable = function(tableData) {
@@ -198,7 +221,7 @@ searchView = (function($) {
 
 		results += '</table>';
 
-		toggleResultsView();
+		toggleResultsView(true);
 		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
 		$("#table-content").html(results);
 	};
@@ -236,17 +259,19 @@ searchView = (function($) {
 
 		results += '</table>';
 
-		toggleResultsView();
+		toggleResultsView(true);
 		$("#table-header").html("<thead> <th class='span1'><!--SPACE--></th> <th class='span2'>Gift Date</th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
 		$("#table-content").html(results);
 	};
 
-	toggleResultsView = function() {
+	toggleResultsView = function(showButtons) {
 
 		$("#search-form").toggle();
 		$("#table-section").toggle();
 		$("#search_return").toggle();
-		$("#post-search-buttons").toggle();
+
+		if(showButtons)
+			$("#post-search-buttons").toggle();
 
 		if( $(".content-window").css("height") == "425px" ) 
 			$(".content-window").css("height", "600px");
@@ -268,14 +293,11 @@ searchView = (function($) {
 		createGiftTable : function(tableData) {
 			createGiftTable(tableData);
 		},
-		createDonationList : function(tableData) {
-			createDonationList(tableData);
+		createNewDonationList : function(tableData) {
+			createNewDonationList(tableData);
 		},
 		setUserLabel : function(fname,lname) {
 			setUserLabel(fname,lname);
-		},
-		showNewDonationList: function() {
-			showNewDonationList();
 		}
 	};
 
@@ -296,7 +318,7 @@ browseDonorsView = (function($) {
 
 		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
 
-		utils.getDonorDataArray(createDonorTable);
+		utils.getDonorDataArray(createDonorTable); 
 	};
 
 	createDonorTable = function(tableData) {
@@ -1127,3 +1149,25 @@ editDonorView = (function($) {
 	};
 
 }(jQuery)); // editDonorView()
+
+
+/*
+ * @return Name of .html file that the current page was loaded from
+ */
+viewUtils = (function($) {
+
+	var getPage;
+
+	getPage = function() {
+
+		return $("meta[name=page]").attr("content");
+	};
+
+	return {
+
+		getPage: function() {
+			return getPage();
+		}
+	};
+
+}(jQuery)); // viewUtils()

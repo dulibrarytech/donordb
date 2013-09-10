@@ -11,6 +11,8 @@
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery-ui.css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/login-form.css">
 
+	<meta name="page" content="gift-view">
+
 	<!-- Positioning -->   
 	<!-- TODO: Create 'left edge field' class to offset by 25px left margin? -->
 	<style>

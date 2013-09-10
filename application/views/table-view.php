@@ -8,6 +8,8 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/main.css" />
 
+	<meta name="page" content="table-view">
+
 	<!-- Positioning -->
 	<style>
 		#lname_label 		{ margin-left: 25px; }
