@@ -13,13 +13,10 @@
  */
 searchView = (function($) {
 
-	var LOGOUT_PATH = "login/logout";
-
 	var initPage,
 		initSession,
 		addEvents,
 		setRole,
-		setUserLabel,
 		resetSearch,
 		createNewDonationList,
 		createDonorTable,
@@ -49,7 +46,7 @@ searchView = (function($) {
 			var profile = JSON.parse(sessionStorage.getItem('donorDB_profile'));
 
 			setRole(profile.roleID);
-			setUserLabel(profile.firstName,profile.lastName);
+			viewUtils.setUserLabel(profile.firstName,profile.lastName);
 		}
 	}
 
@@ -149,12 +146,6 @@ searchView = (function($) {
 				
 				break;
 		}
-	};
-
-	// Sets the user name string / adds logout link
-	setUserLabel = function(fname,lname) {
-
-		$("#username-label").html("Welcome, " + fname + " " + lname + "&nbsp&nbsp&nbsp&nbsp<a href='" + LOGOUT_PATH + "'>Logout</a>");		
 	};
 
 	resetSearch = function() {
@@ -304,9 +295,6 @@ searchView = (function($) {
 		},
 		createNewDonationList : function(tableData) {
 			createNewDonationList(tableData);
-		},
-		setUserLabel : function(fname,lname) {
-			setUserLabel(fname,lname);
 		}
 	};
 
@@ -1165,17 +1153,29 @@ editDonorView = (function($) {
  */
 viewUtils = (function($) {
 
-	var getPage;
+	var LOGOUT_PATH = "login/logout";
+
+	var getPage,
+	setUserLabel;
 
 	getPage = function() {
 
 		return $("meta[name=page]").attr("content");
 	};
 
+	// Sets the user name string / adds logout link
+	setUserLabel = function(fname,lname) {
+
+		$("#username-label").html("Welcome, " + fname + " " + lname + "&nbsp&nbsp&nbsp&nbsp<a href='" + LOGOUT_PATH + "'>Logout</a>");		
+	};
+
 	return {
 
 		getPage: function() {
 			return getPage();
+		},
+		setUserLabel : function(fname,lname) {
+			setUserLabel(fname,lname);
 		}
 	};
 

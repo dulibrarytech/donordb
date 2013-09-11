@@ -340,7 +340,8 @@ class edit extends CI_Controller {
 
   public function generateLetter($giftID)
   {
-
+      $data['pageLoader'] = "<script>letterView.initPage(" . $giftID . ");</script>";
       
+      $this->load->view('letter-view');
   }
 }

@@ -58,7 +58,14 @@
 		<!-- Menu Bar -->
 		<?php $this->load->view("partials/menu-bar.php"); ?>
 
-		<div class="container generic-label" id="page-label"></div>
+		<table style="width: 100%"><tr>
+			<td>
+				<div class="container generic-label" id="page-label"></div>	
+			</td>
+			<td align="right" style="text-align: right;">
+				<div id="username-label"></div>
+			</td>
+		</tr></table>
 
 		<!-- Add Gift form -->
 		<form id="add-gift-form" method="post">
