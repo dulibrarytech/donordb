@@ -74,7 +74,7 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
-	// For menu onclick event.  Currently not in use
+	// For menu onclick event.  Currently not in use.  This should be located in a view, anyways
 	showNewDonationList = function() {
 
 		if(authentication.getUserRole() == 2)  {

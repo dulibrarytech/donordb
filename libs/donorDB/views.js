@@ -17,6 +17,8 @@ searchView = (function($) {
 		initSession,
 		addEvents,
 		setRole,
+		setQueue,
+		getQueue,
 		resetSearch,
 		createNewDonationList,
 		createDonorTable,
@@ -45,7 +47,18 @@ searchView = (function($) {
 		{
 			var profile = JSON.parse(sessionStorage.getItem('donorDB_profile'));
 
-			setRole(profile.roleID);
+			if(getQueue() == "Queue Empty.") {
+
+				utils.getNewDonationList(setQueue);
+				setTimeout(function() {
+					setRole(profile.roleID);
+				}, 1000)
+			}
+			else {
+
+				setRole(profile.roleID);
+			}	
+
 			viewUtils.setUserLabel(profile.firstName,profile.lastName);
 		}
 	}
@@ -128,7 +141,7 @@ searchView = (function($) {
 				$("#alert-section-label").text("New Donations");
 				$("#alert-section-label").show();
 
-				utils.getNewDonationList(searchView.createNewDonationList);
+				createNewDonationList(getQueue());
 				
 				break;
 
@@ -137,6 +150,8 @@ searchView = (function($) {
 				// $(".content-window").css("height", "625px");
 				// $("#table-section").css("height", "200px");
 				// $("#table-section").show();
+				// $("#alert-section-label").text("Typed Letter Requests");
+				// $("#alert-section-label").show();
 				
 				// utils.getTypedLetterRequestList(searchView.createNewDonationList);
 				
@@ -148,6 +163,33 @@ searchView = (function($) {
 		}
 	};
 
+	/*
+	 * Set the local queue
+	 * @param array List of data to place in the queue
+	 */
+	setQueue = function(queueData) {
+
+		if(authentication.validateLocalSession())
+		{
+			sessionStorage.setItem('session_queue', JSON.stringify(queueData));
+		}
+	};
+
+	/*
+	 * @return array All new donations from the local session queue
+	 */
+	getQueue = function() {
+
+		if(authentication.validateLocalSession())
+		{
+			var queueData = JSON.parse(sessionStorage.getItem('session_queue'));
+			if(typeof queueData == 'undefined' || queueData == null)
+				queueData = "Queue Empty.";
+
+			return queueData;
+		}
+	};
+
 	resetSearch = function() {
 
 		window.location.href = _searchUrl;
@@ -155,14 +197,14 @@ searchView = (function($) {
 
 	createNewDonationList = function(tableData) {
 
-		var results = '<table class="table table-bordered table-striped">'; 
+		var results = '<table class="table table-bordered table-nostripes">'; 
 
 		if(typeof tableData == "object") {
 
 			$.each(tableData, function (key, value) {
 				
 				results += '<tr>';
-				results += '<td class="span1" style="text-align: center"> <a href="' + _editUrl + '/editGiftView/' + value.donorID + '/' + value.giftsID +'">Edit</a> </td>';
+				results += '<td class="span1" style="text-align: center"> <a href="' + _editUrl + '/editGiftView/' + value.donorID + '/' + value.giftID +'">Edit</a> </td>';
 
 				results += '<td class="span2">' + value.giftDate + '</td>';
 
@@ -180,7 +222,7 @@ searchView = (function($) {
 		else if(typeof tableData == "string") {
 
 			// Display message only
-			results = '<tr><td class="span12" style="text-align: center; font-weight: bold;">' + tableData + '</td></tr>';
+			results = '<tr><td class="span12" style="text-align: center; ">' + tableData + '</td></tr>';
 		}
 
 		results += '</table>';
@@ -267,16 +309,20 @@ searchView = (function($) {
 	toggleResultsView = function(showButtons) {
 
 		$("#search-form").toggle();
-		$("#table-section").toggle();
 		$("#search_return").toggle();
 
 		if(showButtons)
 			$("#post-search-buttons").toggle();
 
-		if( $(".content-window").css("height") == "425px" ) 
-			$(".content-window").css("height", "600px");
-		else 
-			$(".content-window").css("height", "425px");
+		var profile = JSON.parse(sessionStorage.getItem('donorDB_profile'));
+		if(profile.roleID == 1) {
+
+			$("#table-section").toggle();
+		}
+		else if(profile.roleID == 2 || profile.roleID == 3) {
+
+			$("#alert-section-label").toggle();
+		}
 	};
 
 	return {
@@ -286,6 +332,9 @@ searchView = (function($) {
 		},
 		initSession: function() {
 			initSession();
+		},
+		setQueue: function(queueData) {
+			setQueue(queueData);
 		},
 		createDonorTable : function(tableData) {
 			createResultsTable(tableData);
@@ -375,7 +424,7 @@ editGiftView = (function($) {
 
 	initPage = function() {
 
-		$(".content-window").css("height", "600px");
+		$(".content-window").css("height", "630px");
 
 		$("#page-label").text("View / Edit Gift");
 
@@ -1153,10 +1202,9 @@ editDonorView = (function($) {
  */
 viewUtils = (function($) {
 
-	var LOGOUT_PATH = "login/logout";
-
 	var getPage,
-	setUserLabel;
+	setUserLabel,
+	setLogoutLink;
 
 	getPage = function() {
 
@@ -1166,7 +1214,7 @@ viewUtils = (function($) {
 	// Sets the user name string / adds logout link
 	setUserLabel = function(fname,lname) {
 
-		$("#username-label").html("Welcome, " + fname + " " + lname + "&nbsp&nbsp&nbsp&nbsp<a href='" + LOGOUT_PATH + "'>Logout</a>");		
+		$("#username-label").html("Welcome, " + fname + " " + lname + "&nbsp&nbsp&nbsp&nbsp<a onclick='authentication.logout();'>Logout</a>");		
 	};
 
 	return {

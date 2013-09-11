@@ -15,7 +15,8 @@ authentication = (function($) {
 		authenticate,
 		validateResponse,
 		setUserRole,
-		getUserRole;
+		getUserRole,
+		logout;
 
 	/*   
 	 * Runs initPage().  If session active and valid, will then run setRole() on the page based on the session roleID.
@@ -69,7 +70,7 @@ authentication = (function($) {
      				loginForm.closeDlg();
                 }
                 else {
-                	sessionStorage.donorDB_profile = null;
+                	sessionStorage.clear();
                 	alert("Failed to authenticate " + response['userName']);
                 	loginForm.resetForm();
                 }
@@ -111,6 +112,13 @@ authentication = (function($) {
 		return profile.roleID;
 	};
 
+	logout = function() {
+
+		sessionStorage.clear();
+
+		window.location.href = _logoutUrl;
+	};
+
 	return {
 
 		validateSession: function() {
@@ -127,6 +135,9 @@ authentication = (function($) {
 		},
 		getUserRole: function() {
 			return getUserRole();
+		},
+		logout: function() {
+			logout();
 		}
 	};
 

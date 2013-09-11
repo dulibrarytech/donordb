@@ -83,12 +83,6 @@ table {
 	border-bottom-color:white!important;
 }
 
-/* Link without an href attribute */
-#new-donations-link a:not([href]) {
-
-	cursor: pointer;
-}
-
 .bannersNav a {
 	
 	color: #000000;
@@ -196,6 +190,11 @@ table {
 .table-striped tbody > tr:nth-child(odd) > th {
 
   background-color: #f9f9f9;
+}
+
+.table-nostripes td {
+
+	background-color: #ffffff;
 }
 
 .table th,
@@ -422,7 +421,7 @@ table {
 	margin-bottom: 5px;
 }
 
-#username-label {
+.small-label {
 
 	font-size: 12px;
 	text-align: right;
@@ -483,6 +482,14 @@ table {
 	position: absolute; 
 	margin-left: -1.3em; 
 }
+
+/* Link without an href attribute */
+#username-label a:not([href]) {
+
+	cursor: pointer;
+	padding-left: 0px;
+}
+
 
 
 

@@ -47,6 +47,10 @@ class Login extends CI_Controller
         log_message("info", "logout: " . $userName);
 
         $this->phpsessions->delete("donorDB_profile");
+        $this->phpsessions->delete("activeDonorNameString");
+        $this->phpsessions->delete("activeGiftID");
+        $this->phpsessions->delete("activeDonorID");
+        
         redirect('search');
     }
 

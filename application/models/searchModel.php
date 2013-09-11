@@ -341,7 +341,7 @@ class searchModel extends CI_Model
             }
         }
         else
-            $newDonations = "No new donations found.";
+            $newDonations = "No new donations.";
 
         return $newDonations;
     }
