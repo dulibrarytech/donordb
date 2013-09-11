@@ -129,7 +129,7 @@ searchView = (function($) {
 			case 1: 	// Acquisitions
 				
 				
-				// TODO: Display any kind of message or task list in the table section
+				// TODO: Display any kind of message or task list in the table section.  Or 'DONOWT'
 
 				break;
 
@@ -165,7 +165,7 @@ searchView = (function($) {
 
 	/*
 	 * Set the local queue
-	 * @param array List of data to place in the queue
+	 * @param array : List of data to place in the queue
 	 */
 	setQueue = function(queueData) {
 
@@ -176,7 +176,7 @@ searchView = (function($) {
 	};
 
 	/*
-	 * @return array All new donations from the local session queue
+	 * @return array : All data from the local session queue
 	 */
 	getQueue = function() {
 
@@ -215,7 +215,7 @@ searchView = (function($) {
 
 				results += '<td class="span4">' + value.firstName + '</td>';
 
-				results += '<td style="text-align: center"> <a href="' + _editUrl + '/generateLetter/' + value.giftID + '">Letter</a> </td>';
+				results += '<td style="text-align: center"> <a onclick="letter.generateLetter(' + value.giftID + ');">Letter</a> </td>';
 				results += '</tr>';
 			} );
 		}	

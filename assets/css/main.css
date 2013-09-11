@@ -36,7 +36,12 @@ table {
   	border-spacing: 0;border: ;
 }
 
+/* 'onclick' links with no href */
+a:not([href]) {
 
+	cursor: pointer;
+	//padding-left: 0px;
+}
 
 /* Classes */
 .navbar {
@@ -483,12 +488,7 @@ table {
 	margin-left: -1.3em; 
 }
 
-/* Link without an href attribute */
-#username-label a:not([href]) {
 
-	cursor: pointer;
-	padding-left: 0px;
-}
 
 
 
