@@ -16,24 +16,18 @@ letter = (function($) {
 
 	initPopupWindow = function() {
 
-		return window.open('_top');
+		return window.open();
 	};
 
 	generateLetter = function(giftID) {
 		
 		popup = initPopupWindow();
+		newDocument = popup.document;
 
+		letterText = 
 
-
-
-
-		newdocument=newwindow.document;
-		newdocument.write('Hello World. ' + giftID);
-		
-		newdocument.close()
-
-		
-
+		newDocument.write(letterText);
+		newDocument.close();
 	};
 
 	return {

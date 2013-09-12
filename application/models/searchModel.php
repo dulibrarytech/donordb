@@ -522,12 +522,4 @@ class searchModel extends CI_Model
 
         return $ID;
     }
-
-    public function getLetterText()
-    {
-        $letterText = read_file('/assets/txt/donor-letter.txt');
-
-        return $letterText;
-    }
-
 } // SearchModel
