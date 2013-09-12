@@ -146,4 +146,8 @@ class search extends CI_Controller {
 		echo json_encode($giftDataArray);
 	}
 
+	public function getLetter()
+	{
+		echo json_encode($this->searchModel->getLetterText());
+	}
 }

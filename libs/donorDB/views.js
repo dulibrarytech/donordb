@@ -47,16 +47,16 @@ searchView = (function($) {
 		{
 			var profile = JSON.parse(sessionStorage.getItem('donorDB_profile'));
 
+			setRole(profile.roleID);
+
 			if(getQueue() == "Queue Empty.") {
 
-				utils.getNewDonationList(setQueue);
-				setTimeout(function() {
-					setRole(profile.roleID);
-				}, 1000)
+				// Role is set automatically in setQueue()
+				utils.getNewDonationList(setQueue); 
 			}
 			else {
 
-				setRole(profile.roleID);
+				createNewDonationList(getQueue());
 			}	
 
 			viewUtils.setUserLabel(profile.firstName,profile.lastName);
@@ -140,8 +140,6 @@ searchView = (function($) {
 				$("#table-section").show();
 				$("#alert-section-label").text("New Donations");
 				$("#alert-section-label").show();
-
-				createNewDonationList(getQueue());
 				
 				break;
 
@@ -169,9 +167,10 @@ searchView = (function($) {
 	 */
 	setQueue = function(queueData) {
 
-		if(authentication.validateLocalSession())
-		{
+		if(authentication.validateLocalSession()) {
+
 			sessionStorage.setItem('session_queue', JSON.stringify(queueData));
+			createNewDonationList(queueData);
 		}
 	};
 
@@ -180,8 +179,8 @@ searchView = (function($) {
 	 */
 	getQueue = function() {
 
-		if(authentication.validateLocalSession())
-		{
+		if(authentication.validateLocalSession()) {
+
 			var queueData = JSON.parse(sessionStorage.getItem('session_queue'));
 			if(typeof queueData == 'undefined' || queueData == null)
 				queueData = "Queue Empty.";

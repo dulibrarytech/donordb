@@ -16,16 +16,21 @@ letter = (function($) {
 
 	initPopupWindow = function() {
 
-		popup = window.open();
+		return window.open('_top');
 	};
 
 	generateLetter = function(giftID) {
 		
-		newwindow=window.open('_top');
+		popup = initPopupWindow();
+
+
+
+
+
 		newdocument=newwindow.document;
-		newdocument.write('Hello World.');
+		newdocument.write('Hello World. ' + giftID);
 		
-		setTimeout(function(){newdocument.close();},1000);
+		newdocument.close()
 
 		
 

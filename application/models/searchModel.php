@@ -17,6 +17,7 @@ class searchModel extends CI_Model
         parent::__construct();
         $this->load->database();
         $this->load->helper('date');
+        $this->load->helper('file');
     }
 
     public function donorSearch($keyword)
@@ -28,8 +29,8 @@ class searchModel extends CI_Model
      	  $this->db->select('donorID, Organization, FirstName, LastName, anonymous');
    		  $this->db->from('tbl_donorinfo');
    		  $this->db->like('LastName', $keyword);		// *** Search by last name by default.  May add options later *** //
-        $this->db->where('anonymous !=', 1);
-        $this->db->where('donorID !=', 1);
+          $this->db->where('anonymous !=', 1);
+          $this->db->where('donorID !=', 1);
    		  $this->db->order_by('LastName');
    		
      		$query = $this->db->get();
@@ -254,34 +255,34 @@ class searchModel extends CI_Model
 
    	public function getAllDonors()
    	{
-     		$donorInfo = array();
-     		$index = 0;
+ 		$donorInfo = array();
+ 		$index = 0;
 
-     		$this->db->select('donorID, FirstName, LastName, Organization');
-     		$this->db->from('tbl_donorinfo');
+ 		$this->db->select('donorID, FirstName, LastName, Organization');
+ 		$this->db->from('tbl_donorinfo');
         $this->db->where('anonymous !=', 1);
         $this->db->where('donorID !=', 1);
-     		$this->db->order_by('LastName');
-     		$query = $this->db->get();
+ 		$this->db->order_by('LastName');
+ 		$query = $this->db->get();
 
-     		if ($query->num_rows() > 0)
-   		  { 	
-      		 	foreach ($query->result() as $results)
-      		 	{
-        		 		$donorInfo[$index]['firstName'] 	= $results->FirstName;
-        		 		$donorInfo[$index]['lastName']  	= $results->LastName;
-                $donorInfo[$index]['org']         = $results->Organization;
-        		 		$donorInfo[$index]['donorID']  		= $results->donorID;
+ 		if ($query->num_rows() > 0)
+		    { 	
+  		 	foreach ($query->result() as $results)
+  		 	{
+    		 		$donorInfo[$index]['firstName'] 	= $results->FirstName;
+    		 		$donorInfo[$index]['lastName']  	= $results->LastName;
+                    $donorInfo[$index]['org']         = $results->Organization;
+    		 		$donorInfo[$index]['donorID']  		= $results->donorID;
 
-        		 		$index++;
-      		 	}
-     		}
-     		else
-     		{
-       			$donorInfo = 'Error connecting to database.';
-     		}
+    		 		$index++;
+  		 	}
+ 		}
+ 		else
+ 		{
+   			$donorInfo = 'Error connecting to database.';
+ 		}
 
-     		return $donorInfo;
+ 		return $donorInfo;
    	}
 
    	public function getAllTitles() 
@@ -522,5 +523,11 @@ class searchModel extends CI_Model
         return $ID;
     }
 
+    public function getLetterText()
+    {
+        $letterText = read_file('/assets/txt/donor-letter.txt');
+
+        return $letterText;
+    }
 
 } // SearchModel

@@ -337,12 +337,4 @@ class edit extends CI_Controller {
            $message = "gift data set";
       }
   }
-
-  // Not in use.  Client generates the letter and opens it in a new window.
-  public function generateLetter($giftID)
-  {
-      // $data['pageLoader'] = "<script>letterView.initPage(" . $giftID . ");</script>";
-
-      // $this->load->view('letter-view');
-  }
 }
