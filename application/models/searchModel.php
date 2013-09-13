@@ -522,4 +522,25 @@ class searchModel extends CI_Model
 
         return $ID;
     }
+
+    public function getDonorOfGift($giftID)
+    {
+        $ID = 0;
+
+        if($giftID != null)
+        {
+            $this->db->select('donorID');
+            $this->db->from('tbl_donorgifts');
+            $this->db->where('giftID',$giftID);
+
+            $query = $this->db->get();
+
+            foreach ($query->result() as $result)
+            {
+                $ID = $result->giftsID;
+            }
+        }
+
+        return $ID;
+    }
 } // SearchModel

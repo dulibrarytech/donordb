@@ -148,9 +148,25 @@ class search extends CI_Controller {
 
 	public function getLetter($giftID)
 	{
-		if($giftID)
+		if($giftID != null)
 		{
-			echo json_encode($this->letterModel->generateLetter($giftID));
+			$donorID = $this->searchModel->getDonorOfGift($giftID);
+			if($donorID == 0)
+			{
+				$data['errorMsg'] = "Database error: donor not found";
+			}
+			else
+			{
+				$donorData = $this->searchModel->getDonorData($donorID);
+
+				$giftData = $this->searchModel->getGiftData($giftID);
+
+				$data = array_merge($donorData,$giftData);
+			}			
+
+			echo json_encode($this->letterHelper->generateLetter($data));
 		}
+		else
+			echo json_encode("Error: missing gift ID");
 	}
 }

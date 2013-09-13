@@ -12,28 +12,57 @@
 letter = (function($) {
 
 	var initPopupWindow,
-		generateLetter;
+		createPopupWindow,
+		generateLetter,
+		getLetterText;
 
 	initPopupWindow = function() {
 
 		return window.open();
 	};
 
-	generateLetter = function(giftID) {
-		
+	createPopupWindow = function(letterText) {
+
 		popup = initPopupWindow();
-		newDocument = popup.document;
 
-		letterText = 
+        newDocument = popup.document;
+        newDocument.write(letterText);
+        newDocument.close();
+	};
 
-		newDocument.write(letterText);
-		newDocument.close();
+	generateLetter = function(giftID) {
+
+		getLetterText(giftID);
+	};
+
+	getLetterText = function(giftID) {
+
+		requestObj = {
+
+			type: "POST",
+			data: "giftID=" + giftID, 
+			url: _searchUrl + '/getLetter',
+			dataType: "text",
+			cache: true,
+			success: function(letterText) {
+				alert("success. response: " + letterText);
+				//createPopupWindow(letterText);
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
+
+		doAjax(requestObj);
 	};
 
 	return {
 
 		generateLetter: function(giftID) {
 			generateLetter(giftID);
+		},
+		createPopupWindow: function(letterText) {
+			createPopupWindow(letterText);
 		}
 	}; 
 
