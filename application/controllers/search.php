@@ -146,11 +146,15 @@ class search extends CI_Controller {
 		echo json_encode($giftDataArray);
 	}
 
-	public function getLetter($giftID)
+	public function getLetter()
 	{
+		$this->load->helper('letter_helper');
+		$giftID = $this->input->post('giftID');
+
 		if($giftID != null)
 		{
 			$donorID = $this->searchModel->getDonorOfGift($giftID);
+
 			if($donorID == 0)
 			{
 				$data['errorMsg'] = "Database error: donor not found";
@@ -162,9 +166,10 @@ class search extends CI_Controller {
 				$giftData = $this->searchModel->getGiftData($giftID);
 
 				$data = array_merge($donorData,$giftData);
+				$data['titleString'] = $this->searchModel->getTitle($data['titleID']);
 			}			
 
-			echo json_encode($this->letterHelper->generateLetter($data));
+			echo json_encode(generateLetter($data));
 		}
 		else
 			echo json_encode("Error: missing gift ID");

@@ -531,16 +531,37 @@ class searchModel extends CI_Model
         {
             $this->db->select('donorID');
             $this->db->from('tbl_donorgifts');
-            $this->db->where('giftID',$giftID);
+            $this->db->where('giftsID',$giftID);
 
             $query = $this->db->get();
 
             foreach ($query->result() as $result)
             {
-                $ID = $result->giftsID;
+                $ID = $result->donorID;
             }
         }
 
         return $ID;
+    }
+
+    public function getTitle($titleID)
+    {
+        $title = "";
+
+        if($titleID != null)
+        {
+            $this->db->select('title');
+            $this->db->from('tbl_donortitle_lkup');
+            $this->db->where('titleID',$titleID);
+
+            $query = $this->db->get();
+
+            foreach ($query->result() as $result)
+            {
+                $title = $result->title;
+            }
+        }
+
+        return $title;
     }
 } // SearchModel

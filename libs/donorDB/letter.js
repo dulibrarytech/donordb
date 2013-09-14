@@ -21,11 +21,13 @@ letter = (function($) {
 		return window.open();
 	};
 
-	createPopupWindow = function(letterText) {
+	createPopupWindow = function(test) {
 
 		popup = initPopupWindow();
-
         newDocument = popup.document;
+
+        letterText = test.substring(0, test.length - 4);
+
         newDocument.write(letterText);
         newDocument.close();
 	};
@@ -45,15 +47,15 @@ letter = (function($) {
 			dataType: "text",
 			cache: true,
 			success: function(letterText) {
-				alert("success. response: " + letterText);
-				//createPopupWindow(letterText);
+				//alert("success. response: " + letterText);
+				createPopupWindow(letterText);
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );
             }
 		};
 
-		doAjax(requestObj);
+		$.ajax(requestObj);
 	};
 
 	return {

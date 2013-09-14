@@ -8,7 +8,24 @@
  * University of Denver, September 2013
  */
 
-public function generateLetter($data)
+function generateLetter($data)
 {
-	return "Letter text";
+	$letterBody = "
+
+	<title>Letter to " . $data['firstName'] . " " . $data['lastName'] . "</title>
+
+	<body>
+
+	<div style='height: 75px;'>
+	DATE <br />"
+	. $data['titleString'] . " " . $data['firstName'] . " " . $data['lastName'] . "<br />"
+	. $data['org']  . "
+
+
+	</div>
+	</body>
+
+	";
+
+	echo $letterBody;
 }
