@@ -221,7 +221,7 @@ searchView = (function($) {
 
 				results += '<td class="span4">' + value.firstName + '</td>';
 
-				results += '<td style="text-align: center"> <a onclick="' + data['action'] + '(' + value.giftID + ');">' + data['actionText'] + '</a> </td>';
+				results += '<td style="text-align: center"> <a onclick="' + tableData['action'] + '(' + value.giftID + ');">' + tableData['actionText'] + '</a> </td>';
 				results += '</tr>';
 			} );
 		}	

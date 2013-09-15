@@ -96,7 +96,12 @@ class search extends CI_Controller {
 
 	public function queryDatabaseNewDonations()
 	{
-		echo json_encode($this->searchModel->getAllNewDonations());
+		$data = $this->searchModel->getAllNewDonations();
+
+		$data['action'] = 'viewUtils.displayLetter';
+		$data['actionText'] = 'Letter';
+
+		echo json_encode($data);
 	}
 
 	public function queryDatabaseTypedLetterRequests()
