@@ -20,7 +20,7 @@ searchView = (function($) {
 		setQueue,
 		getQueue,
 		resetSearch,
-		createNewDonationList,
+		createAlertList,
 		createDonorTable,
 		createGiftTable,
 		toggleResultsView;
@@ -45,23 +45,27 @@ searchView = (function($) {
 
 		if(authentication.validateLocalSession())
 		{
-			var profile = JSON.parse(sessionStorage.getItem('donorDB_profile'));
+			var profile = JSON.parse(sessionStorage.getItem('donorDB_profile')),
+				queue = getQueue();
 
+			alert(profile.roleID);
 			setRole(profile.roleID);
 
-			if(getQueue() == "Queue Empty.") {
+			// If the queue is empty, set it here.  List is created in getList()
+			if(queue == "Queue Empty.") {
 
-				// Role is set automatically in setQueue()
-				utils.getNewDonationList(setQueue); 
+				viewUtils.getList();
 			}
 			else {
 
-				createNewDonationList(getQueue());
+				createAlertList(queue);
 			}	
 
 			viewUtils.setUserLabel(profile.firstName,profile.lastName);
 		}
-	}
+		//else 
+			//log and redirect somewhere
+	};
 
 	addEvents = function() {
 
@@ -138,20 +142,18 @@ searchView = (function($) {
 				$(".content-window").css("height", "700px");
 				$("#table-section").css("height", "200px");
 				$("#table-section").show();
-				$("#alert-section-label").text("New Donations");
+				$("#alert-section-label").text("Inbox");
 				$("#alert-section-label").show();
 				
 				break;
 
 			case 3: 	// External Relations
 
-				// $(".content-window").css("height", "625px");
-				// $("#table-section").css("height", "200px");
-				// $("#table-section").show();
-				// $("#alert-section-label").text("Typed Letter Requests");
-				// $("#alert-section-label").show();
-				
-				// utils.getTypedLetterRequestList(searchView.createNewDonationList);
+				$(".content-window").css("height", "625px");
+				$("#table-section").css("height", "200px");
+				$("#table-section").show();
+				$("#alert-section-label").text("Inbox");
+				$("#alert-section-label").show();
 				
 				break;
 
@@ -162,7 +164,7 @@ searchView = (function($) {
 	};
 
 	/*
-	 * Set the local queue
+	 * Set the local queue, and refresh the list
 	 * @param array : List of data to place in the queue
 	 */
 	setQueue = function(queueData) {
@@ -170,7 +172,7 @@ searchView = (function($) {
 		if(authentication.validateLocalSession()) {
 
 			sessionStorage.setItem('session_queue', JSON.stringify(queueData));
-			createNewDonationList(queueData);
+			createAlertList(queueData);
 		}
 	};
 
@@ -194,7 +196,12 @@ searchView = (function($) {
 		window.location.href = _searchUrl;
 	};
 
-	createNewDonationList = function(tableData) {
+	/*
+	 * Builds list items from input data and inserts them into the alert list section
+	 *
+	 * Params: data['tableData']: donor and donation data; data['actionLinkText']: link text; data['action']: javascript function to call onclick
+	 */
+	createAlertList = function(tableData) {
 
 		var results = '<table class="table table-bordered table-nostripes">'; 
 
@@ -214,7 +221,7 @@ searchView = (function($) {
 
 				results += '<td class="span4">' + value.firstName + '</td>';
 
-				results += '<td style="text-align: center"> <a onclick="letter.generateLetter(' + value.giftID + ');">Letter</a> </td>';
+				results += '<td style="text-align: center"> <a onclick="' + data['action'] + '(' + value.giftID + ');">' + data['actionText'] + '</a> </td>';
 				results += '</tr>';
 			} );
 		}	
@@ -341,8 +348,8 @@ searchView = (function($) {
 		createGiftTable : function(tableData) {
 			createGiftTable(tableData);
 		},
-		createNewDonationList : function(tableData) {
-			createNewDonationList(tableData);
+		createAlertList : function(tableData) {
+			createAlertList(tableData);
 		}
 	};
 
@@ -1202,8 +1209,9 @@ editDonorView = (function($) {
 viewUtils = (function($) {
 
 	var getPage,
-	setUserLabel,
-	setLogoutLink;
+		getList,
+		setUserLabel,
+		setLogoutLink;
 
 	getPage = function() {
 
@@ -1216,6 +1224,35 @@ viewUtils = (function($) {
 		$("#username-label").html("Welcome, " + fname + " " + lname + "&nbsp&nbsp&nbsp&nbsp<a onclick='authentication.logout();'>Logout</a>");		
 	};
 
+	displayLetter = function(id) {
+
+		letter.generateLetter(id);
+		getList();
+	};
+
+	getList = function() {
+
+		alert("getList()");
+		var profile = JSON.parse(sessionStorage.getItem('donorDB_profile'));
+		switch(profile.roleID) {
+
+			case 2:
+
+				utils.getNewDonationList(searchView.setQueue); 
+
+			break;
+
+			case 3:
+
+				utils.getTypedLetterRequests(searchView.setQueue);
+
+			break;
+
+			default:
+				// log error
+		}
+	};
+
 	return {
 
 		getPage: function() {
@@ -1223,6 +1260,12 @@ viewUtils = (function($) {
 		},
 		setUserLabel : function(fname,lname) {
 			setUserLabel(fname,lname);
+		},
+		displayLetter: function(id) {
+			displayLetter(id);
+		},
+		getList: function() {
+			getList();
 		}
 	};
 

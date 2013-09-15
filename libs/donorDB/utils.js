@@ -28,6 +28,7 @@ utils = (function($) {
 		getTitleArray,
 		getGiftDatesForActiveDonor,
 		getNewDonationList,
+		getTypedLetterRequests,
 		setActiveGift;
 
 	doAjax = function(ajaxObj) {
@@ -304,7 +305,27 @@ utils = (function($) {
 			dataType: "json",
 			cache: true,
 			success: function(response) {
-				//alert("success");
+				//Set up data array for 'createalertlist'  pass data array into callback
+				callback(response);
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
+
+		doAjax(requestObj);
+	};
+
+	getTypedLetterRequests = function(callback) {
+
+		requestObj = {
+
+			type: "POST", 
+			url: _searchUrl + '/queryDatabaseTypedLetterRequests',
+			dataType: "json",
+			cache: true,
+			success: function(response) {
+				//Set up data array for 'createalertlist'  pass data array into callback
 				callback(response);
 			},
 			error: function ( textStatus, errorThrown ) {
@@ -386,6 +407,9 @@ utils = (function($) {
 		},
 		getNewDonationList: function(callback) {
 			getNewDonationList(callback);
+		},
+		getTypedLetterRequests: function(callback) {
+			getTypedLetterRequests(callback);
 		},
 		setActiveGift: function(giftID, callback) {
 			setActiveGift(giftID,callback);

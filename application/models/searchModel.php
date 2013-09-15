@@ -352,6 +352,45 @@ class searchModel extends CI_Model
         return $newDonations;
     }
 
+    public function getAllTypedLetterRequests()
+    {
+        $requests = array();
+        $index = 0;
+
+        $this->db->trans_start();
+        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorgifts.donorID, tbl_donorinfo.Organization, tbl_donorinfo.FirstName, tbl_donorinfo.LastName');
+        $this->db->from('tbl_donorgifts');
+        $this->db->join('tbl_donorinfo', 'tbl_donorgifts.donorID = tbl_donorinfo.donorID', 'inner');
+        $this->db->where('tbl_donorgifts.important', 1);
+        $this->db->where('tbl_donorgifts.letter', 1);
+        $this->db->order_by("dateOfGift", "desc");
+        $query = $this->db->get();
+        $this->db->trans_complete();
+
+        if ($query->num_rows() > 0)
+        {
+            foreach ($query->result() as $results)
+            {
+                $requests[$index]['giftID']       = $results->giftsID;
+                $requests[$index]['giftDate']     = truncateDateString($results->dateOfGift); 
+                $requests[$index]['org']          = $results->Organization;
+                $requests[$index]['donorID']      = $results->donorID;
+                $requests[$index]['firstName']    = $results->FirstName;
+                $requests[$index]['lastName']     = $results->LastName;
+
+                $index++;
+            }
+        }
+        else
+        {
+            $requests = "No alerts at this time.";
+            log_message("info", "DB Transaction: getAllTypedLetterRequests(): no letter requests found");
+        }
+            
+
+        return $requests;
+    }
+
     public function getTitleID($titleText)
     {
         $ID = 0;

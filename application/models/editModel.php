@@ -150,4 +150,19 @@ class editModel extends CI_Model
         return $ID;
     }
 
+    public function setLetterAsSent($giftID)
+    {
+        $success = 0;
+
+        $data = array(
+
+            'tbl_donorgifts.letter'          => 0
+        );
+
+        $this->db->where('tbl_donorgifts.giftsID', $giftID);
+        $success = $this->db->update('tbl_donorgifts', $data);
+
+        return $success;
+    }
+
 } // editModel

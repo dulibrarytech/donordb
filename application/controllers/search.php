@@ -99,6 +99,11 @@ class search extends CI_Controller {
 		echo json_encode($this->searchModel->getAllNewDonations());
 	}
 
+	public function queryDatabaseTypedLetterRequests()
+	{
+		echo json_encode($this->searchModel->getAllTypedLetterRequests());
+	}
+
 	public function queryDatabaseGiftData($giftID = null)
 	{
 		if($giftID == null)
@@ -148,12 +153,14 @@ class search extends CI_Controller {
 
 	public function getLetter()
 	{
-		$this->load->helper('letter_helper');
-		$this->load->helper('dbdate_helper');
 		$giftID = $this->input->post('giftID');
 
 		if($giftID != null)
 		{
+			$this->load->helper('letter_helper');
+			$this->load->helper('dbdate_helper');
+			$this->load->model('editModel');
+
 			$donorID = $this->searchModel->getDonorOfGift($giftID);
 
 			if($donorID == 0)
@@ -171,6 +178,9 @@ class search extends CI_Controller {
 
 				$data['giftDate'] = convertDateToNormalFormat($data['giftDate']);
 			}			
+
+			// *** Auto-set letter as 'complete'.  Can add option to do so manually if necessary
+			$this->editModel->setLetterAsSent($giftID);
 
 			echo json_encode(generateLetter($data));
 		}
