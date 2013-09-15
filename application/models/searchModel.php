@@ -18,6 +18,7 @@ class searchModel extends CI_Model
         $this->load->database();
         $this->load->helper('date');
         $this->load->helper('file');
+        $this->load->helper('dbdate_helper');
     }
 
     public function donorSearch($keyword)
@@ -119,7 +120,7 @@ class searchModel extends CI_Model
             foreach ($query->result() as $results)
             { 
                 $searchResults[$index]['giftsID']     = $results->giftsID;
-                $searchResults[$index]['giftDate']    = $this->truncateDateString($results->dateOfGift); 
+                $searchResults[$index]['giftDate']    = truncateDateString($results->dateOfGift); 
                 $searchResults[$index]['firstName']   = $results->FirstName;
                 $searchResults[$index]['lastName']    = $results->LastName;
                 $searchResults[$index]['donorID']     = $results->donorID;
@@ -174,7 +175,7 @@ class searchModel extends CI_Model
             foreach ($query->result() as $results)
             { 
                 $searchResults[$index]['giftsID']     = $results->giftsID;
-                $searchResults[$index]['giftDate']    = $this->truncateDateString($results->dateOfGift); 
+                $searchResults[$index]['giftDate']    = truncateDateString($results->dateOfGift); 
                 $searchResults[$index]['lastName']    = "Anonymous Donor";
                 $searchResults[$index]['firstName']   = "";
                 $searchResults[$index]['donorID']     = $results->donorID;  // should always be 1 here
@@ -209,7 +210,7 @@ class searchModel extends CI_Model
             foreach ($query->result() as $results)
             { 
                 $searchResults[$index]['giftsID']     = $results->giftsID;
-                $searchResults[$index]['giftDate']    = $this->truncateDateString($results->dateOfGift); 
+                $searchResults[$index]['giftDate']    = truncateDateString($results->dateOfGift); 
                 $searchResults[$index]['lastName']    = $results->FirstName;
                 $searchResults[$index]['firstName']   = $results->LastName;
                 $searchResults[$index]['donorID']     = $results->donorID;
@@ -247,11 +248,11 @@ class searchModel extends CI_Model
      		return $giftsInRange;
    	}
 
-    // Removes the timestamp from the date string
-    private function truncateDateString($dateString)
-    {
-        return substr($dateString,0,-9);
-    }
+    // // Removes the timestamp from the date string
+    // private function truncateDateString($dateString)
+    // {
+    //     return substr($dateString,0,-9);
+    // }
 
    	public function getAllDonors()
    	{
@@ -332,7 +333,7 @@ class searchModel extends CI_Model
             foreach ($query->result() as $results)
             {
                 $newDonations[$index]['giftID']       = $results->giftsID;
-                $newDonations[$index]['giftDate']     = $this->truncateDateString($results->dateOfGift); 
+                $newDonations[$index]['giftDate']     = truncateDateString($results->dateOfGift); 
                 $newDonations[$index]['org']          = $results->Organization;
                 $newDonations[$index]['donorID']      = $results->donorID;
                 $newDonations[$index]['firstName']    = $results->FirstName;
@@ -342,7 +343,11 @@ class searchModel extends CI_Model
             }
         }
         else
+        {
             $newDonations = "No new donations.";
+            log_message("info", "DB Transaction: getAllNewDonations(): no new donations found");
+        }
+            
 
         return $newDonations;
     }
@@ -422,7 +427,7 @@ class searchModel extends CI_Model
                 {
                     $giftInfo['giftQuantity']     = $result->numberOfGifts;
                     $giftInfo['giftDescription']  = $result->giftDescription1;
-                    $giftInfo['giftDate']         = $this->truncateDateString($result->dateOfGift); 
+                    $giftInfo['giftDate']         = truncateDateString($result->dateOfGift); 
                     $giftInfo['letterFlag']       = $result->letter;
                     $giftInfo['importantFlag']    = $result->important;
                 }
@@ -452,7 +457,7 @@ class searchModel extends CI_Model
                 foreach ($query->result() as $result)
                 {
                     if($result->dateOfGift != null)
-                      $giftData[$result->giftsID] = $this->truncateDateString($result->dateOfGift);
+                      $giftData[$result->giftsID] = truncateDateString($result->dateOfGift);
                 }
             }
         }

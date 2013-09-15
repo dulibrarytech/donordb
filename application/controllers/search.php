@@ -149,6 +149,7 @@ class search extends CI_Controller {
 	public function getLetter()
 	{
 		$this->load->helper('letter_helper');
+		$this->load->helper('dbdate_helper');
 		$giftID = $this->input->post('giftID');
 
 		if($giftID != null)
@@ -166,7 +167,9 @@ class search extends CI_Controller {
 				$giftData = $this->searchModel->getGiftData($giftID);
 
 				$data = array_merge($donorData,$giftData);
-				$data['titleString'] = $this->searchModel->getTitle($data['titleID']);
+				$data['titleString'] = $this->searchModel->getTitle($data['titleID']);  
+
+				$data['giftDate'] = convertDateToNormalFormat($data['giftDate']);
 			}			
 
 			echo json_encode(generateLetter($data));
