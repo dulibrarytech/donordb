@@ -51,7 +51,7 @@ letter = (function($) {
 				createPopupWindow(letterText);
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( errorThrown + ": Error in client letter request" );
             }
 		};
 

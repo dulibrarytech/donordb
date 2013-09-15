@@ -383,7 +383,7 @@ class searchModel extends CI_Model
         }
         else
         {
-            $requests = "No alerts at this time.";
+            $requests = "No requests at this time.";
             log_message("info", "DB Transaction: getAllTypedLetterRequests(): no letter requests found");
         }
             

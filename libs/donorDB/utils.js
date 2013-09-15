@@ -29,7 +29,8 @@ utils = (function($) {
 		getGiftDatesForActiveDonor,
 		getNewDonationList,
 		getTypedLetterRequests,
-		setActiveGift;
+		setActiveGift,
+		setTypedLetterComplete;
 
 	doAjax = function(ajaxObj) {
 		$.ajax(ajaxObj);
@@ -361,6 +362,26 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
+	setTypedLetterComplete = function(giftID) {
+
+		requestObj = {
+
+			type: "POST", 
+			url: _editUrl + '/sendLetter',
+			data: "giftID=" + giftID,
+			dataType: "text",
+			cache: true,
+			success: function(response) {
+				//alert("Letter complete");
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
+		
+		doAjax(requestObj);
+	};
+
 	return {
 
 		submitSearch: function(callback,type) {	
@@ -413,6 +434,9 @@ utils = (function($) {
 		},
 		setActiveGift: function(giftID, callback) {
 			setActiveGift(giftID,callback);
+		},
+		setTypedLetterComplete: function(giftID) {
+			setTypedLetterComplete(giftID);
 		}
 	};
 

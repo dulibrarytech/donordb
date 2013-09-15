@@ -98,15 +98,26 @@ class search extends CI_Controller {
 	{
 		$data = $this->searchModel->getAllNewDonations();
 
-		$data['action'] = 'viewUtils.displayLetter';
-		$data['actionText'] = 'Letter';
+		if(gettype($data) != 'string')
+		{
+			$data[0]['action'] = 'viewUtils.displayLetter';
+			$data[0]['actionText'] = 'Letter';
+		}
 
 		echo json_encode($data);
 	}
 
 	public function queryDatabaseTypedLetterRequests()
 	{
-		echo json_encode($this->searchModel->getAllTypedLetterRequests());
+		$data = $this->searchModel->getAllTypedLetterRequests();
+
+		if(gettype($data) != 'string')
+		{
+			$data[0]['action'] = 'viewUtils.setTypedLetterComplete';
+			$data[0]['actionText'] = 'Complete';
+		}
+
+		echo json_encode($data);
 	}
 
 	public function queryDatabaseGiftData($giftID = null)
@@ -184,7 +195,7 @@ class search extends CI_Controller {
 				$data['giftDate'] = convertDateToNormalFormat($data['giftDate']);
 			}			
 
-			// *** Auto-set letter as 'complete'.  Can add option to do so manually if necessary
+			// *** Auto-set letter as 'complete'.  Can add option to do so manually if necessary (use this->sendLetter)
 			$this->editModel->setLetterAsSent($giftID);
 
 			echo json_encode(generateLetter($data));

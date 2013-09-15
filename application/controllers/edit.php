@@ -337,4 +337,14 @@ class edit extends CI_Controller {
            $message = "gift data set";
       }
   }
+
+  public function sendLetter() 
+  {
+    $giftID = $this->input->post('giftID');
+
+    if($giftID != null)
+    {
+      $this->editModel->setLetterAsSent($giftID);
+    }
+  }
 }

@@ -48,7 +48,6 @@ searchView = (function($) {
 			var profile = JSON.parse(sessionStorage.getItem('donorDB_profile')),
 				queue = getQueue();
 
-			alert(profile.roleID);
 			setRole(profile.roleID);
 
 			// If the queue is empty, set it here.  List is created in getList()
@@ -149,7 +148,7 @@ searchView = (function($) {
 
 			case 3: 	// External Relations
 
-				$(".content-window").css("height", "625px");
+				$(".content-window").css("height", "700px");
 				$("#table-section").css("height", "200px");
 				$("#table-section").show();
 				$("#alert-section-label").text("Inbox");
@@ -221,7 +220,7 @@ searchView = (function($) {
 
 				results += '<td class="span4">' + value.firstName + '</td>';
 
-				results += '<td style="text-align: center"> <a onclick="' + tableData['action'] + '(' + value.giftID + ');">' + tableData['actionText'] + '</a> </td>';
+				results += '<td style="text-align: center"> <a onclick="' + tableData[0]['action'] + '(' + value.giftID + ');">' + tableData[0]['actionText'] + '</a> </td>';
 				results += '</tr>';
 			} );
 		}	
@@ -1211,7 +1210,8 @@ viewUtils = (function($) {
 	var getPage,
 		getList,
 		setUserLabel,
-		setLogoutLink;
+		displayLetter,
+		setTypedLetterComplete;
 
 	getPage = function() {
 
@@ -1232,7 +1232,6 @@ viewUtils = (function($) {
 
 	getList = function() {
 
-		alert("getList()");
 		var profile = JSON.parse(sessionStorage.getItem('donorDB_profile'));
 		switch(profile.roleID) {
 
@@ -1253,6 +1252,13 @@ viewUtils = (function($) {
 		}
 	};
 
+	setTypedLetterComplete = function(id) {
+
+		utils.setTypedLetterComplete(id);
+
+		getList();
+	}
+
 	return {
 
 		getPage: function() {
@@ -1266,6 +1272,9 @@ viewUtils = (function($) {
 		},
 		getList: function() {
 			getList();
+		},
+		setTypedLetterComplete: function(id) {
+			setTypedLetterComplete(id);
 		}
 	};
 
