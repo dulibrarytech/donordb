@@ -244,7 +244,7 @@ searchView = (function($) {
 		if(typeof tableData == "object") {
 
 			$.each(tableData, function (key, value) {
-				
+
 				results += '<tr>';
 				results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
@@ -374,13 +374,12 @@ browseDonorsView = (function($) {
 
 	createDonorTable = function(tableData) {
 
-		var results = '<table class="table table-bordered table-striped">';
+		var results = '<table class="table table-bordered table-striped">',
 
-		results = '<table class="table table-bordered table-striped">'; 
+			jumpToLetters = { a: false, b: false, c: false, d: false, e: false, f: false, g: false, h: false, i: false, j: false, k: false, k: false, l: false, 
+									m: false, n: false, o: false, p: false, q: false, r: false, s: false, t: false, u: false, v: false, w: false, x: false, y: false, z: false };
 
 		$.each(tableData, function (key, value) {
-
-
 
 			results += '<tr>';
 			results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
