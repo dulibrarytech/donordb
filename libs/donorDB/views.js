@@ -358,6 +358,7 @@ searchView = (function($) {
 browseDonorsView = (function($) {
 
 	var initPage,
+		createJumpToLinks,
 		createDonorTable;
 
 	initPage = function() {
@@ -372,14 +373,35 @@ browseDonorsView = (function($) {
 		utils.getDonorDataArray(createDonorTable); 
 	};
 
+	createJumpToLinks = function() {
+
+		alert("hit");
+		$("#jumpTo").html("GAAA");
+	};
+
 	createDonorTable = function(tableData) {
 
-		var results = '<table class="table table-bordered table-striped">',
+		var results = '<table class="table table-bordered table-striped">';
 
-			jumpToLetters = { a: false, b: false, c: false, d: false, e: false, f: false, g: false, h: false, i: false, j: false, k: false, k: false, l: false, 
-									m: false, n: false, o: false, p: false, q: false, r: false, s: false, t: false, u: false, v: false, w: false, x: false, y: false, z: false };
+		var	jumpToLetters = { A: false, B: false, C: false, D: false, E: false, F: false, G: false, H: false, I: false, J: false, K: false, L: false, M: false, 
+									N: false, O: false, P: false, Q: false, R: false, S: false, T: false, U: false, V: false, W: false, X: false, Y: false, Z: false };
+		var	jumpToChar = '';
+		createJumpToLinks();
 
 		$.each(tableData, function (key, value) {
+
+			if(value.lastName != null) {
+
+				jumpToChar = value.lastName.charAt(0).toUpperCase();
+				if(!jumpToLetters[jumpToChar]) {
+
+					var temp = '<div id="' + jumpToChar + '">';
+					results += temp;
+					//alert("added " + temp);
+
+					jumpToLetters[jumpToChar] = true;
+				}
+			}
 
 			results += '<tr>';
 			results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';

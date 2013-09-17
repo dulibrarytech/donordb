@@ -92,6 +92,8 @@
 
 		<!-- Results Table Section -->
 		<div id="table-section">
+			<div class="container" id="jumpTo"></div>
+
 			<!-- Stationary table header -->
 			<div class="table table-bordered" id="table-header"></div>
 
