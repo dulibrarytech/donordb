@@ -60,8 +60,10 @@
 			<!-- Stationary table header -->
 			<div class="table table-bordered" id="table-header"></div>
 
+			<div id="jumpTo"></div>
+
 			<!-- Table content section -->
-			<div class="container pre-scrollable">
+			<div class="container pre-scrollable" id="scroll-section">
 	 			<div id="table-content"></div>
 			</div>
 		</div>

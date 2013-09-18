@@ -359,6 +359,7 @@ browseDonorsView = (function($) {
 
 	var initPage,
 		createJumpToLinks,
+		onClickJumpToLetter,
 		createDonorTable;
 
 	initPage = function() {
@@ -373,35 +374,49 @@ browseDonorsView = (function($) {
 		utils.getDonorDataArray(createDonorTable); 
 	};
 
-	createJumpToLinks = function() {
+	onClickJumpToLetter = function(letter) {
 
-		alert("hit");
-		$("#jumpTo").html("GAAA");
+		$("#table-section").scrollTop();
+	};
+
+	createJumpToLinks = function(jumpToLetters) {
+
+		var links = ""; 
+
+		for(var key in jumpToLetters) {
+
+			links += "<a onclick='browseDonorsView.onClickJumpToLetter(" + key + ")'>" + key + "</a>&nbsp&nbsp";
+		}
+
+		links += "<a href='#G'>TEST</a>";
+
+		$("#jumpTo").html(links);
 	};
 
 	createDonorTable = function(tableData) {
 
 		var results = '<table class="table table-bordered table-striped">';
 
-		var	jumpToLetters = { A: false, B: false, C: false, D: false, E: false, F: false, G: false, H: false, I: false, J: false, K: false, L: false, M: false, 
-									N: false, O: false, P: false, Q: false, R: false, S: false, T: false, U: false, V: false, W: false, X: false, Y: false, Z: false };
-		var	jumpToChar = '';
-		createJumpToLinks();
+		//var	jumpToLetters = { A: false, B: false, C: false, D: false, E: false, F: false, G: false, H: false, I: false, J: false, K: false, L: false, M: false, 
+									//N: false, O: false, P: false, Q: false, R: false, S: false, T: false, U: false, V: false, W: false, X: false, Y: false, Z: false };
+
+		//var	jumpToChar = '';
+		//createJumpToLinks(jumpToLetters);
 
 		$.each(tableData, function (key, value) {
 
-			if(value.lastName != null) {
+			// if(value.lastName != null) {
 
-				jumpToChar = value.lastName.charAt(0).toUpperCase();
-				if(!jumpToLetters[jumpToChar]) {
+			// 	jumpToChar = value.lastName.charAt(0).toUpperCase();
+			// 	if(!jumpToLetters[jumpToChar]) {
 
-					var temp = '<div id="' + jumpToChar + '">';
-					results += temp;
-					//alert("added " + temp);
+			// 		var temp = '<div id="' + jumpToChar + '"></div>';
+			// 		results += temp;
+			// 		//alert("added " + temp);
 
-					jumpToLetters[jumpToChar] = true;
-				}
-			}
+			// 		jumpToLetters[jumpToChar] = true;
+			// 	}
+			// }
 
 			results += '<tr>';
 			results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
@@ -415,7 +430,6 @@ browseDonorsView = (function($) {
 
 			results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
 			results += '</tr>';
-
 		} );
 
 		results += '</table>';
@@ -430,6 +444,9 @@ browseDonorsView = (function($) {
 		},
 		createDonorTable: function(tableData) {
 			createDonorTable(tableData);
+		},
+		onClickJumpToLetter: function(letter) {
+			onClickJumpToLetter(letter);
 		}
 	};
 

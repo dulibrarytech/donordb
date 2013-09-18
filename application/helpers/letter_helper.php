@@ -16,13 +16,15 @@ function generateLetter($data)
 
 	<body>
 
-	<div style='float: right; height: 75px;'>
-		<img src=" . base_url() . "img/lheader.jpg' height = '85px' />
+	<div style='height: 75px;'>
+	<div style='float: right;'>
+		<img src='" . base_url() . "img/lheader.jpg' height = '85px' />
+	</div>
 	</div>
 
 	<div style = 'height: 740px;'>
 
-		" . date('m/d/Y') . " <br />"
+		" . date('m/d/Y') . " <br /><br />"
 		. $data['titleString'] . " " . $data['firstName'] . " " . $data['lastName'] . "<br />";
 
 		if($data['org'] != "") { $letterBody .= $data['org'] . "<br />"; }
@@ -68,3 +70,4 @@ function generateLetter($data)
 
 	echo $letterBody;
 }
+

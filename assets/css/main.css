@@ -488,6 +488,23 @@ a:not([href]) {
 	margin-left: -1.3em; 
 }
 
+#jumpTo a {
+
+	/*font-weight: bold;*/
+	font-size: 18px;
+}
+
+#jumpTo a:hover {
+
+	text-decoration: none;
+}
+
+#jumpTo {
+
+	width: 800px;
+	margin-left: 215px;
+	padding-bottom: 20px;
+}
 
 
 

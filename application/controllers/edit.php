@@ -86,6 +86,8 @@ class edit extends CI_Controller {
 
             $giftData = $this->input->post();
 
+            // sanitize $this->input->post();
+
             // Anonymous donor
             if($donorID == 1)
                 $giftData['letterFlag'] = 0;
