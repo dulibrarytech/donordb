@@ -43,6 +43,11 @@ a:not([href]) {
 	//padding-left: 0px;
 }
 
+.button-table-item {
+
+	width: 100px;
+}
+
 /* Classes */
 .navbar {
 

@@ -192,7 +192,8 @@ class search extends CI_Controller {
 				$data = array_merge($donorData,$giftData);
 				$data['titleString'] = $this->searchModel->getTitle($data['titleID']);  
 
-				$data['giftDate'] = convertDateToNormalFormat($data['giftDate']);
+				$data['giftDate'] = convertDBDateToNormalFormat($data['giftDate']);
+				$data['currentDate'] = getCurrentDate();
 			}			
 
 			// *** Auto-set letter as 'complete'.  Can add option to do so manually if necessary (use this->sendLetter)

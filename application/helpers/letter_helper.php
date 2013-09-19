@@ -24,7 +24,7 @@ function generateLetter($data)
 
 	<div style = 'height: 740px;'>
 
-		" . date('m/d/Y') . " <br /><br />"
+		" . $data['currentDate'] . " <br /><br />"
 		. $data['titleString'] . " " . $data['firstName'] . " " . $data['lastName'] . "<br />";
 
 		if($data['org'] != "") { $letterBody .= $data['org'] . "<br />"; }
@@ -55,7 +55,7 @@ function generateLetter($data)
 		Sincerely,
 		<br/><br/>
 
-		<img src='" . base_url() . "img/ns.jpg' height = '85px' /><br/>
+		<img src='../external-images/testsig.jpg' height = '85px' /><br/>
 		Nancy Allen
 		<br/>
 		Dean and Director
