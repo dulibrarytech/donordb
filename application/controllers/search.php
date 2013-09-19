@@ -84,6 +84,11 @@ class search extends CI_Controller {
 		echo json_encode($this->phpsessions->get('activeDonorNameString'));
 	}
 
+	public function getActiveGiftID()
+	{
+		echo json_encode($this->phpsessions->get('activeGiftID'));
+	}
+
 	public function queryDatabaseAllDonors()
 	{
 		echo json_encode($this->searchModel->getAllDonors());

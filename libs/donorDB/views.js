@@ -45,7 +45,7 @@ searchView = (function($) {
 
 		if(authentication.validateLocalSession())
 		{
-			var profile = JSON.parse(sessionStorage.getItem('donorDB_profile')),
+			var profile = viewUtils.getProfile(),
 				queue = getQueue();
 
 			setRole(profile.roleID);
@@ -319,7 +319,7 @@ searchView = (function($) {
 		if(showButtons)
 			$("#post-search-buttons").toggle();
 
-		var profile = JSON.parse(sessionStorage.getItem('donorDB_profile'));
+		var profile = viewUtils.getProfile();
 		if(profile.roleID == 1) {
 
 			$("#table-section").toggle();
@@ -974,6 +974,12 @@ editDonorView = (function($) {
 		$("#description_area").prop('disabled', 'true');
 		$("#gift_quantity_box").prop('disabled', 'true');
 
+		var profile = viewUtils.getProfile();
+		if(profile.roleID != 2) {
+			$("#gen_letter_button").hide();
+		}
+
+
 		addEvents();
 
 		utils.getGiftDatesForActiveDonor(createGiftDateDropDown); 
@@ -1033,6 +1039,11 @@ editDonorView = (function($) {
 	    $("#edit-gift-button").click( function() {
 
 	    	window.location.href = _editUrl + "/editGiftView";
+	    });
+
+	    $("#gen_letter_button").click( function() {
+
+	    	utils.getActiveGift(viewUtils.displayLetter);
 	    });
 	};
 
@@ -1256,6 +1267,11 @@ viewUtils = (function($) {
 		return $("meta[name=page]").attr("content");
 	};
 
+	getProfile = function() {
+
+		return JSON.parse(sessionStorage.getItem('donorDB_profile'));
+	};
+
 	// Sets the user name string / adds logout link
 	setUserLabel = function(fname,lname) {
 
@@ -1270,7 +1286,7 @@ viewUtils = (function($) {
 
 	getList = function() {
 
-		var profile = JSON.parse(sessionStorage.getItem('donorDB_profile'));
+		var profile = getProfile();
 		switch(profile.roleID) {
 
 			case 2:
@@ -1301,6 +1317,9 @@ viewUtils = (function($) {
 
 		getPage: function() {
 			return getPage();
+		},
+		getProfile: function() {
+			return getProfile();
 		},
 		setUserLabel : function(fname,lname) {
 			setUserLabel(fname,lname);

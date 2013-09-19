@@ -29,6 +29,7 @@ utils = (function($) {
 		getGiftDatesForActiveDonor,
 		getNewDonationList,
 		getTypedLetterRequests,
+		getActiveGift,
 		setActiveGift,
 		setTypedLetterComplete;
 
@@ -63,6 +64,25 @@ utils = (function($) {
 
 			type: "POST", 
 			url: _searchUrl + '/queryDatabaseDonorData',
+			dataType: "json",
+			cache: true,
+			success: function (response) {
+				callback(response);
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown );
+            }
+		};
+
+		doAjax(requestObj);
+	};
+
+	getActiveGift = function(callback) {
+
+		requestObj = {
+
+			type: "POST", 
+			url: _searchUrl + '/getActiveGiftID',
 			dataType: "json",
 			cache: true,
 			success: function (response) {
@@ -431,6 +451,9 @@ utils = (function($) {
 		},
 		getTypedLetterRequests: function(callback) {
 			getTypedLetterRequests(callback);
+		},
+		getActiveGift: function(callback) {
+			getActiveGift(callback);
 		},
 		setActiveGift: function(giftID, callback) {
 			setActiveGift(giftID,callback);
