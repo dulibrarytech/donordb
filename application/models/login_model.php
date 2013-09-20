@@ -3,14 +3,14 @@
 /*
  * Donor Application
  *
- * loginModel - LDAP/AD access; usersModel access
+ * Login_model - LDAP/AD access; Users_model access
  *
  * Author: Jeff Rynhart
  * 
  * University of Denver, August 2013
  */
 
-class loginModel extends CI_Model 
+class Login_model extends CI_Model 
 {
     public function __construct() 
     {
@@ -64,12 +64,12 @@ class loginModel extends CI_Model
         // Check login against donorDB user table.  If login is valid, set user session profile
         if($remoteAuth == TRUE)
         {
-            $this->load->model("usersModel");
-            $id = $this->usersModel->validateUser($userName);
+            $this->load->model("Users_model");
+            $id = $this->Users_model->validateUser($userName);
             
             if($id > 0)
             {
-                $profile = $this->usersModel->getProfile($id);
+                $profile = $this->Users_model->getProfile($id);
                 log_message("info", "donorDB login validated: " . $userName);
 
                 if ($profile["isValid"] == TRUE) // *returns $profile['isValid'] == FALSE if not valid, not a null array

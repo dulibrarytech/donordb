@@ -16,7 +16,7 @@ class search extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('url');
-		$this->load->model('searchModel');
+		$this->load->model('Search_model');
     }
 
 	/*
@@ -54,11 +54,11 @@ class search extends CI_Controller {
                 $searchType = $this->input->post('searchType');
 
                 if($searchType == "donor")
-					echo json_encode($this->searchModel->donorSearch($keyword)); 
+					echo json_encode($this->Search_model->donorSearch($keyword)); 
                 else if($searchType == "gift")
-                	echo json_encode($this->searchModel->giftSearch($keyword,$fromDate,$toDate)); 
+                	echo json_encode($this->Search_model->giftSearch($keyword,$fromDate,$toDate)); 
                 else if($searchType == "anonymous")
-                	echo json_encode($this->searchModel->anonymousGiftSearch($keyword,$fromDate,$toDate));
+                	echo json_encode($this->Search_model->anonymousGiftSearch($keyword,$fromDate,$toDate));
                 else
                 	echo json_encode("Search type error!");
 
@@ -91,17 +91,17 @@ class search extends CI_Controller {
 
 	public function queryDatabaseAllDonors()
 	{
-		echo json_encode($this->searchModel->getAllDonors());
+		echo json_encode($this->Search_model->getAllDonors());
 	}
 
 	public function queryDatabaseAllTitles()
 	{
-		echo json_encode($this->searchModel->getAllTitles());
+		echo json_encode($this->Search_model->getAllTitles());
 	}
 
 	public function queryDatabaseNewDonations()
 	{
-		$data = $this->searchModel->getAllNewDonations();
+		$data = $this->Search_model->getAllNewDonations();
 
 		if(gettype($data) != 'string')
 		{
@@ -114,7 +114,7 @@ class search extends CI_Controller {
 
 	public function queryDatabaseTypedLetterRequests()
 	{
-		$data = $this->searchModel->getAllTypedLetterRequests();
+		$data = $this->Search_model->getAllTypedLetterRequests();
 
 		if(gettype($data) != 'string')
 		{
@@ -131,7 +131,7 @@ class search extends CI_Controller {
 			$giftID = $this->phpsessions->get('activeGiftID');
 
 		// Main gift data
-		$dataArray = $this->searchModel->getGiftData($giftID);
+		$dataArray = $this->Search_model->getGiftData($giftID);
 
 		// Add namestring for view display
 		$dataArray['nameString'] = $this->phpsessions->get('activeDonorNameString');
@@ -144,7 +144,7 @@ class search extends CI_Controller {
 		if($donorID == null)
 			$donorID = $this->phpsessions->get('activeDonorID');
 
-		echo json_encode($this->searchModel->getDonorData($donorID));
+		echo json_encode($this->Search_model->getDonorData($donorID));
 	}
 
 	public function queryDatabaseDonorGifts($donorID = null)
@@ -152,7 +152,7 @@ class search extends CI_Controller {
 		if($donorID == null)
 			$donorID = $this->phpsessions->get('activeDonorID');
 
-		$giftDataArray = $this->searchModel->getDonorGifts($donorID);
+		$giftDataArray = $this->Search_model->getDonorGifts($donorID);
 
 		// Send over the current active giftID
 		//$giftDataArray['activeGiftID'] = $this->phpsessions->get('activeGiftID');
@@ -180,9 +180,9 @@ class search extends CI_Controller {
 		{
 			$this->load->helper('letter_helper');
 			$this->load->helper('dbdate_helper');
-			$this->load->model('editModel');
+			$this->load->model('Edit_model');
 
-			$donorID = $this->searchModel->getDonorOfGift($giftID);
+			$donorID = $this->Search_model->getDonorOfGift($giftID);
 
 			if($donorID == 0)
 			{
@@ -190,19 +190,19 @@ class search extends CI_Controller {
 			}
 			else
 			{
-				$donorData = $this->searchModel->getDonorData($donorID);
+				$donorData = $this->Search_model->getDonorData($donorID);
 
-				$giftData = $this->searchModel->getGiftData($giftID);
+				$giftData = $this->Search_model->getGiftData($giftID);
 
 				$data = array_merge($donorData,$giftData);
-				$data['titleString'] = $this->searchModel->getTitle($data['titleID']);  
+				$data['titleString'] = $this->Search_model->getTitle($data['titleID']);  
 
 				$data['giftDate'] = convertDBDateToNormalFormat($data['giftDate']);
 				$data['currentDate'] = getCurrentDate();
 			}			
 
 			// *** Auto-set letter as 'complete'.  Can add option to do so manually if necessary (use this->sendLetter)
-			$this->editModel->setLetterAsSent($giftID);
+			$this->Edit_model->setLetterAsSent($giftID);
 
 			echo json_encode(generateLetter($data));
 		}

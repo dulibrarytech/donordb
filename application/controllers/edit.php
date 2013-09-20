@@ -21,8 +21,8 @@ class edit extends CI_Controller {
         $this->load->helper('url');
         $this->load->helper('form');
 
-		$this->load->model('editModel');
-		$this->load->model('searchModel');
+		$this->load->model('Edit_model');
+		$this->load->model('Search_model');
     }
 
 	public function index()
@@ -57,7 +57,7 @@ class edit extends CI_Controller {
               if($donorID == 1)
                   $this->phpsessions->set('activeDonorNameString', "Anonymous Donor");
               else
-                  $this->phpsessions->set('activeDonorNameString', $this->searchModel->getNameString($donorID));
+                  $this->phpsessions->set('activeDonorNameString', $this->Search_model->getNameString($donorID));
           }
           
 
@@ -92,7 +92,7 @@ class edit extends CI_Controller {
             if($donorID == 1)
                 $giftData['letterFlag'] = 0;
 
-            $giftID = $this->editModel->createGiftRecord($donorID,$giftData);
+            $giftID = $this->Edit_model->createGiftRecord($donorID,$giftData);
 
             if($giftID > 0) 
             {
@@ -119,7 +119,7 @@ class edit extends CI_Controller {
       if($donorID != null)
       {
           $this->phpsessions->set('activeDonorID', $donorID);
-          $this->phpsessions->set('activeDonorNameString', $this->searchModel->getNameString($donorID));
+          $this->phpsessions->set('activeDonorNameString', $this->Search_model->getNameString($donorID));
       }
       if($giftID != null)
           $this->phpsessions->set('activeGiftID', $giftID);
@@ -145,7 +145,7 @@ class edit extends CI_Controller {
 
               $giftData = $this->input->post();
 
-              if($this->editModel->editGiftRecord($giftID,$giftData)) 
+              if($this->Edit_model->editGiftRecord($giftID,$giftData)) 
                 echo "Database was successfully updated.";
               else
                 echo "Error in updating database.";
@@ -189,9 +189,9 @@ class edit extends CI_Controller {
 
                 $donorData = $this->input->post();
                 
-                $donorID = $this->editModel->createDonorRecord($donorData);
+                $donorID = $this->Edit_model->createDonorRecord($donorData);
 
-                $giftID = $this->editModel->createGiftRecord($donorID, $donorData);
+                $giftID = $this->Edit_model->createGiftRecord($donorID, $donorData);
 
                 if($donorID > 0 && $giftID > 0) 
                 	echo "Database was successfully updated.";
@@ -213,7 +213,7 @@ class edit extends CI_Controller {
       $data['pageLoader'] = "<script>editDonorView.initPage();</script>";
 
       $this->phpsessions->set('activeDonorID', $donorID);
-      $this->phpsessions->set('activeDonorNameString', $this->searchModel->getNameString($donorID));
+      $this->phpsessions->set('activeDonorNameString', $this->Search_model->getNameString($donorID));
 
       // If a giftID arg is passed in, set the active gift now.  If not, this is a general donor info view, no active gift yet
       if($giftID != null)
@@ -241,7 +241,7 @@ class edit extends CI_Controller {
 
               $donorData = $this->input->post();
 
-              if($this->editModel->editDonorRecord($donorID,$donorData)) 
+              if($this->Edit_model->editDonorRecord($donorID,$donorData)) 
                 echo "Database updated successfully";
               else
                 echo "Error in updating database.";
@@ -273,7 +273,7 @@ class edit extends CI_Controller {
 
               $newTitle = $this->input->post('title');
 
-              $titleID = $this->editModel->addTitle($newTitle);
+              $titleID = $this->Edit_model->addTitle($newTitle);
 
               if($titleID > 0) 
               {
@@ -301,7 +301,7 @@ class edit extends CI_Controller {
   public function setSessionActiveGift($giftID,$data = null)
   {
       //$donorID = $this->phpsessions->get('activeDonorID');
-      //$giftID = $this->searchModel->getGiftIDForGiftDate($donorID,$giftDate);
+      //$giftID = $this->Search_model->getGiftIDForGiftDate($donorID,$giftDate);
 
       $message = "Set Active Gift Error";
 
@@ -346,7 +346,7 @@ class edit extends CI_Controller {
 
     if($giftID != null)
     {
-      $this->editModel->setLetterAsSent($giftID);
+      $this->Edit_model->setLetterAsSent($giftID);
     }
   }
 }

@@ -3,14 +3,14 @@
 /*
  * Donor Application
  *
- * usersModel - Interface with user database table
+ * Users_model - Interface with user database table
  *
  * Author: Jeff Rynhart
  * 
  * University of Denver, August 2013
  */
 
-class usersModel extends CI_Model 
+class Users_model extends CI_Model 
 {
     public function __construct() 
     {

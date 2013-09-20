@@ -25,8 +25,8 @@ class Login extends CI_Controller
 
             case "POST":
 
-                $this->load->model('loginModel');
-                echo json_encode($this->loginModel->authenticate($this->input->post()));
+                $this->load->model('Login_model');
+                echo json_encode($this->Login_model->authenticate($this->input->post()));
                 break;
 
             default:

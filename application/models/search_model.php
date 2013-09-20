@@ -3,14 +3,14 @@
 /*
  * Donor Application
  *
- * SearchModel - functions related to data retrieval
+ * Search_model - functions related to data retrieval
  *
  * Author: Jeff Rynhart
  * 
  * University of Denver, June 2013
  */
  
-class searchModel extends CI_Model 
+class Search_model extends CI_Model 
 {
     function __construct() 
     {
@@ -608,4 +608,4 @@ class searchModel extends CI_Model
 
         return $title;
     }
-} // SearchModel
+} // Search_model

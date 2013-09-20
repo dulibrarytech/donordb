@@ -16,8 +16,7 @@ function truncateDateString($dateString)
 
 function getCurrentDate() 
 {
-	//$date = date("m/d/Y");
-	$date = "09/09/2013";
+	$date = date("m/d/Y");
 
 	if($date[3] == "0")
 		$date = substr_replace($date,"",3,1);

@@ -2,28 +2,28 @@
 /*
  * Donor Application
  *
- * editModel - functions related to data entry
+ * Edit_model - functions related to data entry
  *
  * Author: Jeff Rynhart
  * 
  * University of Denver, July 2013
  */
  
-class editModel extends CI_Model 
+class Edit_model extends CI_Model 
 {
 
 	function __construct() 
     {
         parent::__construct();
         $this->load->database();
-        $this->load->model('searchModel');
+        $this->load->model('Search_model');
     }
 
     public function createDonorRecord($newDonorData)
     {
     	$ID = 0;
 
-        //$titleID = $this->searchModel->getTitleID($newDonorData['title']);
+        //$titleID = $this->Search_model->getTitleID($newDonorData['title']);
 
         $country = "USA";
         if($newDonorData['country'] != "")
@@ -165,4 +165,4 @@ class editModel extends CI_Model
         return $success;
     }
 
-} // editModel
+} // Edit_model
