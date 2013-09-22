@@ -10,7 +10,7 @@
  * 
  * University of Denver, June 2013
  */
-class search extends CI_Controller {
+class Search extends CI_Controller {
 
     function __construct() 
     {

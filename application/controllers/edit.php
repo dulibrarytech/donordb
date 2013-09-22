@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class edit extends CI_Controller {
+class Edit extends CI_Controller {
 
 /*
  * Donor Application - Edit Functions
