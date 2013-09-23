@@ -16,6 +16,7 @@ class Search extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('url');
+        $this->load->helper('sanitizer');
 		$this->load->model('Search_model');
     }
 
@@ -161,16 +162,16 @@ class Search extends CI_Controller {
 		//$giftDataArray['activeGiftID'] = $this->phpsessions->get('activeGiftID');
 
 		// Set the active gift to the first giftID in the gift array, if it has not yet been set 
-		$giftID = $this->phpsessions->get('activeGiftID');
-		if($giftID != null)
-			$giftDataArray['activeGiftID'] = $giftID;
-		else
-		{
+		// $giftID = $this->phpsessions->get('activeGiftID');
+		// if($giftID != null)
+		// 	$giftDataArray['activeGiftID'] = $giftID;
+		// else
+		// {
 			reset($giftDataArray);
 			$firstKey = key($giftDataArray);
 			$this->phpsessions->set('activeGiftID', $firstKey);
 			$giftDataArray['activeGiftID'] = $firstKey;
-		}
+		//}
 
 		echo json_encode($giftDataArray);
 	}
@@ -178,8 +179,9 @@ class Search extends CI_Controller {
 	public function getLetter()
 	{
 		$giftID = $this->input->post('giftID');
+		//$giftID = sanitizeString($postID);
 
-		if($giftID != null && is_int($giftID))
+		if($giftID != null)
 		{
 			$this->load->helper('letter_helper');
 			$this->load->helper('dbdate_helper');
@@ -210,6 +212,6 @@ class Search extends CI_Controller {
 			echo json_encode(generateLetter($data));
 		}
 		else
-			echo json_encode("Error: missing gift ID");
+			echo json_encode('Error: missing gift ID');
 	}
 }

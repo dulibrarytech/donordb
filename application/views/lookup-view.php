@@ -47,7 +47,7 @@
 	</div>
 
 	<!-- Main Content Window -->
-	<div class="container content-window">
+	<div class="container content-window" id="home-window">
 
 		<!-- Menu Bar -->
 		<?php $this->load->view("partials/menu-bar.php"); ?>
@@ -104,14 +104,12 @@
 	 			<div id="table-content"></div>
 			</div>
 
-			<div id="post-search-buttons">
-				<button class="btn-grey" id="search_return">Return To Search</button>
-				<button class="btn-grey" id="search_new">New Search</button>
-			</div>
-
 		</div>
 
-		
+		<div id="post-search-buttons">
+			<button class="btn-grey" id="search_return">Return To Search</button>
+			<button class="btn-grey" id="search_new">New Search</button>
+		</div>	
 
 	</div>
 

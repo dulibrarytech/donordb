@@ -141,7 +141,7 @@ searchView = (function($) {
 			case 2: 	// Admin
 
 				$(".content-window").css("height", "700px");
-				$("#table-section").css("height", "200px");
+				$("#table-content").css("height", "125px");
 				$("#table-section").show();
 				$("#alert-section-label").text("Inbox");
 				$("#alert-section-label").show();
@@ -151,7 +151,7 @@ searchView = (function($) {
 			case 3: 	// External Relations
 
 				$(".content-window").css("height", "700px");
-				$("#table-section").css("height", "200px");
+				$("#table-content").css("height", "125px");
 				$("#table-section").show();
 				$("#alert-section-label").text("Inbox");
 				$("#alert-section-label").show();
@@ -325,6 +325,14 @@ searchView = (function($) {
 		if(profile.roleID == 1) {
 
 			$("#table-section").toggle();
+
+			//if($("#content-window").prop('height') == '435')
+			if($("#home-window").css('height') == '435px') {
+				$("#home-window").css('height', '700px');
+			}
+			else {
+				$("#home-window").css('height', '700px');
+			}
 		}
 		else if(profile.roleID == 2 || profile.roleID == 3) {
 
@@ -739,7 +747,7 @@ addNewDonorView = (function($) {
 
 		anonymousView = anonymous;
 
-		$(".content-window").css("height", "740px");
+		$(".content-window").css("height", "760px");
 
 		if(anonymous == 1) {
 
@@ -753,7 +761,6 @@ addNewDonorView = (function($) {
 			$(".content-window").css("height", "740px");
 		}
 			
-
 		$("#add_info_message").hide();
 		$("#title-edit-box").hide();
 		$("#edit-gift-button").hide();
@@ -763,6 +770,11 @@ addNewDonorView = (function($) {
 		$("#gift_quantity_box").prop('enabled', 'true');
 
 		$("#add_info_button").html("Save");
+
+		var profile = viewUtils.getProfile();
+		if(profile.roleID != 2) {
+			$("#gen_letter_button").hide();
+		}
 
 		addEvents(anonymous);
 
@@ -964,7 +976,7 @@ editDonorView = (function($) {
 
 	initPage = function() {
 
-		$(".content-window").css("height", "740px");
+		$(".content-window").css("height", "760px");
 
 		$("#page-label").text("View / Edit Donor Info");
 
@@ -981,7 +993,6 @@ editDonorView = (function($) {
 		if(profile.roleID != 2) {
 			$("#gen_letter_button").hide();
 		}
-
 
 		addEvents();
 

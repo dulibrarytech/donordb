@@ -36,6 +36,7 @@ function sanitizeString($inputString)
 {
     if(is_string($inputString))
     {
+        $sanitized = "";
         $sanitized = htmlspecialchars($sanitized, ENT_QUOTES, 'UTF-8');
 
         $sanitized = strip_tags($sanitized);
