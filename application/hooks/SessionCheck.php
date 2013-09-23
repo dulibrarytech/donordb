@@ -22,7 +22,7 @@ class SessionCheck
     function isSessionValid() 
     {
     	$CI =& get_instance();
-    	if($CI->router->class == 'login' || ($CI->router->class == 'search' && $CI->router->method == 'index'))
+    	if($CI->router->class == 'login' || $CI->router->class == 'codetest' || ($CI->router->class == 'search' && $CI->router->method == 'index'))
     	{
     		return;
     	}

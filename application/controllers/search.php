@@ -40,7 +40,10 @@ class Search extends CI_Controller {
 
             case "GET":
 			{
-                $data['pageLoader'] = "<script>searchView.initPage();</script>";
+                $data['pageLoader'] = "<script>
+									searchView.initPage();
+									authentication.validateSession();
+								</script>";
 
                 $this->load->view('lookup-view', $data);
 
@@ -176,7 +179,7 @@ class Search extends CI_Controller {
 	{
 		$giftID = $this->input->post('giftID');
 
-		if($giftID != null)
+		if($giftID != null && is_int($giftID))
 		{
 			$this->load->helper('letter_helper');
 			$this->load->helper('dbdate_helper');

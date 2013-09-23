@@ -20,9 +20,10 @@ class Edit extends CI_Controller {
 
         $this->load->helper('url');
         $this->load->helper('form');
+        $this->load->helper('sanitizer');
 
-		$this->load->model('Edit_model');
-		$this->load->model('Search_model');
+		    $this->load->model('Edit_model');
+		    $this->load->model('Search_model');
     }
 
 	public function index()
@@ -84,9 +85,8 @@ class Edit extends CI_Controller {
             if($donorID == null)
               $donorID = $this->phpsessions->get('activeDonorID');
 
-            $giftData = $this->input->post();
-
-            // sanitize $this->input->post();
+            $postData = $this->input->post();
+            $giftData = sanitizePost($postData);
 
             // Anonymous donor
             if($donorID == 1)
@@ -143,7 +143,8 @@ class Edit extends CI_Controller {
               if($giftID == null)
                   $giftID = $this->phpsessions->get('activeGiftID');
 
-              $giftData = $this->input->post();
+              $postData = $this->input->post();
+              $giftData = sanitizePost($postData);
 
               if($this->Edit_model->editGiftRecord($giftID,$giftData)) 
                 echo "Database was successfully updated.";
@@ -187,7 +188,8 @@ class Edit extends CI_Controller {
                 $donorID = 0;
                 $giftID = 0;
 
-                $donorData = $this->input->post();
+                $postData = $this->input->post();
+                $donorData = sanitizePost($postData);
                 
                 $donorID = $this->Edit_model->createDonorRecord($donorData);
 
@@ -239,7 +241,8 @@ class Edit extends CI_Controller {
               if($donorID == null)
                   $donorID = $this->phpsessions->get('activeDonorID');
 
-              $donorData = $this->input->post();
+              $postData = $this->input->post();
+              $donorData = sanitizePost($postData);
 
               if($this->Edit_model->editDonorRecord($donorID,$donorData)) 
                 echo "Database updated successfully";
@@ -271,7 +274,8 @@ class Edit extends CI_Controller {
           {
               $titleID = 0;
 
-              $newTitle = $this->input->post('title');
+              $postData = $this->input->post('title');
+              $newTitle = sanitizeString($postData);
 
               $titleID = $this->Edit_model->addTitle($newTitle);
 

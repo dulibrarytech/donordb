@@ -25,8 +25,9 @@ form = (function($) {
 	addDonorDBEditFormValidation = function() {
 
 		$( "#fname_input_box" ).rules( "add", {
+			required: true,
 			maxlength: 255,
-			messages: {
+			messages: { 
 
 			}
 		});
@@ -35,7 +36,7 @@ form = (function($) {
 			required: true,
 			maxlength: 255,
 			messages: {
-			    required: "Please enter a last name"
+			    
 			}
 		});
 
@@ -46,45 +47,130 @@ form = (function($) {
 			}
 		});
 
-		$( "#" ).rules( "add", {
+		$( "#addr1_input_box" ).rules( "add", {
+			required: true,
 			maxlength: 255,
 			messages: {
 			    
 			}
 		});
 
-		$( "#" ).rules( "add", {
+		$( "#addr2_input_box" ).rules( "add", {
 			maxlength: 255,
 			messages: {
 			    
 			}
 		});
 
-		$( "#" ).rules( "add", {
-			maxlength: 255,
+		$( "#city_input_box" ).rules( "add", {
+			required: true,
+			maxlength: 50,
 			messages: {
 			    
 			}
 		});
 
-		$( "#" ).rules( "add", {
-			maxlength: 255,
+		$( "#state_input_box" ).rules( "add", {
+			required: true,
+			maxlength: 50,
 			messages: {
 			    
 			}
 		});
 
-		$( "#" ).rules( "add", {
-			maxlength: 255,
+		$( "#zip_input_box" ).rules( "add", {
+			number: true,
+			maxlength: 20,
 			messages: {
 			    
 			}
 		});
 
-		$( "#" ).rules( "add", {
+		$( "#country_input_box" ).rules( "add", {
+			maxlength: 50,
+			messages: {
+			    
+			}
+		});
+
+		$( "#phone_input_box" ).rules( "add", {
+			number: true,
+			maxlength: 11,
+			messages: {
+			    
+			}
+		});
+
+		$( "#email_input_box" ).rules( "add", {
+			maxlength: 255,
+			email: true,
+			messages: {
+			    
+			    email: "Please enter a valid email address"
+			}
+		});
+
+		$( "#description_area" ).rules( "add", {
 			maxlength: 255,
 			messages: {
 			    
+
+			}
+		});
+
+		$( "#gift-date-box" ).rules( "add", {
+			date: true,
+			maxlength: 255,
+			messages: {
+			    
+
+			}
+		});
+
+		$( "#gift_quantity_box" ).rules( "add", {
+			number: true,
+			maxlength: 10,
+			messages: {
+			    
+
+			}
+		});
+	};
+
+	addDonorDBGiftFormValidation = function() {
+
+		$( "#gift_quantity_box" ).rules( "add", {
+			number: true,
+			maxlength: 10,
+			messages: {
+			    
+
+			}
+		});
+
+		$( "#gift-date-box" ).rules( "add", {
+			date: true,
+			maxlength: 12,
+			messages: {
+			    
+
+			}
+		});
+
+		$( "#gift_description_box" ).rules( "add", {
+			maxlength: 255,
+			messages: {
+			    
+
+			}
+		});
+
+		$( "#edit-date-box" ).rules( "add", {
+			date: true,
+			maxlength: 12,
+			messages: {
+			    
+
 			}
 		});
 	};
