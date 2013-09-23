@@ -27,7 +27,7 @@ searchView = (function($) {
 
 	initPage = function() {
 
-		$(".content-window").css("height", "425px");
+		$(".content-window").css("height", "435px");
 		$(".pre-scrollable").css("max-height", "315px");
 		$("#table-section").css("height", "405px");
 
@@ -39,6 +39,7 @@ searchView = (function($) {
 		$("#alert-section-label").hide();
 
 		addEvents();
+		form.addDonorDBSearchFormValidation();
 	};
 
 	initSession = function() {
@@ -74,6 +75,7 @@ searchView = (function($) {
 
 		$("#search-form").validate({
 
+	        // Handler
 	        errorClass: "invalid",
 	        submitHandler: function() {
 
@@ -94,7 +96,8 @@ searchView = (function($) {
 		        		utils.submitSearch(createDonorTable,"donor");
 		        	}
 	        	}
-	        }
+	        },
+	        errorLabelContainer: "#add_info_message"
 	    });
 
 	    $("#anonymous-gift-check").click(function() { 
@@ -496,7 +499,8 @@ editGiftView = (function($) {
 	            	$('#add_info_message').html("Updating gift info...");
 	            	toggleSubmitMessage();
 	            }
-	        }
+	        },
+	        errorLabelContainer: "#add_info_message"
 	    });
 
 	    $("#dropdown-box-section").change( function() {
@@ -671,7 +675,8 @@ addGiftView = (function($) {
 	        	utils.submitGift();
 	            $('#add_info_message').html("Adding new gift info...");
 	            toggleSubmitMessage();
-	        }
+	        },
+	        errorLabelContainer: "#add_info_message"
 	    });
 
 	    $("#add_anon_info_button").click( function() {
@@ -765,6 +770,7 @@ addNewDonorView = (function($) {
 		addEvents(anonymous);
 
 		utils.getTitleArray(createTitleDropdown);
+		form.addDonorDBEditFormValidation();
 	};
 
 	addEvents = function(anonymous) {
@@ -777,7 +783,8 @@ addNewDonorView = (function($) {
 	            utils.submitNewDonorInfo(anonymous);
 	            $('#add_info_message').html("Adding new donor info...");
 	            toggleSubmitMessage();
-	        }
+	        },
+	        errorLabelContainer: "#add_info_message"
 	    });
 
 	    $("#dropdown-box").change( function() {
@@ -1010,7 +1017,8 @@ editDonorView = (function($) {
 	            	$('#add_info_message').html("Updating donor info...");   
 	            	toggleSubmitMessage();
 	            } 
-	        }
+	        },
+	        errorLabelContainer: "#add_info_message"
 	    });
 
 	    // Change a selection in the title dropdown

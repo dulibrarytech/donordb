@@ -13,6 +13,7 @@
 <!--script src="<?php echo base_url();?>libs/donorDB/tables.js"></script-->
 <script src="<?php echo base_url();?>libs/donorDB/authentication.js"></script>
 <script src="<?php echo base_url();?>libs/donorDB/letter.js"></script>
+<script src="<?php echo base_url();?>libs/donorDB/form.js"></script>
 
 <!-- Page Load Scripts -->
 <script src="<?php echo base_url();?>libs/donorDB/views.js"></script>

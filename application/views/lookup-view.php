@@ -24,6 +24,7 @@
 		#post-search-buttons	{ margin-left: 20px; }
 		#anon_check_label		{ margin-left: 320px; margin-top: 5px; }
 		#anonymous-gift-check	{ margin-left: 530px; margin-top: -25px; }
+		#add_info_message		{ margin-left: 650px; }
 	</style>
 
 </head>
@@ -66,18 +67,18 @@
 			<div class="well" id="search-form-name"> 
 				<table><tr>
 					<td>
-						<label class="form-label-text" id="lname_label">Last Name or Organization:</label>  
-						<input type="text" class="input-xlarge" id="lname_input_box" placeholder="Leave blank to search all donors" name="searchTerm">   
+						<label for="lname_input_box" class="form-label-text" id="lname_label">Last Name or Organization:</label>  
+						<input type="text" class="input-xlarge" id="lname_input_box" placeholder="Leave blank to search all donors" name="searchTerm"/>   
 					</td>
 					<td>
-						<label class="form-label-text" id="anon_check_label">Search Anonymous Records</label> 
+						<label for"anonymous-gift-check" class="form-label-text" id="anon_check_label">Search Anonymous Records</label> 
 						<input type="checkbox" class="checkbox" id="anonymous-gift-check" value="0" name="anonymousCheck"/>
 					</td>
 				</td></table>
 			</div>
 
 			<div class="well" id="search-form-date">
-				<label class="form-label-text" id="date_label">Date Range:</label>
+				<label for"fromDate toDate" class="form-label-text" id="date_label">Date Range:</label>
 
 				<input type="text" class="input-small" id="fromDate" name="fromDate" placeholder="From"/>
 
@@ -87,6 +88,8 @@
 			</div>
 
 		</form>
+
+		<div id="add_info_message"></div>
 
 		<div class="container generic-label" id="alert-section-label"></div>
 
