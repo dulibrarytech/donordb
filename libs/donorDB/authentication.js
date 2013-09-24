@@ -38,7 +38,8 @@ authentication = (function($) {
             	}
             },
             error: function ( textStatus, errorThrown ) {
-                alert( "validateSession error: " + errorThrown );
+                //alert( "validateSession error: " + errorThrown );
+                window.location.replace(_serverErrorView);
             }
         };
 

@@ -31,8 +31,14 @@ class Login_model extends CI_Model
         $userName = strip_tags(trim($login["userName"]));
         $passWord = strip_tags(trim($login["passWord"]));
         $profile  = array('isValid' => FALSE, 'userName' => $userName);
-        $remoteAuth = TRUE;                                                                                 // *************   BYPASSED!  Set to FALSE
+        $remoteAuth = FALSE;                                                                            
     
+        // Demo Accounts:  Bypass remote authorization                                                      *** REMOVE ***
+        if($userName == "acq" || $userName == "admin" || $userName == "external")
+        {
+            $remoteAuth = TRUE;
+        }      
+
         // Detect ldap and ad usernames
         if (ctype_digit($userName)) 
         {
