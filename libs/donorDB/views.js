@@ -77,6 +77,8 @@ searchView = (function($) {
 
 	        // Handler
 	        errorClass: "invalid",
+	        onkeyup: function(element) {$(element).valid()},
+	        onfocusout: false,
 	        submitHandler: function() {
 
 	        	fromDate	= $("#fromDate").val();
@@ -96,7 +98,12 @@ searchView = (function($) {
 		        		utils.submitSearch(createDonorTable,"donor");
 		        	}
 	        	}
-	        }
+	        },
+	        errorPlacement: function(error, element) {
+
+				//error.appendTo('#errordiv');
+				alert(error.html());
+			}
 	    });
 
 	    $("#anonymous-gift-check").click(function() { 
@@ -200,7 +207,7 @@ searchView = (function($) {
 	/*
 	 * Builds list items from input data and inserts them into the alert list section
 	 *
-	 * Params: data['tableData']: donor and donation data; data['actionLinkText']: link text; data['action']: javascript function to call onclick
+	 * @param array tableData Donor and d ..
 	 */
 	createAlertList = function(tableData) {
 
@@ -313,6 +320,10 @@ searchView = (function($) {
 		$("#table-content").html(results);
 	};
 
+	/*
+	 * Toggle view between the search form and search results table elements.
+	 * @param boolean showButtons
+	 */
 	toggleResultsView = function(showButtons) {
 
 		$("#search-form").toggle();
@@ -321,22 +332,29 @@ searchView = (function($) {
 		if(showButtons)
 			$("#post-search-buttons").toggle();
 
+		// For the acquisitions user, there is no inbox.  The home window is 435px and the results window is 700px; this height needs to be toggled as well.
 		var profile = viewUtils.getProfile();
 		if(profile.roleID == 1) {
 
 			$("#table-section").toggle();
+
+			alert($("#home-window").css('height'));
 
 			//if($("#content-window").prop('height') == '435')
 			if($("#home-window").css('height') == '435px') {
 				$("#home-window").css('height', '700px');
 			}
 			else {
-				$("#home-window").css('height', '700px');
+				$("#home-window").css('height', '435px');
 			}
 		}
+
+		// For the admin and external relation users, there is an inbox on the home view.  This needs to be refreshed upon returning to the home view from the results view.
 		else if(profile.roleID == 2 || profile.roleID == 3) {
 
-			$("#alert-section-label").toggle();
+			$("#alert-section-label").toggle(); 
+
+			createAlertList(getQueue());
 		}
 	};
 
@@ -498,6 +516,8 @@ editGiftView = (function($) {
 		$("#add-gift-form").validate({
 
 	        errorClass: "invalid",
+	        onkeyup: function(element) {$(element).valid()},
+	        onfocusout: false,
 	        submitHandler: function() {
 
 	        	if(confirm("Are you sure?")) {
@@ -506,7 +526,12 @@ editGiftView = (function($) {
 	            	$('#add_info_message').html("Updating gift info...");
 	            	toggleSubmitMessage();
 	            }
-	        }
+	        },
+	        errorPlacement: function(error, element) {
+
+				//error.appendTo('#errordiv');
+				alert(error.html());
+			}
 	    });
 
 	    $("#dropdown-box-section").change( function() {
@@ -676,12 +701,19 @@ addGiftView = (function($) {
 		$("#add-gift-form").validate({
 
 	        errorClass: "invalid",
+	        onkeyup: function(element) {$(element).valid()},
+	        onfocusout: false,
 	        submitHandler: function() {
 
 	        	utils.submitGift();
 	            $('#add_info_message').html("Adding new gift info...");
 	            toggleSubmitMessage();
-	        }
+	        },
+	        errorPlacement: function(error, element) {
+
+				//error.appendTo('#errordiv');
+				alert(error.html());
+			}
 	    });
 
 	    $("#add_anon_info_button").click( function() {
@@ -787,12 +819,19 @@ addNewDonorView = (function($) {
 		$("#donor-input-form").validate({
 
 	        errorClass: "invalid",
+	        onkeyup: function(element) {},
+	        onfocusout: false,
 	        submitHandler: function() {
 
 	            utils.submitNewDonorInfo(anonymous);
 	            $('#add_info_message').html("Adding new donor info...");
 	            toggleSubmitMessage();
-	        }
+	        },
+	        errorPlacement: function(error, element) {
+
+				//error.appendTo('#errordiv');
+				alert(error.html());
+			}
 	    });
 
 	    $("#dropdown-box").change( function() {
@@ -1016,6 +1055,8 @@ editDonorView = (function($) {
 		$("#donor-input-form").validate({
 
 	        errorClass: "invalid",
+	        onkeyup: function(element) {$(element).valid()},
+	        onfocusout: false,
 	        submitHandler: function() {
 
 	            if(confirm("Are you sure?")) {
@@ -1024,7 +1065,12 @@ editDonorView = (function($) {
 	            	$('#add_info_message').html("Updating donor info...");   
 	            	toggleSubmitMessage();
 	            } 
-	        }
+	        },
+	        errorPlacement: function(error, element) {
+
+				//error.appendTo('#errordiv');
+				alert(error.html());
+			}
 	    });
 
 	    // Change a selection in the title dropdown
@@ -1266,7 +1312,7 @@ editDonorView = (function($) {
 
 
 /*
- * @return Name of .html file that the current page was loaded from
+ * 
  */
 viewUtils = (function($) {
 
