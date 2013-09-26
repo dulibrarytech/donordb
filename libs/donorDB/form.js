@@ -102,11 +102,11 @@ form = (function($) {
 		});
 
 		$( "#phone_input_box" ).rules( "add", {
-			number: true,
+			//number: true,
 			maxlength: 25,
 			messages: {
-			    maxlength: "Phone number: Character limit exceeded (25)",
-			    number: "Phone number: Must be a number"
+			    maxlength: "Phone number: Character limit exceeded (25)"//,
+			    //number: "Phone number: Must be a number"
 			}
 		});
 
