@@ -17,7 +17,7 @@ function sanitizePost($inputArray)
         {
             if(is_string($postValue))
             {
-                $sanitized = htmlspecialchars($sanitized, ENT_QUOTES, 'UTF-8');
+                $sanitized = htmlspecialchars($postValue, ENT_QUOTES, 'UTF-8');
 
                 $sanitized = strip_tags($sanitized);
 
@@ -41,7 +41,7 @@ function sanitizeString($inputString)
 
         $sanitized = strip_tags($sanitized);
 
-        $specChars = array('@', '#', '$', '%', '&', '(', ')', '*', ';');
+        $specChars = array('@', ' # ', '$', '%', '&', '(', ')', '*', ';');  
         $sanitized = str_ireplace($specChars, '', $sanitized);
 
         return $sanitized;

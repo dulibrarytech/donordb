@@ -1027,6 +1027,7 @@ editDonorView = (function($) {
 
 		$("#description_area").prop('disabled', 'true');
 		$("#gift_quantity_box").prop('disabled', 'true');
+		$("#important-checkbox").prop('disabled', 'true');
 
 		var profile = viewUtils.getProfile();
 		if(profile.roleID != 2) {

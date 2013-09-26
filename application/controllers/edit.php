@@ -187,15 +187,31 @@ class Edit extends CI_Controller {
             {
                 $donorID = 0;
                 $giftID = 0;
+                $updateOK = FALSE;
 
                 $postData = $this->input->post();
                 $donorData = sanitizePost($postData);
+
+                log_message("info", "postdata: " . print_r($donorData, true));
                 
                 $donorID = $this->Edit_model->createDonorRecord($donorData);
+                if($donorID > 0)
+                  $updateOK = TRUE;
+                else
+                  log_message("info", "Error in updating database with new donor info");
 
-                $giftID = $this->Edit_model->createGiftRecord($donorID, $donorData);
-
-                if($donorID > 0 && $giftID > 0) 
+                // Bug 202: Only add new gift if a gift description has been entered.
+                if($donorData['giftDescription'] != "")
+                {
+                  $giftID = $this->Edit_model->createGiftRecord($donorID, $donorData);
+                  if($giftID <= 0)
+                  {
+                    $updateOK = FALSE;
+                    log_message("info", "Error in updating database with new gift info (Add donor)");
+                  }
+                }
+                  
+                if($updateOK) 
                 	echo "Database was successfully updated.";
                 else
                 	echo "Error in updating database";

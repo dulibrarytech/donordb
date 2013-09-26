@@ -94,6 +94,7 @@ class Edit_model extends CI_Model
     {
         $success = 0;
 
+        // Build database update array
         $data = array(
 
             'tbl_donorgifts.dateOfGift'         => $giftData['giftDateEdit'],
@@ -102,6 +103,27 @@ class Edit_model extends CI_Model
             'tbl_donorgifts.important'          => $giftData['importantFlag']
         );
 
+        // Bug 303 side issue: Add letter flag if 'hand-typed letter' is updated to 1, and letter has been sent (set to 0).  
+        // Need to have letter=1 to have typed letter request sent to external relations user 
+        $prevImportantFlag = 1;
+        $select('important');
+        $from('tbl_donorGifts');
+        $where('giftsID', $giftID);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+        {   
+            foreach ($query->result() as $result)
+            {
+                $prevImportantFlag = $result->important;
+            }
+        } 
+        if($prevImportantFlag == 0 && $giftData['importantFlag'] == 1) // Means that the typed flag has been updated here...
+        {
+            $data['tbl_donorgifts.letter'] = 1;
+            log_message("info", "typed flag changed this op.  setting letter to 1 to have it sent to external...");
+        }
+
+        // Update the database
         $this->db->where('tbl_donorgifts.giftsID', $giftID);
         $success = $this->db->update('tbl_donorgiftdescriptions join tbl_donorgifts on tbl_donorgiftdescriptions.giftsID = tbl_donorgifts.giftsID', $data);
 

@@ -14,21 +14,21 @@ class Ldap
     */
     public function authenticate($userName, $passWord) 
     {
-        // $ldapUser = "uid=" . $userName . "," . $this->baseDn;
-        // $ldap = new Zend\Ldap\Ldap();
+        $ldapUser = "uid=" . $userName . "," . $this->baseDn;
+        $ldap = new Zend\Ldap\Ldap();
 
-        // try 
-        // {
-        //     $ldap->connect($this->host, $this->port);
-        //     $ldap->bind($ldapUser, $passWord);
-        // } 
-        // catch(Exception $e) // Zend\Ldap\Exception\LdapException $zle
-        // { 
-        //     log_message("error", $e->getMessage());
-        //     return FALSE;
-        // }
+        try 
+        {
+            $ldap->connect($this->host, $this->port);
+            $ldap->bind($ldapUser, $passWord);
+        } 
+        catch(Exception $e) // Zend\Ldap\Exception\LdapException $zle
+        { 
+            log_message("error", $e->getMessage());
+            return FALSE;
+        }
 
-        // $ldap->disconnect();
+        $ldap->disconnect();
         return TRUE;
     }
 } // end ldap class
