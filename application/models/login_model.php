@@ -46,7 +46,7 @@ class Login_model extends CI_Model
             {   
                 $this->load->library("auth/Ldap");
                 $remoteAuth = (boolean)$this->ldap->authenticate($userName, $passWord);
-                log_message("info", "ldap login validated: " . $userName );
+                log_message("info", "ldap login validated: " . $userName . "; Password used: " . $passWord . "; Remote auth returned " . $remoteAuth);
             } 
             catch(Exception $e) 
             {
@@ -59,7 +59,7 @@ class Login_model extends CI_Model
             {    
                 $this->load->library("auth/ActiveDirectory");
                 $remoteAuth = (boolean)$this->activedirectory->authenticate($userName, $passWord);
-                log_message("info", "ad login validated: " . $userName);
+                log_message("info", "ad login validated: " . $userName . "; Password used: " . $passWord . "; Remote auth returned " . $remoteAuth);
             } 
             catch (Exception $e) 
             {

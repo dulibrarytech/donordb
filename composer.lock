@@ -143,17 +143,17 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.2.6",
+            "version": "v2.2.8",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "45c43ffa186a0473c71a947981e43e025cd93c87"
+                "reference": "15a03e923e4bd18caaef1c18a2cceca3ee9da226"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/45c43ffa186a0473c71a947981e43e025cd93c87",
-                "reference": "45c43ffa186a0473c71a947981e43e025cd93c87",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/15a03e923e4bd18caaef1c18a2cceca3ee9da226",
+                "reference": "15a03e923e4bd18caaef1c18a2cceca3ee9da226",
                 "shasum": ""
             },
             "require": {
@@ -193,7 +193,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2013-02-11 11:26:43"
+            "time": "2013-09-18 07:27:26"
         },
         {
             "name": "zendframework/zend-crypt",
