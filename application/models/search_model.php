@@ -40,7 +40,6 @@ class Search_model extends CI_Model
      		{ 	
       		 	foreach ($query->result() as $results)
       		 	{
-
       			 		$searchResults[$index]['firstName']		 = $results->FirstName;
       			 		$searchResults[$index]['lastName']		 = $results->LastName;
       			 		$searchResults[$index]['donorID']		   = $results->donorID;
@@ -153,6 +152,8 @@ class Search_model extends CI_Model
             $toDate = mdate($datestring,$time);
         }
 
+        log_message("info", "pre-data: from: " . $fromDate . ", to: " . $toDate . ", keyword: " . $keyword);
+
         // Get all dates from donor 1 (generic anonymous donor)
         $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorgifts.donorID, tbl_donorgiftdescriptions.giftDescription1');
         $this->db->from('tbl_donorgifts');
@@ -184,44 +185,52 @@ class Search_model extends CI_Model
             }
         }
 
-        $query = null;
+        log_message("info", "post sql: results array: " . print_r($searchResults, true));
 
-        // Search for gifts from donors marked as 'anonymous' (anonymous donors with recorded info)
-        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorinfo.donorID, tbl_donorinfo.FirstName, tbl_donorinfo.LastName, tbl_donorinfo.anonymous, tbl_donorgiftdescriptions.giftDescription1');
-        $this->db->from('tbl_donorgifts');
-        $this->db->join('tbl_donorinfo', 'tbl_donorinfo.donorID = tbl_donorgifts.donorID', 'inner');
-        $this->db->join('tbl_donorgiftdescriptions', 'tbl_donorgiftdescriptions.giftsID = tbl_donorgifts.giftsID', 'inner');
-        $this->db->where('dateOfGift >=', $fromDate);
-        $this->db->where('dateOfGift <=', $toDate);
-        $this->db->where('anonymous', '1');
-        $this->db->where('tbl_donorinfo.donorID !=', '1');
-        $this->db->order_by("dateOfGift", "desc");
+        /* 
+         * Search all anonymous donor records (not yet implemented) 
+         */
+        // $query = null;
 
-        //If there is keyword data, return records that are like the keyword.
-        if($keyword != "")
-        {
-            $this->db->like('tbl_donorgiftdescriptions.giftDescription1', $keyword);    
-        }
+        // // Search for gifts from donors marked as 'anonymous' (anonymous donors with recorded info)
+        // $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorinfo.donorID, tbl_donorinfo.FirstName, tbl_donorinfo.LastName, tbl_donorinfo.anonymous, tbl_donorgiftdescriptions.giftDescription1');
+        // $this->db->from('tbl_donorgifts');
+        // $this->db->join('tbl_donorinfo', 'tbl_donorinfo.donorID = tbl_donorgifts.donorID', 'inner');
+        // $this->db->join('tbl_donorgiftdescriptions', 'tbl_donorgiftdescriptions.giftsID = tbl_donorgifts.giftsID', 'inner');
+        // $this->db->where('dateOfGift >=', $fromDate);
+        // $this->db->where('dateOfGift <=', $toDate);
+        // $this->db->where('anonymous', '1');
+        // $this->db->where('tbl_donorinfo.donorID !=', '1');
+        // $this->db->order_by("dateOfGift", "desc");
 
-        $query = $this->db->get();
+        // //If there is keyword data, return records that are like the keyword.
+        // if($keyword != "")
+        // {
+        //     $this->db->like('tbl_donorgiftdescriptions.giftDescription1', $keyword);    
+        // }
 
-        if ($query->num_rows() > 0)
-        {
-            foreach ($query->result() as $results)
-            { 
-                $searchResults[$index]['giftsID']     = $results->giftsID;
-                $searchResults[$index]['giftDate']    = truncateDateString($results->dateOfGift); 
-                $searchResults[$index]['lastName']    = $results->FirstName;
-                $searchResults[$index]['firstName']   = $results->LastName;
-                $searchResults[$index]['donorID']     = $results->donorID;
+        // $query = $this->db->get();
 
-                $index++;
-            }
-        }
-        else
-        {
-            $searchResults = "No results found";
-        }
+        // if ($query->num_rows() > 0)
+        // {
+        //     foreach ($query->result() as $results)
+        //     { 
+        //         $searchResults[$index]['giftsID']     = $results->giftsID;
+        //         $searchResults[$index]['giftDate']    = truncateDateString($results->dateOfGift); 
+        //         $searchResults[$index]['lastName']    = $results->FirstName;
+        //         $searchResults[$index]['firstName']   = $results->LastName;
+        //         $searchResults[$index]['donorID']     = $results->donorID;
+
+        //         $index++;
+        //     }
+        // }
+        // else
+        // {
+        //     *$searchResults = "No results found"; // Bug 204: no anonymous records turning up in search: this is clearing all results found in 'search anonymous gifts' sql bloc above!!  Refactor this code if implemented in the future!
+        // }
+        /*
+         * End search anonymous donor records section
+         */
 
         return $searchResults;
     }

@@ -33,20 +33,19 @@ class Login_model extends CI_Model
         $profile  = array('isValid' => FALSE, 'userName' => $userName);
         $remoteAuth = FALSE;                                                                            
     
-        // Demo Accounts:  Bypass remote authorization                                                      *** REMOVE ***
+        // Demo Accounts:  Bypass remote authorization                                                      *** REMOVE DEMO ACCOUNTS ***        *** REMOVE else from following if ***
         if($userName == "acq" || $userName == "admin" || $userName == "external")
         {
             $remoteAuth = TRUE;
         }      
 
         // Detect ldap and ad usernames
-        if (ctype_digit($userName)) 
+        else if (ctype_digit($userName)) 
         {
             try 
             {   
                 $this->load->library("auth/Ldap");
                 $remoteAuth = (boolean)$this->ldap->authenticate($userName, $passWord);
-                log_message("info", "ldap login validated: " . $userName . "; Password used: " . $passWord . "; Remote auth returned " . $remoteAuth);
             } 
             catch(Exception $e) 
             {
@@ -59,7 +58,6 @@ class Login_model extends CI_Model
             {    
                 $this->load->library("auth/ActiveDirectory");
                 $remoteAuth = (boolean)$this->activedirectory->authenticate($userName, $passWord);
-                log_message("info", "ad login validated: " . $userName . "; Password used: " . $passWord . "; Remote auth returned " . $remoteAuth);
             } 
             catch (Exception $e) 
             {

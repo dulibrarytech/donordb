@@ -158,6 +158,10 @@ class Search extends CI_Controller {
 
 		$giftDataArray = $this->Search_model->getDonorGifts($donorID);
 
+		// Uncommented for bug 205
+		$activeGift = $this->phpsessions->get('activeGiftID');
+		if($activeGift != null)
+			$giftDataArray['activeGiftID'] = $activeGift;
 		// Send over the current active giftID
 		//$giftDataArray['activeGiftID'] = $this->phpsessions->get('activeGiftID');
 
@@ -165,13 +169,13 @@ class Search extends CI_Controller {
 		// $giftID = $this->phpsessions->get('activeGiftID');
 		// if($giftID != null)
 		// 	$giftDataArray['activeGiftID'] = $giftID;
-		// else
-		// {
+		else
+		{
 			reset($giftDataArray);
 			$firstKey = key($giftDataArray);
 			$this->phpsessions->set('activeGiftID', $firstKey);
 			$giftDataArray['activeGiftID'] = $firstKey;
-		//}
+		}
 
 		echo json_encode($giftDataArray);
 	}

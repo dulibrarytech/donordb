@@ -41,7 +41,7 @@ function sanitizeString($inputString)
 
         $sanitized = strip_tags($sanitized);
 
-        $specChars = array('@', ' # ', '$', '%', '&', '(', ')', '*', ';');  
+        $specChars = array('$', '%', '&', '(', ')', '*', ';', '!', '?', '[', ']', '{', '}');  
         $sanitized = str_ireplace($specChars, '', $sanitized);
 
         return $sanitized;

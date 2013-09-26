@@ -38,6 +38,8 @@ searchView = (function($) {
 		$("#post-search-buttons").hide();
 		$("#alert-section-label").hide();
 
+		$('#anonymous-gift-check').removeAttr('checked'); // Bug 207: Hard remove of check with each page load...
+
 		addEvents();
 		form.addDonorDBSearchFormValidation();
 	};
@@ -506,6 +508,7 @@ editGiftView = (function($) {
 		$("#add_anon_info_button").hide();
 
 		addEvents();
+		form.addDonorDBGiftFormValidation();
 
 		utils.getGiftDatesForActiveDonor(createGiftDateDropDown);
 		utils.getGiftData(setGiftFormData);
@@ -683,6 +686,7 @@ addGiftView = (function($) {
 		utils.getActiveNameString(setNameString);
 
 		addEvents();
+		form.addDonorDBGiftFormValidation();
 	};
 
 	setNameString = function(name) {
@@ -1035,6 +1039,7 @@ editDonorView = (function($) {
 		}
 
 		addEvents();
+		form.addDonorDBEditFormValidation();
 
 		utils.getGiftDatesForActiveDonor(createGiftDateDropDown); 
 		utils.getActiveDonorData(setDonorFormData);
