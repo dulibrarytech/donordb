@@ -394,8 +394,8 @@ browseDonorsView = (function($) {
 
 	initPage = function() {
 
-		$(".content-window").css("height", "710px");
-		$(".pre-scrollable").css("max-height", "420px");
+		$(".content-window").css("height", "760px");
+		$(".pre-scrollable").css("max-height", "470px");
 
 		$("#page-label").text("Donor Listing");
 
@@ -406,7 +406,9 @@ browseDonorsView = (function($) {
 
 	onClickJumpToLetter = function(letter) {
 
-		$("#table-section").scrollTop();
+		alert("clicked " + letter);
+		// Scroll code
+		//$("#table-section").scrollTo(letter);
 	};
 
 	createJumpToLinks = function(jumpToLetters) {
@@ -415,10 +417,8 @@ browseDonorsView = (function($) {
 
 		for(var key in jumpToLetters) {
 
-			links += "<a onclick='browseDonorsView.onClickJumpToLetter(" + key + ")'>" + key + "</a>&nbsp&nbsp";
+			links += "<a onclick='browseDonorsView.onClickJumpToLetter(\"" + key + "\")'>" + key + "</a>&nbsp&nbsp";
 		}
-
-		links += "<a href='#G'>TEST</a>";
 
 		$("#jumpTo").html(links);
 	};
@@ -427,26 +427,27 @@ browseDonorsView = (function($) {
 
 		var results = '<table class="table table-bordered table-striped">';
 
-		//var	jumpToLetters = { A: false, B: false, C: false, D: false, E: false, F: false, G: false, H: false, I: false, J: false, K: false, L: false, M: false, 
-									//N: false, O: false, P: false, Q: false, R: false, S: false, T: false, U: false, V: false, W: false, X: false, Y: false, Z: false };
+		var	jumpToLetters = { A: false, B: false, C: false, D: false, E: false, F: false, G: false, H: false, I: false, J: false, K: false, L: false, M: false, 
+									N: false, O: false, P: false, Q: false, R: false, S: false, T: false, U: false, V: false, W: false, X: false, Y: false, Z: false };
 
-		//var	jumpToChar = '';
-		//createJumpToLinks(jumpToLetters);
+		var	jumpToChar = '';
+		createJumpToLinks(jumpToLetters);
 
 		$.each(tableData, function (key, value) {
 
-			// if(value.lastName != null) {
+			// Add the jump-to divs for each letter of the alphabet.  Once one is added, mark it as 'used' so it
+			// is only used once.
+			if(value.lastName != null) {
 
-			// 	jumpToChar = value.lastName.charAt(0).toUpperCase();
-			// 	if(!jumpToLetters[jumpToChar]) {
+				jumpToChar = value.lastName.charAt(0).toUpperCase();
+				if(!jumpToLetters[jumpToChar]) {
 
-			// 		var temp = '<div id="' + jumpToChar + '"></div>';
-			// 		results += temp;
-			// 		//alert("added " + temp);
+					var temp = '<div id="' + jumpToChar + '"></div>';
+					results += temp;
 
-			// 		jumpToLetters[jumpToChar] = true;
-			// 	}
-			// }
+					jumpToLetters[jumpToChar] = true;
+				}
+			}
 
 			results += '<tr>';
 			results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';

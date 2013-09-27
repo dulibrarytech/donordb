@@ -57,10 +57,10 @@
 		<!-- Results Table Section -->
 		<div id="table-section">
 			
+			<div id="jumpTo"></div>
+
 			<!-- Stationary table header -->
 			<div class="table table-bordered" id="table-header"></div>
-
-			<div id="jumpTo"></div>
 
 			<!-- Table content section -->
 			<div class="container pre-scrollable" id="scroll-section">
