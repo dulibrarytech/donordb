@@ -7,8 +7,9 @@
 
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/main.css" />
-
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery-ui.css" />
+
+	<link rel="shortcut icon" href="<?php echo base_url();?>img/kwak_favicon.ico" />
 
 	<meta name="page" content="info-view">
 
