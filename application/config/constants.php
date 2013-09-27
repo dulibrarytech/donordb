@@ -37,9 +37,8 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 
-// define('EXTERNAL_IMAGE_DIR', 'c:\xampp\htdocs\external-images');
-define('EXTERNAL_IMAGE_DIR', '../external-images/ns1.jpg');
-// define('EXTERNAL_IMAGE_DIR', '/etc/img'); // server
+// define('EXTERNAL_IMAGE_DIR', '../external-images/ns1.jpg'); // Local
+define('EXTERNAL_IMAGE_DIR', '/usr/I5app/ns.jpg'); // server
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
