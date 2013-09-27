@@ -55,7 +55,7 @@ function generateLetter($data)
 		Sincerely,
 		<br/><br/>
 
-		<img src='" . EXTERNAL_IMAGE_DIR . "' height = '85px' /><br/>
+		<img src='" . base_url() . "' height = '85px' /><br/>
 		Nancy Allen
 		<br/>
 		Dean and Director
@@ -63,7 +63,7 @@ function generateLetter($data)
 	</div>
 
 	<div style='padding-top: 10px;'>
-		<img src='" . base_url() . "img/lfooter.jpg' width = '400px'/>
+		<img src='" . base_url() . SIG_IMG_READER . "' width = '400px'/>
 	</div>
 
 	</body>";

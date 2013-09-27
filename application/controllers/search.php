@@ -213,9 +213,17 @@ class Search extends CI_Controller {
 			// *** Auto-set letter as 'complete'.  Can add option to do so manually if necessary (use this->sendLetter)
 			$this->Edit_model->setLetterAsSent($giftID);
 
+			// Read external file
+
 			echo json_encode(generateLetter($data));
 		}
 		else
 			echo json_encode('Error: missing gift ID');
+	}
+
+	public function getSigImage()
+	{
+		$file = read_file(EXTERNAL_IMAGE_DIR);
+		echo $file;
 	}
 }
