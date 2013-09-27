@@ -13,7 +13,7 @@
 	<!-- Positioning -->
 	<style>
 		#lname_label 		{ margin-left: 25px; }
-		#lname_input_box 	{ margin-top:9px; margin-left: 25px; }
+		#lname_input_box 	{ margin-top:  9px; margin-left: 25px; }
 		#date_label 		{ margin-left: 25px; padding-bottom: 9px }
 		#fromDate			{ margin-left: 25px; }
 		#toDate				{ margin-left: 85px; }

@@ -21,12 +21,12 @@ letter = (function($) {
 		return window.open();
 	};
 
-	createPopupWindow = function(test) {
+	createPopupWindow = function(text) {
 
 		popup = initPopupWindow();
         newDocument = popup.document;
 
-        letterText = test.substring(0, test.length - 4);
+        letterText = text.substring(0, text.length - 4);
 
         newDocument.write(letterText);
         newDocument.close();

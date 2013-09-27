@@ -324,40 +324,40 @@ searchView = (function($) {
 
 	/*
 	 * Toggle view between the search form and search results table elements.
-	 * @param boolean showButtons
+	 *
+	 * @param boolean showButtons TRUE to toggle visibility of the 'search return' buttons
 	 */
 	toggleResultsView = function(showButtons) {
-
-		$("#search-form").toggle();
-		$("#search_return").toggle();
 
 		if(showButtons)
 			$("#post-search-buttons").toggle();
 
-		// For the acquisitions user, there is no inbox.  The home window is 435px and the results window is 700px; this height needs to be toggled as well.
+		// Resize the window for the acquisitions user.  At this point, there is no alert section 
+		// and the window size changes between search and results views.
 		var profile = viewUtils.getProfile();
 		if(profile.roleID == 1) {
 
 			$("#table-section").toggle();
 
-			alert($("#home-window").css('height'));
-
-			//if($("#content-window").prop('height') == '435')
-			if($("#home-window").css('height') == '435px') {
-				$("#home-window").css('height', '700px');
+			if($("#search-form").is(":visible")) {
+				$("#home-window").css('height', '655px');
 			}
 			else {
 				$("#home-window").css('height', '435px');
 			}
 		}
 
-		// For the admin and external relation users, there is an inbox on the home view.  This needs to be refreshed upon returning to the home view from the results view.
+		// For the admin and external relation users, there is an alert section on the home view.  
+		// This needs to be refreshed upon returning to the home view from the results view.
 		else if(profile.roleID == 2 || profile.roleID == 3) {
 
 			$("#alert-section-label").toggle(); 
 
 			createAlertList(getQueue());
 		}
+
+		$("#search-form").toggle();
+		$("#search_return").toggle();
 	};
 
 	return {
@@ -395,7 +395,7 @@ browseDonorsView = (function($) {
 	initPage = function() {
 
 		$(".content-window").css("height", "760px");
-		$(".pre-scrollable").css("max-height", "470px");
+		$(".pre-scrollable").css("max-height", "463px");
 
 		$("#page-label").text("Donor Listing");
 
@@ -405,10 +405,10 @@ browseDonorsView = (function($) {
 	};
 
 	onClickJumpToLetter = function(letter) {
-
-		alert("clicked " + letter);
-		// Scroll code
-		//$("#table-section").scrollTo(letter);
+		
+		$('#scroll-section').animate({
+        	scrollTop: $("#" + letter).offset().top
+    	}, 	1000);
 	};
 
 	createJumpToLinks = function(jumpToLetters) {
@@ -426,6 +426,7 @@ browseDonorsView = (function($) {
 	createDonorTable = function(tableData) {
 
 		var results = '<table class="table table-bordered table-striped">';
+			temp = "";
 
 		var	jumpToLetters = { A: false, B: false, C: false, D: false, E: false, F: false, G: false, H: false, I: false, J: false, K: false, L: false, M: false, 
 									N: false, O: false, P: false, Q: false, R: false, S: false, T: false, U: false, V: false, W: false, X: false, Y: false, Z: false };
@@ -435,22 +436,26 @@ browseDonorsView = (function($) {
 
 		$.each(tableData, function (key, value) {
 
-			// Add the jump-to divs for each letter of the alphabet.  Once one is added, mark it as 'used' so it
-			// is only used once.
-			if(value.lastName != null) {
+			results += '<tr>';
+
+			results += '<td class="span2" style="text-align: center">';
+
+			/*
+			 * Add the jump-to divs for each letter of the alphabet.  Once one is added, mark it as 'used' so it
+			 * is only placed in the list once.
+			 * Divs need to be placed within <td> elements to work correctly with the table laypot.
+			 */  
+			 if(value.lastName != null) {
 
 				jumpToChar = value.lastName.charAt(0).toUpperCase();
-				if(!jumpToLetters[jumpToChar]) {
-
-					var temp = '<div id="' + jumpToChar + '"></div>';
-					results += temp;
-
+				if(jumpToLetters[jumpToChar] == false) {
+ 
+					results += '<div id="' + jumpToChar + '">';
 					jumpToLetters[jumpToChar] = true;
 				}
 			}
 
-			results += '<tr>';
-			results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
+			results += '<a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
 			if(value.lastName == "" || value.lastName == null)	
 				results += '<td class="span4">' + value.org + '</td>';	
@@ -461,11 +466,20 @@ browseDonorsView = (function($) {
 
 			results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
 			results += '</tr>';
+
+			// if(jumpToChar == 'Z') {
+			// 	results += '</div>';
+			// }
 		} );
 
 		results += '</table>';
 
 		$("#table-content").html(results);
+
+		// popup =window.open();
+  //       newDocument = popup.document;
+  //       newDocument.write(results);
+  //       newDocument.close();
 	};
 
 	return {
