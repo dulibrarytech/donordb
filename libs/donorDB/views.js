@@ -466,20 +466,11 @@ browseDonorsView = (function($) {
 
 			results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
 			results += '</tr>';
-
-			// if(jumpToChar == 'Z') {
-			// 	results += '</div>';
-			// }
 		} );
 
 		results += '</table>';
 
 		$("#table-content").html(results);
-
-		// popup =window.open();
-  //       newDocument = popup.document;
-  //       newDocument.write(results);
-  //       newDocument.close();
 	};
 
 	return {

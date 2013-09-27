@@ -279,9 +279,17 @@ class Search_model extends CI_Model
 		    { 	
   		 	foreach ($query->result() as $results)
   		 	{
-    		 		$donorInfo[$index]['firstName'] 	= $results->FirstName;
+    		 		// Remove 'null' string.  
+                    if($results->FirstName == null)
+                        $results->FirstName = "";
+                    if($results->LastName == null)
+                        $results->LastName = "";
+                    if($results->Organization == null)
+                        $results->Organization = "";
+
+                    $donorInfo[$index]['firstName'] 	= $results->FirstName;
     		 		$donorInfo[$index]['lastName']  	= $results->LastName;
-                    $donorInfo[$index]['org']         = $results->Organization;
+                    $donorInfo[$index]['org']           = $results->Organization;
     		 		$donorInfo[$index]['donorID']  		= $results->donorID;
 
     		 		$index++;
