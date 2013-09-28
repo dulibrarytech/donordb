@@ -55,7 +55,7 @@ function generateLetter($data)
 		Sincerely,
 		<br/><br/>
 
-		<img src='" . base_url() . "' height = '85px' /><br/>
+		<img src='" . base_url() . EXTERNAL_IMAGE_DIR . "' height = '85px' /><br/>
 		Nancy Allen
 		<br/>
 		Dean and Director
