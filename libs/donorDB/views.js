@@ -66,8 +66,10 @@ searchView = (function($) {
 			viewUtils.setUserLabel(profile.firstName,profile.lastName);
 		}
 		else {
+			alert("Local session not validated.  Please contact systems support if there is a problem logging in.");
+			authentication.logout();
 			//window.location.replace(_serverErrorView);
-			window.location.href = _searchUrl;
+			//window.location.href = _searchUrl;
 		}
 			
 	};

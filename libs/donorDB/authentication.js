@@ -115,6 +115,7 @@ authentication = (function($) {
 
 	logout = function() {
 
+		alert("here");
 		sessionStorage.clear();
 
 		window.location.href = _logoutUrl;

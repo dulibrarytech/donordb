@@ -40,7 +40,7 @@ loginForm = (function($) {
     }
 
     function doModal() {
-
+      
       $( "#dialog-form" ).dialog( "open" );
     }
 
