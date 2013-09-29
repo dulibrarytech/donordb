@@ -28,7 +28,7 @@ searchView = (function($) {
 	initPage = function() {
 
 		$(".content-window").css("height", "435px");
-		$(".pre-scrollable").css("max-height", "315px");
+		$(".pre-scrollable").css("max-height", "415px");
 		$("#table-section").css("height", "405px");
 
 		$("#page-label").text("Search Records");
@@ -150,6 +150,8 @@ searchView = (function($) {
 				
 				// TODO: Display any kind of message or task list in the table section.  Or 'DONOWT'
 
+				// set app title text: |5?
+
 				break;
 
 			case 2: 	// Admin
@@ -159,6 +161,7 @@ searchView = (function($) {
 				$("#table-section").show();
 				$("#alert-section-label").text("Inbox");
 				$("#alert-section-label").show();
+				// set app title text? donor db app?
 				
 				break;
 
@@ -169,6 +172,7 @@ searchView = (function($) {
 				$("#table-section").show();
 				$("#alert-section-label").text("Inbox");
 				$("#alert-section-label").show();
+				// set app title text? donor db app
 				
 				break;
 
