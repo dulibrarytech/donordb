@@ -505,6 +505,12 @@ class Search_model extends CI_Model
             $this->db->select();
             $this->db->from('tbl_donorgifts');
             $this->db->where('donorID', $donorID);
+            if($donorID == 1)
+            {
+              $giftID = $this->phpsessions->get('activeGiftID');
+              if($giftID != null)
+                $this->db->where('giftsID', $giftID);
+            }
 
             $query = $this->db->get();
 

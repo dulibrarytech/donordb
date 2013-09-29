@@ -26,7 +26,7 @@
 		#important-checkbox			{ margin-top: 12px; }
 		#add_anon_info_button		{ margin-left: 88px; margin-bottom: 8px; }
 
-		.change_date_elts			{ margin-left: 92px; }
+		.change_date_elts			{ margin-left: 120px; }
 
 		#dropdown-box-section		{ margin-left: 42px; width: 150px; }
 		#dropdown-box 				{ width: 120px; }

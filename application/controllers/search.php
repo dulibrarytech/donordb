@@ -158,17 +158,10 @@ class Search extends CI_Controller {
 
 		$giftDataArray = $this->Search_model->getDonorGifts($donorID);
 
-		// Uncommented for bug 205
 		$activeGift = $this->phpsessions->get('activeGiftID');
+
 		if($activeGift != null)
 			$giftDataArray['activeGiftID'] = $activeGift;
-		// Send over the current active giftID
-		//$giftDataArray['activeGiftID'] = $this->phpsessions->get('activeGiftID');
-
-		// Set the active gift to the first giftID in the gift array, if it has not yet been set 
-		// $giftID = $this->phpsessions->get('activeGiftID');
-		// if($giftID != null)
-		// 	$giftDataArray['activeGiftID'] = $giftID;
 		else
 		{
 			reset($giftDataArray);
