@@ -380,17 +380,20 @@ a:not([href]) {
 	background-color: #000000;
 	margin-left: -3;
 	width: 300px;
-	height: 33px;
+	height: 37px;
 	z-index: 5000;
 
-	text-align: center;
+	text-align: left;
 	color: #FFFFFF;
 	padding-top: 20px;
-	font-size: 20;
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; 
+	padding-left: 25px;
+	font-size: 25;
+	font-family: "Segoe Script", Arial, Helvetica, sans-serif; 
+	font-weight: bold;
 
 	position: relative; 
     left: 0px; 
+    bottom: 4px;
     z-index: 1;
 }
 

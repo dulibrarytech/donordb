@@ -65,8 +65,11 @@ searchView = (function($) {
 
 			viewUtils.setUserLabel(profile.firstName,profile.lastName);
 		}
-		//else 
-			//log and redirect somewhere
+		else {
+			//window.location.replace(_serverErrorView);
+			window.location.href = _searchUrl;
+		}
+			
 	};
 
 	addEvents = function() {

@@ -18,6 +18,6 @@ var baseUrl     = "http://" + document.domain + "/donorDB/",
 
     EDIT_VIEW	= baseUrl + "index.php/views/edit-view.php",
 
-    _serverErrorView = baseUrl + "index.php/views/messages/server_error.php";
+    _serverErrorView = baseUrl + "html/server_error.html";
 
 
