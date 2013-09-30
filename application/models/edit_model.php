@@ -106,10 +106,12 @@ class Edit_model extends CI_Model
         // Bug 303 side issue: Add letter flag if 'hand-typed letter' is updated to 1, and letter has been sent (set to 0).  
         // Need to have letter=1 to have typed letter request sent to external relations user 
         $prevImportantFlag = 1;
+        $this->db->trans_start();
         $this->db->select('important');
         $this->db->from('tbl_donorGifts');
         $this->db->where('giftsID', $giftID);
         $query = $this->db->get();
+        $this->db->trans_complete();
         if ($query->num_rows() > 0)
         {   
             foreach ($query->result() as $result)
@@ -124,8 +126,10 @@ class Edit_model extends CI_Model
         }
 
         // Update the database
+        $this->db->trans_start();
         $this->db->where('tbl_donorgifts.giftsID', $giftID);
         $success = $this->db->update('tbl_donorgiftdescriptions join tbl_donorgifts on tbl_donorgiftdescriptions.giftsID = tbl_donorgifts.giftsID', $data);
+        $this->db->trans_complete();
 
         return $success;
     }
