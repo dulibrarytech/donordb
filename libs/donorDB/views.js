@@ -1356,7 +1356,8 @@ viewUtils = (function($) {
 	// Sets the user name string / adds logout link
 	setUserLabel = function(fname,lname) {
 
-		$("#username-label").html("Welcome, " + fname + " " + lname + "&nbsp&nbsp&nbsp&nbsp<a onclick='authentication.logout();'>Logout</a>");		
+		//$("#username-label").html("Welcome, " + fname + " " + lname + "&nbsp&nbsp&nbsp&nbsp<a onclick='authentication.logout();'>Logout</a>");		
+		$("#username-label").html("Welcome, " + fname + " " + lname);
 	};
 
 	displayLetter = function(id) {
