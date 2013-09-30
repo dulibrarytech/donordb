@@ -21,7 +21,7 @@
 
             <li class="navbar-item"><a title="New Gift" href="<?php echo base_url();?>index.php/edit/addGiftView/1">Anonymous Gift</a></li>
 
-            <li class="navbar-item" id="logout-link" style="border: none;"><a title="Logout" onclick="authentication.logout();">Settings</a></li> <!-- call controller -->
+            <li class="navbar-item" id="logout-link" style="border: none;"><a title="Logout" onclick="authentication.logout();">Logout</a></li> <!-- call controller -->
 
         </ul>
         <!--/section-->

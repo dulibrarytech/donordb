@@ -362,7 +362,6 @@ class Search_model extends CI_Model
         else
         {
             $newDonations = "No new donations.";
-            log_message("info", "DB Transaction: getAllNewDonations(): no new donations found");
         }
             
 
