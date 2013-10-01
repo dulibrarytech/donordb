@@ -362,7 +362,7 @@ searchView = (function($) {
 			$("#table-section").toggle();
 
 			if($("#search-form").is(":visible")) {
-				$("#home-window").css('height', '655px');
+				$("#home-window").css('height', '720px');
 			}
 			else {
 				$("#home-window").css('height', '435px');

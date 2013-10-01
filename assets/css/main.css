@@ -31,6 +31,7 @@ input[type="text"] {
 table {
 
   	max-width: 100%;
+  	/*width: 500px;*/
   	background-color: transparent;
   	border-collapse: collapse;
   	border-spacing: 0;border: ;
@@ -455,7 +456,8 @@ a:not([href]) {
 
 #table-header {
 
-	max-width: 96%;
+	/*max-width: 96%;*/
+	width: 895px;
 }
 
 #add_info_message {
@@ -512,6 +514,12 @@ a:not([href]) {
 	width: 800px;
 	margin-left: 215px;
 	padding-bottom: 20px;
+}
+
+#table-content {
+
+	height: 500px;
+	width: 905px;
 }
 
 

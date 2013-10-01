@@ -23,7 +23,7 @@
 		#fromDate				{ margin-left: 25px; }
 		#toDate					{ margin-left: 85px; }
 		#search_submit			{ margin-left: 475px; margin-bottom: 9px; }
-		#post-search-buttons	{ margin-left: 20px; margin-top: 50px; }
+		#post-search-buttons	{ margin-left: 20px; margin-top: 30px; }
 		#anon_check_label		{ margin-left: 320px; margin-top: 5px; }
 		#anonymous-gift-check	{ margin-left: 530px; margin-top: -25px; }
 		#add_info_message		{ margin-left: 650px; }
@@ -106,13 +106,15 @@
 	 			<div id="table-content"></div>
 			</div>
 
+			<div id="post-search-buttons">
+				<button class="btn-grey" id="search_return">Return To Search</button>
+				<button class="btn-grey" id="search_new">New Search</button>
+			</div>
+
 		</div>	
 
-	</div>
 
-	<div id="post-search-buttons">
-		<button class="btn-grey" id="search_return">Return To Search</button>
-		<button class="btn-grey" id="search_new">New Search</button>
+
 	</div>
 
 	<div class="copyright-text">
