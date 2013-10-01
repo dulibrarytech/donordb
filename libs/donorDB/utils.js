@@ -31,7 +31,7 @@ utils = (function($) {
 		getTypedLetterRequests,
 		getActiveGift,
 		setActiveGift,
-		setTypedLetterComplete;
+		setLetterComplete;
 
 	doAjax = function(ajaxObj) {
 		$.ajax(ajaxObj);
@@ -382,8 +382,9 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
-	setTypedLetterComplete = function(giftID) {
+	setLetterComplete = function(giftID) {
 
+		alert("here");
 		requestObj = {
 
 			type: "POST", 
@@ -392,7 +393,9 @@ utils = (function($) {
 			dataType: "text",
 			cache: true,
 			success: function(response) {
-				//alert("Letter complete");
+				
+				// Refresh the inbox
+				viewUtils.getList();
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown );
@@ -458,8 +461,8 @@ utils = (function($) {
 		setActiveGift: function(giftID, callback) {
 			setActiveGift(giftID,callback);
 		},
-		setTypedLetterComplete: function(giftID) {
-			setTypedLetterComplete(giftID);
+		setLetterComplete: function(giftID) {
+			setLetterComplete(giftID);
 		}
 	};
 

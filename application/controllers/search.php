@@ -122,7 +122,7 @@ class Search extends CI_Controller {
 
 		if(gettype($data) != 'string')
 		{
-			$data[0]['action'] = 'viewUtils.setTypedLetterComplete';
+			$data[0]['action'] = 'utils.setLetterComplete';
 			$data[0]['actionText'] = 'Complete';
 		}
 
@@ -204,7 +204,7 @@ class Search extends CI_Controller {
 			}			
 
 			// *** Auto-set letter as 'complete'.  Can add option to do so manually if necessary (use this->sendLetter)
-			$this->Edit_model->setLetterAsSent($giftID);
+			//$this->Edit_model->setLetterAsSent($giftID);
 
 			// Read external file
 

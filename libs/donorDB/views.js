@@ -190,7 +190,7 @@ searchView = (function($) {
 
 		if(authentication.validateLocalSession()) {
 
-			sessionStorage.setItem('session_queue', null);
+			//sessionStorage.setItem('session_queue', null);
 			sessionStorage.setItem('session_queue', JSON.stringify(queueData));
 			createAlertList(queueData);
 		}
@@ -1341,8 +1341,7 @@ viewUtils = (function($) {
 	var getPage,
 		getList,
 		setUserLabel,
-		displayLetter,
-		setTypedLetterComplete;
+		displayLetter;
 
 	getPage = function() {
 
@@ -1364,7 +1363,8 @@ viewUtils = (function($) {
 	displayLetter = function(id) {
 
 		letter.generateLetter(id);
-		getList();
+
+		//getList();
 	};
 
 	getList = function() {
@@ -1389,13 +1389,6 @@ viewUtils = (function($) {
 		}
 	};
 
-	setTypedLetterComplete = function(id) {
-
-		utils.setTypedLetterComplete(id);
-
-		getList();
-	}
-
 	return {
 
 		getPage: function() {
@@ -1412,9 +1405,6 @@ viewUtils = (function($) {
 		},
 		getList: function() {
 			getList();
-		},
-		setTypedLetterComplete: function(id) {
-			setTypedLetterComplete(id);
 		}
 	};
 
