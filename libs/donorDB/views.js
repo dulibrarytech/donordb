@@ -300,21 +300,33 @@ searchView = (function($) {
 
 		if(typeof tableData == "object") {
 
+			// Remove the 'Add Gift' link if the result is an anonymous donation.
+			var addLinkText;
+			// if(value.lastName == "Anonymous Donor") {
+			// 	addLinkText = "";
+			// }
+			// else {
+			// 	addLinkText = "Add Gift";
+			// }
+
 			$.each(tableData, function (key, value) {
-				
+
 				results += '<tr>';
 				results += '<td class="span1" style="text-align: center"> <a href="' + _editUrl + '/editGiftView/' + value.donorID + '/' + value.giftsID +'">Edit</a> </td>';
 
 				results += '<td class="span2">' + value.giftDate + '</td>';
 
-				if(value.lastName == "" || value.lastName == null)
+				if(value.lastName == "" || value.lastName == null) 
 					results += '<td class="span4">' + value.org + '</td>';
 				else
 					results += '<td class="span4">' + value.lastName + '</td>';
 
 				results += '<td class="span4">' + value.firstName + '</td>';
 
-				results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
+				if(value.lastName != "Anonymous Donor") {
+					results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">' + addLinkText + '</a> </td>';
+				}
+				
 				results += '</tr>';
 
 			} );
@@ -511,7 +523,7 @@ editGiftView = (function($) {
 		toggleSubmitMessage,
 		createGiftDateDropDown;
 
-	initPage = function() {
+	initPage = function(anonymous) {
 
 		$(".content-window").css("height", "630px");
 
@@ -522,6 +534,10 @@ editGiftView = (function($) {
 		$('#add_info_message').hide();
 		$("#gift-date-box").hide();
 		$("#add_anon_info_button").hide();
+
+		if(anonymous) {
+			$("#important_gift_check").hide();
+		}
 
 		addEvents();
 		form.addDonorDBGiftFormValidation();
@@ -650,8 +666,8 @@ editGiftView = (function($) {
 
 	return {
 
-		initPage: function() {	
-			initPage();
+		initPage: function(anonymous) {	
+			initPage(anonymous);
 		},
 		blockForm: function(message) {
 			blockForm(message);
@@ -685,7 +701,7 @@ addGiftView = (function($) {
 		addEvents,
 		resetForm;
 
-	initPage = function() {
+	initPage = function(anonymous) {
 
 		$(".content-window").css("height", "630px");
 
@@ -698,6 +714,10 @@ addGiftView = (function($) {
 		$('#add_info_message').hide();
 		$(".change_date_elts").hide();
 		$("#add_anon_info_button").hide();
+
+		if(anonymous) {
+			$("#important_gift_check").hide();
+		}
 
 		utils.getActiveNameString(setNameString);
 
@@ -760,8 +780,8 @@ addGiftView = (function($) {
 
 	return {
 
-		initPage: function() {	
-			initPage();
+		initPage: function(anonymous) {	
+			initPage(anonymous);
 		},
 		setNameString: function(name) {	
 			setNameString(name);
@@ -801,11 +821,13 @@ addNewDonorView = (function($) {
 
 		$(".content-window").css("height", "760px");
 
+		// Not in use
 		if(anonymous == 1) {
 
 			$("#page-label").text("Add Anonymous Donor Info");
 			$("#lower_well").hide();
 			$(".content-window").css("height", "555px");
+			$("#important_gift_check").hide();
 		}		
 		else {
 

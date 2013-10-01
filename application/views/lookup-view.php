@@ -43,7 +43,7 @@
 	<div id="app-title" class="container">
 		<div class="container">
 			<div id="app-title-box">
-				| 5
+				|5
 			</div>
 		</div>
 	</div>
@@ -106,13 +106,13 @@
 	 			<div id="table-content"></div>
 			</div>
 
-		</div>
-
-		<div id="post-search-buttons">
-			<button class="btn-grey" id="search_return">Return To Search</button>
-			<button class="btn-grey" id="search_new">New Search</button>
 		</div>	
 
+	</div>
+
+	<div id="post-search-buttons">
+		<button class="btn-grey" id="search_return">Return To Search</button>
+		<button class="btn-grey" id="search_new">New Search</button>
 	</div>
 
 	<div class="copyright-text">

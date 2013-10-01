@@ -35,7 +35,8 @@ class Edit extends CI_Controller {
 	{
       if(!isset($donorID) || $donorID == null)
       {
-          $this->load->view("lookup-view");
+          //$this->load->view("lookup-view");
+          // log error and redirect to error msg
       }
       else
       {
@@ -43,7 +44,6 @@ class Edit extends CI_Controller {
               $time = time();
               $date =  mdate($datestring,$time);   
 
-          $data['pageLoader'] = "<script>addGiftView.initPage();</script>";
           $data['date'] = $date;
 
           $this->phpsessions->set('activeDonorID', $donorID);
@@ -55,12 +55,18 @@ class Edit extends CI_Controller {
           }
           else
           {
-              if($donorID == 1)
+              if($donorID == 1) 
+              {
+                  $data['pageLoader'] = "<script>addGiftView.initPage(" . 1 . ");</script>";
                   $this->phpsessions->set('activeDonorNameString', "Anonymous Donor");
+              }
+                  
               else
+              {
+                  $data['pageLoader'] = "<script>addGiftView.initPage(" . 0 . ");</script>";
                   $this->phpsessions->set('activeDonorNameString', $this->Search_model->getNameString($donorID));
-          }
-          
+              }
+          }          
 
           $this->load->view('gift-view', $data);
       }          
@@ -114,7 +120,10 @@ class Edit extends CI_Controller {
 
 	public function editGiftView($donorID = null, $giftID = null) 
 	{
-		  $data['pageLoader'] = "<script>editGiftView.initPage();</script>";
+		  if($donorID == 1)
+        $data['pageLoader'] = "<script>editGiftView.initPage(" . 1 . ");</script>";
+      else
+        $data['pageLoader'] = "<script>addGiftView.initPage(" . 0 . ");</script>";
 
       if($donorID != null)
       {
