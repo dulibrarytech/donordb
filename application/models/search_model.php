@@ -335,7 +335,7 @@ class Search_model extends CI_Model
         $newDonations = array();
         $index = 0;
 
-        $this->db->trans_start();
+        //$this->db->trans_start();
         $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorgifts.donorID, tbl_donorinfo.Organization, tbl_donorinfo.FirstName, tbl_donorinfo.LastName');
         $this->db->from('tbl_donorgifts');
         $this->db->join('tbl_donorinfo', 'tbl_donorgifts.donorID = tbl_donorinfo.donorID', 'inner');
@@ -343,7 +343,7 @@ class Search_model extends CI_Model
         $this->db->where('tbl_donorgifts.important !=', 1);
         $this->db->order_by("dateOfGift", "desc");
         $query = $this->db->get();
-        $this->db->trans_complete();
+        //$this->db->trans_complete();
 
         if ($query->num_rows() > 0)
         {
@@ -357,11 +357,14 @@ class Search_model extends CI_Model
                 $newDonations[$index]['lastName']     = $results->LastName;
 
                 $index++;
+
+                log_message("info", "Found new donation: " . $results->LastName);
             }
         }
         else
         {
             $newDonations = "No new donations.";
+            log_message("info", "Found no new donations.");
         }
             
 

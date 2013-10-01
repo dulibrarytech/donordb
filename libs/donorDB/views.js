@@ -190,6 +190,7 @@ searchView = (function($) {
 
 		if(authentication.validateLocalSession()) {
 
+			sessionStorage.setItem('session_queue', null);
 			sessionStorage.setItem('session_queue', JSON.stringify(queueData));
 			createAlertList(queueData);
 		}
