@@ -791,7 +791,7 @@ addNewDonorView = (function($) {
 		removeAddTitleBox,
 		enterNewTitle,
 		getTitleDropdownEntries,
-		resetForm,
+		resetForm;
 
 		anonymousView = 0;
 
@@ -843,6 +843,8 @@ addNewDonorView = (function($) {
 	        onfocusout: false,
 	        submitHandler: function() {
 
+	            alert("hit handler");
+
 	            utils.submitNewDonorInfo(anonymous);
 	            $('#add_info_message').html("Adding new donor info...");
 	            toggleSubmitMessage();
@@ -869,6 +871,33 @@ addNewDonorView = (function($) {
 		        return false;
 		    }
 		});
+
+		// Disable name constraints if an organization name has been entered
+		// $('#org_input_box').on('focusout',function(){
+
+		//     var orgText = $('#org_input_box').val();
+		//     if(orgText == "") {
+
+		//   //   	$( "#fName_input_box" ).rules( "add", {
+		// 		// 	required: true
+		// 		// });
+
+		// 		// $( "#lName_input_box" ).rules( "add", {
+		// 		// 	required: true
+		// 		// });
+		//     }
+		//     else {
+
+		//     	alert("removing");
+
+		// 		$( "#fName_input_box" ).rules( "remove", "max" );
+
+		// 		$( "#lName_input_box" ).rules( "remove", "max" );
+
+		// 		//alert($("#donor-input-form").valid());
+		// 		alert("post remove...");
+		//     }
+		// });
 	};
 
 	toggleSubmitMessage = function() {

@@ -121,8 +121,10 @@ form = (function($) {
 
 		$( "#description_area" ).rules( "add", {
 			maxlength: 255,
+			required: true,
 			messages: {
-			    maxlength: "Gift Description: Character limit exceeded (255)"
+			    maxlength: "Gift Description: Character limit exceeded (255)",
+			    required: "Please enter a gift description"
 			}
 		});
 
@@ -137,10 +139,12 @@ form = (function($) {
 
 		$( "#gift_quantity_box" ).rules( "add", {
 			number: true,
+			required: true,
 			maxlength: 10,
 			messages: {
 			    maxlength: "Gift Quantity: Character limit exceeded (10)",
-			    number: "Gift Quantity: Must be a number"
+			    number: "Gift Quantity: Must be a number",
+			    required: "Please enter a gift quantity"
 			}
 		});
 	};
@@ -149,10 +153,12 @@ form = (function($) {
 
 		$( "#gift_quantity_box" ).rules( "add", {
 			number: true,
+			required: true,
 			maxlength: 10,
 			messages: {
 			    maxlength: "Gift Quantity: Character limit exceeded (10)",
-			    number: "Gift Quantity: Must be a number"
+			    number: "Gift Quantity: Must be a number",
+			    required: "Please enter a gift quantity"
 			}
 		});
 
@@ -167,8 +173,10 @@ form = (function($) {
 
 		$( "#gift_description_box" ).rules( "add", {
 			maxlength: 255,
+			required: true,
 			messages: {
-			    maxlength: "Gift Description: Character limit exceeded (255)"
+			    maxlength: "Gift Description: Character limit exceeded (255)",
+			    required: "Please enter a gift description"
 			}
 		});
 
