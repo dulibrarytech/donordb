@@ -30,6 +30,7 @@ utils = (function($) {
 		getNewDonationList,
 		getTypedLetterRequests,
 		getActiveGift,
+		getStatistics,
 		setActiveGift,
 		setLetterComplete;
 
@@ -357,6 +358,28 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
+	getStatistics = function(callback,type) {
+
+		var searchForm = "#search-form";
+
+		requestObj = {
+
+			type: "POST", 
+			url: _searchUrl + '/statisticsSearch',
+			data: $(searchForm).serialize() + "&searchType=" + type,
+			dataType: "json",
+			cache: true,
+			success: function(response) {
+				alert(response.totalQuantity);
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( errorThrown + ": utils.getStatistics" );
+            }
+		};
+		
+		doAjax(requestObj);
+	};
+
 	setActiveGift = function(giftID,callback) {
 
 		requestObj = {
@@ -457,6 +480,9 @@ utils = (function($) {
 		},
 		getActiveGift: function(callback) {
 			getActiveGift(callback);
+		},
+		getStatistics: function(callback,type) {
+			getStatistics(callback,type);
 		},
 		setActiveGift: function(giftID, callback) {
 			setActiveGift(giftID,callback);

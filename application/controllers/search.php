@@ -42,9 +42,9 @@ class Search extends CI_Controller {
             case "GET":
 			{
                 $data['pageLoader'] = "<script>
-									searchView.initPage();
-									authentication.validateSession();
-								</script>";
+										searchView.initPage();
+										authentication.validateSession();
+									</script>";
 
                 $this->load->view('lookup-view', $data);
 
@@ -65,6 +65,57 @@ class Search extends CI_Controller {
                 	echo json_encode($this->Search_model->anonymousGiftSearch($keyword,$fromDate,$toDate));
                 else
                 	echo json_encode("Search type error!");
+
+                break;
+            }
+            default:
+           	{
+                header("HTTP/1.1 404 Not Found");
+                return;
+            }
+        }
+	}
+
+	public function statisticsSearch()
+	{
+		switch($this->input->server("REQUEST_METHOD")) 
+		{
+            case "GET":
+			{
+                $data['pageLoader'] = "<script>
+										searchView.initPage();
+										authentication.validateSession();
+									</script>";
+
+                $this->load->view('lookup-view', $data);
+
+                break;
+            }
+            case "POST":
+            {
+                $keyword 	= $this->input->post('searchTerm');
+                $fromDate 	= $this->input->post('fromDate');
+                $toDate 	= $this->input->post('toDate');
+                $searchType = $this->input->post('searchType');
+
+                if($searchType == "anonymous")
+                	$results = ($this->Search_model->anonymousGiftSearch($keyword,$fromDate,$toDate));
+
+                else if($searchType == "gift")     	 
+              	    $results = ($this->Search_model->giftSearch($keyword,$fromDate,$toDate));
+
+                else
+                	echo json_encode("Search type error!");
+
+                // Total the quantity of returned gift entries, and piggyback it in on the array.
+                $total = 0;
+                foreach($results as $result)
+                {
+                	$total += $result['giftQuantity'];
+                }
+                $results['totalQuantity'] = $total;
+
+                echo json_encode($results);
 
                 break;
             }
