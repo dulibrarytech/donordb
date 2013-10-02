@@ -1384,6 +1384,131 @@ editDonorView = (function($) {
 }(jQuery)); // editDonorView()
 
 
+statisticsView = (function($) {
+
+	var initPage,
+		addEvents,
+		createGiftTable,
+		toggleResultsView;
+
+	initPage = function() {
+
+		$(".content-window").css("height", "435px");
+		$(".pre-scrollable").css("max-height", "415px");
+		$("#table-section").css("height", "405px");
+
+		$("#page-label").text("Statistics");
+
+		$("#search_return").hide();
+		$("#table-section").hide();
+		$("#post-search-buttons").hide();
+		$("#alert-section-label").hide();
+
+		//$('#anonymous-gift-check').removeAttr('checked'); // Bug 207: Hard remove of check with each page load...
+
+		addEvents();
+		form.addDonorDBSearchFormValidation();
+	};
+
+	addEvents = function() {
+
+		var fromDate, 
+			toDate,
+			anonymous;
+
+		$("#search-form").validate({
+
+	       // Handler
+	        errorClass: "invalid",
+	        onkeyup: function(element) {$(element).valid()},
+	        onfocusout: false,
+	        submitHandler: function() {
+
+	        	anonymous 	= $("#anonymous-gift-check").val();
+
+	        	if(anonymous == '1') {
+
+	        		utils.getStatistics(createGiftTable,"anonymous");
+	        	}
+	        	else {
+
+		        	utils.getStatistics(createGiftTable,"gift");
+	        	}
+	        },
+	        errorPlacement: function(error, element) {
+
+				//error.appendTo('#errordiv');
+				alert(error.html());
+			}
+		});
+	};
+
+	createGiftTable = function(tableData) {
+
+		var results = '<table class="table table-bordered table-striped">';
+
+		if(typeof tableData == "object") {
+
+			$.each(tableData, function (key, value) {
+
+				results += '<tr>';
+				results += '<td class="span1" style="text-align: center"> <a href="' + _editUrl + '/editGiftView/' + value.donorID + '/' + value.giftsID +'">Edit</a> </td>';
+
+				results += '<td class="span2">' + value.giftDate + '</td>';
+
+				if(value.lastName == "" || value.lastName == null) 
+					results += '<td class="span4">' + value.org + '</td>';
+				else
+					results += '<td class="span4">' + value.lastName + '</td>';
+
+				results += '<td class="span4">' + value.firstName + '</td>';
+
+				if(value.lastName != "Anonymous Donor") {
+					results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '"></a> </td>';
+				}
+				
+				results += '</tr>';
+
+			} );
+		}	
+		else if(typeof tableData == "string") {
+
+			// Display message only
+			results = '<tr><td class="span12" style="text-align: center; font-weight: bold;">' + tableData + '</td></tr>';
+		}	
+
+		results += '</table>';
+
+		toggleResultsView(true);
+		$("#table-header").html("<thead> <th class='span1'><!--SPACE--></th> <th class='span2'>Gift Date</th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
+		$("#table-content").html(results);
+	};
+
+	toggleResultsView = function(showButtons) {
+
+		if(showButtons)
+			$("#post-search-buttons").toggle();
+
+		$("#search-form").toggle();
+		$("#search_return").toggle();
+	};
+
+	return {
+
+		initPage: function() {
+		    initPage();
+		},
+		createGiftTable: function() {
+			createGiftTable();
+		},
+		toggleResultsView: function() {
+			toggleResultsView();
+		}
+	};
+
+}(jQuery)); // statisticsView()
+
+
 /*
  * 
  */

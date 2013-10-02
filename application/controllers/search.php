@@ -83,6 +83,13 @@ class Search extends CI_Controller {
 		$this->load->view('table-view', $data);
 	}
 
+	public function statisticsView()
+	{
+		$data['pageLoader'] = "<script>statisticsView.initPage();</script>";
+
+		$this->load->view('lookup-view', $data);
+	}
+
 	public function getActiveDonorNameString()
 	{
 		echo json_encode($this->phpsessions->get('activeDonorNameString'));
