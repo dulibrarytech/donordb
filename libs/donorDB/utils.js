@@ -370,7 +370,7 @@ utils = (function($) {
 			dataType: "json",
 			cache: true,
 			success: function(response) {
-				alert(response.totalQuantity);
+				callback(response);
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( errorThrown + ": utils.getStatistics" );

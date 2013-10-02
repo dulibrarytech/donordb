@@ -37,6 +37,7 @@ searchView = (function($) {
 		$("#table-section").hide();
 		$("#post-search-buttons").hide();
 		$("#alert-section-label").hide();
+		$("#data-section-1").hide();
 
 		$('#anonymous-gift-check').removeAttr('checked'); // Bug 207: Hard remove of check with each page load...
 
@@ -1395,8 +1396,8 @@ statisticsView = (function($) {
 	initPage = function() {
 
 		$(".content-window").css("height", "435px");
-		$(".pre-scrollable").css("max-height", "415px");
-		$("#table-section").css("height", "405px");
+		$(".pre-scrollable").css("max-height", "400px");
+		$("#table-section").css("height", "390px");
 
 		$("#page-label").text("Statistics");
 
@@ -1445,15 +1446,49 @@ statisticsView = (function($) {
 				alert(error.html());
 			}
 		});
+
+		$("#anonymous-gift-check").click(function() { 
+
+	    	if($("#anonymous-gift-check").val() == '0') {
+
+	    		$("#anonymous-gift-check").val('1');
+	    		$("#lname_label").text('Search anonymous gift descriptions:');
+	    		$("#lname_input_box").prop('placeholder', '');
+	    	}
+	    	else {
+
+	    		$("#anonymous-gift-check").val('0');
+	    		$("#lname_label").text('Last Name or Organization:');
+	    		$("#lname_input_box").prop('placeholder', 'Leave blank to search all donors');
+	    	}
+	    });
+
+	    $("#search_return").click(function() { 
+
+	    	toggleResultsView(true);
+	    });
+
+	    $("#search_new").click(function() { 
+
+	    	window.location.href = _statsUrl;
+	    });
 	};
 
 	createGiftTable = function(tableData) {
 
-		var results = '<table class="table table-bordered table-striped">';
+		var results = '<table class="table table-bordered table-striped">',
+			total = 0;
 
 		if(typeof tableData == "object") {
 
 			$.each(tableData, function (key, value) {
+
+				// Skip the quantity data
+				if(key == "totalQuantity") {
+
+					total = value;
+					return true;
+				}
 
 				results += '<tr>';
 				results += '<td class="span1" style="text-align: center"> <a href="' + _editUrl + '/editGiftView/' + value.donorID + '/' + value.giftsID +'">Edit</a> </td>';
@@ -1467,7 +1502,7 @@ statisticsView = (function($) {
 
 				results += '<td class="span3">' + value.firstName + '</td>';
 
-				results += '<td class="span2">' + '###' + '</td>';
+				results += '<td class="span2">' + value.giftQuantity + '</td>';
 
 				if(value.lastName != "Anonymous Donor") {
 					results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '"></a> </td>';
@@ -1488,12 +1523,23 @@ statisticsView = (function($) {
 		toggleResultsView(true);
 		$("#table-header").html("<thead> <th class='span1'><!--SPACE--></th> <th class='span2'>Gift Date</th> <th class='span3'>Last Name / Organization</th> <th class='span3'>First Name</th> <th class='span2'>Quantity</th> <th><!--SPACE--></th> </thead>");
 		$("#table-content").html(results);
+
+		$("#data-section-1").html('Total Gifts: ' + total);
 	};
 
 	toggleResultsView = function(showButtons) {
 
 		if(showButtons)
 			$("#post-search-buttons").toggle();
+
+		$("#table-section").toggle();
+
+		if($("#search-form").is(":visible")) {
+			$("#home-window").css('height', '720px');
+		}
+		else {
+			$("#home-window").css('height', '435px');
+		}
 
 		$("#search-form").toggle();
 		$("#search_return").toggle();

@@ -27,6 +27,7 @@
 		#anon_check_label		{ margin-left: 320px; margin-top: 5px; }
 		#anonymous-gift-check	{ margin-left: 530px; margin-top: -25px; }
 		#add_info_message		{ margin-left: 650px; }
+		#data-section-1			{ margin-left: 730px; }
 	</style>
 
 </head>
@@ -105,6 +106,8 @@
 			<div class="container pre-scrollable">
 	 			<div id="table-content"></div>
 			</div>
+
+			<div id="data-section-1"></div>
 
 			<div id="post-search-buttons">
 				<button class="btn-grey" id="search_return">Return To Search</button>
