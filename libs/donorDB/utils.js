@@ -35,6 +35,15 @@ utils = (function($) {
 		setLetterComplete;
 
 	doAjax = function(ajaxObj) {
+
+		$(document).ajaxStart(function() {
+            $.fancybox.showLoading();
+        });
+
+        $(document).ajaxStop(function() {
+            $.fancybox.hideLoading();
+        });
+
 		$.ajax(ajaxObj);
 	};
 

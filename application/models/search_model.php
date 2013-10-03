@@ -160,8 +160,6 @@ class Search_model extends CI_Model
             $toDate = mdate($datestring,$time);
         }
 
-        log_message("info", "pre-data: from: " . $fromDate . ", to: " . $toDate . ", keyword: " . $keyword);
-
         // Get all dates from donor 1 (generic anonymous donor)
         $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorgifts.numberOfGifts, tbl_donorgifts.donorID, tbl_donorgiftdescriptions.giftDescription1');
         $this->db->from('tbl_donorgifts');
@@ -193,8 +191,10 @@ class Search_model extends CI_Model
                 $index++;
             }
         }
-
-        log_message("info", "post sql: results array: " . print_r($searchResults, true));
+        else
+        {
+            $searchResults = "No results found";
+        }
 
         /* 
          * Search all anonymous donor records (not yet implemented) 

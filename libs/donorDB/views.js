@@ -1462,12 +1462,14 @@ statisticsView = (function($) {
 	    		$("#anonymous-gift-check").val('1');
 	    		$("#lname_label").text('Search anonymous gift descriptions:');
 	    		$("#lname_input_box").prop('placeholder', '');
+	    		$("#fname_input_box").prop('disabled','true');
 	    	}
 	    	else {
 
 	    		$("#anonymous-gift-check").val('0');
 	    		$("#lname_label").text('Last Name or Organization:');
 	    		$("#lname_input_box").prop('placeholder', 'Leave blank to search all donors');
+	    		$("#fname_input_box").prop('disabled','false');
 	    	}
 	    });
 

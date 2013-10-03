@@ -125,13 +125,17 @@ class Search extends CI_Controller {
                 else
                 	echo json_encode("Search type error!");
 
-                // Total the quantity of returned gift entries, and piggyback it in on the array.
-                $total = 0;
-                foreach($results as $result)
+                if(is_array($results))
                 {
-                	$total += $result['giftQuantity'];
+					// Total the quantity of returned gift entries, and piggyback it in on the array.
+	                $total = 0;
+	                foreach($results as $result)
+	                {
+	                	$total += $result['giftQuantity'];
+	                }
+
+	                $results['totalQuantity'] = $total;
                 }
-                $results['totalQuantity'] = $total;
 
                 echo json_encode($results);
 
