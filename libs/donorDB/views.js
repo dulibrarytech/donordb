@@ -436,7 +436,7 @@ browseDonorsView = (function($) {
 		
 		$('#scroll-section').animate({
         	scrollTop: $("#" + letter).offset().top
-    	}, 	1000);
+    	}, 	10);
 	};
 
 	createJumpToLinks = function(jumpToLetters) {

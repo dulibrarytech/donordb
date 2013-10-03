@@ -21,5 +21,6 @@
 <!-- External Libs -->
 <script src="<?php echo base_url();?>libs/dateUtils.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>libs/fancyBox/source/jquery.fancybox.pack.js"></script>
+<script src="<?php echo base_url();?>libs/jquery.scrollTo-1.4.3.1-min.js"></script>
 
 
