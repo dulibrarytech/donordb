@@ -19,11 +19,13 @@
 	<style>
 		#lname_label 			{ margin-left: 25px; }
 		#lname_input_box 		{ margin-top:9px; margin-left: 25px; }
+		#fname_label 			{ margin-left: 25px; margin-top:9px; }
+		#fname_input_box		{ margin-top:9px; margin-left: 25px; }
 		#date_label 			{ margin-left: 25px; padding-bottom: 9px }
 		#fromDate				{ margin-left: 25px; }
 		#toDate					{ margin-left: 85px; }
 		#search_submit			{ margin-left: 475px; margin-bottom: 9px; }
-		#post-search-buttons	{ margin-left: 20px; margin-top: 30px; }
+		#post-search-buttons	{ margin-left: 20px; margin-top: 20px; }
 		#anon_check_label		{ margin-left: 320px; margin-top: 5px; }
 		#anonymous-gift-check	{ margin-left: 530px; margin-top: -25px; }
 		#add_info_message		{ margin-left: 650px; }
@@ -78,6 +80,9 @@
 						<input type="checkbox" class="checkbox" id="anonymous-gift-check" value="0" name="anonymousCheck"/>
 					</td>
 				</td></table>
+
+				<label for="fname_input_box" class="form-label-text" id="fname_label">First Name:</label>  
+				<input type="text" class="input-medium" id="fname_input_box" placeholder="" name="searchTermFName"/>  
 			</div>
 
 			<div class="well" id="search-form-date">

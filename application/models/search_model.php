@@ -81,10 +81,11 @@ class Search_model extends CI_Model
     		return $searchResults;
     }
 
-   	public function giftsearch($keyword = "",$fromDate,$toDate)
+   	public function giftsearch($keyword = "", $fromDate, $toDate, $firstName = "")
    	{
         $searchResults = array();
         $index = 0;
+        $quantity = 0;
 
         if($fromDate == null)
             $fromDate = "1864-01-01";   // Shouldn't be any before this!
@@ -107,11 +108,14 @@ class Search_model extends CI_Model
         $this->db->order_by("dateOfGift", "desc");
         $this->db->trans_complete();
 
-        // If there is keyword data, return records that are like the keyword.
         if($keyword != "")
         {
             $this->db->like('tbl_donorinfo.LastName', $keyword);    
             //$this->db->order_by('LastName', 'desc');
+        }
+        if($firstName != "")
+        {
+            $this->db->like('tbl_donorinfo.FirstName', $firstName);    
         }
 
         $query = $this->db->get();
@@ -128,8 +132,11 @@ class Search_model extends CI_Model
                 $searchResults[$index]['donorID']       = $results->donorID;
                 $searchResults[$index]['org']           = $results->Organization;
 
+                $quantity += $results->numberOfGifts;
                 $index++;
             }
+
+            $searchResults['totalQuantity'] = $quantity;
         }
         else
         {

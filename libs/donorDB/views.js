@@ -33,6 +33,8 @@ searchView = (function($) {
 
 		$("#page-label").text("Search Records");
 
+		$("#fname_input_box").hide();
+		$("#fname_label").hide();
 		$("#search_return").hide();
 		$("#table-section").hide();
 		$("#post-search-buttons").hide();
@@ -1395,7 +1397,7 @@ statisticsView = (function($) {
 
 	initPage = function() {
 
-		$(".content-window").css("height", "435px");
+		$(".content-window").css("height", "520px");
 		$(".pre-scrollable").css("max-height", "400px");
 		$("#table-section").css("height", "390px");
 
@@ -1538,7 +1540,7 @@ statisticsView = (function($) {
 			$("#home-window").css('height', '720px');
 		}
 		else {
-			$("#home-window").css('height', '435px');
+			$("#home-window").css('height', '520px');
 		}
 
 		$("#search-form").toggle();

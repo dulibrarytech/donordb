@@ -94,6 +94,7 @@ class Search extends CI_Controller {
             case "POST":
             {
                 $keyword 	= $this->input->post('searchTerm');
+                $fName 		= $this->input->post('searchTermFName');
                 $fromDate 	= $this->input->post('fromDate');
                 $toDate 	= $this->input->post('toDate');
                 $searchType = $this->input->post('searchType');
@@ -102,18 +103,18 @@ class Search extends CI_Controller {
                 	$results = ($this->Search_model->anonymousGiftSearch($keyword,$fromDate,$toDate));
 
                 else if($searchType == "gift")     	 
-              	    $results = ($this->Search_model->giftSearch($keyword,$fromDate,$toDate));
+              	    $results = ($this->Search_model->giftSearch($keyword,$fromDate,$toDate,$fName));
 
                 else
                 	echo json_encode("Search type error!");
 
                 // Total the quantity of returned gift entries, and piggyback it in on the array.
-                $total = 0;
-                foreach($results as $result)
-                {
-                	$total += $result['giftQuantity'];
-                }
-                $results['totalQuantity'] = $total;
+                // $total = 0;
+                // foreach($results as $result)
+                // {
+                // 	$total += $result['giftQuantity'];
+                // }
+                // $results['totalQuantity'] = $total;
 
                 echo json_encode($results);
 

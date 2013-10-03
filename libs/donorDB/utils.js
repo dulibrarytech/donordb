@@ -121,7 +121,7 @@ utils = (function($) {
 				callback(response);
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( errorThrown + ": submitSearch");
             }
 		};
 		
