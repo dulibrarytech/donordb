@@ -420,7 +420,7 @@ browseDonorsView = (function($) {
 
 	initPage = function() {
 
-		$(".content-window").css("height", "760px");
+		$(".content-window").css("height", "770px");
 		$(".pre-scrollable").css("max-height", "463px");
 
 		$("#page-label").text("Donor Listing");

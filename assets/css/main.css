@@ -379,7 +379,7 @@ a:not([href]) {
 #app-title-box { 
 
 	background-color: #000000;
-	margin-left: -3;
+	margin-left: -2;
 	width: 300px;
 	height: 37px;
 	z-index: 5000;

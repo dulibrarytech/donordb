@@ -123,7 +123,7 @@ class Edit extends CI_Controller {
 		  if($donorID == 1)
         $data['pageLoader'] = "<script>editGiftView.initPage(" . 1 . ");</script>";
       else
-        $data['pageLoader'] = "<script>addGiftView.initPage(" . 0 . ");</script>";
+        $data['pageLoader'] = "<script>editGiftView.initPage(" . 0 . ");</script>";
 
       if($donorID != null)
       {
