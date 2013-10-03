@@ -85,7 +85,6 @@ class Search_model extends CI_Model
    	{
         $searchResults = array();
         $index = 0;
-        $quantity = 0;
 
         if($fromDate == null)
             $fromDate = "1864-01-01";   // Shouldn't be any before this!
@@ -98,7 +97,7 @@ class Search_model extends CI_Model
         }
 
         $this->db->trans_start();
-        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorgifts.numberOfGifts, tbl_donorinfo.donorID, tbl_donorinfo.FirstName, tbl_donorinfo.LastName, tbl_donorinfo.Organization, tbl_donorinfo.anonymous');
+        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.letter, tbl_donorgifts.dateOfGift, tbl_donorgifts.numberOfGifts, tbl_donorinfo.donorID, tbl_donorinfo.FirstName, tbl_donorinfo.LastName, tbl_donorinfo.Organization, tbl_donorinfo.anonymous');
         $this->db->from('tbl_donorgifts');
         $this->db->join('tbl_donorinfo', 'tbl_donorinfo.donorID = tbl_donorgifts.donorID', 'inner');
         $this->db->where('dateOfGift >=', $fromDate);
@@ -131,12 +130,10 @@ class Search_model extends CI_Model
                 $searchResults[$index]['lastName']      = $results->LastName;
                 $searchResults[$index]['donorID']       = $results->donorID;
                 $searchResults[$index]['org']           = $results->Organization;
+                $searchResults[$index]['letter']        = $results->letter;
 
-                $quantity += $results->numberOfGifts;
                 $index++;
             }
-
-            $searchResults['totalQuantity'] = $quantity;
         }
         else
         {
@@ -479,7 +476,7 @@ class Search_model extends CI_Model
 
     public function getGiftData($giftID)
     {
-        $giftInfo = array();
+        $giftInfo = array("giftDescription" => "Error: Null giftID");
 
         if($giftID != null)
         {

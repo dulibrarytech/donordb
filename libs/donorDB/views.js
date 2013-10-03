@@ -321,11 +321,13 @@ searchView = (function($) {
 				results += '<td class="span2">' + value.giftDate + '</td>';
 
 				if(value.lastName == "" || value.lastName == null) 
-					results += '<td class="span4">' + value.org + '</td>';
+					results += '<td class="span3">' + value.org + '</td>';
 				else
-					results += '<td class="span4">' + value.lastName + '</td>';
+					results += '<td class="span3">' + value.lastName + '</td>';
 
-				results += '<td class="span4">' + value.firstName + '</td>';
+				results += '<td class="span3">' + value.firstName + '</td>';
+
+				results += '<td class="span2">' + value.letterStatus + '</td>';
 
 				if(value.lastName != "Anonymous Donor") {
 					results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">' + addLinkText + '</a> </td>';
@@ -344,7 +346,7 @@ searchView = (function($) {
 		results += '</table>';
 
 		toggleResultsView(true);
-		$("#table-header").html("<thead> <th class='span1'><!--SPACE--></th> <th class='span2'>Gift Date</th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
+		$("#table-header").html("<thead> <th class='span1'><!--SPACE--></th> <th class='span2'>Gift Date</th> <th class='span3'>Last Name / Organization</th> <th class='span3'>First Name</th> <th class='span2'>Letter</th> <th><!--SPACE--></th> </thead>");
 		$("#table-content").html(results);
 	};
 
@@ -625,6 +627,8 @@ editGiftView = (function($) {
 		$("#gift_quantity_box").val(giftData['giftQuantity']);
 
 		$("#gift_description_box").text(giftData['giftDescription']);
+
+		$("#letter-status").html("Letter Status: " + giftData['letterStatus']);
 
 		if(giftData['importantFlag'] == 1) 
 			$('#important-checkbox').prop('checked', true);
@@ -1327,6 +1331,8 @@ editDonorView = (function($) {
 		$("#gift_quantity_box").val(giftData['giftQuantity']);
 
 		$("#description_area").text(giftData['giftDescription']);
+
+		$("#letter-status").html("Letter Status: " + giftData['letterStatus']);
 
 		if(giftData['importantFlag'] == 1) 
 			$('#important-checkbox').prop('checked', true);

@@ -18,7 +18,7 @@
 	<!-- TODO: Create 'left edge field' class to offset by 25px left margin? -->
 	<style>
 		#gift_description_box		{ width: 500px; height: 150px; }
-		#gift_date_label			{ margin-left: 75px; }
+		#gift_date_label			{ margin-left: 43px; }
 		#gift-date-box				{ margin-left: 75px; }
 		#gift_submit_button			{ margin-left: -7px; margin-top: 0px; width: 90px;}
 		#edit_date_cell				{ vertical-align: bottom;  }
@@ -32,6 +32,8 @@
 
 		#lower_controls				{ background-color: #ffffff; width: 60%; padding: -10px; margin-top: -10px; }
 		#add_info_message			{ padding-top: 15px; }
+
+		#letter-status 				{ margin-right: 30px; }
 	</style>
 
 </head>
@@ -61,7 +63,7 @@
 
 		<table style="width: 100%"><tr>
 			<td>
-				<div class="container generic-label" id="page-label"></div>	
+				<div class="container generic-label" id="page-label"></div>	     
 			</td>
 			<td align="right" style="text-align: right;">
 				<div id="username-label"></div>
@@ -72,7 +74,14 @@
 		<form id="add-gift-form" method="post">
 
 			<div class="well" id="display-donor-section">
-				<label class="form-label-text left-edge-field" id="donor-name-label"></label>   
+				<table style="width: 100%"><tr>
+					<td>
+						<label class="form-label-text left-edge-field" id="donor-name-label"></label>
+					</td>
+					<td align="right" style="text-align: right;">
+						<div class="generic-text" id="letter-status"></div>
+					</td>
+				</tr></table>
 			</div>
 
 			<div class="well" id="add-gift-section">

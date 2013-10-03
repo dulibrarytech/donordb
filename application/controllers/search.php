@@ -60,7 +60,24 @@ class Search extends CI_Controller {
                 if($searchType == "donor")
 					echo json_encode($this->Search_model->donorSearch($keyword)); 
                 else if($searchType == "gift")
-                	echo json_encode($this->Search_model->giftSearch($keyword,$fromDate,$toDate)); 
+                {
+                	$resultArray = $this->Search_model->giftSearch($keyword,$fromDate,$toDate); 
+
+                	// Convert letter data from bit to human readable data
+                	foreach($resultArray as $key => $result)
+                	{
+                		$resultArray[$key]['letterStatus'] = "";
+
+                		if($result['letter'] == 1)
+	                		$resultArray[$key]['letterStatus'] = "Pending";
+	                	else if($result['letter'] == 0)
+	                		$resultArray[$key]['letterStatus'] = "Sent";
+	                	else
+	                		$resultArray[$key]['letterStatus'] = "Error";
+                	}
+
+                	echo json_encode($resultArray);
+                }
                 else if($searchType == "anonymous")
                 	echo json_encode($this->Search_model->anonymousGiftSearch($keyword,$fromDate,$toDate));
                 else
@@ -109,12 +126,12 @@ class Search extends CI_Controller {
                 	echo json_encode("Search type error!");
 
                 // Total the quantity of returned gift entries, and piggyback it in on the array.
-                // $total = 0;
-                // foreach($results as $result)
-                // {
-                // 	$total += $result['giftQuantity'];
-                // }
-                // $results['totalQuantity'] = $total;
+                $total = 0;
+                foreach($results as $result)
+                {
+                	$total += $result['giftQuantity'];
+                }
+                $results['totalQuantity'] = $total;
 
                 echo json_encode($results);
 
@@ -198,6 +215,13 @@ class Search extends CI_Controller {
 
 		// Add namestring for view display
 		$dataArray['nameString'] = $this->phpsessions->get('activeDonorNameString');
+
+		if($dataArray['letterFlag'] == 1)
+			$dataArray['letterStatus'] = "Pending";
+		else if($dataArray['letterFlag'] == 0)
+			$dataArray['letterStatus'] = "Sent";
+		else
+			$dataArray['letterStatus'] = "Error";
 
 		echo json_encode($dataArray);
 	}
