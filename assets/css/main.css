@@ -389,7 +389,8 @@ a:not([href]) {
 	padding-top: 20px;
 	padding-left: 25px;
 	font-size: 25;
-	font-family: "Segoe Script", Arial, Helvetica, sans-serif; 
+	/*font-family: "Segoe Script", Arial, Helvetica, sans-serif;*/ 
+	font-family: 'Amarante', cursive;  /*google font*/
 	font-weight: bold;
 
 	position: relative; 
