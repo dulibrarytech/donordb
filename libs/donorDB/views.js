@@ -418,83 +418,160 @@ browseDonorsView = (function($) {
 	var initPage,
 		createJumpToLinks,
 		onClickJumpToLetter,
+		setQueue,
+		getQueue,
 		createDonorTable;
 
 	initPage = function() {
 
 		$(".content-window").css("height", "770px");
-		$(".pre-scrollable").css("max-height", "463px");
+		$(".pre-scrollable").css("max-height", "485px");
 
 		$("#page-label").text("Donor Listing");
 
 		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
 
-		utils.getDonorDataArray(createDonorTable); 
+		utils.getDonorDataArray(setQueue); 
 	};
 
 	onClickJumpToLetter = function(letter) {
 		
-		$('#scroll-section').animate({
-        	scrollTop: $("#" + letter).offset().top
-    	}, 	10);
+		// For the scrolltop animation.  Not in use.
+		// $('#scroll-section').animate({
+  //       	scrollTop: $("#" + letter).offset().top
+  //   	}, 	10);
+	
+		createDonorTable(getQueue(letter));
 	};
 
 	createJumpToLinks = function(jumpToLetters) {
 
 		var links = ""; 
 
-		for(var key in jumpToLetters) {
+		// For the scrolltop animation.  Not in use.
+		// for(var key in jumpToLetters) {
 
-			links += "<a onclick='browseDonorsView.onClickJumpToLetter(\"" + key + "\")'>" + key + "</a>&nbsp&nbsp";
-		}
+		// 	links += "<a onclick='browseDonorsView.onClickJumpToLetter(\"" + key + "\")'>" + key + "</a>&nbsp&nbsp";
+		// }
+
+		$.each(jumpToLetters, function (key, value) { 
+
+			links += "<a onclick='browseDonorsView.onClickJumpToLetter(\"" + value + "\")'>" + value + "</a>&nbsp&nbsp";
+		});
 
 		$("#jumpTo").html(links);
 	};
 
+	setQueue = function(queueData) {
+
+		if(authentication.validateLocalSession()) {
+
+			//sessionStorage.setItem('session_queue', null);
+			sessionStorage.setItem('donorData_queue', JSON.stringify(queueData));
+			createDonorTable(queueData);
+		}
+	};
+
+	getQueue = function(chr) {
+
+		if(authentication.validateLocalSession()) {
+
+			var queueData = JSON.parse(sessionStorage.getItem('donorData_queue'));
+
+			if(typeof queueData == 'undefined' || queueData == null) {
+				
+				queueData = "Queue Empty.";
+			}
+			else {
+
+				// Return donors with last name beginning with chr.  If chr is 'ALL', return all of the donor data in the queue
+				if(typeof chr != 'undefined' && chr != null && chr != '(Display All)') {
+
+					var tempArray = new Array();
+						index = 0;
+
+					$.each(queueData, function (key, value) {
+
+						if(value.lastName.charAt(0) == chr) {
+
+							tempArray[index] = value;
+
+							index++;
+						}
+					});
+
+					// Add a message string to show no donors were found under the specified char
+					if(tempArray.length == 0) {
+
+						queueData = null;
+						queueData = "No donors found under " + chr;
+					}
+					else
+						queueData = tempArray;
+				}
+			}
+
+			return queueData;
+		}
+	};
+
 	createDonorTable = function(tableData) {
+
+		$("#table-content").html('');
 
 		var results = '<table class="table table-bordered table-striped">';
 			temp = "";
 
-		var	jumpToLetters = { A: false, B: false, C: false, D: false, E: false, F: false, G: false, H: false, I: false, J: false, K: false, L: false, M: false, 
-									N: false, O: false, P: false, Q: false, R: false, S: false, T: false, U: false, V: false, W: false, X: false, Y: false, Z: false };
+		// For the scrolltop animation.  Not in use.
+		// var	jumpToLetters = { A: false, B: false, C: false, D: false, E: false, F: false, G: false, H: false, I: false, J: false, K: false, L: false, M: false, 
+		// 							N: false, O: false, P: false, Q: false, R: false, S: false, T: false, U: false, V: false, W: false, X: false, Y: false, Z: false };
+		//var	jumpToChar = '';
+		var jumpToLetters = new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '(Display All)');
 
-		var	jumpToChar = '';
 		createJumpToLinks(jumpToLetters);
 
-		$.each(tableData, function (key, value) {
+		if(typeof tableData == "object") {
 
-			results += '<tr>';
+			$.each(tableData, function (key, value) {
 
-			results += '<td class="span2" style="text-align: center">';
+				results += '<tr>';
 
+				results += '<td class="span2" style="text-align: center">';
+
+			// For the scrolltop animation.  Not in use.
 			/*
 			 * Add the jump-to divs for each letter of the alphabet.  Once one is added, mark it as 'used' so it
 			 * is only placed in the list once.
 			 * Divs need to be placed within <td> elements to work correctly with the table laypot.
 			 */  
-			 if(value.lastName != null) {
+			//  if(value.lastName != null) {
 
-				jumpToChar = value.lastName.charAt(0).toUpperCase();
-				if(jumpToLetters[jumpToChar] == false) {
+			// 	jumpToChar = value.lastName.charAt(0).toUpperCase();
+			// 	if(jumpToLetters[jumpToChar] == false) {
  
-					results += '<div id="' + jumpToChar + '">';
-					jumpToLetters[jumpToChar] = true;
-				}
-			}
+			// 		results += '<div id="' + jumpToChar + '">';
+			// 		jumpToLetters[jumpToChar] = true;
+			// 	}
+			// }
 
-			results += '<a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
+				results += '<a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
-			if(value.lastName == "" || value.lastName == null)	
-				results += '<td class="span4">' + value.org + '</td>';	
-			else
-				results += '<td class="span4">' + value.lastName + '</td>';
+				if(value.lastName == "" || value.lastName == null)	
+					results += '<td class="span4">' + value.org + '</td>';	
+				else
+					results += '<td class="span4">' + value.lastName + '</td>';
 
-			results += '<td class="span4">' + value.firstName + '</td>';
+				results += '<td class="span4">' + value.firstName + '</td>';
 
-			results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
-			results += '</tr>';
-		} );
+				results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
+				results += '</tr>';
+			});
+		}
+		else if(typeof tableData == "string") {
+
+			// Display message only
+			results = '<tr><td class="span12" style="text-align: center; font-weight: bold;">' + tableData + '</td></tr>';
+		} 
 
 		results += '</table>';
 
@@ -505,6 +582,9 @@ browseDonorsView = (function($) {
 
 		initPage: function() {
 			initPage();
+		},
+		setQueue: function(queueData) {
+			setQueue(queueData);
 		},
 		createDonorTable: function(tableData) {
 			createDonorTable(tableData);

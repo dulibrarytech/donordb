@@ -439,7 +439,7 @@ a:not([href]) {
 
 #page-label {
 
-	margin-bottom: 5px;
+	margin-bottom: -10px;
 }
 
 .small-label {
@@ -519,7 +519,7 @@ a:not([href]) {
 #jumpTo {
 
 	width: 800px;
-	margin-left: 215px;
+	margin-left: 155px;
 	padding-bottom: 20px;
 }
 
@@ -527,6 +527,11 @@ a:not([href]) {
 
 	height: 500px;
 	width: 905px;
+}
+
+#table-content td{
+
+	max-height: 50px;
 }
 
 #data-section-1 {
