@@ -55,6 +55,41 @@ loginForm = (function($) {
       $( "#password" ).val("");
     }
 
+    function validateFormInput() {
+
+      var userName = $( "#name" ).val(),
+          passWord = $( "#password" ).val(),
+          bValid = true;
+
+          bValid = bValid && checkLength( userName, "username", 3, 30 );
+          bValid = bValid && checkLength( passWord, "password", 5, 16 );
+
+          return bValid;
+    }
+
+    function authenticateFormData() {
+
+        var MAX_USERNAME = 30,
+            MAX_PASSWORD = 30;
+
+        userName = $( "#name" ).val(),
+        passWord = $( "#password" ).val();
+
+        // Validate
+        var valid = true;
+        if (userName.length > MAX_USERNAME) {
+          alert("Exceeded max characters allowed for username (" + MAX_USERNAME + ")");
+          valid = false;
+        }
+        if (passWord.length > MAX_PASSWORD) {
+          alert("Exceeded max characters allowed for password (" + MAX_PASSWORD + ")");
+          valid = false;
+        }
+          
+        if(valid)
+          authentication.authenticate({userName: userName, passWord: passWord});
+    }
+
  	  /*
 	  *	Popup login form (jquery) 
     * TODO: validation
@@ -67,26 +102,19 @@ loginForm = (function($) {
       buttons: {
         Submit: function() {
 
-          var bValid = true;
-          allFields.removeClass( "ui-state-error" );
- 
-          bValid = bValid && checkLength( name, "username", 3, 16 );
-          bValid = bValid && checkLength( password, "password", 5, 16 );
- 
-          //bValid = bValid && checkRegexp( name, /^[a-z]([0-9a-z_.])+$/i, "Username may consist of a-z, 0-9, underscores, begin with a letter." );
-          //bValid = bValid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
- 
-          if ( bValid ) {
+            allFields.removeClass( "ui-state-error" );
 
-            var userName = $( "#name" ).val(),
-                passWord = $( "#password" ).val();
-            
-            var loginData = {userName: userName, passWord: passWord};
-
-            authentication.authenticate(loginData);
+            authenticateFormData();          
           }
         }
-       }
+    });
+
+    // Submit on enter
+    $( "#dialog-form" ).keypress(function( event ) {
+        if ( event.which == 13 ) { 
+
+           authenticateFormData(); 
+        }
     });
 
     return {

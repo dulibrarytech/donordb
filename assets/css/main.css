@@ -37,6 +37,11 @@ table {
   	border-spacing: 0;border: ;
 }
 
+textarea {
+
+	resize: none;
+}
+
 /* 'onclick' links with no href */
 a:not([href]) {
 

@@ -570,7 +570,7 @@ browseDonorsView = (function($) {
 		else if(typeof tableData == "string") {
 
 			// Display message only
-			results = '<tr><td class="span12" style="text-align: center;">' + tableData + '</td></tr>';
+			results = '<tr><td class="span12" style="text-align: center; font-weight: bold;">' + tableData + '</td></tr>';
 		} 
 
 		results += '</table>';
