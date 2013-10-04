@@ -18,7 +18,7 @@
 	<!-- TODO: Create 'left edge field' class to offset by 25px left margin? -->
 	<style>
 		#gift_description_box		{ width: 500px; height: 150px; }
-		#gift_date_label			{ margin-left: 43px; }
+		#gift_date_label			{ margin-left: 75px; }
 		#gift-date-box				{ margin-left: 75px; }
 		#gift_submit_button			{ margin-left: -7px; margin-top: 0px; width: 90px;}
 		#edit_date_cell				{ vertical-align: bottom;  }
