@@ -86,8 +86,7 @@ loginForm = (function($) {
           valid = false;
         }
           
-        if(valid)
-          authentication.authenticate({userName: userName, passWord: passWord});
+        return valid;
     }
 
  	  /*
@@ -104,7 +103,9 @@ loginForm = (function($) {
 
             allFields.removeClass( "ui-state-error" );
 
-            authenticateFormData();          
+            if(authenticateFormData()) {
+              authentication.authenticate({userName: userName, passWord: passWord}); 
+            }         
           }
         }
     });
@@ -113,7 +114,10 @@ loginForm = (function($) {
     $( "#dialog-form" ).keypress(function( event ) {
         if ( event.which == 13 ) { 
 
-           authenticateFormData(); 
+           if(authenticateFormData()) {
+              authentication.authenticate({userName: userName, passWord: passWord}); 
+           }
+            
         }
     });
 
