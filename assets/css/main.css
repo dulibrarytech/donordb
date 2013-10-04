@@ -465,6 +465,7 @@ a:not([href]) {
 
 	/*max-width: 96%;*/
 	width: 900px;
+	font-weight: normal; 
 }
 
 #add_info_message {
@@ -527,11 +528,16 @@ a:not([href]) {
 
 	height: 500px;
 	width: 905px;
+	table-layout: fixed;
 }
 
 #table-content td{
 
-	max-height: 50px;
+	max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
 }
 
 #data-section-1 {
