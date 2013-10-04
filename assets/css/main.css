@@ -401,7 +401,7 @@ a:not([href]) {
 	padding-left: 25px;
 	font-size: 25;
 	/*font-family: "Segoe Script", Arial, Helvetica, sans-serif;*/ 
-	font-family: 'Amarante', cursive;  /*google font*/
+	font-family: 'Libre Baskerville', serif;  /*google font*/
 	font-weight: bold;
 
 	position: relative; 
