@@ -244,7 +244,7 @@ searchView = (function($) {
 
 				results += '<td class="span4">' + value.firstName + '</td>';
 
-				results += '<td style="text-align: center"> <a onclick="' + tableData[0]['action'] + '(' + value.giftID + ');">' + tableData[0]['actionText'] + '</a> </td>';
+				results += '<td class="span2" style="text-align: center"> <a onclick="' + tableData[0]['action'] + '(' + value.giftID + ');">' + tableData[0]['actionText'] + '</a> </td>';
 				results += '</tr>';
 			} );
 		}	
@@ -279,7 +279,7 @@ searchView = (function($) {
 				
 				results += '<td class="span4">' + value.firstName + '</td>';
 
-				results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
+				results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
 				results += '</tr>';
 
 			} );
@@ -330,7 +330,7 @@ searchView = (function($) {
 				results += '<td class="span2">' + value.letterStatus + '</td>';
 
 				if(value.lastName != "Anonymous Donor") {
-					results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">' + addLinkText + '</a> </td>';
+					results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">' + addLinkText + '</a> </td>';
 				}
 				
 				results += '</tr>';
@@ -429,7 +429,8 @@ browseDonorsView = (function($) {
 
 		$("#page-label").text("Donor Listing");
 
-		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
+		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th class='span2' style='float: right;'><!--SPACE--></th> </thead>");
+		//$("#table-header").html("<thead> <th style='width: 140'><!--SPACE--></th> <th style='width: 284'>Last Name / Organization</th> <th style='width: 284'>First Name</th> <th style='width: 140; float: right;'><!--SPACE--></th> </thead>");
 
 		utils.getDonorDataArray(setQueue); 
 	};
@@ -563,7 +564,7 @@ browseDonorsView = (function($) {
 
 				results += '<td class="span4">' + value.firstName + '</td>';
 
-				results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
+				results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
 				results += '</tr>';
 			});
 		}

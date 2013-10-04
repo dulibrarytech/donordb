@@ -617,12 +617,13 @@ a:not([href]) {
 
 	height: 500px;
 	width: 905px;
-	table-layout: fixed;
+	k
 }
 
 #table-content td{
 
 	max-width: 100px;
+
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
