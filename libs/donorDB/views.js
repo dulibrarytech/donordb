@@ -238,11 +238,11 @@ searchView = (function($) {
 				results += '<td class="span2">' + value.giftDate + '</td>';
 
 				if(value.lastName == "" || value.lastName == null)
-					results += '<td class="span4">' + value.org + '</td>';
+					results += '<td class="span4 name-cell">' + value.org + '</td>';
 				else
-					results += '<td class="span4">' + value.lastName + '</td>';
+					results += '<td class="span4 name-cell">' + value.lastName + '</td>';
 
-				results += '<td class="span4">' + value.firstName + '</td>';
+				results += '<td class="span4 name-cell">' + value.firstName + '</td>';
 
 				results += '<td style="text-align: center"> <a onclick="' + tableData[0]['action'] + '(' + value.giftID + ');">' + tableData[0]['actionText'] + '</a> </td>';
 				results += '</tr>';
@@ -273,11 +273,11 @@ searchView = (function($) {
 				results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
 				if(value.lastName == "" || value.lastName == null)
-					results += '<td class="span4">' + value.org + '</td>';
+					results += '<td class="span4 name-cell">' + value.org + '</td>';
 				else
-					results += '<td class="span4">' + value.lastName + '</td>';
+					results += '<td class="span4 name-cell">' + value.lastName + '</td>';
 				
-				results += '<td class="span4">' + value.firstName + '</td>';
+				results += '<td class="span4 name-cell">' + value.firstName + '</td>';
 
 				results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
 				results += '</tr>';
@@ -321,11 +321,11 @@ searchView = (function($) {
 				results += '<td class="span2">' + value.giftDate + '</td>';
 
 				if(value.lastName == "" || value.lastName == null) 
-					results += '<td class="span3">' + value.org + '</td>';
+					results += '<td class="span3 name-cell">' + value.org + '</td>';
 				else
-					results += '<td class="span3">' + value.lastName + '</td>';
+					results += '<td class="span3 name-cell">' + value.lastName + '</td>';
 
-				results += '<td class="span3">' + value.firstName + '</td>';
+				results += '<td class="span3 name-cell">' + value.firstName + '</td>';
 
 				results += '<td class="span2">' + value.letterStatus + '</td>';
 
@@ -566,11 +566,11 @@ browseDonorsView = (function($) {
 				results += '<a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
 				if(value.lastName == "" || value.lastName == null)	
-					results += '<td class="span4">' + value.org + '</td>';	
+					results += '<td class="span4 name-cell">' + value.org + '</td>';	
 				else
-					results += '<td class="span4">' + value.lastName + '</td>';
+					results += '<td class="span4 name-cell">' + value.lastName + '</td>';
 
-				results += '<td class="span4">' + value.firstName + '</td>';
+				results += '<td class="span4 name-cell">' + value.firstName + '</td>';
 
 				results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
 				results += '</tr>';
@@ -1595,11 +1595,11 @@ statisticsView = (function($) {
 				results += '<td class="span2">' + value.giftDate + '</td>';
 
 				if(value.lastName == "" || value.lastName == null) 
-					results += '<td class="span3">' + value.org + '</td>';
+					results += '<td class="span3 name-cell">' + value.org + '</td>';
 				else
-					results += '<td class="span3">' + value.lastName + '</td>';
+					results += '<td class="span3 name-cell">' + value.lastName + '</td>';
 
-				results += '<td class="span3">' + value.firstName + '</td>';
+				results += '<td class="span3 name-cell">' + value.firstName + '</td>';
 
 				results += '<td class="span2">' + value.giftQuantity + '</td>';
 

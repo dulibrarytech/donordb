@@ -337,6 +337,14 @@ a:not([href]) {
 	width: 538px;
 }
 
+.name-cell{
+  
+  	max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 
 /* List */
 /*.ui-state-default,
@@ -536,14 +544,14 @@ a:not([href]) {
 	table-layout: fixed;
 }
 
-#table-content td{
+/*#table-content td{
 
 	max-width: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     
-}
+}*/
 
 #data-section-1 {
 
