@@ -492,7 +492,16 @@ browseDonorsView = (function($) {
 
 					$.each(queueData, function (key, value) {
 
-						if(value.lastName.charAt(0) == chr) {
+						if(value.lastName == null || value.lastName == "") {
+
+								if(value.org.charAt(0) == chr) {
+
+								tempArray[index] = value;
+
+								index++;
+							}
+						}
+						else if(value.lastName.charAt(0) == chr) {
 
 							tempArray[index] = value;
 
