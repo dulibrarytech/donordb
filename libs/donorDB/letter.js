@@ -67,7 +67,7 @@ letter = (function($) {
             }
 		};
 
-		$.ajax(requestObj);
+		utils.doAjax(requestObj);
 	};
 
 	return {

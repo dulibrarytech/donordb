@@ -38,12 +38,12 @@ authentication = (function($) {
             	}
             },
             error: function ( textStatus, errorThrown ) {
-                //alert( "validateSession error: " + errorThrown );
+                alert( "validateSession error: " + errorThrown );
                 window.location.replace(_serverErrorView);
             }
         };
 
-	  	$.ajax(requestObj);
+	  	utils.doAjax(requestObj);
 	};
 
 	validateLocalSession = function() {
@@ -81,7 +81,7 @@ authentication = (function($) {
             }
         };	
 
-        $.ajax(requestObj);
+        utils.doAjax(requestObj);
 	};
 
 	validateResponse = function(response) {

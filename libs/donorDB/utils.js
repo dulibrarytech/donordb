@@ -416,7 +416,6 @@ utils = (function($) {
 
 	setLetterComplete = function(giftID) {
 
-		alert("here");
 		requestObj = {
 
 			type: "POST", 
@@ -439,6 +438,9 @@ utils = (function($) {
 
 	return {
 
+		doAjax: function(reqObj) {
+			doAjax(reqObj);
+		},
 		submitSearch: function(callback,type) {	
 			submitSearch(callback,type);
 		},
