@@ -197,7 +197,7 @@
 
 
 <footer id="footer-bar">
-	<?php $this->load->view("partials/footer-bar.php"); ?>
+	<!--?php $this->load->view("partials/footer-bar.php"); ?-->
 
 	<!--Load javascript functions-->
 	<?php $this->load->view("partials/javascript-partial.php"); ?>
