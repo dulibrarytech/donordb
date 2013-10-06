@@ -69,69 +69,69 @@
 
 					<tr>
 						<td>
-							<label class="form-label-text" id="title-label">Title:</label>  
+							<label for="title-edit-box" class="form-label-text" id="title-label">Title:</label>  
 							<div id="dropdown-box"></div>
 
 							<input type="text" class="input-medium" id="title-edit-box" placeholder="Enter new title:" />
 						</td>
 					
 						<td>
-							<label class="form-label-text">First Name:</label> 
+							<label for="fname_input_box" class="form-label-text">First Name:</label> 
 							<input type="text" id="fname_input_box" class="input_form-default" name="fName"/>  
 						</td>
 
 						<td>
-							<label class="form-label-text">Last Name:</label>
+							<label for="lName_input_box" class="form-label-text">Last Name:</label>
 							<input type="text" id="lName_input_box" class="input_form-default" name="lName"/>  
 						</td>
 					</tr>
 
 					<tr>
 						<td>
-							<label class="form-label-text">Organization:</label>
+							<label for="org_input_box" class="form-label-text">Organization:</label>
 							<input type="text" id="org_input_box" class="input_form-default" name="org"/>  
 						</td>
 						<td>
-							<label class="form-label-text">Address 1:</label>
+							<label for="addr1_input_box" class="form-label-text">Address 1:</label>
 							<input type="text" id="addr1_input_box" class="input_form-default" name="addr1"/>  
 						</td>
 
 						<td>
-							<label class="form-label-text">Address 2:</label>
+							<label for="addr2_input_box" class="form-label-text">Address 2:</label>
 							<input type="text" id="addr2_input_box" class="input_form-default" name="addr2"/>  
 						</td>
 					</tr>
 
 					<tr>
 						<td>
-							<label class="form-label-text">City:</label>
+							<label for="city_input_box" class="form-label-text">City:</label>
 							<input type="text" id="city_input_box" class="input_form-default" name="city"/>  
 						</td>
 
 						<td>
-							<label class="form-label-text">State:</label>
+							<label for="state_input_box" class="form-label-text">State:</label>
 							<input type="text" id="state_input_box" class="input-medium" name="state"/>  
 						</td>
 
 						<td>
-							<label class="form-label-text">Zip:</label>
+							<label for="zip_input_box" class="form-label-text">Zip:</label>
 							<input type="text" id="zip_input_box" class="input-small" name="zip"/>  
 						</td>
 					</tr>
 
 					<tr>
 						<td>
-							<label class="form-label-text">Country:</label>
+							<label for="country_input_box" class="form-label-text">Country:</label>
 							<input type="text" id="country_input_box" class="input_form-default" name="country" value="USA"/>  
 						</td>
 
 						<td>
-							<label class="form-label-text">Phone:</label>
+							<label for="phone_input_box" class="form-label-text">Phone:</label>
 							<input type="text" id="phone_input_box" class="input_form-default" name="phone"/>  
 						</td>
 
 						<td>
-							<label class="form-label-text">Email:</label>
+							<label for="email_input_box" class="form-label-text">Email:</label>
 							<input type="text" id="email_input_box" class="input_form-default" name="email"/>  
 						</td>
 					</tr>
@@ -145,21 +145,21 @@
 
 					<tr>
 						<td class="span7" rowspan="2">
-							<label class="form-label-text">Gift Description:</label>
+							<label for="description_area" class="form-label-text">Gift Description:</label>
 							<textarea class="textarea" id="description_area" name="giftDescription"></textarea>
 						</td>
 						<td class="span2">
 							<!-- Spacer -->
 						</td>
 						<td class="span3">
-							<label class="form-label-text">Gift Date:</label>  
+							<label for="gift-date-box" class="form-label-text">Gift Date:</label>  
 							<input type="text" class="input-small" id="gift-date-box" name="giftDate"/> 
 
 							<div id="gift-date-box-section"></div>
 						</td>
 					
 						<td class="span3">
-							<label class="form-label-text" id="gift_quantity_label" for="gift_quantity_box">Gift Quantity:</label> 
+							<label for="gift_quantity_box" class="form-label-text" id="gift_quantity_label" for="gift_quantity_box">Gift Quantity:</label> 
 							<input type="text" class="input-small" id="gift_quantity_box" name="giftQuantity"/>  
 						</td>
 					</tr>

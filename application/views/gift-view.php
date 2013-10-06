@@ -87,7 +87,7 @@
 			<div class="well" id="add-gift-section">
 				<table>
 					<tr><td class="span9">
-						<label class="form-label-text left-edge-field" id="gift_quantity_label">Quantity:</label>  
+						<label for="gift_quantity_box" class="form-label-text left-edge-field" id="gift_quantity_label">Quantity:</label>  
 						<input type="text" class="input-small left-edge-field" id="gift_quantity_box" placeholder="#" name="giftQuantity" />
 					</td>
 					<td id="important_gift_check">
@@ -95,17 +95,17 @@
 						<input type="checkbox" name="importantFlag" class="checkbox" id="important-checkbox" value="1">Hand-Typed Letter</input>
 					</td>
 					<td>
-						<label class="form-label-text" id="gift_date_label">Date of Gift:</label>  
+						<label for="gift-date-box" class="form-label-text" id="gift_date_label">Date of Gift:</label>  
 						<input type="text" class="input-small" id="gift-date-box" name="giftDate" />
 
 						<div id="dropdown-box-section"></div>
 					</td></tr>
 					<tr><td class="span9">
-						<label class="form-label-text left-edge-field" id="gift_description_label">Description:</label> 
+						<label for="gift_description_box" class="form-label-text left-edge-field" id="gift_description_label">Description:</label> 
 						<textarea class="textarea left-edge-field" id="gift_description_box" name="giftDescription" cols="70" rows="50"></textarea>
 					</td>
 					<td id="edit_date_cell" colspan="2">
-						<label class="form-label-text change_date_elts" id="change_date_label">Change Date:</label>  
+						<label for="edit-date-box" class="form-label-text change_date_elts" id="change_date_label">Change Date:</label>  
 						<input type="text" class="input-small change_date_elts" id="edit-date-box" name="giftDateEdit" />
 
 						<input type="button" class="btn" id="add_anon_info_button" value="Add info"/>
