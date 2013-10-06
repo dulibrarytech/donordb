@@ -480,11 +480,13 @@ class Search_model extends CI_Model
 
         if($giftID != null)
         {
+            $this->db->trans_start();
             $this->db->select('tbl_donorgifts.dateOfGift, tbl_donorgifts.numberOfGifts, tbl_donorgifts.letter, tbl_donorgifts.important, tbl_donorgiftdescriptions.giftDescription1');
             $this->db->from('tbl_donorgifts');
             $this->db->join('tbl_donorgiftdescriptions', 'tbl_donorgifts.giftsID = tbl_donorgiftdescriptions.giftsID', 'inner');
             $this->db->where('tbl_donorgifts.giftsID', $giftID);
             $this->db->order_by("dateOfGift", "desc");
+            $this->db->trans_complete();
 
             $query = $this->db->get();
 

@@ -61,7 +61,7 @@ utils = (function($) {
 				callback(response);
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( "getDonorDataArray: " + errorThrown );
             }
 		};
 
@@ -80,7 +80,7 @@ utils = (function($) {
 				callback(response);
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( "getActiveDonorData: " + errorThrown );
             }
 		};
 
@@ -99,7 +99,7 @@ utils = (function($) {
 				callback(response);
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( "getActiveGift: " + errorThrown );
             }
 		};
 
@@ -130,7 +130,7 @@ utils = (function($) {
 				callback(response);
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown + ": submitSearch");
+                alert( "submitSearch: " + errorThrown );
             }
 		};
 		
@@ -159,7 +159,7 @@ utils = (function($) {
 				}, MESSAGE_DELAY );
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( "submitNewDonorInfo: " + errorThrown );
             }
 		};
 		
@@ -180,7 +180,7 @@ utils = (function($) {
 				callback(title,response['ID']); 
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( "submitNewTitle: " + errorThrown );
             }
 		};
 		
@@ -202,7 +202,7 @@ utils = (function($) {
 				addGiftView.resetForm();
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( "submitGift: " + errorThrown );
             }
 		};
 		
@@ -223,7 +223,7 @@ utils = (function($) {
 				setTimeout( function(){ editGiftView.toggleSubmitMessage(); }, MESSAGE_DELAY );
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( "submitGiftEdit: " + errorThrown );
             }
 		};
 		
@@ -244,7 +244,7 @@ utils = (function($) {
 				setTimeout( function(){ editDonorView.toggleSubmitMessage(); }, MESSAGE_DELAY );
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( "submitDonorEdit: " + errorThrown );
             }
 		};
 		
@@ -263,7 +263,7 @@ utils = (function($) {
 				callback(response);
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( "getGiftData: " + errorThrown );
             }
 		};
 		
@@ -282,7 +282,7 @@ utils = (function($) {
 				callback(response);
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( "getActiveNameString: " + errorThrown );
             }
 		};
 
@@ -301,7 +301,7 @@ utils = (function($) {
 				callback(response,index);
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( "getTitleArray: " + errorThrown );
             }
 		};
 
@@ -320,7 +320,7 @@ utils = (function($) {
 				callback(response);
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( "getGiftDatesForActiveDonor: " + errorThrown );
             }
 		};
 
@@ -340,7 +340,7 @@ utils = (function($) {
 				callback(response);
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( "getNewDonationList: " + errorThrown );
             }
 		};
 
@@ -360,7 +360,7 @@ utils = (function($) {
 				callback(response);
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( "getTypedLetterRequests: " + errorThrown );
             }
 		};
 
@@ -382,7 +382,7 @@ utils = (function($) {
 				callback(response);
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown + ": utils.getStatistics" );
+                alert( "getStatistics: " + errorThrown );
             }
 		};
 		
@@ -407,7 +407,7 @@ utils = (function($) {
 
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( "setActiveGift: " + errorThrown );
             }
 		};
 		
@@ -429,7 +429,7 @@ utils = (function($) {
 				viewUtils.getList();
 			},
 			error: function ( textStatus, errorThrown ) {
-                alert( errorThrown );
+                alert( "setLetterComplete: " + errorThrown );
             }
 		};
 		
