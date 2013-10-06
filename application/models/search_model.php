@@ -477,6 +477,7 @@ class Search_model extends CI_Model
     public function getGiftData($giftID)
     {
         $giftInfo = array("giftDescription" => "Error: Null giftID");
+        $giftInfo['letterFlag'] = -1;
 
         if($giftID != null)
         {
