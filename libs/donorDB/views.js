@@ -947,10 +947,8 @@ addNewDonorView = (function($) {
 
 		$("#add_info_button").html("Save");
 
-		var profile = viewUtils.getProfile();
-		if(profile.roleID != 2) {
-			$("#gen_letter_button").hide();
-		}
+		$("#gen_letter_button").hide();
+		$("#return_button").hide();
 
 		addEvents(anonymous);
 
@@ -1209,6 +1207,9 @@ editDonorView = (function($) {
 			$("#gen_letter_button").hide();
 		}
 
+		if(viewUtils.getPrevPage() != "search")
+			$("#return_button").hide();
+
 		addEvents();
 		form.addDonorDBEditFormValidation();
 
@@ -1283,6 +1284,11 @@ editDonorView = (function($) {
 	    $("#gen_letter_button").click( function() {
 
 	    	utils.getActiveGift(viewUtils.displayLetter);
+	    });
+
+	    $("#return_button").click( function() {
+
+	    	alert("return...");
 	    });
 	};
 
@@ -1678,12 +1684,29 @@ viewUtils = (function($) {
 
 	var getPage,
 		getList,
+		getPrevPage,
 		setUserLabel,
 		displayLetter;
 
 	getPage = function() {
 
 		return $("meta[name=page]").attr("content");
+	};
+
+	getPrevPage = function() {
+
+		var prevUrl = document.referrer,
+			length = document.referrer.length;
+
+		var ch;
+		for(var i = length - 1; i > 0; i--) {
+
+			ch = prevUrl.charAt(i);
+			if(ch == '/')
+				break;
+		}
+
+		return prevUrl.substring((i + 1), length);
 	};
 
 	getProfile = function() {
@@ -1733,6 +1756,9 @@ viewUtils = (function($) {
 
 		getPage: function() {
 			return getPage();
+		},
+		getPrevPage: function() {
+			return getPrevPage();
 		},
 		getProfile: function() {
 			return getProfile();

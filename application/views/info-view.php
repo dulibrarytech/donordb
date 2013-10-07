@@ -17,18 +17,21 @@
 	<style>
 		#add_info_button 			{ margin-left: -7px; margin-top: -10px; }
 		/*#add_info_message			{ width: 200px; }*/
-		#gen_letter_button			{ margin-left: -20px; margin-top: -10px; }
+		#gen_letter_button			{ margin-left: 0px; margin-top: -10px; }
 		#upper_well					{ padding-bottom: 0px; }
 		#lower_well					{ padding-bottom: 0px; }
 		#description_area			{ width: 455px; height: 75px;}
 		#gift_quantity_label		{ margin-left: 5px; }
 		#gift_quantity_box			{ margin-left: 5px; }
 		#lower_controls				{ background-color: #ffffff; width: 90%; }
+		#return_button				{ margin-left: 25px; margin-top: -10px; }
 
 		#edit-gift-button			{ margin-left: 18px; margin-top: 10px; }
 		#edit-gift-button           { margin-left: 18px; margin-top: 10px; }
         #important-checkbox         { margin-left: 40px; margin-top:-5px; }
         #username-label				{ margin-right: 20px; }
+
+       /* #add_info_message			{ margin-left: 50px; }*/
 	</style>		
 
 </head>
@@ -183,9 +186,10 @@
 
 			<!-- This table creates a row with the submit button and an 'adding donor info' status message to the right of the button-->
 			<table class="table" id="lower_controls"><tr>
-				<td class="button-table-item"><button type="submit" class="btn-grey" id="add_info_button">Save</button></td>
-				<td class="button-table-item"><button type="button" class="btn-grey" id="gen_letter_button">Letter</button></td>
-				<td><div id="add_info_message"></div></td>
+				<td class="span1"><button type="submit" class="btn-grey" id="add_info_button">Save</button></td>
+				<td class="span1"><button type="button" class="btn-grey" id="gen_letter_button">Letter</button></td>
+				<td class="span4"><button type="button" class="btn-grey" id="return_button">Return to Search Results</button></td>
+				<td class="span6"><div id="add_info_message"></div></td>
 				<!--td class=""><input type="checkbox" id="add_gift_checkbox" name="addGiftCheckbox">&nbsp&nbspDo not add a gift at this time</input></td></tr-->
 			</table>
 		</form>

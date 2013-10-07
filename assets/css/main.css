@@ -486,6 +486,7 @@ a:not([href]) {
 	color: #F71A03;
 	font-weight: bold;
 	font-family: "Times New Roman", Times, serif;
+	text-align: right;
 }
 
 #list-section {
