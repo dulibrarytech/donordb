@@ -429,6 +429,14 @@ a:not([href]) {
     white-space: nowrap;
 }
 
+.lower_controls {
+
+	background-color: #ffffff; 
+	padding: -10px; 
+	
+	width: 90%;
+}
+
 
 /* List */
 /*.ui-state-default,
@@ -644,6 +652,7 @@ a:not([href]) {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; 
 	font-size: 16px;
 }
+
 
 
 

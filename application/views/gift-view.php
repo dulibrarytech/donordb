@@ -20,7 +20,7 @@
 		#gift_description_box		{ width: 500px; height: 150px; }
 		#gift_date_label			{ margin-left: 75px; }
 		#gift-date-box				{ margin-left: 75px; }
-		#gift_submit_button			{ margin-left: -7px; margin-top: 0px; width: 90px;}
+		#gift_submit_button			{ margin-left: -7px; margin-top: 0px; }
 		#edit_date_cell				{ vertical-align: bottom;  }
 		#important-checkbox			{ margin-top: 12px; }
 		#add_anon_info_button		{ margin-left: 88px; margin-bottom: 8px; }
@@ -30,7 +30,7 @@
 		#dropdown-box-section		{ margin-left: 42px; width: 150px; }
 		#dropdown-box 				{ width: 120px; }
 
-		#lower_controls				{ background-color: #ffffff; width: 60%; padding: -10px; margin-top: -10px; }
+		#back_button				{ margin-left: 0px; }
 		#add_info_message			{ padding-top: 15px; }
 
 		#letter-status 				{ margin-right: 30px; }
@@ -115,10 +115,12 @@
 			</div>
 
 			<!-- This table creates a row with the submit button and an 'adding donor info' status message to the right of the button-->
-			<table class="table" id="lower_controls"><tr>
-				<td class="span2"><button type="submit" class="btn-grey" id="gift_submit_button"></button></td>
-				<td id="add_info_message"></td>
-				<!--td class=""><input type="checkbox" id="add_gift_checkbox" name="addGiftCheckbox">&nbsp&nbspDo not add a gift at this time</input></td></tr-->
+			<table class="table lower_controls">
+				<tr>
+					<td class="span1"><button type="submit" class="btn-grey button-table-item" id="gift_submit_button"></button></td>
+					<td class="span1"><button type="button" class="btn-grey" id="back_button">Back</button></td>
+					<td class="span10"><div id="add_info_message"></div></td>
+				</tr>
 			</table>
 
 		</form>  

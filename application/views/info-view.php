@@ -15,7 +15,7 @@
 
 	<!-- Positioning -->
 	<style>
-		#add_info_button 			{ margin-left: -7px; margin-top: -10px; }
+		#add_info_button 			{ margin-left: -8px; margin-top: -10px; }
 		/*#add_info_message			{ width: 200px; }*/
 		#gen_letter_button			{ margin-left: 0px; margin-top: -10px; }
 		#upper_well					{ padding-bottom: 0px; }
@@ -23,8 +23,8 @@
 		#description_area			{ width: 455px; height: 75px;}
 		#gift_quantity_label		{ margin-left: 5px; }
 		#gift_quantity_box			{ margin-left: 5px; }
-		#lower_controls				{ background-color: #ffffff; width: 90%; }
-		#return_button				{ margin-left: 25px; margin-top: -10px; }
+
+		#back_button				{ margin-top: -10px; }
 
 		#edit-gift-button			{ margin-left: 18px; margin-top: 10px; }
 		#edit-gift-button           { margin-left: 18px; margin-top: 10px; }
@@ -172,11 +172,11 @@
 
 					<tr>	
 						<td id="important_gift_check" colspan="2">
-                                                        <div id="important-box-text">
-                                                                <input type='hidden' name='importantFlag' value="0"/>
-                                                                <input type="checkbox" name="importantFlag" id="important-checkbox" value="1">Hand-Typed Letter</input>
-                                                        </div>
-                                                </td>
+                                <div id="important-box-text">
+                                    <input type='hidden' name='importantFlag' value="0"/>
+                                    <input type="checkbox" name="importantFlag" id="important-checkbox" value="1">Hand-Typed Letter</input>
+                                </div>
+                            </td>
 						<td>
 							<button type="button" class="btn" id="edit-gift-button">Edit Gift</button>
 						</td>
@@ -185,11 +185,11 @@
 			</div>
 
 			<!-- This table creates a row with the submit button and an 'adding donor info' status message to the right of the button-->
-			<table class="table" id="lower_controls"><tr>
+			<table class="table lower_controls"><tr>
 				<td class="span1"><button type="submit" class="btn-grey" id="add_info_button">Save</button></td>
+				<td class="span1"><button type="button" class="btn-grey" id="back_button">Back</button></td>
 				<td class="span1"><button type="button" class="btn-grey" id="gen_letter_button">Letter</button></td>
-				<td class="span4"><button type="button" class="btn-grey" id="return_button">Return to Search Results</button></td>
-				<td class="span6"><div id="add_info_message"></div></td>
+				<td class="span9"><div id="add_info_message"></div></td>
 				<!--td class=""><input type="checkbox" id="add_gift_checkbox" name="addGiftCheckbox">&nbsp&nbspDo not add a gift at this time</input></td></tr-->
 			</table>
 		</form>

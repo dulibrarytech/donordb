@@ -1208,9 +1208,6 @@ editDonorView = (function($) {
 			$("#gen_letter_button").hide();
 		}
 
-		if(viewUtils.getPrevPage() != "search")
-			$("#return_button").hide();
-
 		addEvents();
 		form.addDonorDBEditFormValidation();
 
