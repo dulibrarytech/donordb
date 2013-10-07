@@ -23,6 +23,7 @@ searchView = (function($) {
 		createAlertList,
 		createDonorTable,
 		createGiftTable,
+		reloadSearchResults,
 		toggleResultsView;
 
 	initPage = function() {
@@ -54,6 +55,7 @@ searchView = (function($) {
 			var profile = viewUtils.getProfile(),
 				queue = getQueue();
 
+			// Set user-specific layout
 			setRole(profile.roleID);
 
 			// If the queue is empty, set it here.  List is created in getList()
@@ -66,7 +68,17 @@ searchView = (function($) {
 				createAlertList(queue);
 			}	
 
+			// Set user namestring
 			viewUtils.setUserLabel();
+
+			// If there are search results cached, display them in the results view
+			var searchResults = JSON.parse(sessionStorage.getItem('search_results'));
+			if(searchResults != null) {
+
+				reloadSearchResults(searchResults);
+				sessionStorage.setItem('search_results', null);
+			}
+
 		}
 		else {
 			alert("Local session not validated.  Please contact systems support if there is a problem logging in.");
@@ -81,7 +93,9 @@ searchView = (function($) {
 
 		var fromDate, 
 			toDate,
-			anonymous;
+			anonymous,
+			keyword,
+			type;
 
 		$("#search-form").validate({
 
@@ -94,20 +108,32 @@ searchView = (function($) {
 	        	fromDate	= $("#fromDate").val();
 	        	toDate 		= $("#toDate").val();
 	        	anonymous 	= $("#anonymous-gift-check").val();
+	        	keyword		= $("#lname_input_box").val();
 
+	        	// Run search based on anonymous state and the presence of date terms
 	        	if(anonymous == '1') {
-	        		utils.submitSearch(createGiftTable,"anonymous");
+
+	        		type = "anonymous";
+	        		utils.submitSearch(createGiftTable,type);
 	        	}
 	        	else {
 
 	        		//If a date field has been populated, search results should display gifts by date.  If not, display donor results
 		        	if(fromDate != "" || toDate != "") {
-		        		utils.submitSearch(createGiftTable,"gift");
+
+		        		type = "gift";
+		        		utils.submitSearch(createGiftTable,type);
 		        	}
 		        	else {
-		        		utils.submitSearch(createDonorTable,"donor");
+
+		        		type = "donor";
+		        		utils.submitSearch(createDonorTable,type);
 		        	}
 	        	}
+
+	        	// Store the search terms for search reload purposes
+	        	var prevSearchTerms = {keyword:keyword, toDate:toDate, fromDate:fromDate, anonymous:anonymous, type:type};
+	        	sessionStorage.setItem('prev_search_terms', prevSearchTerms);
 	        },
 	        errorPlacement: function(error, element) {
 
@@ -384,8 +410,38 @@ searchView = (function($) {
 			createAlertList(getQueue());
 		}
 
+		else {
+
+			window.location.href =  _searchUrl;
+		}
+
 		$("#search-form").toggle();
 		$("#search_return").toggle();
+	};
+
+	reloadSearchResults = function(tableData) {
+
+		// Make sure tableData object is valid and of the proper format for the table
+		if(typeof tableData == "object" && tableData["0"] != null) {
+
+			// Detect search type based on giftsID state
+			if(typeof tableData['0'].giftsID == 'undefined' || tableData['0'].giftsID == null) {
+
+				createDonorTable(tableData);
+			}
+			else {
+
+				createGiftTable(tableData);
+			}
+		}
+		else if(typeof tableData == "string") {
+
+			createDonorTable("Reload error: " + tableData);
+		}
+		else {
+
+			createDonorTable("Reload error: Null tableData object");
+		}	
 	};
 
 	return {
@@ -404,6 +460,9 @@ searchView = (function($) {
 		},
 		createGiftTable : function(tableData) {
 			createGiftTable(tableData);
+		},
+		reloadSearchResults: function(tableData) {
+			reloadSearchResults(tableData);
 		},
 		createAlertList : function(tableData) {
 			createAlertList(tableData);
@@ -678,6 +737,11 @@ editGiftView = (function($) {
 			var giftID = $("#dropdown-box>option:selected").val();
 	    	utils.setActiveGift(giftID,setGiftFormData);
 	    });
+
+	    $("#back_button").click( function() {
+
+	    	viewUtils.onClickBack();
+	    });
 	};
 
 	// Blocks all fields and displays 'message' in the description section
@@ -863,6 +927,11 @@ addGiftView = (function($) {
 
 	    	window.location.href = _editUrl + "/addDonorView/1";
 	    });
+
+	    $("#back_button").click( function() {
+
+	    	viewUtils.onClickBack();
+	    });
 	};
 
 	toggleSubmitMessage = function() {
@@ -996,6 +1065,11 @@ addNewDonorView = (function($) {
 		        return false;
 		    }
 		});
+
+		$("#back_button").click( function() {
+
+	    	viewUtils.onClickBack();
+	    });
 
 		// Disable name constraints if an organization name has been entered
 		// $('#org_input_box').on('focusout',function(){
@@ -1284,9 +1358,9 @@ editDonorView = (function($) {
 	    	utils.getActiveGift(viewUtils.displayLetter);
 	    });
 
-	    $("#return_button").click( function() {
+	    $("#back_button").click( function() {
 
-	    	alert("return...");
+	    	viewUtils.onClickBack();
 	    });
 	};
 
@@ -1750,6 +1824,33 @@ viewUtils = (function($) {
 		}
 	};
 
+	onClickBack = function() {
+
+		switch(getPrevPage()) {
+
+			case "search":
+
+				// Reload previous search result
+                utils.loadPreviousSearchResults();
+
+			break;
+
+			case "browseDonors":
+
+				// Reload previous browse section
+				alert("onclickback: browse");
+
+			break;
+
+			default:
+
+				// Reload previous url
+				window.history.back();
+
+			break;
+		}
+	};
+
 	return {
 
 		getPage: function() {
@@ -1769,6 +1870,9 @@ viewUtils = (function($) {
 		},
 		getList: function() {
 			getList();
+		},
+		onClickBack: function() {
+			onClickBack();
 		}
 	};
 

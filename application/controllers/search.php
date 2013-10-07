@@ -24,14 +24,20 @@ class Search extends CI_Controller {
 	 * Loads Search View 
 	 * If 
 	 */
-	public function index()
+	public function index($resetSearchCache = TRUE)
 	{
+		if($resetSearchCache) 
+		{
+			$this->phpsessions->set('prevSearchResults', null);
+		}
+		
 		$data['pageLoader'] = "<script>
 									searchView.initPage();
 									authentication.validateSession();
 								</script>";
 
     	$this->load->view('lookup-view', $data);
+    	//echo "<h1 style='margin-top:100px;'>ECHO TEST" . $resetSearchCache . "</h1>";
 	}
 
 	public function recordSearch()
@@ -52,36 +58,59 @@ class Search extends CI_Controller {
             }
             case "POST":
             {
+                // Attempt to get posted search data
                 $keyword 	= $this->input->post('searchTerm');
                 $fromDate 	= $this->input->post('fromDate');
                 $toDate 	= $this->input->post('toDate');
                 $searchType = $this->input->post('searchType');
 
-                if($searchType == "donor")
-					echo json_encode($this->Search_model->donorSearch($keyword)); 
-                else if($searchType == "gift")
+                // If no data in POST, or if this is a reload search, get the data from the session array.
+                if($searchType == null || $searchType == "reload")
                 {
-                	$resultArray = $this->Search_model->giftSearch($keyword,$fromDate,$toDate); 
-
-                	// Convert letter data from bit to human readable data
-                	foreach($resultArray as $key => $result)
-                	{
-                		$resultArray[$key]['letterStatus'] = "";
-
-                		if($result['letter'] == 1)
-	                		$resultArray[$key]['letterStatus'] = "Pending";
-	                	else if($result['letter'] == 0)
-	                		$resultArray[$key]['letterStatus'] = "Sent";
-	                	else
-	                		$resultArray[$key]['letterStatus'] = "Error";
-                	}
-
+                	$resultArray = $this->phpsessions->get('prevSearchResults');
                 	echo json_encode($resultArray);
                 }
-                else if($searchType == "anonymous")
-                	echo json_encode($this->Search_model->anonymousGiftSearch($keyword,$fromDate,$toDate));
+                // Run the search from post data
                 else
-                	echo json_encode("Search type error!");
+                {
+	                if($searchType == "donor") {
+
+	                	$resultArray = $this->Search_model->donorSearch($keyword);
+	                	$this->phpsessions->set('prevSearchResults', $resultArray);
+
+	                	echo json_encode($resultArray);
+	                }	 
+	                else if($searchType == "gift")
+	                {
+	                	$resultArray = $this->Search_model->giftSearch($keyword,$fromDate,$toDate); 
+
+	                	// Convert letter data from bit to human readable data
+	                	foreach($resultArray as $key => $result)
+	                	{
+	                		$resultArray[$key]['letterStatus'] = "";
+
+	                		if($result['letter'] == 1)
+		                		$resultArray[$key]['letterStatus'] = "Pending";
+		                	else if($result['letter'] == 0)
+		                		$resultArray[$key]['letterStatus'] = "Sent";
+		                	else
+		                		$resultArray[$key]['letterStatus'] = "Error";
+	                	}
+
+	                	$this->phpsessions->set('prevSearchResults', $resultArray);
+
+	                	echo json_encode($resultArray);
+	                }
+	                else if($searchType == "anonymous") {
+
+	                	$resultArray = $this->Search_model->anonymousGiftSearch($keyword,$fromDate,$toDate);
+	                	$this->phpsessions->set('prevSearchResults', $resultArray);
+
+	                	echo json_encode($resultArray);
+	                } 	
+	                else
+	                	echo json_encode("Search type error!");
+	            }
 
                 break;
             }
@@ -260,6 +289,14 @@ class Search extends CI_Controller {
 		}
 
 		echo json_encode($giftDataArray);
+	}
+
+	public function getPreviousSearchResults() {
+
+		$keyword = $this->phpsessions->get('prevSearchTerm');
+        $fromDate = $this->phpsessions->get('prevFromDate');
+        $toDate = $this->phpsessions->get('prevToDate');
+        $searchType = $this->phpsessions->get('prevSearchType');
 	}
 
 	public function getLetter()

@@ -32,7 +32,8 @@ utils = (function($) {
 		getActiveGift,
 		getStatistics,
 		setActiveGift,
-		setLetterComplete;
+		setLetterComplete,
+		loadPreviousSearchResults;
 
 	doAjax = function(ajaxObj) {
 
@@ -119,6 +120,7 @@ utils = (function($) {
 
 		var searchForm = "#search-form";
 
+		alert(type);
 		requestObj = {
 
 			type: "POST", 
@@ -436,6 +438,32 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
+	loadPreviousSearchResults = function() {
+
+		requestObj = {
+
+			type: "POST", 
+			url: _searchUrl + '/recordSearch',
+			data: "&searchType=reload",
+			dataType: "json",
+			cache: true,
+			success: function(response) {
+
+				if(typeof response == "object") {
+
+					sessionStorage.setItem('search_results', JSON.stringify(response));
+				}
+
+				window.location.href = _searchUrl;
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( "loadPreviousSearchResults: " + errorThrown );
+            }
+		};
+		
+		doAjax(requestObj);
+	};
+
 	return {
 
 		doAjax: function(reqObj) {
@@ -500,6 +528,9 @@ utils = (function($) {
 		},
 		setLetterComplete: function(giftID) {
 			setLetterComplete(giftID);
+		},
+		loadPreviousSearchResults: function() {
+			loadPreviousSearchResults();
 		}
 	};
 
