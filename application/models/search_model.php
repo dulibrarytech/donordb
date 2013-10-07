@@ -501,13 +501,19 @@ class Search_model extends CI_Model
                     $giftInfo['letterFlag']       = $result->letter;
                     $giftInfo['importantFlag']    = $result->important;
                 }
+
+                log_message('info', 'getGiftData: data returned: ' . print_r($giftInfo,true));
             }
             else 
             {
                 $giftInfo['giftDescription'] = "No data found / or database error";
-            }
-                
-            
+
+                log_message('info', 'getGiftData: No data found / or database error');
+            }    
+        }
+        else 
+        {
+          log_message('info', 'getGiftData: Null giftID');
         }
 
         return $giftInfo;
