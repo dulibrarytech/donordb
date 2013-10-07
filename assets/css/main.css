@@ -421,6 +421,14 @@ a:not([href]) {
 	width: 538px;
 }
 
+.name-cell{
+  
+  	max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 
 /* List */
 /*.ui-state-default,
@@ -526,10 +534,10 @@ a:not([href]) {
 	background-color: #ffffff;
 }*/
 
-#page-label {
+/*#page-label {
 
 	margin-bottom: -10px;
-}
+}*/
 
 .small-label {
 
@@ -562,6 +570,7 @@ a:not([href]) {
 	color: #F71A03;
 	font-weight: bold;
 	font-family: "Times New Roman", Times, serif;
+	text-align: right;
 }
 
 #list-section {
@@ -620,7 +629,7 @@ a:not([href]) {
 	k
 }
 
-#table-content td{
+/*#table-content td{
 
 	max-width: 100px;
 
@@ -628,7 +637,7 @@ a:not([href]) {
     text-overflow: ellipsis;
     white-space: nowrap;
     
-}
+}*/
 
 #data-section-1 {
 

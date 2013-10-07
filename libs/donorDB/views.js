@@ -66,7 +66,7 @@ searchView = (function($) {
 				createAlertList(queue);
 			}	
 
-			viewUtils.setUserLabel(profile.firstName,profile.lastName);
+			viewUtils.setUserLabel();
 		}
 		else {
 			alert("Local session not validated.  Please contact systems support if there is a problem logging in.");
@@ -238,11 +238,11 @@ searchView = (function($) {
 				results += '<td class="span2">' + value.giftDate + '</td>';
 
 				if(value.lastName == "" || value.lastName == null)
-					results += '<td class="span4">' + value.org + '</td>';
+					results += '<td class="span4 name-cell">' + value.org + '</td>';
 				else
-					results += '<td class="span4">' + value.lastName + '</td>';
+					results += '<td class="span4 name-cell">' + value.lastName + '</td>';
 
-				results += '<td class="span4">' + value.firstName + '</td>';
+				results += '<td class="span4 name-cell">' + value.firstName + '</td>';
 
 				results += '<td class="span2" style="text-align: center"> <a onclick="' + tableData[0]['action'] + '(' + value.giftID + ');">' + tableData[0]['actionText'] + '</a> </td>';
 				results += '</tr>';
@@ -273,11 +273,11 @@ searchView = (function($) {
 				results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
 				if(value.lastName == "" || value.lastName == null)
-					results += '<td class="span4">' + value.org + '</td>';
+					results += '<td class="span4 name-cell">' + value.org + '</td>';
 				else
-					results += '<td class="span4">' + value.lastName + '</td>';
+					results += '<td class="span4 name-cell">' + value.lastName + '</td>';
 				
-				results += '<td class="span4">' + value.firstName + '</td>';
+				results += '<td class="span4 name-cell">' + value.firstName + '</td>';
 
 				results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
 				results += '</tr>';
@@ -321,11 +321,11 @@ searchView = (function($) {
 				results += '<td class="span2">' + value.giftDate + '</td>';
 
 				if(value.lastName == "" || value.lastName == null) 
-					results += '<td class="span3">' + value.org + '</td>';
+					results += '<td class="span3 name-cell">' + value.org + '</td>';
 				else
-					results += '<td class="span3">' + value.lastName + '</td>';
+					results += '<td class="span3 name-cell">' + value.lastName + '</td>';
 
-				results += '<td class="span3">' + value.firstName + '</td>';
+				results += '<td class="span3 name-cell">' + value.firstName + '</td>';
 
 				results += '<td class="span2">' + value.letterStatus + '</td>';
 
@@ -433,6 +433,7 @@ browseDonorsView = (function($) {
 		//$("#table-header").html("<thead> <th style='width: 140'><!--SPACE--></th> <th style='width: 284'>Last Name / Organization</th> <th style='width: 284'>First Name</th> <th style='width: 140; float: right;'><!--SPACE--></th> </thead>");
 
 		utils.getDonorDataArray(setQueue); 
+		viewUtils.setUserLabel();
 	};
 
 	onClickJumpToLetter = function(letter) {
@@ -493,7 +494,16 @@ browseDonorsView = (function($) {
 
 					$.each(queueData, function (key, value) {
 
-						if(value.lastName.charAt(0) == chr) {
+						if(value.lastName == null || value.lastName == "") {
+
+								if(value.org.charAt(0) == chr) {
+
+								tempArray[index] = value;
+
+								index++;
+							}
+						}
+						else if(value.lastName.charAt(0) == chr) {
 
 							tempArray[index] = value;
 
@@ -558,11 +568,11 @@ browseDonorsView = (function($) {
 				results += '<a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
 				if(value.lastName == "" || value.lastName == null)	
-					results += '<td class="span4">' + value.org + '</td>';	
+					results += '<td class="span4 name-cell">' + value.org + '</td>';	
 				else
-					results += '<td class="span4">' + value.lastName + '</td>';
+					results += '<td class="span4 name-cell">' + value.lastName + '</td>';
 
-				results += '<td class="span4">' + value.firstName + '</td>';
+				results += '<td class="span4 name-cell">' + value.firstName + '</td>';
 
 				results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
 				results += '</tr>';
@@ -631,6 +641,8 @@ editGiftView = (function($) {
 
 		utils.getGiftDatesForActiveDonor(createGiftDateDropDown);
 		utils.getGiftData(setGiftFormData);
+
+		viewUtils.setUserLabel();
 	};
 
 	addEvents = function() {
@@ -812,6 +824,8 @@ addGiftView = (function($) {
 
 		addEvents();
 		form.addDonorDBGiftFormValidation();
+
+		viewUtils.setUserLabel();
 	};
 
 	setNameString = function(name) {
@@ -934,15 +948,15 @@ addNewDonorView = (function($) {
 
 		$("#add_info_button").html("Save");
 
-		var profile = viewUtils.getProfile();
-		if(profile.roleID != 2) {
-			$("#gen_letter_button").hide();
-		}
+		$("#gen_letter_button").hide();
+		$("#return_button").hide();
 
 		addEvents(anonymous);
 
 		utils.getTitleArray(createTitleDropdown);
 		form.addDonorDBEditFormValidation();
+
+		viewUtils.setUserLabel();
 	};
 
 	addEvents = function(anonymous) {
@@ -1194,12 +1208,17 @@ editDonorView = (function($) {
 			$("#gen_letter_button").hide();
 		}
 
+		if(viewUtils.getPrevPage() != "search")
+			$("#return_button").hide();
+
 		addEvents();
 		form.addDonorDBEditFormValidation();
 
 		utils.getGiftDatesForActiveDonor(createGiftDateDropDown); 
 		utils.getActiveDonorData(setDonorFormData);
 		utils.getGiftData(setGiftFormData);
+
+		viewUtils.setUserLabel();
 	};
 
 	setActiveGift = function() {
@@ -1266,6 +1285,11 @@ editDonorView = (function($) {
 	    $("#gen_letter_button").click( function() {
 
 	    	utils.getActiveGift(viewUtils.displayLetter);
+	    });
+
+	    $("#return_button").click( function() {
+
+	    	alert("return...");
 	    });
 	};
 
@@ -1502,6 +1526,8 @@ statisticsView = (function($) {
 
 		addEvents();
 		form.addDonorDBSearchFormValidation();
+
+		viewUtils.setUserLabel();
 	};
 
 	addEvents = function() {
@@ -1587,11 +1613,11 @@ statisticsView = (function($) {
 				results += '<td class="span2">' + value.giftDate + '</td>';
 
 				if(value.lastName == "" || value.lastName == null) 
-					results += '<td class="span3">' + value.org + '</td>';
+					results += '<td class="span3 name-cell">' + value.org + '</td>';
 				else
-					results += '<td class="span3">' + value.lastName + '</td>';
+					results += '<td class="span3 name-cell">' + value.lastName + '</td>';
 
-				results += '<td class="span3">' + value.firstName + '</td>';
+				results += '<td class="span3 name-cell">' + value.firstName + '</td>';
 
 				results += '<td class="span2">' + value.giftQuantity + '</td>';
 
@@ -1659,6 +1685,7 @@ viewUtils = (function($) {
 
 	var getPage,
 		getList,
+		getPrevPage,
 		setUserLabel,
 		displayLetter;
 
@@ -1667,16 +1694,34 @@ viewUtils = (function($) {
 		return $("meta[name=page]").attr("content");
 	};
 
+	getPrevPage = function() {
+
+		var prevUrl = document.referrer,
+			length = document.referrer.length;
+
+		var ch;
+		for(var i = length - 1; i > 0; i--) {
+
+			ch = prevUrl.charAt(i);
+			if(ch == '/')
+				break;
+		}
+
+		return prevUrl.substring((i + 1), length);
+	};
+
 	getProfile = function() {
 
 		return JSON.parse(sessionStorage.getItem('donorDB_profile'));
 	};
 
 	// Sets the user name string / adds logout link
-	setUserLabel = function(fname,lname) {
+	setUserLabel = function() {
+
+		var profile = viewUtils.getProfile();
 
 		//$("#username-label").html("Welcome, " + fname + " " + lname + "&nbsp&nbsp&nbsp&nbsp<a onclick='authentication.logout();'>Logout</a>");		
-		$("#username-label").html("Welcome, " + fname + " " + lname);
+		$("#username-label").html("Welcome, " + profile.firstName + " " + profile.lastName);
 	};
 
 	displayLetter = function(id) {
@@ -1713,11 +1758,14 @@ viewUtils = (function($) {
 		getPage: function() {
 			return getPage();
 		},
+		getPrevPage: function() {
+			return getPrevPage();
+		},
 		getProfile: function() {
 			return getProfile();
 		},
-		setUserLabel : function(fname,lname) {
-			setUserLabel(fname,lname);
+		setUserLabel : function() {
+			setUserLabel();
 		},
 		displayLetter: function(id) {
 			displayLetter(id);

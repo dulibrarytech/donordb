@@ -22,13 +22,19 @@ $(function() {
     $( "#gift-date-box" ).datepicker({
 
         altField: "#gift-date-box", 
-        altFormat: "yy-mm-dd"
+        altFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true,
+        yearRange: "c-100:c+10"
     });
 
     $( "#edit-date-box" ).datepicker({
 
         altField: "#edit-date-box", 
-        altFormat: "yy-mm-dd"
+        altFormat: "yy-mm-dd",
+        changeYear: true,
+        changeMonth: true,
+        yearRange: "c-100:c+10"
     });
 });
 

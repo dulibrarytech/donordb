@@ -34,7 +34,7 @@ class Login_model extends CI_Model
         $remoteAuth = FALSE;                                                                            
     
         // Demo Accounts:  Bypass remote authorization                                                      *** REMOVE DEMO ACCOUNTS ***        *** REMOVE else from following if ***
-        if($userName == "acq" || $userName == "admin" || $userName == "external")
+        if($userName == "acqu" || $userName == "adminn" || $userName == "externall")
         {
             $remoteAuth = TRUE;
         }      

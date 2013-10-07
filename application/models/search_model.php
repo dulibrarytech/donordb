@@ -477,14 +477,17 @@ class Search_model extends CI_Model
     public function getGiftData($giftID)
     {
         $giftInfo = array("giftDescription" => "Error: Null giftID");
+        $giftInfo['letterFlag'] = -1;
 
         if($giftID != null)
         {
+            $this->db->trans_start();
             $this->db->select('tbl_donorgifts.dateOfGift, tbl_donorgifts.numberOfGifts, tbl_donorgifts.letter, tbl_donorgifts.important, tbl_donorgiftdescriptions.giftDescription1');
             $this->db->from('tbl_donorgifts');
             $this->db->join('tbl_donorgiftdescriptions', 'tbl_donorgifts.giftsID = tbl_donorgiftdescriptions.giftsID', 'inner');
             $this->db->where('tbl_donorgifts.giftsID', $giftID);
             $this->db->order_by("dateOfGift", "desc");
+            $this->db->trans_complete();
 
             $query = $this->db->get();
 
@@ -498,10 +501,19 @@ class Search_model extends CI_Model
                     $giftInfo['letterFlag']       = $result->letter;
                     $giftInfo['importantFlag']    = $result->important;
                 }
+
+                log_message('info', 'getGiftData: data returned: ' . print_r($giftInfo,true));
             }
-            else
+            else 
+            {
                 $giftInfo['giftDescription'] = "No data found / or database error";
-            
+
+                log_message('info', 'getGiftData: No data found / or database error');
+            }    
+        }
+        else 
+        {
+          log_message('info', 'getGiftData: Null giftID');
         }
 
         return $giftInfo;

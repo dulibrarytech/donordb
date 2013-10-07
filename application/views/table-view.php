@@ -19,6 +19,8 @@
 		#fromDate			{ margin-left: 25px; }
 		#toDate				{ margin-left: 85px; }
 		#search_submit		{ margin-left: 475px; margin-bottom: 9px; }
+		#username-label		{ margin-right: 20px; }
+		#page-label			{ margin-bottom: -10px; }
 	</style>
 
 </head>
@@ -51,7 +53,7 @@
 				<div class="container generic-label" id="page-label"></div>	
 			</td>
 			<td align="right" style="text-align: right;">
-				<div id="username-label"></div>
+				<div class="small-label" id="username-label"></div>
 			</td>
 		</tr></table>
 
@@ -79,7 +81,7 @@
 
 
 <footer id="footer-bar">
-	<?php $this->load->view("partials/footer-bar.php"); ?>
+	<!--?php $this->load->view("partials/footer-bar.php"); ?-->
 
 	<!--Load javascript functions-->
 	<?php $this->load->view("partials/javascript-partial.php"); ?>
