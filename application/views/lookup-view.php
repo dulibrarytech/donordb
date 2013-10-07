@@ -29,6 +29,7 @@
 		#anonymous-gift-check	{ margin-left: 530px; margin-top: -25px; }
 		#add_info_message		{ margin-left: 650px; }
 		#data-section-1			{ margin-left: 730px; }
+		#username-label			{ margin-right: 20px; }
 	</style>
 
 </head>

@@ -34,6 +34,7 @@
 		#add_info_message			{ padding-top: 15px; }
 
 		#letter-status 				{ margin-right: 30px; }
+		#username-label				{ margin-right: 20px; }
 	</style>
 
 </head>
@@ -66,7 +67,7 @@
 				<div class="container generic-label" id="page-label"></div>	     
 			</td>
 			<td align="right" style="text-align: right;">
-				<div id="username-label"></div>
+				<div class="small-label" id="username-label"></div>
 			</td>
 		</tr></table>
 

@@ -24,9 +24,12 @@
 		#gift_quantity_label		{ margin-left: 5px; }
 		#gift_quantity_box			{ margin-left: 5px; }
 		#lower_controls				{ background-color: #ffffff; width: 90%; }
+
 		#edit-gift-button			{ margin-left: 18px; margin-top: 10px; }
-		#important-checkbox			{ margin-left: 40px; margin-top:-5px; }
-	</style>
+		#edit-gift-button           { margin-left: 18px; margin-top: 10px; }
+        #important-checkbox         { margin-left: 40px; margin-top:-5px; }
+        #username-label				{ margin-right: 20px; }
+	</style>		
 
 </head>
 
@@ -58,7 +61,7 @@
 				<div class="container generic-label" id="page-label"></div>	
 			</td>
 			<td align="right" style="text-align: right;">
-				<div id="username-label"></div>
+				<div class="small-label" id="username-label"></div>
 			</td>
 		</tr></table>	
 
@@ -164,13 +167,13 @@
 						</td>
 					</tr>
 
-					<tr>
+					<tr>	
 						<td id="important_gift_check" colspan="2">
-							<div id="important-box-text">
-								<input type='hidden' name='importantFlag' value="0"/>
-								<input type="checkbox" name="importantFlag" id="important-checkbox" value="1">Hand-Typed Letter</input>
-							</div>
-						</td>
+                                                        <div id="important-box-text">
+                                                                <input type='hidden' name='importantFlag' value="0"/>
+                                                                <input type="checkbox" name="importantFlag" id="important-checkbox" value="1">Hand-Typed Letter</input>
+                                                        </div>
+                                                </td>
 						<td>
 							<button type="button" class="btn" id="edit-gift-button">Edit Gift</button>
 						</td>

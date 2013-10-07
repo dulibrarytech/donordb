@@ -66,7 +66,7 @@ searchView = (function($) {
 				createAlertList(queue);
 			}	
 
-			viewUtils.setUserLabel(profile.firstName,profile.lastName);
+			viewUtils.setUserLabel();
 		}
 		else {
 			alert("Local session not validated.  Please contact systems support if there is a problem logging in.");
@@ -432,6 +432,7 @@ browseDonorsView = (function($) {
 		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th><!--SPACE--></th> </thead>");
 
 		utils.getDonorDataArray(setQueue); 
+		viewUtils.setUserLabel();
 	};
 
 	onClickJumpToLetter = function(letter) {
@@ -639,6 +640,8 @@ editGiftView = (function($) {
 
 		utils.getGiftDatesForActiveDonor(createGiftDateDropDown);
 		utils.getGiftData(setGiftFormData);
+
+		viewUtils.setUserLabel();
 	};
 
 	addEvents = function() {
@@ -820,6 +823,8 @@ addGiftView = (function($) {
 
 		addEvents();
 		form.addDonorDBGiftFormValidation();
+
+		viewUtils.setUserLabel();
 	};
 
 	setNameString = function(name) {
@@ -951,6 +956,8 @@ addNewDonorView = (function($) {
 
 		utils.getTitleArray(createTitleDropdown);
 		form.addDonorDBEditFormValidation();
+
+		viewUtils.setUserLabel();
 	};
 
 	addEvents = function(anonymous) {
@@ -1208,6 +1215,8 @@ editDonorView = (function($) {
 		utils.getGiftDatesForActiveDonor(createGiftDateDropDown); 
 		utils.getActiveDonorData(setDonorFormData);
 		utils.getGiftData(setGiftFormData);
+
+		viewUtils.setUserLabel();
 	};
 
 	setActiveGift = function() {
@@ -1510,6 +1519,8 @@ statisticsView = (function($) {
 
 		addEvents();
 		form.addDonorDBSearchFormValidation();
+
+		viewUtils.setUserLabel();
 	};
 
 	addEvents = function() {
@@ -1681,10 +1692,12 @@ viewUtils = (function($) {
 	};
 
 	// Sets the user name string / adds logout link
-	setUserLabel = function(fname,lname) {
+	setUserLabel = function() {
+
+		var profile = viewUtils.getProfile();
 
 		//$("#username-label").html("Welcome, " + fname + " " + lname + "&nbsp&nbsp&nbsp&nbsp<a onclick='authentication.logout();'>Logout</a>");		
-		$("#username-label").html("Welcome, " + fname + " " + lname);
+		$("#username-label").html("Welcome, " + profile.firstName + " " + profile.lastName);
 	};
 
 	displayLetter = function(id) {
@@ -1724,8 +1737,8 @@ viewUtils = (function($) {
 		getProfile: function() {
 			return getProfile();
 		},
-		setUserLabel : function(fname,lname) {
-			setUserLabel(fname,lname);
+		setUserLabel : function() {
+			setUserLabel();
 		},
 		displayLetter: function(id) {
 			displayLetter(id);
