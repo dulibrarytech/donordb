@@ -119,8 +119,7 @@ utils = (function($) {
 	submitSearch = function(callback,type) {
 
 		var searchForm = "#search-form";
-
-		alert(type);
+		
 		requestObj = {
 
 			type: "POST", 

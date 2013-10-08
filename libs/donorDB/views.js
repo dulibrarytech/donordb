@@ -133,7 +133,7 @@ searchView = (function($) {
 
 	        	// Store the search terms for search reload purposes
 	        	var prevSearchTerms = {keyword:keyword, toDate:toDate, fromDate:fromDate, anonymous:anonymous, type:type};
-	        	sessionStorage.setItem('prev_search_terms', prevSearchTerms);
+	        	sessionStorage.setItem('prev_search_terms', JSON.stringify(prevSearchTerms));
 	        },
 	        errorPlacement: function(error, element) {
 
@@ -159,6 +159,23 @@ searchView = (function($) {
 	    });
 
 	    $("#search_return").click(function() { 
+
+	    	var lname = $("#lname_input_box").val(),
+	    		todate = $("#toDate").val(),
+	    		fromdate = $("#fromDate").val();
+
+	    	// // Check for blank form.  If blank, repopulate from previous search terms
+	    	if(lname == "" && todate == "" && fromdate == "") {
+
+	    		alert("blank form detected...repopulating...");
+
+	    		var prevSearch =  JSON.parse(sessionStorage.getItem('prev_search_terms'));
+
+	    		$("#lname_input_box").val(prevSearch.keyword);
+	    		$("#toDate").val(prevSearch.toDate);
+	    		$("#fromDate").val(prevSearch.fromDate);
+	    		$("#anonymous-gift-check").val(prevSearch.anonymous);
+	    	}
 
 	    	toggleResultsView(true);
 	    });
@@ -1036,8 +1053,6 @@ addNewDonorView = (function($) {
 	        onkeyup: function(element) {},
 	        onfocusout: false,
 	        submitHandler: function() {
-
-	            alert("hit handler");
 
 	            utils.submitNewDonorInfo(anonymous);
 	            $('#add_info_message').html("Adding new donor info...");
