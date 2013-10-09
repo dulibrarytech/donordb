@@ -92,7 +92,7 @@
 						<input type="text" class="input-small left-edge-field" id="gift_quantity_box" placeholder="#" name="giftQuantity" />
 					</td>
 					<td id="important_gift_check">
-						<input type='hidden' name='importantFlag' value="0">
+						<input type='hidden' name='importantFlag' value="0" />
 						<input type="checkbox" name="importantFlag" class="checkbox" id="important-checkbox" value="1">Hand-Typed Letter</input>
 					</td>
 					<td>

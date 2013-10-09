@@ -724,7 +724,7 @@ editGiftView = (function($) {
 		$("#add-gift-form").validate({
 
 	        errorClass: "invalid",
-	        onkeyup: function(element) {$(element).valid()},
+	        // onkeyup: function(element) {$(element).valid()},
 	        onfocusout: false,
 	        submitHandler: function() {
 
@@ -923,7 +923,7 @@ addGiftView = (function($) {
 		$("#add-gift-form").validate({
 
 	        errorClass: "invalid",
-	        onkeyup: function(element) {$(element).valid()},
+	        // onkeyup: function(element) {$(element).valid()},
 	        onfocusout: false,
 	        submitHandler: function() {
 
