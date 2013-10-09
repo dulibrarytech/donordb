@@ -167,8 +167,6 @@ searchView = (function($) {
 	    	// // Check for blank form.  If blank, repopulate from previous search terms
 	    	if(lname == "" && todate == "" && fromdate == "") {
 
-	    		alert("blank form detected...repopulating...");
-
 	    		var prevSearch =  JSON.parse(sessionStorage.getItem('prev_search_terms'));
 
 	    		$("#lname_input_box").val(prevSearch.keyword);
@@ -505,7 +503,7 @@ browseDonorsView = (function($) {
 
 		$("#page-label").text("Donor Listing");
 
-		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th class='span2' style='float: right;'><!--SPACE--></th> </thead>");
+		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th class='span2'><!--SPACE--></th> </thead>");
 		//$("#table-header").html("<thead> <th style='width: 140'><!--SPACE--></th> <th style='width: 284'>Last Name / Organization</th> <th style='width: 284'>First Name</th> <th style='width: 140; float: right;'><!--SPACE--></th> </thead>");
 
 		utils.getDonorDataArray(setQueue); 
@@ -1594,7 +1592,7 @@ statisticsView = (function($) {
 
 	initPage = function() {
 
-		$(".content-window").css("height", "520px");
+		$(".content-window").css("height", "550px");
 		$(".pre-scrollable").css("max-height", "400px");
 		$("#table-section").css("height", "390px");
 
