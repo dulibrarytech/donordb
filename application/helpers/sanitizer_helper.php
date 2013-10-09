@@ -34,18 +34,19 @@ function sanitizePost($inputArray)
 
 function sanitizeString($inputString)
 {
+    $sanitized = "";
+
     if(is_string($inputString))
     {
-        $sanitized = "";
-        $sanitized = htmlspecialchars($sanitized, ENT_QUOTES, 'UTF-8');
+        $sanitized = htmlspecialchars($inputString, ENT_QUOTES, 'UTF-8');
 
         $sanitized = strip_tags($sanitized);
 
         $specChars = array('$', '%', '&', '(', ')', '*', ';', '!', '?', '[', ']', '{', '}');  
         $sanitized = str_ireplace($specChars, '', $sanitized);
-
-        return $sanitized;
     }
+
+    return $sanitized;
 }
 
 function removeSQL($inputString)

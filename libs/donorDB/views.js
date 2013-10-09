@@ -1072,8 +1072,10 @@ addNewDonorView = (function($) {
 
 	    // Disable the enter keypress from submitting the form
 	    $('#donor-input-form').on('keypress',function(e){
+
 		    var p = e.which;
 		    if(p==13){
+		        // alert(document.activeElement.toString());
 		        e.preventDefault();
 		        return false;
 		    }

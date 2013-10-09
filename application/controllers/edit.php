@@ -300,6 +300,7 @@ class Edit extends CI_Controller {
               $titleID = 0;
 
               $postData = $this->input->post('title');
+
               $newTitle = sanitizeString($postData);
 
               $titleID = $this->Edit_model->addTitle($newTitle);
