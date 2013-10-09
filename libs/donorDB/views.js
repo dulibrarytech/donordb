@@ -1229,7 +1229,24 @@ addNewDonorView = (function($) {
 
 	resetForm = function() {
 
-		window.location.href = _editUrl + "/addDonorView/" + anonymousView;
+		// window.location.href = _editUrl + "/addDonorView/" + anonymousView;
+		
+		$("#fname_input_box").val('');
+		$("#lName_input_box").val('');
+		$("#org_input_box").val('');
+		$("#addr1_input_box").val('');
+		$("#addr2_input_box").val('');
+		$("#city_input_box").val('');
+		$("#state_input_box").val('');
+		$("#zip_input_box").val('');
+		$("#country_input_box").val('');
+		$("#phone_input_box").val('');
+		$("#email_input_box").val('');
+		$("#description_area").val('');
+		$("#gift-date-box").val('');
+		$("#gift_quantity_box").val('');
+
+		$("#title-dropdown>option:eq(0)").attr('selected', 'true');
 	};
 
 	return {
@@ -1841,6 +1858,7 @@ viewUtils = (function($) {
 
 	onClickBack = function() {
 
+		alert(getPrevPage());
 		switch(getPrevPage()) {
 
 			case "search":
@@ -1850,12 +1868,12 @@ viewUtils = (function($) {
 
 			break;
 
-			case "browseDonors":
+			// case "browseDonors":
 
-				// Reload previous browse section
-				alert("onclickback: browse");
+			// 	// Reload previous browse section
+			// 	alert("onclickback: browse");
 
-			break;
+			// break;
 
 			default:
 
