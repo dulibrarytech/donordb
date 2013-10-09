@@ -708,6 +708,7 @@ editGiftView = (function($) {
 
 		if(anonymous) {
 			$("#important_gift_check").hide();
+			$("#letter-status").hide();
 		}
 
 		addEvents();
