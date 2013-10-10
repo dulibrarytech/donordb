@@ -166,13 +166,10 @@ searchView = (function($) {
 
 	    		var prevSearch =  JSON.parse(sessionStorage.getItem('prev_search_terms'));
 
-	    		alert("check state is: " + $("#anonymous-gift-check").val());
-	    		alert("prev srch anon: " + prevSearch.anonymous);
 	    		if(typeof prevSearch.anonymous === 'undefined' || prevSearch.anonymous == null)
 	    			setAnonymousCheckState('0');
 	    		else
 	    			setAnonymousCheckState(prevSearch.anonymous);
-	    		alert("check state is: " + $("#anonymous-gift-check").val());
 
 	    		$("#lname_input_box").val(prevSearch.keyword);
 	    		$("#toDate").val(prevSearch.toDate);
@@ -423,7 +420,7 @@ searchView = (function($) {
 		if(showButtons)
 			$("#post-search-buttons").toggle();
 
-		// Resize the window for the acquisitions user.  At this point, there is no alert section 
+		// Resize the content window for the acquisitions user.  At this point, there is no alert section 
 		// and the window size changes between search and results views.
 		var profile = viewUtils.getProfile();
 		if(profile.roleID == 1) {
@@ -440,11 +437,21 @@ searchView = (function($) {
 
 		// For the admin and external relation users, there is an alert section on the home view.  
 		// This needs to be refreshed upon returning to the home view from the results view.
+		// Also, the constraint of 125px used on the alert section needs to be removed when switching to search results.
 		else if(profile.roleID == 2 || profile.roleID == 3) {
 
 			$("#alert-section-label").toggle(); 
 
-			createAlertList(getQueue());
+			if($("#alert-section-label").is(":visible")) {
+
+				$("#table-content").css("height", "125px");
+				createAlertList(getQueue());
+			}
+			else {
+
+				// Remove constraint to display search results
+				$("#table-content").css("height", "405px");
+			}
 		}
 
 		else {
