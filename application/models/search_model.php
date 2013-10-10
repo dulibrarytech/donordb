@@ -501,8 +501,6 @@ class Search_model extends CI_Model
                     $giftInfo['letterFlag']       = $result->letter;
                     $giftInfo['importantFlag']    = $result->important;
                 }
-
-                log_message('info', 'getGiftData: data returned: ' . print_r($giftInfo,true));
             }
             else 
             {

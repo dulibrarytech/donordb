@@ -72,7 +72,9 @@ searchView = (function($) {
 			// Set user namestring
 			viewUtils.setUserLabel();
 
-			// If there are search results cached, display them in the results view
+			// If there are search results cached, display them in the results view now.
+			// This cache array is set externally (in utils).  It should always be null until temporarily set by utils.
+			// The previous search results are also cached on the server, and are always available via ajax request. (search/recordSearch?searchType=reload)
 			var searchResults = JSON.parse(sessionStorage.getItem('search_results'));
 			if(searchResults != null) {
 

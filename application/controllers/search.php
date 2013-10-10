@@ -24,7 +24,7 @@ class Search extends CI_Controller {
 	 * Loads Search View 
 	 * If 
 	 */
-	public function index($resetSearchCache = TRUE)
+	public function index($resetSearchCache = FALSE)
 	{
 		if($resetSearchCache) 
 		{
@@ -58,6 +58,8 @@ class Search extends CI_Controller {
             }
             case "POST":
             {
+                //$resultArray = array(); 
+
                 // Attempt to get posted search data
                 $keyword 	= $this->input->post('searchTerm');
                 $fromDate 	= $this->input->post('fromDate');
@@ -68,6 +70,7 @@ class Search extends CI_Controller {
                 if($searchType == null || $searchType == "reload")
                 {
                 	$resultArray = $this->phpsessions->get('prevSearchResults');
+                	log_message('info', 'got prevResults: ' . print_r($resultArray,true));
                 	echo json_encode($resultArray);
                 }
                 // Run the search from post data
@@ -84,19 +87,25 @@ class Search extends CI_Controller {
 	                {
 	                	$resultArray = $this->Search_model->giftSearch($keyword,$fromDate,$toDate); 
 
-	                	// Convert letter data from bit to human readable data
-	                	foreach($resultArray as $key => $result)
+	                	// Convert letter data from bit to human readable data, if result array is not an error string
+	                	if(gettype($resultArray) != 'string')
 	                	{
-	                		$resultArray[$key]['letterStatus'] = "";
+		                	foreach($resultArray as $key => $result)
+		                	{
+		                		$resultArray[$key]['letterStatus'] = "";
 
-	                		if($result['letter'] == 1)
-		                		$resultArray[$key]['letterStatus'] = "Pending";
-		                	else if($result['letter'] == 0)
-		                		$resultArray[$key]['letterStatus'] = "Sent";
-		                	else
-		                		$resultArray[$key]['letterStatus'] = "Error";
+		                		if($result['letter'] == null)
+									$resultArray['letterStatus'] = "Error";
+		                		else if($result['letter'] == 1)
+			                		$resultArray[$key]['letterStatus'] = "Pending";
+			                	else if($result['letter'] == 0)
+			                		$resultArray[$key]['letterStatus'] = "Sent";
+			                	else
+			                		$resultArray[$key]['letterStatus'] = "Error";
+		                	}
 	                	}
 
+	                	// Cache search results
 	                	$this->phpsessions->set('prevSearchResults', $resultArray);
 
 	                	echo json_encode($resultArray);
@@ -249,16 +258,19 @@ class Search extends CI_Controller {
 		// Add namestring for view display
 		$dataArray['nameString'] = $this->phpsessions->get('activeDonorNameString');
 
-		// Convert the db bit data to human-readable
-		if($dataArray['letterFlag'] == null)
-			$dataArray['letterStatus'] = "Error";
-		else if($dataArray['letterFlag'] == 1)
-			$dataArray['letterStatus'] = "Pending";
-		else if($dataArray['letterFlag'] == 0)
-			$dataArray['letterStatus'] = "Sent";
-		else
-			$dataArray['letterStatus'] = "Error";
-
+		// Convert the db bit data to human-readable, if result array is not an error string
+		if(gettype($dataArray) != 'string')
+	    {
+			if($dataArray['letterFlag'] == null)
+				$dataArray['letterStatus'] = "Error";
+			else if($dataArray['letterFlag'] == 1)
+				$dataArray['letterStatus'] = "Pending";
+			else if($dataArray['letterFlag'] == 0)
+				$dataArray['letterStatus'] = "Sent";
+			else
+				$dataArray['letterStatus'] = "Error";
+	    }          	
+		
 		echo json_encode($dataArray);
 	}
 

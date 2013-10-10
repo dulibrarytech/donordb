@@ -451,8 +451,8 @@ utils = (function($) {
 				if(typeof response == "object") {
 
 					sessionStorage.setItem('search_results', JSON.stringify(response));
+					var test = JSON.parse(sessionStorage.getItem('search_results'));
 				}
-
 				window.location.href = _searchUrl;
 			},
 			error: function ( textStatus, errorThrown ) {
