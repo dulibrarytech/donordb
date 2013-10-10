@@ -372,6 +372,7 @@ searchView = (function($) {
 
 				if(value.lastName == "Anonymous Donor") {
 					addLinkText = "";
+					value.letterStatus = "";
 				}
 				else {
 					addLinkText = "Add Gift";
