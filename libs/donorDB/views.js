@@ -18,6 +18,7 @@ searchView = (function($) {
 		addEvents,
 		setRole,
 		setQueue,
+		setAnonymousCheckState,
 		getQueue,
 		resetSearch,
 		createAlertList,
@@ -42,7 +43,7 @@ searchView = (function($) {
 		$("#alert-section-label").hide();
 		$("#data-section-1").hide();
 
-		$('#anonymous-gift-check').removeAttr('checked'); // Bug 207: Hard remove of check with each page load...
+		$("#anonymous-gift-check").prop('checked',false); // Bug 207: Hard remove of check with each page load...
 
 		addEvents();
 		form.addDonorDBSearchFormValidation();
@@ -146,15 +147,11 @@ searchView = (function($) {
 
 	    	if($("#anonymous-gift-check").val() == '0') {
 
-	    		$("#anonymous-gift-check").val('1');
-	    		$("#lname_label").text('Search anonymous gift descriptions:');
-	    		$("#lname_input_box").prop('placeholder', '');
+	    		setAnonymousCheckState('1');
 	    	}
 	    	else {
 
-	    		$("#anonymous-gift-check").val('0');
-	    		$("#lname_label").text('Last Name or Organization:');
-	    		$("#lname_input_box").prop('placeholder', 'Leave blank to search all donors');
+	    		setAnonymousCheckState('0');
 	    	}
 	    });
 
@@ -169,10 +166,17 @@ searchView = (function($) {
 
 	    		var prevSearch =  JSON.parse(sessionStorage.getItem('prev_search_terms'));
 
+	    		alert("check state is: " + $("#anonymous-gift-check").val());
+	    		alert("prev srch anon: " + prevSearch.anonymous);
+	    		if(typeof prevSearch.anonymous === 'undefined' || prevSearch.anonymous == null)
+	    			setAnonymousCheckState('0');
+	    		else
+	    			setAnonymousCheckState(prevSearch.anonymous);
+	    		alert("check state is: " + $("#anonymous-gift-check").val());
+
 	    		$("#lname_input_box").val(prevSearch.keyword);
 	    		$("#toDate").val(prevSearch.toDate);
 	    		$("#fromDate").val(prevSearch.fromDate);
-	    		$("#anonymous-gift-check").val(prevSearch.anonymous);
 	    	}
 
 	    	toggleResultsView(true);
@@ -182,6 +186,24 @@ searchView = (function($) {
 
 	    	resetSearch();
 	    });
+	};
+
+	setAnonymousCheckState = function(val) {
+
+		if(val == '1') {
+
+    		$("#anonymous-gift-check").val('1');
+    		$("#lname_label").text('Search anonymous gift descriptions:');
+    		$("#lname_input_box").prop('placeholder', '');
+    		$("#anonymous-gift-check").prop('checked',true);
+    	}
+    	else {
+
+    		$("#anonymous-gift-check").val('0');
+    		$("#lname_label").text('Last Name or Organization:');
+    		$("#lname_input_box").prop('placeholder', 'Leave blank to search all donors');
+    		$("#anonymous-gift-check").prop('checked',false);
+    	}
 	};
 
 	// Set layout for user status.
@@ -1859,7 +1881,7 @@ viewUtils = (function($) {
 
 	onClickBack = function() {
 
-		alert(getPrevPage());
+		//alert(getPrevPage());
 		switch(getPrevPage()) {
 
 			case "search":
@@ -1868,6 +1890,13 @@ viewUtils = (function($) {
                 utils.loadPreviousSearchResults();
 
 			break;
+
+			// case "statisticsView":
+
+			// 	// Reload previous statistics request
+			// 	alert("onclickback: statistics");
+
+			// break;
 
 			// case "browseDonors":
 
