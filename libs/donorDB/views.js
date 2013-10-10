@@ -1482,7 +1482,7 @@ editDonorView = (function($) {
 		$("#gift-date-box-section").html(dropdownHTML);
 
 		//setActiveGift();
-		utils.getGiftData(setGiftFormData);
+		//utils.getGiftData(setGiftFormData);
 	};
 
 	// Remove dropdown and add box to enter a new title.  Add handlers to submit new title data

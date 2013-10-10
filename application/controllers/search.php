@@ -249,7 +249,8 @@ class Search extends CI_Controller {
 		// Add namestring for view display
 		$dataArray['nameString'] = $this->phpsessions->get('activeDonorNameString');
 
-		if(!$dataArray['letterFlag'])
+		// Convert the db bit data to human-readable
+		if($dataArray['letterFlag'] == null)
 			$dataArray['letterStatus'] = "Error";
 		else if($dataArray['letterFlag'] == 1)
 			$dataArray['letterStatus'] = "Pending";
