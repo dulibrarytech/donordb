@@ -29,6 +29,9 @@ searchView = (function($) {
 
 	initPage = function() {
 
+		// Ensure the full url string is displayed in the location bar
+		history.pushState(null, null, _searchUrl);
+
 		$(".content-window").css("height", "435px");
 		$(".pre-scrollable").css("max-height", "415px");
 		$("#table-section").css("height", "405px");
