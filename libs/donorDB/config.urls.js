@@ -8,7 +8,7 @@
  * University of Denver, June 2013
  */
 
-var baseUrl     = "http://" + document.domain + "/donorDB/",
+var baseUrl     = "http://" + document.domain + "/I5App/",
 
 
     _editUrl   			= baseUrl + "index.php/edit",
