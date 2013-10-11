@@ -58,8 +58,6 @@ class Search extends CI_Controller {
             }
             case "POST":
             {
-                //$resultArray = array(); 
-
                 // Attempt to get posted search data
                 $keyword 	= $this->input->post('searchTerm');
                 $fromDate 	= $this->input->post('fromDate');
@@ -70,11 +68,14 @@ class Search extends CI_Controller {
                 if($searchType == null || $searchType == "reload")
                 {
                 	$resultArray = $this->phpsessions->get('prevSearchResults');
-                	log_message('info', 'got prevResults: ' . print_r($resultArray,true));
+
+                	// If there are no search results cached in the session, echo an error message string
+                	if(!is_array($resultArray))
+                		$resultArray = "Search error: no search data found";
+
                 	echo json_encode($resultArray);
-                }
-                // Run the search from post data
-                else
+                }                
+                else // Run the search from post data
                 {
 	                if($searchType == "donor") {
 
@@ -85,6 +86,7 @@ class Search extends CI_Controller {
 	                }	 
 	                else if($searchType == "gift")
 	                {
+	                	// Do gift search
 	                	$resultArray = $this->Search_model->giftSearch($keyword,$fromDate,$toDate); 
 
 	                	// Convert letter data from bit to human readable data, if result array is not an error string
@@ -121,7 +123,7 @@ class Search extends CI_Controller {
 	                	echo json_encode("Search type error!");
 	            }
 
-                break;
+                break; // case POST
             }
             default:
            	{
@@ -154,30 +156,56 @@ class Search extends CI_Controller {
                 $toDate 	= $this->input->post('toDate');
                 $searchType = $this->input->post('searchType');
 
-                if($searchType == "anonymous")
-                	$results = ($this->Search_model->anonymousGiftSearch($keyword,$fromDate,$toDate));
-
-                else if($searchType == "gift")     	 
-              	    $results = ($this->Search_model->giftSearch($keyword,$fromDate,$toDate,$fName));
-
-                else
-                	echo json_encode("Search type error!");
-
-                if(is_array($results))
+                // If no data in POST, or if this is a reload search, get the data from the session array.
+                if($searchType == null || $searchType == "reload")
                 {
-					// Total the quantity of returned gift entries, and piggyback it in on the array.
-	                $total = 0;
-	                foreach($results as $result)
+                	$results = $this->phpsessions->get('prevSearchResults');
+
+					if(is_array($results))
+                	{
+                		// Total the quantity of returned gift entries, and piggyback it in on the array.
+		                $total = 0;
+		                foreach($results as $result)
+		                {
+		                	$total += $result['giftQuantity'];
+		                }
+
+	                	$results['totalQuantity'] = $total;
+                	}
+                	else // If there are no search results cached in the session, echo an error message string
+                		$results = "Search error: no search data found";
+
+                	echo json_encode($results);
+                }
+                else // Get statistics for post data
+                {
+                	if($searchType == "anonymous")
+                		$results = ($this->Search_model->anonymousGiftSearch($keyword,$fromDate,$toDate));
+
+	                else if($searchType == "gift")     	 
+	              	    $results = ($this->Search_model->giftSearch($keyword,$fromDate,$toDate,$fName));
+
+	                else
+	                	echo json_encode("Search type error!");
+
+	                if(is_array($results))
 	                {
-	                	$total += $result['giftQuantity'];
+						// Cache search results
+		            	$this->phpsessions->set('prevSearchResults', $results);
+
+						// Total the quantity of returned gift entries, and piggyback it in on the array.
+		                $total = 0;
+		                foreach($results as $result)
+		                {
+		                	$total += $result['giftQuantity'];
+		                }
+		                $results['totalQuantity'] = $total;
 	                }
 
-	                $results['totalQuantity'] = $total;
+	                echo json_encode($results);
                 }
-
-                echo json_encode($results);
-
-                break;
+           
+                break; // case POST
             }
             default:
            	{

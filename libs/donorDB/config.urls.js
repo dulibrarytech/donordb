@@ -11,11 +11,12 @@
 var baseUrl     = "http://" + document.domain + "/donorDB/",
 
 
-    _editUrl    = baseUrl + "index.php/edit",
-    _searchUrl  = baseUrl + "index.php/search",
-    _loginUrl	= baseUrl + "index.php/login",
-    _logoutUrl  = baseUrl + "index.php/login/logout",
-    _statsUrl   = baseUrl + "index.php/search/statisticsView"
+    _editUrl   			= baseUrl + "index.php/edit",
+    _searchUrl  		= baseUrl + "index.php/search",
+    _loginUrl			= baseUrl + "index.php/login",
+    _logoutUrl  		= baseUrl + "index.php/login/logout",
+    _statsUrl   		= baseUrl + "index.php/search/statisticsView",
+    _statsSearchUrl  	= baseUrl + "index.php/search/statisticsSearch",
 
     EDIT_VIEW	= baseUrl + "index.php/views/edit-view.php",
 

@@ -1664,6 +1664,16 @@ statisticsView = (function($) {
 		form.addDonorDBSearchFormValidation();
 
 		viewUtils.setUserLabel();
+
+		// If there are search results cached, display them in the results view now.
+		// This cache array is set externally (in utils).  It should always be null until temporarily set by utils.
+		// The previous search results are also cached on the server, and are always available via ajax request. (search/recordSearch?searchType=reload)
+		var searchResults = JSON.parse(sessionStorage.getItem('search_results'));
+		if(searchResults != null) {
+
+			reloadSearchResults(searchResults);
+			sessionStorage.setItem('search_results', null);
+		}
 	};
 
 	addEvents = function() {
@@ -1798,6 +1808,25 @@ statisticsView = (function($) {
 		$("#search_return").toggle();
 	};
 
+	reloadSearchResults = function(tableData) {
+
+		// Make sure tableData object is valid and of the proper format for the table
+		if(typeof tableData == "object" && tableData["0"] != null) {
+
+			// Detect search type based on giftsID state
+			createGiftTable(tableData);
+
+		}
+		else if(typeof tableData == "string") {
+
+			createGiftTable("Reload error: " + tableData);
+		}
+		else {
+
+			createGiftTable("Reload error: Null tableData object");
+		}	
+	};
+
 	return {
 
 		initPage: function() {
@@ -1897,16 +1926,16 @@ viewUtils = (function($) {
 			case "search":
 
 				// Reload previous search result
-                utils.loadPreviousSearchResults();
+                utils.loadPreviousSearchResults("search");
 
 			break;
 
-			// case "statisticsView":
+			case "statisticsView":
 
-			// 	// Reload previous statistics request
-			// 	alert("onclickback: statistics");
+				// Reload previous statistics request
+				utils.loadPreviousSearchResults("statistics");
 
-			// break;
+			break;
 
 			// case "browseDonors":
 

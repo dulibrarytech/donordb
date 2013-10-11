@@ -437,23 +437,44 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
-	loadPreviousSearchResults = function() {
+	loadPreviousSearchResults = function(view) {
 
+		if(typeof view == "undefined" || view == null) {
+
+			view = "search";
+		}
+
+		var page, requestUrl;
+		if(view === "search") {
+
+			page = _searchUrl;
+			requestUrl = _searchUrl + '/recordSearch';
+		}
+		else if(view == "statistics") {
+
+			page = _statsUrl;
+			requestUrl = _statsSearchUrl;
+		}
+
+		// Request the previous search results from the server session cache
 		requestObj = {
 
 			type: "POST", 
-			url: _searchUrl + '/recordSearch',
+			url: requestUrl,
 			data: "&searchType=reload",
 			dataType: "json",
 			cache: true,
 			success: function(response) {
 
+				// Cache the search results
 				if(typeof response == "object") {
 
 					sessionStorage.setItem('search_results', JSON.stringify(response));
 					var test = JSON.parse(sessionStorage.getItem('search_results'));
 				}
-				window.location.href = _searchUrl;
+
+				// Load specified view
+				window.location.href = page;
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( "loadPreviousSearchResults: " + errorThrown );
@@ -528,8 +549,8 @@ utils = (function($) {
 		setLetterComplete: function(giftID) {
 			setLetterComplete(giftID);
 		},
-		loadPreviousSearchResults: function() {
-			loadPreviousSearchResults();
+		loadPreviousSearchResults: function(view) {
+			loadPreviousSearchResults(view);
 		}
 	};
 
