@@ -538,7 +538,7 @@ browseDonorsView = (function($) {
 
 		$("#page-label").text("Donor Listing");
 
-		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th class='span2'><!--SPACE--></th> </thead>");
+		$("#table-header").html("<thead> <th class='span2'><!--SPACE--></th> <th class='span4'>Last Name / Organization</th> <th class='span4'>First Name</th> <th style='align:right'><!--SPACE--></th> </thead>");
 		//$("#table-header").html("<thead> <th style='width: 140'><!--SPACE--></th> <th style='width: 284'>Last Name / Organization</th> <th style='width: 284'>First Name</th> <th style='width: 140; float: right;'><!--SPACE--></th> </thead>");
 
 		utils.getDonorDataArray(setQueue); 
@@ -677,13 +677,13 @@ browseDonorsView = (function($) {
 				results += '<a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
 				if(value.lastName == "" || value.lastName == null)	
-					results += '<td class="span4 name-cell">' + value.org + '</td>';	
+					results += '<td class="span4 name-cell4">' + value.org + '</td>';	
 				else
-					results += '<td class="span4 name-cell">' + value.lastName + '</td>';
+					results += '<td class="span4 name-cell4">' + value.lastName + '</td>';
 
-				results += '<td class="span4 name-cell">' + value.firstName + '</td>';
+				results += '<td class="span4 name-cell4">' + value.firstName + '</td>';
 
-				results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
+				results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
 				results += '</tr>';
 			});
 		}

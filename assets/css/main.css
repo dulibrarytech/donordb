@@ -421,13 +421,22 @@ a:not([href]) {
 	width: 538px;
 }
 
-.name-cell{
+.name-cell3{
   
-  	max-width: 100px;
+  	max-width: 204px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.name-cell4{
+  
+  	max-width: 284px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 
 .lower_controls {
 
