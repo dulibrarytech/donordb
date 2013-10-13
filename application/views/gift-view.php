@@ -5,6 +5,11 @@
 
 <head>
 
+	<!-- [if lt IE 7]> <html class="ie6"> <![endif] -->
+	<!-- [if IE 7]> <html class="ie7"> <![endif] -->
+	<!-- [if IE 8]> <html class="ie8"> <![endif] -->
+	<!-- [if gt IE 8]><! -->
+
 	<?php $this->load->view("partials/head-partial.php"); ?>
 
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery-ui.css" />
