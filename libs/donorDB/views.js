@@ -303,13 +303,13 @@ searchView = (function($) {
 				results += '<td class="span2">' + value.giftDate + '</td>';
 
 				if(value.lastName == "" || value.lastName == null)
-					results += '<td class="span4 name-cell">' + value.org + '</td>';
+					results += '<td class="span4 name-cell4">' + value.org + '</td>';
 				else
-					results += '<td class="span4 name-cell">' + value.lastName + '</td>';
+					results += '<td class="span4 name-cell4">' + value.lastName + '</td>';
 
-				results += '<td class="span4 name-cell">' + value.firstName + '</td>';
+				results += '<td class="span4 name-cell4">' + value.firstName + '</td>';
 
-				results += '<td class="span2" style="text-align: center"> <a onclick="' + tableData[0]['action'] + '(' + value.giftID + ');">' + tableData[0]['actionText'] + '</a> </td>';
+				results += '<td style="text-align: center"> <a onclick="' + tableData[0]['action'] + '(' + value.giftID + ');">' + tableData[0]['actionText'] + '</a> </td>';
 				results += '</tr>';
 			} );
 		}	
@@ -338,13 +338,13 @@ searchView = (function($) {
 				results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
 				if(value.lastName == "" || value.lastName == null)
-					results += '<td class="span4 name-cell">' + value.org + '</td>';
+					results += '<td class="span4 name-cell4">' + value.org + '</td>';
 				else
-					results += '<td class="span4 name-cell">' + value.lastName + '</td>';
+					results += '<td class="span4 name-cell4">' + value.lastName + '</td>';
 				
-				results += '<td class="span4 name-cell">' + value.firstName + '</td>';
+				results += '<td class="span4 name-cell4">' + value.firstName + '</td>';
 
-				results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
+				results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">Add Gift</a> </td>';
 				results += '</tr>';
 
 			} );
@@ -387,16 +387,19 @@ searchView = (function($) {
 				results += '<td class="span2">' + value.giftDate + '</td>';
 
 				if(value.lastName == "" || value.lastName == null) 
-					results += '<td class="span3 name-cell">' + value.org + '</td>';
+					results += '<td class="span3 name-cell3">' + value.org + '</td>';
 				else
-					results += '<td class="span3 name-cell">' + value.lastName + '</td>';
+					results += '<td class="span3 name-cell3">' + value.lastName + '</td>';
 
-				results += '<td class="span3 name-cell">' + value.firstName + '</td>';
+				results += '<td class="span3 name-cell3">' + value.firstName + '</td>';
 
 				results += '<td class="span2">' + value.letterStatus + '</td>';
 
 				if(value.lastName != "Anonymous Donor") {
-					results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">' + addLinkText + '</a> </td>';
+					results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '">' + addLinkText + '</a> </td>';
+				}
+				else {
+					results += '<td></td>';
 				}
 				
 				results += '</tr>';
@@ -1762,16 +1765,19 @@ statisticsView = (function($) {
 				results += '<td class="span2">' + value.giftDate + '</td>';
 
 				if(value.lastName == "" || value.lastName == null) 
-					results += '<td class="span3 name-cell">' + value.org + '</td>';
+					results += '<td class="span3 name-cell3">' + value.org + '</td>';
 				else
-					results += '<td class="span3 name-cell">' + value.lastName + '</td>';
+					results += '<td class="span3 name-cell3">' + value.lastName + '</td>';
 
-				results += '<td class="span3 name-cell">' + value.firstName + '</td>';
+				results += '<td class="span3 name-cell3">' + value.firstName + '</td>';
 
 				results += '<td class="span2">' + value.giftQuantity + '</td>';
 
 				if(value.lastName != "Anonymous Donor") {
 					results += '<td style="text-align: center"> <a href="' + _editUrl + '/addGiftView/' + value.donorID + '"></a> </td>';
+				}
+				else {
+					results += '<td></td>';
 				}
 				
 				results += '</tr>';

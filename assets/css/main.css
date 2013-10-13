@@ -432,6 +432,7 @@ a:not([href]) {
 .name-cell4{
   
   	max-width: 284px;
+  	/*max-height: 142px;*/
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
