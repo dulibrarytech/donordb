@@ -13,6 +13,9 @@
  */
 searchView = (function($) {
 
+	var isIE = $.browser.msie ? true : false,
+		MAX_TD_CHARS = 35;
+
 	var initPage,
 		initSession,
 		addEvents,
@@ -302,8 +305,18 @@ searchView = (function($) {
 
 				results += '<td class="span2">' + value.giftDate + '</td>';
 
-				if(value.lastName == "" || value.lastName == null)
-					results += '<td class="span4 name-cell4">' + value.org + '</td>';
+				if(value.lastName == "" || value.lastName == null) {
+
+					// ie: truncate td string manually.
+					if(isIE && value.org.length > MAX_TD_CHARS) {
+
+						var trunc = value.org.substring(0,MAX_TD_CHARS-1);
+						trunc += "...";
+						results += '<td class="span4 name-cell4">' + trunc + '</td>';
+					}
+					else
+						results += '<td class="span4 name-cell4">' + value.org + '</td>';
+				}
 				else
 					results += '<td class="span4 name-cell4">' + value.lastName + '</td>';
 
@@ -337,8 +350,18 @@ searchView = (function($) {
 				results += '<tr>';
 				results += '<td class="span2" style="text-align: center"> <a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
-				if(value.lastName == "" || value.lastName == null)
-					results += '<td class="span4 name-cell4">' + value.org + '</td>';
+				if(value.lastName == "" || value.lastName == null) {
+
+					// ie: truncate td string manually.
+					if(isIE && value.org.length > MAX_TD_CHARS) {
+
+						var trunc = value.org.substring(0,MAX_TD_CHARS-1);
+						trunc += "...";
+						results += '<td class="span4 name-cell4">' + trunc + '</td>';
+					}
+					else
+						results += '<td class="span4 name-cell4">' + value.org + '</td>';
+				}
 				else
 					results += '<td class="span4 name-cell4">' + value.lastName + '</td>';
 				
@@ -386,8 +409,18 @@ searchView = (function($) {
 
 				results += '<td class="span2">' + value.giftDate + '</td>';
 
-				if(value.lastName == "" || value.lastName == null) 
-					results += '<td class="span3 name-cell3">' + value.org + '</td>';
+				if(value.lastName == "" || value.lastName == null)  {
+
+					// ie: truncate td string manually.
+					if(isIE && value.org.length > MAX_TD_CHARS) {
+
+						var trunc = value.org.substring(0,MAX_TD_CHARS-1);
+						trunc += "...";
+						results += '<td class="span3 name-cell3">' + trunc + '</td>';
+					}
+					else
+						results += '<td class="span3 name-cell3">' + value.org + '</td>';
+				}
 				else
 					results += '<td class="span3 name-cell3">' + value.lastName + '</td>';
 
@@ -527,8 +560,8 @@ searchView = (function($) {
 
 browseDonorsView = (function($) {
 
-	// For ie kludge, truncate name/org table data strings to length MAX_TD_CHARS
-	var MAX_TD_CHARS = 35;
+	var isIE = $.browser.msie ? true : false,
+		MAX_TD_CHARS = 35;
 
 	var initPage,
 		createJumpToLinks,
@@ -643,8 +676,6 @@ browseDonorsView = (function($) {
 
 	createDonorTable = function(tableData) {
 
-		var isIE = $.browser.msie ? true : false;
-
 		$("#table-content").html('');
 
 		var results = '<table class="table table-bordered table-striped">';
@@ -660,7 +691,7 @@ browseDonorsView = (function($) {
 
 		if(typeof tableData == "object") {
 
-			$.each(tableData, function (key, value) {
+			each(tableData, function (key, value) {
 
 
 				results += '<tr>';
@@ -680,7 +711,7 @@ browseDonorsView = (function($) {
 			// 		results += '<div id="' + jumpToChar + '">';
 			// 		jumpToLetters[jumpToChar] = true;
 			// 	}
-			// }
+			// } current test
 
 				results += '<a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
@@ -1658,6 +1689,9 @@ editDonorView = (function($) {
 
 statisticsView = (function($) {
 
+	var isIE = $.browser.msie ? true : false,
+		MAX_TD_CHARS = 35;
+
 	var initPage,
 		addEvents,
 		createGiftTable,
@@ -1779,8 +1813,18 @@ statisticsView = (function($) {
 
 				results += '<td class="span2">' + value.giftDate + '</td>';
 
-				if(value.lastName == "" || value.lastName == null) 
-					results += '<td class="span3 name-cell3">' + value.org + '</td>';
+				if(value.lastName == "" || value.lastName == null)  {
+
+					// ie: truncate td string manually.
+					if(isIE && value.org.length > MAX_TD_CHARS) {
+
+						var trunc = value.org.substring(0,MAX_TD_CHARS-1);
+						trunc += "...";
+						results += '<td class="span3 name-cell3">' + trunc + '</td>';
+					}
+					else
+						results += '<td class="span3 name-cell3">' + value.org + '</td>';
+				}
 				else
 					results += '<td class="span3 name-cell3">' + value.lastName + '</td>';
 
