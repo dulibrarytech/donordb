@@ -640,6 +640,8 @@ browseDonorsView = (function($) {
 
 	createDonorTable = function(tableData) {
 
+		var isIE = $.browser.msie ? true : false;
+
 		$("#table-content").html('');
 
 		var results = '<table class="table table-bordered table-striped">';
@@ -657,8 +659,8 @@ browseDonorsView = (function($) {
 
 			$.each(tableData, function (key, value) {
 
-				results += '<tr>';
 
+				results += '<tr>';
 				results += '<td class="span2" style="text-align: center">';
 
 			// For the scrolltop animation.  Not in use.
@@ -679,8 +681,14 @@ browseDonorsView = (function($) {
 
 				results += '<a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
-				if(value.lastName == "" || value.lastName == null)	
-					results += '<td class="span4 name-cell4">' + value.org + '</td>';	
+				if(value.lastName == "" || value.lastName == null) {
+
+					if(isIE && value.org.length > 5) {
+
+						alert("org " + value.org + " is > 5!!!");
+					}
+					results += '<td class="span4 name-cell4">' + value.org + '</td>';
+				}	
 				else
 					results += '<td class="span4 name-cell4">' + value.lastName + '</td>';
 

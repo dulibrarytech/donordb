@@ -427,6 +427,7 @@ a:not([href]) {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    word-wrap: break-word;
 }
 
 .name-cell4{
@@ -436,6 +437,7 @@ a:not([href]) {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    word-wrap: break-word;
 }
 
 
