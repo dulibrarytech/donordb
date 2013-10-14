@@ -1699,9 +1699,9 @@ statisticsView = (function($) {
 
 	initPage = function() {
 
-		$(".content-window").css("height", "550px");
+		$(".content-window").css("height", "515px");
 		$(".pre-scrollable").css("max-height", "400px");
-		$("#table-section").css("height", "390px");
+		$("#table-section").css("height", "430px");
 
 		$("#page-label").text("Statistics");
 
@@ -1711,7 +1711,7 @@ statisticsView = (function($) {
 		$("#alert-section-label").hide();
 
 		$("#search_submit").text('Get Statistics');
-		$("#search_submit").css('margin-left', '450px');
+		$("#search_submit").css('margin-left', '425px');
 
 		$('#anonymous-gift-check').removeAttr('checked'); // Bug 207: Hard remove of check with each page load...
 
@@ -1866,10 +1866,10 @@ statisticsView = (function($) {
 		$("#table-section").toggle();
 
 		if($("#search-form").is(":visible")) {
-			$("#home-window").css('height', '720px');
+			$("#home-window").css('height', '750px');
 		}
 		else {
-			$("#home-window").css('height', '520px');
+			$("#home-window").css('height', '515px');
 		}
 
 		$("#search-form").toggle();
