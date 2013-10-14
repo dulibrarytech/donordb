@@ -28,7 +28,7 @@ form = (function($) {
 
 		$( "#fname_input_box" ).rules( "add", {
 			required: true,
-			maxlength: 75,
+			maxlength: 35,
 			messages: { 
 				required: "Please enter a first name",
 				maxlength: "First name: Character limit exceeded (75)"
@@ -37,7 +37,7 @@ form = (function($) {
 
 		$( "#lName_input_box" ).rules( "add", {
 			required: true,
-			maxlength: 75,
+			maxlength: 35,
 			messages: {
 			    required: "Please enter a last name",
 			    maxlength: "Last Name: Character limit exceeded (75)"

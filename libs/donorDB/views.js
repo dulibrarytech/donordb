@@ -527,6 +527,9 @@ searchView = (function($) {
 
 browseDonorsView = (function($) {
 
+	// For ie kludge, truncate name/org table data strings to length MAX_TD_CHARS
+	var MAX_TD_CHARS = 35;
+
 	var initPage,
 		createJumpToLinks,
 		onClickJumpToLetter,
@@ -683,14 +686,18 @@ browseDonorsView = (function($) {
 
 				if(value.lastName == "" || value.lastName == null) {
 
-					if(isIE && value.org.length > 5) {
+					// ie: truncate td string manually.
+					if(isIE && value.org.length > MAX_TD_CHARS) {
 
-						alert("org " + value.org + " is > 5!!!");
+						var trunc = value.org.substring(0,MAX_TD_CHARS-1);
+						trunc += "...";
+						results += '<td class="span4 name-cell4">' + trunc + '</td>';
 					}
-					results += '<td class="span4 name-cell4">' + value.org + '</td>';
+					else
+						results += '<td class="span4 name-cell4">' + value.org + '</td>';
 				}	
-				else
-					results += '<td class="span4 name-cell4">' + value.lastName + '</td>';
+				else 
+					results += '<td class="span4 name-cell4">' + value.lastName + '</td>';	
 
 				results += '<td class="span4 name-cell4">' + value.firstName + '</td>';
 
