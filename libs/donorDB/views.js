@@ -800,6 +800,7 @@ editGiftView = (function($) {
 
 		utils.getGiftDatesForActiveDonor(createGiftDateDropDown);
 		utils.getGiftData(setGiftFormData);
+		utils.getActiveDonorData(setDonorAddress);
 
 		viewUtils.setUserLabel();
 	};
@@ -929,6 +930,13 @@ editGiftView = (function($) {
 		$("#edit-date-box").val(gdate);
 	};
 
+	setDonorAddress = function(donorData) {
+
+		var address = donorData['addr1'] + ", " + donorData['addr2'] + " " + donorData['city'] + ", " + donorData['state'] + " " + donorData['zip'] + " " + donorData['country']; 
+
+		//$("#donor-address-label").text(address);
+	};
+
 	return {
 
 		initPage: function(anonymous) {	
@@ -939,6 +947,9 @@ editGiftView = (function($) {
 		},
 		setNameString: function(name) {	
 			setNameString(name);
+		},
+		setDonorAddress: function(donorData) {
+			setDonorAddress(donorData);
 		},
 		setGiftFormData: function(giftData) {
 			setGiftFormData(giftData);
