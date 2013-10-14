@@ -691,7 +691,7 @@ browseDonorsView = (function($) {
 
 		if(typeof tableData == "object") {
 
-			each(tableData, function (key, value) {
+			$.each(tableData, function (key, value) {
 
 
 				results += '<tr>';
@@ -711,7 +711,7 @@ browseDonorsView = (function($) {
 			// 		results += '<div id="' + jumpToChar + '">';
 			// 		jumpToLetters[jumpToChar] = true;
 			// 	}
-			// } current test
+			// } 
 
 				results += '<a href="' + _editUrl + '/editDonorView/' + value.donorID + '">Edit</a> </td>';
 
