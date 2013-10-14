@@ -14,8 +14,6 @@
 
 	<?php $this->load->view("partials/head-partial.php"); ?>
 
-	<link rel="shortcut icon" href="<?php echo base_url();?>img/kwak_favicon.ico" />
-
 	<meta name="page" content="table-view">
 
 	<!-- Positioning -->
