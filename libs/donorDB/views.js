@@ -1814,10 +1814,16 @@ statisticsView = (function($) {
 
 			$.each(tableData, function (key, value) {
 
-				// Skip the quantity data
+				// Grab the quantity data
 				if(key == "totalQuantity") {
 
 					total = value;
+					return true;
+				}
+				// Grab the quantity data
+				if(key == "totalDonations") {
+
+					totalDonations = value;
 					return true;
 				}
 
@@ -1868,7 +1874,7 @@ statisticsView = (function($) {
 		$("#table-header").html("<thead> <th class='span1'><!--SPACE--></th> <th class='span2'>Gift Date</th> <th class='span3'>Last Name / Organization</th> <th class='span3'>First Name</th> <th class='span2'>Quantity</th> <th><!--SPACE--></th> </thead>");
 		$("#table-content").html(results);
 
-		$("#data-section-1").html('Total Gifts: ' + total);
+		$("#data-section-1").html('Total Donations: ' + totalDonations + '&nbsp&nbsp&nbsp&nbsp&nbspTotal Gifts: ' + total);
 	};
 
 	toggleResultsView = function(showButtons) {

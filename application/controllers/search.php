@@ -165,12 +165,15 @@ class Search extends CI_Controller {
                 	{
                 		// Total the quantity of returned gift entries, and piggyback it in on the array.
 		                $total = 0;
+		                $totalD = 0;
 		                foreach($results as $result)
 		                {
 		                	$total += $result['giftQuantity'];
+		                	$totalD++;
 		                }
 
 	                	$results['totalQuantity'] = $total;
+	                	$results['totalDonations'] = $totalD;
                 	}
                 	else // If there are no search results cached in the session, echo an error message string
                 		$results = "Search error: no search data found";
@@ -195,11 +198,15 @@ class Search extends CI_Controller {
 
 						// Total the quantity of returned gift entries, and piggyback it in on the array.
 		                $total = 0;
+		                $totalD = 0;
 		                foreach($results as $result)
 		                {
 		                	$total += $result['giftQuantity'];
+		                	$totalD++;
 		                }
-		                $results['totalQuantity'] = $total;
+
+	                	$results['totalQuantity'] = $total;
+	                	$results['totalDonations'] = $totalD;
 	                }
 
 	                echo json_encode($results);

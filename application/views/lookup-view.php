@@ -28,7 +28,7 @@
 		#search_submit			{ margin-left: 475px; margin-bottom: 9px; }
 
 		#post-search-buttons	{ margin-left: 20px; margin-top: 30px; }
-		#data-section-1			{ margin-left: 730px; margin-top:30px }
+		#data-section-1			{ margin-right: 50px; margin-top:30px }
 
 		#anon_check_label		{ margin-left: 320px; margin-top: 5px; }
 		#anonymous-gift-check	{ margin-left: 530px; margin-top: -25px; }
@@ -116,7 +116,7 @@
 	 			<div id="table-content"></div>
 			</div>
 
-			<div id="data-section-1"></div>
+			<div align="right" id="data-section-1"></div>
 
 			<div id="post-search-buttons">
 				<button class="btn-grey" id="search_return">Return To Search</button>
