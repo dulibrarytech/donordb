@@ -21,15 +21,19 @@
 		#gen_letter_button			{ margin-left: 0px; margin-top: -10px; }
 		#upper_well					{ padding-bottom: 0px; }
 		#lower_well					{ padding-bottom: 0px; }
-		#description_area			{ width: 455px; height: 75px;}
+		#description_area			{ width: 455px; height: 100px;}
 		#gift_quantity_label		{ margin-left: 5px; }
 		#gift_quantity_box			{ margin-left: 5px; }
 
 		#back_button				{ margin-top: -10px; }
 
-		#edit-gift-button			{ margin-left: 18px; margin-top: 10px; }
-		#edit-gift-button           { margin-left: 18px; margin-top: 10px; }
-        #important-checkbox         { margin-left: 40px; margin-top:-5px; }
+		#edit-gift-button			{ margin-left: 18px; margin-top: 20px; }
+
+        #important-checkbox         { margin-left: 0px; margin-top:10px; }
+        #skip-letter-checkbox 		{ margin-top:-5px; }
+        #skip_gift_label			{ margin-top: -17px; }
+        #important_label			{ margin-top:-15px; }
+
         #username-label				{ margin-right: 20px; }
 
        /* #add_info_message			{ margin-left: 50px; }*/
@@ -172,10 +176,16 @@
 					</tr>
 
 					<tr>	
-						<td id="important_gift_check" colspan="2">
-                                <div id="important-box-text">
+						<td id="important_gift_check" colspan="2" rowspan="2">
+                                <div id="important-check-box">
+                                    <input type='hidden' name='skipLetterFlag' value="0"/>
+                                    <input type="checkbox" name="skipLetterFlag" id="skip-letter-checkbox" value="1"></input>
+                                    <label for="skip-letter-checkbox" class="form-label-text left-edge-field" id="skip_gift_label">Bypass Letter Request</label> 
+                                </div>
+                                <div id="skip-letter-check-box"> <!-- this is not directly related to the important_gift_check td ID -->
                                     <input type='hidden' name='importantFlag' value="0"/>
-                                    <input type="checkbox" name="importantFlag" id="important-checkbox" value="1">Hand-Typed Letter</input>
+                                    <input type="checkbox" name="importantFlag" id="important-checkbox" value="1"></input>
+                                    <label for="important-checkbox" class="form-label-text left-edge-field" id="important_label">Hand-Typed Letter</label> 
                                 </div>
                             </td>
 						<td>

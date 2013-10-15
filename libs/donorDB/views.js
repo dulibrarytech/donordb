@@ -790,11 +790,11 @@ editGiftView = (function($) {
 		$('#add_info_message').hide();
 		$("#gift-date-box").hide();
 		$("#add_anon_info_button").hide();
+		$("#letter-status").hide();
 
 		if(anonymous) {
 			$(".content-window").css("height", "660px");
 			$("#important_gift_check").hide();
-			$("#letter-status").hide();
 		}
 		else {
 			$(".content-window").css("height", "710px");
@@ -1422,13 +1422,14 @@ editDonorView = (function($) {
 
 	initPage = function() {
 
-		$(".content-window").css("height", "760px");
+		$(".content-window").css("height", "780px");
 
 		$("#page-label").text("View / Edit Donor Info");
 
 		$("#add_info_message").hide();
 		$("#title-edit-box").hide();
 		$('#gift-date-box').hide();
+		$("#important-check-box").hide();
 
 		$("#add_info_button").html("Update");
 
