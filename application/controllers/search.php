@@ -279,6 +279,7 @@ class Search extends CI_Controller {
 	{
 		if($giftID == null)
 			$giftID = $this->phpsessions->get('activeGiftID');
+		log_message('info', 'got giftID: ' . $giftID);
 
 		// Main gift data
 		$dataArray = $this->Search_model->getGiftData($giftID);
@@ -327,6 +328,7 @@ class Search extends CI_Controller {
 			$firstKey = key($giftDataArray);
 			$this->phpsessions->set('activeGiftID', $firstKey);
 			$giftDataArray['activeGiftID'] = $firstKey;
+			log_message('info', 'set active gift as: ' .$firstKey);
 		}
 
 		echo json_encode($giftDataArray);

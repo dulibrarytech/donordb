@@ -84,6 +84,11 @@
 					<td align="right" style="text-align: right;">
 						<div class="generic-text" id="letter-status"></div>
 					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="left-edge-field" id="donor-address-label"></label>
+					</td>
 				</tr></table>
 			</div>
 

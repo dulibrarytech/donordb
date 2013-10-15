@@ -780,8 +780,6 @@ editGiftView = (function($) {
 
 	initPage = function(anonymous) {
 
-		$(".content-window").css("height", "630px");
-
 		$("#page-label").text("View / Edit Gift");
 
 		$('#gift_submit_button').html("Update");
@@ -791,10 +789,12 @@ editGiftView = (function($) {
 		$("#add_anon_info_button").hide();
 
 		if(anonymous) {
+			$(".content-window").css("height", "630px");
 			$("#important_gift_check").hide();
 			$("#letter-status").hide();
 		}
 		else {
+			$(".content-window").css("height", "655px");
 			utils.getActiveDonorData(setDonorAddress);
 		}
 
@@ -936,7 +936,7 @@ editGiftView = (function($) {
 
 		var address = donorData['addr1'] + ", " + donorData['addr2'] + " " + donorData['city'] + ", " + donorData['state'] + " " + donorData['zip'] + " " + donorData['country']; 
 
-		//$("#donor-address-label").text(address);
+		$("#donor-address-label").text(address);
 	};
 
 	return {
