@@ -476,7 +476,7 @@ class Search_model extends CI_Model
 
     public function getGiftData($giftID)
     {
-        $giftInfo = array("giftDescription" => "Data Not Found");
+        $giftInfo = array("giftDescription" => "Data Not Found.  GiftID: " . $giftID);
         $giftInfo['letterFlag'] = -1;
 
         if($giftID != null)

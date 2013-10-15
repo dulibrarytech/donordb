@@ -794,13 +794,15 @@ editGiftView = (function($) {
 			$("#important_gift_check").hide();
 			$("#letter-status").hide();
 		}
+		else {
+			utils.getActiveDonorData(setDonorAddress);
+		}
 
 		addEvents();
 		form.addDonorDBGiftFormValidation();
 
 		utils.getGiftDatesForActiveDonor(createGiftDateDropDown);
 		utils.getGiftData(setGiftFormData);
-		utils.getActiveDonorData(setDonorAddress);
 
 		viewUtils.setUserLabel();
 	};
