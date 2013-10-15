@@ -17,19 +17,23 @@
 	<meta name="page" content="gift-view">
 
 	<!-- Positioning -->   
-	<!-- TODO: Create 'left edge field' class to offset by 25px left margin? -->
 	<style>
 		#gift_description_box		{ width: 500px; height: 75px; }
 		#gift_details_box			{ width: 500px; height: 75px; }
+
 		#select_date_elts			{ margin-right: 30px; }
-		#gift_date_label			{ margin-right: 34px; }
+		#gift_date_label			{ margin-right: 37px; }
+
 		#gift_submit_button			{ margin-left: -7px; }
+
+		#important_gift_check		{ margin-bottom: 10px; }
 		#important-checkbox			{ margin-top: 40px; margin-right: 30px; }
 		#important_label			{ margin-right: 50px; margin-top: -20px; }
-		/*#add_anon_info_button		{ margin-left: 88px; margin-bottom: 8px; }*/
+		#skip-letter-checkbox		{ margin-top: 40px; margin-right: 30px; }
+		#skip_letter_label			{ margin-right: 50px; margin-top: -20px; }
 
-		#change_date_elts			{ margin-right: 73px; }
-		#change_date_label			{ margin-right: 21px; }
+		#change_date_elts			{ margin-right: 60px; }
+		#change_date_label			{ margin-right: 22px; }
 
 		#gift_description_label		{ margin-top: 15px; }
 		#gift_details_label			{ margin-top: 15px; }
@@ -130,19 +134,19 @@
 							<textarea class="textarea left-edge-field" id="gift_details_box" name="giftDetails" cols="70" rows="50"></textarea>
 						</td>
 						<td align="right">
-							<div id="important_gift_check">
-								<input type='hidden' name='importantFlag' value="0" />
-								<input type="checkbox" name="importantFlag" class="checkbox" id="important-checkbox" value="1"></input>
-								<label for="important-checkbox" class="form-label-text left-edge-field" id="important_label">Hand-Typed Letter</label> 
+							<div id="skip_letter_check">
+								<input type='hidden' name='skipLetterFlag' value="0" />
+								<input type="checkbox" name="skipLetterFlag" class="checkbox" id="skip-letter-checkbox" value="1"></input>
+								<label for="important-checkbox" class="form-label-text left-edge-field" id="skip_letter_label">Bypass Letter Request</label> 
 							</div>
 						</td>
 					</tr>
 					<tr>
-						<td>
+						<td align="right">
 							<div id="important_gift_check">
-<!-- 								<input type='hidden' name='importantFlag' value="0" />
+								<input type='hidden' name='importantFlag' value="0" />
 								<input type="checkbox" name="importantFlag" class="checkbox" id="important-checkbox" value="1"></input>
-								<label for="important-checkbox" class="form-label-text left-edge-field" id="important_label">Hand-Typed Letter</label>  -->
+								<label for="important-checkbox" class="form-label-text left-edge-field" id="important_label">Hand-Typed Letter</label> 
 							</div>
 						</td>
 					</tr>

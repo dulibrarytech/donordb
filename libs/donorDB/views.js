@@ -768,6 +768,9 @@ browseDonorsView = (function($) {
 
 editGiftView = (function($) {
 
+	var isIE = $.browser.msie ? true : false,
+		MAX_TD_CHARS = 35;
+
 	var initPage,
 		addEvents,
 		blockForm,
@@ -805,6 +808,13 @@ editGiftView = (function($) {
 		utils.getGiftData(setGiftFormData);
 
 		viewUtils.setUserLabel();
+
+		// ie kludge to reposition the date dropdown
+		if(isIE) {
+			
+			$("#select_date_elts").css('margin-right', '0px');
+			$("#gift_date_label").css('margin-right', '80px');
+		}
 	};
 
 	addEvents = function() {
@@ -972,6 +982,9 @@ editGiftView = (function($) {
 
 addGiftView = (function($) {
 
+	var isIE = $.browser.msie ? true : false,
+		MAX_TD_CHARS = 35;
+
 	var initPage,
 		setNameString,
 		toggleSubmitMessage,
@@ -993,9 +1006,13 @@ addGiftView = (function($) {
 		$("#change_date_elts").hide();
 		$("#add_anon_info_button").hide();
 
+		// Crap!  Duct tape!
+		$("#gift_date_label").css('margin-right', '9px');
+
 		if(anonymous) {
-			$(".content-window").css("height", "660px");
+			$(".content-window").css("height", "680px");
 			$("#important_gift_check").hide();
+			$("#skip_letter_check").hide();
 		}
 		else {
 			$(".content-window").css("height", "710px");
@@ -1008,6 +1025,13 @@ addGiftView = (function($) {
 		form.addDonorDBGiftFormValidation();
 
 		viewUtils.setUserLabel();
+
+		// ie kludge to reposition the date dropdown
+		if(isIE) {
+			
+			$("#select_date_elts").css('margin-right', '30px');
+			//$("#gift_date_label").css('margin-right', '9px');
+		}
 	};
 
 	setNameString = function(name) {
