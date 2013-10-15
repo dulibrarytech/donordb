@@ -46,7 +46,7 @@ textarea {
 a:not([href]) {
 
 	cursor: pointer;
-	//padding-left: 0px;
+	padding-left: 0px;
 }
 
 .generic-text {

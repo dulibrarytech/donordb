@@ -19,15 +19,20 @@
 	<!-- Positioning -->   
 	<!-- TODO: Create 'left edge field' class to offset by 25px left margin? -->
 	<style>
-		#gift_description_box		{ width: 500px; height: 150px; }
-		#gift_date_label			{ margin-left: 75px; }
-		#gift-date-box				{ margin-left: 75px; }
-		#gift_submit_button			{ margin-left: -7px; margin-top: 0px; }
-		#edit_date_cell				{ vertical-align: bottom;  }
-		#important-checkbox			{ margin-top: 12px; }
-		#add_anon_info_button		{ margin-left: 88px; margin-bottom: 8px; }
+		#gift_description_box		{ width: 500px; height: 75px; }
+		#gift_details_box			{ width: 500px; height: 75px; }
+		#select_date_elts			{ margin-right: 30px; }
+		#gift_date_label			{ margin-right: 34px; }
+		#gift_submit_button			{ margin-left: -7px; }
+		#important-checkbox			{ margin-top: 40px; margin-right: 30px; }
+		#important_label			{ margin-right: 50px; margin-top: -20px; }
+		/*#add_anon_info_button		{ margin-left: 88px; margin-bottom: 8px; }*/
 
-		.change_date_elts			{ margin-left: 120px; }
+		#change_date_elts			{ margin-right: 73px; }
+		#change_date_label			{ margin-right: 21px; }
+
+		#gift_description_label		{ margin-top: 15px; }
+		#gift_details_label			{ margin-top: 15px; }
 
 		#dropdown-box-section		{ margin-left: 42px; width: 150px; }
 		#dropdown-box 				{ width: 120px; }
@@ -37,6 +42,9 @@
 
 		#letter-status 				{ margin-right: 30px; }
 		#username-label				{ margin-right: 20px; }
+
+		.lower_controls				{ margin-top: -7px; }
+		#gift_form_table			{ width: 100%; }
 	</style>
 
 </head>
@@ -93,31 +101,51 @@
 			</div>
 
 			<div class="well" id="add-gift-section">
-				<table>
-					<tr><td class="span9">
+				<table id="gift_form_table">
+					<tr><td>
 						<label for="gift_quantity_box" class="form-label-text left-edge-field" id="gift_quantity_label">Quantity:</label>  
 						<input type="text" class="input-small left-edge-field" id="gift_quantity_box" placeholder="#" name="giftQuantity" />
 					</td>
-					<td id="important_gift_check">
-						<input type='hidden' name='importantFlag' value="0" />
-						<input type="checkbox" name="importantFlag" class="checkbox" id="important-checkbox" value="1">Hand-Typed Letter</input>
+					<td align="right">
+						<div id="change_date_elts">
+							<label for="edit-date-box" class="form-label-text" id="change_date_label">Edit Date:</label>  
+							<input type="text" class="input-small" id="edit-date-box" name="giftDateEdit" />
+						</div>
 					</td>
-					<td>
-						<label for="gift-date-box" class="form-label-text" id="gift_date_label">Date of Gift:</label>  
-						<input type="text" class="input-small" id="gift-date-box" name="giftDate" />
+					<td align="right">
+						<div id="select_date_elts">
+							<label for="gift-date-box" class="form-label-text" id="gift_date_label">Date of Gift:</label>  
+							<input type="text" class="input-small" id="gift-date-box" name="giftDate" />
 
-						<div id="dropdown-box-section"></div>
+							<div id="dropdown-box-section"></div>
+						</div>
 					</td></tr>
-					<tr><td class="span9">
+					<tr><td colspan="2">
 						<label for="gift_description_box" class="form-label-text left-edge-field" id="gift_description_label">Description:</label> 
 						<textarea class="textarea left-edge-field" id="gift_description_box" name="giftDescription" cols="70" rows="50"></textarea>
-					</td>
-					<td id="edit_date_cell" colspan="2">
-						<label for="edit-date-box" class="form-label-text change_date_elts" id="change_date_label">Change Date:</label>  
-						<input type="text" class="input-small change_date_elts" id="edit-date-box" name="giftDateEdit" />
-
-						<input type="button" class="btn" id="add_anon_info_button" value="Add info"/>
-					</td>
+					</td></tr>
+					<tr>
+						<td  rowspan="2" colspan="2">
+							<label for="gift_destails_box" class="form-label-text left-edge-field" id="gift_details_label">Details:</label> 
+							<textarea class="textarea left-edge-field" id="gift_details_box" name="giftDetails" cols="70" rows="50"></textarea>
+						</td>
+						<td align="right">
+							<div id="important_gift_check">
+								<input type='hidden' name='importantFlag' value="0" />
+								<input type="checkbox" name="importantFlag" class="checkbox" id="important-checkbox" value="1"></input>
+								<label for="important-checkbox" class="form-label-text left-edge-field" id="important_label">Hand-Typed Letter</label> 
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div id="important_gift_check">
+<!-- 								<input type='hidden' name='importantFlag' value="0" />
+								<input type="checkbox" name="importantFlag" class="checkbox" id="important-checkbox" value="1"></input>
+								<label for="important-checkbox" class="form-label-text left-edge-field" id="important_label">Hand-Typed Letter</label>  -->
+							</div>
+						</td>
+					</tr>
 				</table>
 			</div>
 

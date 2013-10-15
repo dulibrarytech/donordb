@@ -789,12 +789,12 @@ editGiftView = (function($) {
 		$("#add_anon_info_button").hide();
 
 		if(anonymous) {
-			$(".content-window").css("height", "630px");
+			$(".content-window").css("height", "660px");
 			$("#important_gift_check").hide();
 			$("#letter-status").hide();
 		}
 		else {
-			$(".content-window").css("height", "655px");
+			$(".content-window").css("height", "710px");
 			utils.getActiveDonorData(setDonorAddress);
 		}
 
@@ -981,7 +981,7 @@ addGiftView = (function($) {
 
 	initPage = function(anonymous) {
 
-		$(".content-window").css("height", "630px");
+		//$(".content-window").css("height", "690px");
 
 		$("#page-label").text("Add a Gift");
 		$('#gift-date-box').attr('value', dateUtils.getCurrentDate());
@@ -990,11 +990,16 @@ addGiftView = (function($) {
 		$('#add_info_message').html("Adding new gift info...");
 
 		$('#add_info_message').hide();
-		$(".change_date_elts").hide();
+		$("#change_date_elts").hide();
 		$("#add_anon_info_button").hide();
 
 		if(anonymous) {
+			$(".content-window").css("height", "660px");
 			$("#important_gift_check").hide();
+		}
+		else {
+			$(".content-window").css("height", "710px");
+			utils.getActiveDonorData(setDonorAddress);
 		}
 
 		utils.getActiveNameString(setNameString);

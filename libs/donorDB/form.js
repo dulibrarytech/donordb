@@ -180,6 +180,13 @@ form = (function($) {
 			}
 		});
 
+		$( "#gift_details_box" ).rules( "add", {
+			maxlength: 255,
+			messages: {
+			    maxlength: "Gift Details: Character limit exceeded (255)"
+			}
+		});
+
 		$( "#edit-date-box" ).rules( "add", {
 			// date: true,
 			// maxlength: 12,
