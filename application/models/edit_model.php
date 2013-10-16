@@ -68,7 +68,8 @@ class Edit_model extends CI_Model
             'dateOfGift'        => $newGiftData['giftDate'],
             'numberOfGifts'     => $newGiftData['giftQuantity'],
             'letter'            => $newGiftData['letterFlag'],
-            'important'         => $newGiftData['importantFlag']
+            'important'         => $newGiftData['importantFlag'],
+            'bypassLetter'      => $newGiftData['skipLetterFlag']
         );
 
         // TODO: Join tables, then do an insert (Future-not required)
@@ -100,7 +101,8 @@ class Edit_model extends CI_Model
             'tbl_donorgifts.dateOfGift'         => $giftData['giftDateEdit'],
             'tbl_donorgifts.numberOfGifts'      => $giftData['giftQuantity'],
             'tbl_donorgiftdescriptions.giftDescription1'  => $giftData['giftDescription'],
-            'tbl_donorgifts.important'          => $giftData['importantFlag']
+            'tbl_donorgifts.important'          => $giftData['importantFlag'],
+            'tbl_donorgifts.bypassLetter'       => $giftData['skipLetterFlag']
         );
 
         // Bug 303 side issue: Add letter flag if 'hand-typed letter' is updated to 1, and letter has been sent (set to 0).  

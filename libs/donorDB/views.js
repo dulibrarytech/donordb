@@ -790,14 +790,14 @@ editGiftView = (function($) {
 		$('#add_info_message').hide();
 		$("#gift-date-box").hide();
 		$("#add_anon_info_button").hide();
-		$("#letter-status").hide();
+		//$("#letter-status").hide();
 
 		if(anonymous) {
-			$(".content-window").css("height", "660px");
+			$(".content-window").css("height", "690px");
 			$("#important_gift_check").hide();
 		}
 		else {
-			$(".content-window").css("height", "710px");
+			$(".content-window").css("height", "730px");
 			utils.getActiveDonorData(setDonorAddress);
 		}
 
@@ -899,11 +899,17 @@ editGiftView = (function($) {
 		$("#gift_description_box").text(giftData['giftDescription']);
 
 		$("#letter-status").html("Letter Status: " + giftData['letterStatus']);
+		// if sent  remove bypass control
 
 		if(giftData['importantFlag'] == 1) 
 			$('#important-checkbox').prop('checked', true);
 		else 
 			$('#important-checkbox').prop('checked', false);
+
+		if(giftData['bypassLetter'] == 1) 
+			$('#skip-letter-checkbox').prop('checked', true);
+		else 
+			$('#skip-letter-checkbox').prop('checked', false);
 
 		setNameString(giftData['nameString']);
 	};
@@ -1010,12 +1016,12 @@ addGiftView = (function($) {
 		$("#gift_date_label").css('margin-right', '9px');
 
 		if(anonymous) {
-			$(".content-window").css("height", "680px");
+			$(".content-window").css("height", "695px");
 			$("#important_gift_check").hide();
 			$("#skip_letter_check").hide();
 		}
 		else {
-			$(".content-window").css("height", "710px");
+			$(".content-window").css("height", "725px");
 			utils.getActiveDonorData(setDonorAddress);
 		}
 
@@ -1133,7 +1139,7 @@ addNewDonorView = (function($) {
 
 		anonymousView = anonymous;
 
-		$(".content-window").css("height", "760px");
+		//$(".content-window").css("height", "760px");
 
 		// Not in use
 		if(anonymous == 1) {
@@ -1146,7 +1152,7 @@ addNewDonorView = (function($) {
 		else {
 
 			$("#page-label").text("Add New Donor Info");
-			$(".content-window").css("height", "740px");
+			$(".content-window").css("height", "780px");
 		}
 			
 		$("#add_info_message").hide();
@@ -1373,6 +1379,9 @@ addNewDonorView = (function($) {
 		$("#gift-date-box").val('');
 		$("#gift_quantity_box").val('');
 
+		$("#important-checkbox").val(0);
+		$("#skip-letter-checkbox").val(0);
+
 		$("#title-dropdown>option:eq(0)").attr('selected', 'true');
 	};
 
@@ -1429,13 +1438,14 @@ editDonorView = (function($) {
 		$("#add_info_message").hide();
 		$("#title-edit-box").hide();
 		$('#gift-date-box').hide();
-		$("#important-check-box").hide();
+		//$("#important-check-box").hide();
 
 		$("#add_info_button").html("Update");
 
 		$("#description_area").prop('disabled', 'true');
 		$("#gift_quantity_box").prop('disabled', 'true');
 		$("#important-checkbox").prop('disabled', 'true');
+		$("#skip-letter-checkbox").prop('disabled', 'true');
 
 		var profile = viewUtils.getProfile();
 		if(profile.roleID != 2) {
@@ -1669,11 +1679,17 @@ editDonorView = (function($) {
 		$("#description_area").text(giftData['giftDescription']);
 
 		$("#letter-status").html("Letter Status: " + giftData['letterStatus']);
+		// if 'sent', hide the bypass control
 
 		if(giftData['importantFlag'] == 1) 
 			$('#important-checkbox').prop('checked', true);
 		else 
 			$('#important-checkbox').prop('checked', false);
+
+		if(giftData['bypassLetter'] == 1) 
+			$('#skip-letter-checkbox').prop('checked', true);
+		else 
+			$('#skip-letter-checkbox').prop('checked', false);
 	};
 
 	setDonorFormData = function(donorData) {

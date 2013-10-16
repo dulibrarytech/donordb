@@ -210,6 +210,7 @@ class Edit extends CI_Controller {
                   log_message("info", "Error in updating database with new donor info");
 
                 // Bug 202: Only add new gift if a gift description has been entered.
+                // New operation: giftDescription now is validated for data.  A gift must be entered with new donation info...
                 if($donorData['giftDescription'] != "")
                 {
                   $giftID = $this->Edit_model->createGiftRecord($donorID, $donorData);

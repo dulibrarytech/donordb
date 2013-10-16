@@ -97,7 +97,7 @@ class Search_model extends CI_Model
         }
 
         $this->db->trans_start();
-        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.letter, tbl_donorgifts.dateOfGift, tbl_donorgifts.numberOfGifts, tbl_donorinfo.donorID, tbl_donorinfo.FirstName, tbl_donorinfo.LastName, tbl_donorinfo.Organization, tbl_donorinfo.anonymous');
+        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.letter, tbl_donorgifts.bypassLetter, tbl_donorgifts.dateOfGift, tbl_donorgifts.numberOfGifts, tbl_donorinfo.donorID, tbl_donorinfo.FirstName, tbl_donorinfo.LastName, tbl_donorinfo.Organization, tbl_donorinfo.anonymous');
         $this->db->from('tbl_donorgifts');
         $this->db->join('tbl_donorinfo', 'tbl_donorinfo.donorID = tbl_donorgifts.donorID', 'inner');
         $this->db->where('dateOfGift >=', $fromDate);
@@ -131,6 +131,7 @@ class Search_model extends CI_Model
                 $searchResults[$index]['donorID']       = $results->donorID;
                 $searchResults[$index]['org']           = $results->Organization;
                 $searchResults[$index]['letter']        = $results->letter;
+                $searchResults[$index]['bypassLetter']  = $results->bypassLetter;
 
                 $index++;
             }
@@ -345,11 +346,12 @@ class Search_model extends CI_Model
         $index = 0;
 
         $this->db->trans_start();
-        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorgifts.donorID, tbl_donorinfo.Organization, tbl_donorinfo.FirstName, tbl_donorinfo.LastName');
+        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorgifts.donorID, tbl_donorgifts.bypassLetter, tbl_donorinfo.Organization, tbl_donorinfo.FirstName, tbl_donorinfo.LastName');
         $this->db->from('tbl_donorgifts');
         $this->db->join('tbl_donorinfo', 'tbl_donorgifts.donorID = tbl_donorinfo.donorID', 'inner');
         $this->db->where('tbl_donorgifts.letter', 1);
         $this->db->where('tbl_donorgifts.important !=', 1);
+        $this->db->where('tbl_donorgifts.bypassLetter !=', 1);
         $this->db->order_by("dateOfGift", "desc");
         $query = $this->db->get();
         $this->db->trans_complete();
@@ -482,7 +484,7 @@ class Search_model extends CI_Model
         if($giftID != null)
         {
             $this->db->trans_start();
-            $this->db->select('tbl_donorgifts.dateOfGift, tbl_donorgifts.numberOfGifts, tbl_donorgifts.letter, tbl_donorgifts.important, tbl_donorgiftdescriptions.giftDescription1');
+            $this->db->select('tbl_donorgifts.dateOfGift, tbl_donorgifts.numberOfGifts, tbl_donorgifts.letter, tbl_donorgifts.important, tbl_donorgifts.bypassLetter, tbl_donorgiftdescriptions.giftDescription1');
             $this->db->from('tbl_donorgifts');
             $this->db->join('tbl_donorgiftdescriptions', 'tbl_donorgifts.giftsID = tbl_donorgiftdescriptions.giftsID', 'inner');
             $this->db->where('tbl_donorgifts.giftsID', $giftID);
@@ -500,6 +502,7 @@ class Search_model extends CI_Model
                     $giftInfo['giftDate']         = truncateDateString($result->dateOfGift); 
                     $giftInfo['letterFlag']       = $result->letter;
                     $giftInfo['importantFlag']    = $result->important;
+                    $giftInfo['bypassLetter']     = $result->bypassLetter;
                 }
             }
             else 

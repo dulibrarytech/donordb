@@ -177,12 +177,13 @@
 
 					<tr>	
 						<td id="important_gift_check" colspan="2" rowspan="2">
-                                <div id="important-check-box">
+                                <div id="skip-letter-check-box">
                                     <input type='hidden' name='skipLetterFlag' value="0"/>
                                     <input type="checkbox" name="skipLetterFlag" id="skip-letter-checkbox" value="1"></input>
                                     <label for="skip-letter-checkbox" class="form-label-text left-edge-field" id="skip_gift_label">Bypass Letter Request</label> 
                                 </div>
-                                <div id="skip-letter-check-box"> <!-- this is not directly related to the important_gift_check td ID -->
+                                <div>
+                                <div id="important-check-box"> <!-- this is not directly related to the important_gift_check td ID -->
                                     <input type='hidden' name='importantFlag' value="0"/>
                                     <input type="checkbox" name="importantFlag" id="important-checkbox" value="1"></input>
                                     <label for="important-checkbox" class="form-label-text left-edge-field" id="important_label">Hand-Typed Letter</label> 
