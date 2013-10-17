@@ -109,7 +109,7 @@ class Edit_model extends CI_Model
         // Need to have letter=1 to have typed letter request sent to external relations user 
         $prevImportantFlag = 1;
         $this->db->select('important');
-        $this->db->from('tbl_donorGifts');
+        $this->db->from('tbl_donorgifts');
         $this->db->where('giftsID', $giftID);
         $query = $this->db->get();
         if ($query->num_rows() > 0)
