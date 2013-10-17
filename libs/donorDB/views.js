@@ -1033,6 +1033,8 @@ addGiftView = (function($) {
 		MAX_TD_CHARS = 35;
 
 	var initPage,
+		addEvents,
+		setRole,
 		setNameString,
 		toggleSubmitMessage,
 		setMessage,
@@ -1067,6 +1069,9 @@ addGiftView = (function($) {
 			$(".content-window").css("height", "725px");
 			utils.getActiveDonorData(setDonorAddress);
 		}
+
+		// Set user-specific layout
+		setRole(viewUtils.getProfile().roleID);
 
 		utils.getActiveNameString(setNameString);
 
@@ -1125,6 +1130,38 @@ addGiftView = (function($) {
 	    });
 	};
 
+	// Set layout for user status.
+	setRole = function(roleID) {
+
+		switch(roleID)
+		{
+			case 1: 	// Acquisitions
+				
+				
+				// TODO: Display any kind of message or task list in the table section.  Or 'DONOWT'
+
+				// set app title text: |5?
+
+				break;
+
+			case 2: 	// Admin
+
+				$("#skip_letter_check").hide();
+				
+				break;
+
+			case 3: 	// External Relations
+
+				$("#skip_letter_check").hide();
+				
+				break;
+
+			default:
+				
+				break;
+		}
+	};
+
 	toggleSubmitMessage = function() {
 
 		$("#add_info_message").toggle();
@@ -1167,6 +1204,7 @@ addNewDonorView = (function($) {
 
 	var initPage,
 		addEvents,
+		setRole,
 		toggleSubmitMessage,
 		setMessage,
 		createTitleDropdown,
@@ -1212,6 +1250,9 @@ addNewDonorView = (function($) {
 		$("#return_button").hide();
 
 		$("#gift_date_label").text('Gift Date:');
+
+		// Set user-specific layout
+		setRole(viewUtils.getProfile().roleID);
 
 		addEvents(anonymous);
 
@@ -1290,6 +1331,38 @@ addNewDonorView = (function($) {
 		// 		alert("post remove...");
 		//     }
 		// });
+	};
+
+	// Set layout for user status.
+	setRole = function(roleID) {
+
+		switch(roleID)
+		{
+			case 1: 	// Acquisitions
+				
+				
+				// TODO: Display any kind of message or task list in the table section.  Or 'DONOWT'
+
+				// set app title text: |5?
+
+				break;
+
+			case 2: 	// Admin
+
+				$("#skip_letter_check").hide();
+				
+				break;
+
+			case 3: 	// External Relations
+
+				$("#skip_letter_check").hide();
+				
+				break;
+
+			default:
+				
+				break;
+		}
 	};
 
 	toggleSubmitMessage = function() {

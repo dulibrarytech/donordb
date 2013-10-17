@@ -49,7 +49,8 @@ class Login_model extends CI_Model
             } 
             catch(Exception $e) 
             {
-                log_message("error", $e->getMessage());
+                log_message("error", "LDAP refused: " . $e->getMessage());
+
             }
         } 
         else 
@@ -61,7 +62,7 @@ class Login_model extends CI_Model
             } 
             catch (Exception $e) 
             {
-                log_message("error", $e->getMessage());
+                log_message("error", "AD refused: " . $e->getMessage());
             }     
         }
 
