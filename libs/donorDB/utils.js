@@ -455,7 +455,7 @@ utils = (function($) {
 			page = _searchUrl;
 			requestUrl = _searchUrl + '/recordSearch';
 		}
-		else if(view == "statistics") {
+		else if(view === "statistics") {
 
 			page = _statsUrl;
 			requestUrl = _statsSearchUrl;
@@ -475,7 +475,7 @@ utils = (function($) {
 				if(typeof response == "object") {
 
 					sessionStorage.setItem('search_results', JSON.stringify(response));
-					var test = JSON.parse(sessionStorage.getItem('search_results'));
+					//var test = JSON.parse(sessionStorage.getItem('search_results'));
 				}
 
 				// Load specified view

@@ -79,12 +79,11 @@ searchView = (function($) {
 
 			// If there are search results cached, display them in the results view now.
 			// This cache array is set externally (in utils).  It should always be null until temporarily set by utils.
-			// The previous search results are also cached on the server, and are always available via ajax request. (search/recordSearch?searchType=reload)
 			var searchResults = JSON.parse(sessionStorage.getItem('search_results'));
 			if(searchResults != null) {
 
 				reloadSearchResults(searchResults);
-				sessionStorage.setItem('search_results', null);
+				sessionStorage.setItem('search_results', null); // Set to null after each reload
 			}
 
 		}
@@ -795,6 +794,8 @@ editGiftView = (function($) {
 		if(anonymous) {
 			$(".content-window").css("height", "690px");
 			$("#important_gift_check").hide();
+			$("#letter-status").hide();
+			//$("#gift-date-box").prop('disabled', 'true');
 		}
 		else {
 			$(".content-window").css("height", "730px");
@@ -817,7 +818,11 @@ editGiftView = (function($) {
 			
 			$("#select_date_elts").css('margin-right', '0px');
 			$("#gift_date_label").css('margin-right', '80px');
+			$("#change_date_elts").css('margin-right', '67px');
 		}
+
+		// TEMP disable details until implemented
+		$("#gift_details_box").prop('disabled', 'true');
 	};
 
 	addEvents = function() {
@@ -1064,6 +1069,7 @@ addGiftView = (function($) {
 			$(".content-window").css("height", "695px");
 			$("#important_gift_check").hide();
 			$("#skip_letter_check").hide();
+			$("#letter-status").hide();
 		}
 		else {
 			$(".content-window").css("height", "725px");
@@ -1086,6 +1092,9 @@ addGiftView = (function($) {
 			$("#select_date_elts").css('margin-right', '30px');
 			//$("#gift_date_label").css('margin-right', '9px');
 		}
+
+		// TEMP disable details until implemented
+		$("#gift_details_box").prop('disabled', 'true');
 	};
 
 	setNameString = function(name) {

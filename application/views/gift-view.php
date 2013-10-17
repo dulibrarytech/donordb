@@ -21,7 +21,7 @@
 		#gift_description_box		{ width: 500px; height: 75px; }
 		#gift_details_box			{ width: 500px; height: 75px; }
 
-		#select_date_elts			{ margin-right: 30px; }
+		#select_date_elts			{ margin-right: 45px; }
 		#gift_date_label			{ margin-right: 42px; }
 
 		#gift_submit_button			{ margin-left: -7px; }

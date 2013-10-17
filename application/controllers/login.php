@@ -50,6 +50,7 @@ class Login extends CI_Controller
         $this->phpsessions->delete("activeDonorNameString");
         $this->phpsessions->delete("activeGiftID");
         $this->phpsessions->delete("activeDonorID");
+        $this->phpsessions->delete("prevSearchResults");
         
         redirect('search');
     }

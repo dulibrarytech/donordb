@@ -24,7 +24,7 @@ class Search extends CI_Controller {
 	 * Loads Search View 
 	 * If 
 	 */
-	public function index($resetSearchCache = FALSE)
+	public function index($resetSearchCache = TRUE)
 	{
 		if($resetSearchCache) 
 		{
@@ -65,6 +65,7 @@ class Search extends CI_Controller {
                 $searchType = $this->input->post('searchType');
 
                 // If no data in POST, or if this is a reload search, get the data from the session array.
+                // The session array holds search results until the search page is loaded again.  
                 if($searchType == null || $searchType == "reload")
                 {
                 	$resultArray = $this->phpsessions->get('prevSearchResults');
