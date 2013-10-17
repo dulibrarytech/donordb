@@ -77,6 +77,7 @@ utils = (function($) {
 			url: _searchUrl + '/queryDatabaseDonorData',
 			dataType: "json",
 			cache: true,
+			//async: false
 			success: function (response) {
 				callback(response);
 			},
@@ -316,14 +317,18 @@ utils = (function($) {
 			type: "POST", 
 			url: _searchUrl + '/queryDatabaseDonorGifts',
 			dataType: "json",
+			async: false,
 			cache: true,
 			success: function(response) {
+
 				callback(response);
 			},
 			error: function ( textStatus, errorThrown ) {
                 alert( "getGiftDatesForActiveDonor: " + errorThrown );
             }
 		};
+
+		//alert("1 returning response");
 
 		doAjax(requestObj);
 	};
