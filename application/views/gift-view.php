@@ -22,7 +22,7 @@
 		#gift_details_box			{ width: 500px; height: 75px; }
 
 		#select_date_elts			{ margin-right: 30px; }
-		#gift_date_label			{ margin-right: 37px; }
+		#gift_date_label			{ margin-right: 42px; }
 
 		#gift_submit_button			{ margin-left: -7px; }
 
@@ -118,7 +118,7 @@
 					</td>
 					<td align="right">
 						<div id="select_date_elts">
-							<label for="gift-date-box" class="form-label-text" id="gift_date_label">Date of Gift:</label>  
+							<label for="gift-date-box" class="form-label-text" id="gift_date_label">Select Gift:</label>  
 							<input type="text" class="input-small" id="gift-date-box" name="giftDate" />
 
 							<div id="dropdown-box-section"></div>

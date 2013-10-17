@@ -899,17 +899,23 @@ editGiftView = (function($) {
 		$("#gift_description_box").text(giftData['giftDescription']);
 
 		$("#letter-status").html("Letter Status: " + giftData['letterStatus']);
-		// if sent  remove bypass control
 
+		if(giftData['letterStatus'] === "Sent") {
+			$('#skip-letter-checkbox').hide();
+		}
+		else {
+
+			if(giftData['bypassLetter'] == 1) 
+				$('#skip-letter-checkbox').prop('checked', true);
+			else 
+				$('#skip-letter-checkbox').prop('checked', false);
+		}
+
+		
 		if(giftData['importantFlag'] == 1) 
 			$('#important-checkbox').prop('checked', true);
 		else 
 			$('#important-checkbox').prop('checked', false);
-
-		if(giftData['bypassLetter'] == 1) 
-			$('#skip-letter-checkbox').prop('checked', true);
-		else 
-			$('#skip-letter-checkbox').prop('checked', false);
 
 		setNameString(giftData['nameString']);
 	};
@@ -1376,11 +1382,14 @@ addNewDonorView = (function($) {
 		$("#phone_input_box").val('');
 		$("#email_input_box").val('');
 		$("#description_area").val('');
-		$("#gift-date-box").val('');
+
+		//$("#gift-date-box").val('');
+		$('#gift-date-box').attr('value', dateUtils.getCurrentDate());
+
 		$("#gift_quantity_box").val('');
 
-		$("#important-checkbox").val(0);
-		$("#skip-letter-checkbox").val(0);
+		$("#important-checkbox").prop('checked',false);
+		$("#skip-letter-checkbox").prop('checked',false);
 
 		$("#title-dropdown>option:eq(0)").attr('selected', 'true');
 	};
@@ -1679,17 +1688,24 @@ editDonorView = (function($) {
 		$("#description_area").text(giftData['giftDescription']);
 
 		$("#letter-status").html("Letter Status: " + giftData['letterStatus']);
-		// if 'sent', hide the bypass control
+		
+		if(giftData['letterStatus'] === "Sent") {
+			$('#skip-letter-checkbox').hide();
+		}
+		else {
+
+			if(giftData['bypassLetter'] == 1) 
+				$('#skip-letter-checkbox').prop('checked', true);
+			else 
+				$('#skip-letter-checkbox').prop('checked', false);
+		}
 
 		if(giftData['importantFlag'] == 1) 
 			$('#important-checkbox').prop('checked', true);
 		else 
 			$('#important-checkbox').prop('checked', false);
 
-		if(giftData['bypassLetter'] == 1) 
-			$('#skip-letter-checkbox').prop('checked', true);
-		else 
-			$('#skip-letter-checkbox').prop('checked', false);
+		
 	};
 
 	setDonorFormData = function(donorData) {

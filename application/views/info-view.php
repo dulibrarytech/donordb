@@ -163,7 +163,7 @@
 							<!-- Spacer -->
 						</td>
 						<td class="span3">
-							<label for="gift-date-box" class="form-label-text">Gift Date:</label>  
+							<label for="gift-date-box" class="form-label-text">Select Gift:</label>  
 							<input type="text" class="input-small" id="gift-date-box" name="giftDate"/> 
 
 							<div id="gift-date-box-section"></div>

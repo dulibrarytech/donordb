@@ -388,11 +388,12 @@ class Search_model extends CI_Model
         $index = 0;
 
         $this->db->trans_start();
-        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorgifts.donorID, tbl_donorinfo.Organization, tbl_donorinfo.FirstName, tbl_donorinfo.LastName');
+        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorgifts.donorID, tbl_donorgifts.bypassLetter, tbl_donorinfo.Organization, tbl_donorinfo.FirstName, tbl_donorinfo.LastName');
         $this->db->from('tbl_donorgifts');
         $this->db->join('tbl_donorinfo', 'tbl_donorgifts.donorID = tbl_donorinfo.donorID', 'inner');
         $this->db->where('tbl_donorgifts.important', 1);
         $this->db->where('tbl_donorgifts.letter', 1);
+        $this->db->where('tbl_donorgifts.bypassLetter !=', 1);
         $this->db->order_by("dateOfGift", "desc");
         $query = $this->db->get();
         $this->db->trans_complete();
