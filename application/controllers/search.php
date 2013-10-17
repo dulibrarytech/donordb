@@ -103,7 +103,7 @@ class Search extends CI_Controller {
 			                	else if($result['letter'] == 0)
 			                		$resultArray[$key]['letterStatus'] = "Sent";
 			                	else if($result['letter'] == 1 && $result['bypassLetter'] == 1)
-			                		$resultArray[$key]['letterStatus'] = "Request Not Sent";
+			                		$resultArray[$key]['letterStatus'] = "Request Bypassed";
 			                	else
 			                		$resultArray[$key]['letterStatus'] = "Error";
 		                	}
@@ -306,7 +306,7 @@ class Search extends CI_Controller {
 			else if($dataArray['letterFlag'] == 0)
 				$dataArray['letterStatus'] = "Sent";
 			else if($dataArray['letterFlag'] == 1 && $dataArray['bypassLetter'] == 1)
-				$dataArray['letterStatus'] = "Request Not Sent";
+				$dataArray['letterStatus'] = "Request Bypassed";
 			else
 				$dataArray['letterStatus'] = "Error";
 	    }          	

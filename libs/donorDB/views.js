@@ -59,11 +59,10 @@ searchView = (function($) {
 
 		if(authentication.validateLocalSession())
 		{
-			var profile = viewUtils.getProfile(),
-				queue = getQueue();
+			var queue = getQueue();
 
 			// Set user-specific layout
-			setRole(profile.roleID);
+			setRole(viewUtils.getProfile().roleID);
 
 			// If the queue is empty, set it here.  List is created in getList()
 			if(queue == "Queue Empty.") {
@@ -773,6 +772,7 @@ editGiftView = (function($) {
 
 	var initPage,
 		addEvents,
+		setRole,
 		blockForm,
 		setMessage,
 		unblockForm,
@@ -800,6 +800,9 @@ editGiftView = (function($) {
 			$(".content-window").css("height", "730px");
 			utils.getActiveDonorData(setDonorAddress);
 		}
+
+		// Set user-specific layout
+		setRole(viewUtils.getProfile().roleID);
 
 		addEvents();
 		form.addDonorDBGiftFormValidation();
@@ -855,6 +858,38 @@ editGiftView = (function($) {
 
 	    	viewUtils.onClickBack();
 	    });
+	};
+
+	// Set layout for user status.
+	setRole = function(roleID) {
+
+		switch(roleID)
+		{
+			case 1: 	// Acquisitions
+				
+				
+				// TODO: Display any kind of message or task list in the table section.  Or 'DONOWT'
+
+				// set app title text: |5?
+
+				break;
+
+			case 2: 	// Admin
+
+				$("#skip_letter_check").hide();
+				
+				break;
+
+			case 3: 	// External Relations
+
+				$("#skip_letter_check").hide();
+				
+				break;
+
+			default:
+				
+				break;
+		}
 	};
 
 	// Blocks all fields and displays 'message' in the description section
@@ -1019,7 +1054,9 @@ addGiftView = (function($) {
 		$("#add_anon_info_button").hide();
 
 		// Crap!  Duct tape!
-		$("#gift_date_label").css('margin-right', '9px');
+		$("#gift_date_label").css('margin-right', '25px');
+
+		$("#gift_date_label").text('Gift Date:');
 
 		if(anonymous) {
 			$(".content-window").css("height", "695px");
@@ -1173,6 +1210,8 @@ addNewDonorView = (function($) {
 
 		$("#gen_letter_button").hide();
 		$("#return_button").hide();
+
+		$("#gift_date_label").text('Gift Date:');
 
 		addEvents(anonymous);
 
@@ -1427,6 +1466,7 @@ editDonorView = (function($) {
 	var initPage,
 		setActiveGift,
 		addEvents,
+		setRole,
 		toggleSubmitMessage,
 		setMessage,
 		createTitleDropdown,
@@ -1460,6 +1500,9 @@ editDonorView = (function($) {
 		if(profile.roleID != 2) {
 			$("#gen_letter_button").hide();
 		}
+
+		// Set user-specific layout
+		setRole(viewUtils.getProfile().roleID);
 
 		addEvents();
 		form.addDonorDBEditFormValidation();
@@ -1541,6 +1584,38 @@ editDonorView = (function($) {
 
 	    	viewUtils.onClickBack();
 	    });
+	};
+
+	// Set layout for user status.
+	setRole = function(roleID) {
+
+		switch(roleID)
+		{
+			case 1: 	// Acquisitions
+				
+				
+				// TODO: Display any kind of message or task list in the table section.  Or 'DONOWT'
+
+				// set app title text: |5?
+
+				break;
+
+			case 2: 	// Admin
+
+				$("#skip-letter-check-box").hide();
+				
+				break;
+
+			case 3: 	// External Relations
+
+				$("#skip-letter-check-box").hide();
+				
+				break;
+
+			default:
+				
+				break;
+		}
 	};
 
 	toggleSubmitMessage = function() {
