@@ -30,7 +30,7 @@
 		#edit-gift-button			{ margin-left: 18px; margin-top: 20px; }
 
         #important-checkbox         { margin-left: 0px; margin-top:10px; }
-        #skip-letter-checkbox 		{ margin-top:-5px; }
+        #skip-letter-checkbox 		{ margin-top: -5px; }
         #skip_gift_label			{ margin-top: -17px; }
         #important_label			{ margin-top:-15px; }
 

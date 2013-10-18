@@ -941,7 +941,7 @@ editGiftView = (function($) {
 		$("#letter-status").html("Letter Status: " + giftData['letterStatus']);
 
 		if(giftData['letterStatus'] === "Sent") {
-			$('#skip-letter-checkbox').hide();
+			$('#skip-letter-check-box').hide();
 		}
 		else {
 
@@ -1847,7 +1847,7 @@ editDonorView = (function($) {
 		$("#letter-status").html("Letter Status: " + giftData['letterStatus']);
 		
 		if(giftData['letterStatus'] === "Sent") {
-			$('#skip-letter-checkbox').hide();
+			$('#skip-letter-check-box').hide();
 		}
 		else {
 
