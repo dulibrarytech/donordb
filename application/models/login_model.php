@@ -33,11 +33,12 @@ class Login_model extends CI_Model
         $profile  = array('isValid' => FALSE, 'userName' => $userName);
         $remoteAuth = FALSE;                                                                            
     
-        // Demo Accounts:  Bypass remote authorization                                                      *** REMOVE DEMO ACCOUNTS ***        *** REMOVE else from following if ***
-        if($userName == "acqu" || $userName == "adminn" || $userName == "externall")
+        // Demo Accounts:  Bypass remote authorization                                                     
+        if($userName == "acq" || $userName == "admin" || $userName == "external")
         {
-            $remoteAuth = TRUE;
-        }      
+            if($passWord === "d3c3mb3r")
+                $remoteAuth = TRUE;
+        }     
 
         // Detect ldap and ad usernames
         else if (ctype_digit($userName)) 
