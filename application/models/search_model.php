@@ -532,6 +532,7 @@ class Search_model extends CI_Model
             $this->db->where('donorID', $donorID);
             if($donorID == 1)
             {
+              log_message('info', 'in model: anon block');
               $giftID = $this->phpsessions->get('activeGiftID');
               if($giftID != null)
                 $this->db->where('giftsID', $giftID);
