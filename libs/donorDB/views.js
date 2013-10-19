@@ -940,8 +940,9 @@ editGiftView = (function($) {
 
 		$("#letter-status").html("Letter Status: " + giftData['letterStatus']);
 
-		if(giftData['letterStatus'] === "Sent") {
-			$('#skip-letter-check-box').hide();
+		if(giftData['letterStatus'] == "Sent") {
+
+			$('#skip_letter_check').hide();
 		}
 		else {
 

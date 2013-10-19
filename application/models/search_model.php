@@ -525,6 +525,8 @@ class Search_model extends CI_Model
     {
         $giftData = array();
 
+        log_message('info', 'in model: donoID: ' . $donorID);
+
         if($donorID != null)
         {
             $this->db->select();
@@ -539,6 +541,7 @@ class Search_model extends CI_Model
             }
 
             $query = $this->db->get();
+            log_message('info', "rows returned: " . $query->num_rows());
 
             if ($query->num_rows() > 0)
             { 
@@ -546,6 +549,8 @@ class Search_model extends CI_Model
                 {
                     if($result->dateOfGift != null)
                       $giftData[$result->giftsID] = truncateDateString($result->dateOfGift);
+                    else
+                      $giftData[$result->giftsID] = "Undated Gift";
                 }
             }
         }
