@@ -111,17 +111,20 @@ a:not([href]) {
 	margin-top: 5px;
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; 
 	font-size: 16px;
+	border: none;
 }
 
 .bannersNav li > a:hover {
 
 	background-color:#a89968;
+	border-color: #a89968;
 	color: #ffffff;
-	text-transform: uppercase;
-	border: none;
-	padding-left: -10px;
-	padding-right: -10px;
-	font-size: 14px;
+/*	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; 
+	text-transform: uppe*/rcase;
+
+/*	padding-left: -10px;
+	padding-right: 10px;
+	font-size: 14px*/;
 }
 
 .nav-tabs {

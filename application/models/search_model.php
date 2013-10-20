@@ -283,6 +283,7 @@ class Search_model extends CI_Model
         $this->db->where('anonymous !=', 1);
         $this->db->where('donorID !=', 1);
  		$this->db->order_by('LastName');
+    $this->db->order_by('Organization');
  		$query = $this->db->get();
 
  		if ($query->num_rows() > 0)

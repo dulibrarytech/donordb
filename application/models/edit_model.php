@@ -80,7 +80,8 @@ class Edit_model extends CI_Model
             $desc = array(
 
                 'giftsID'           => $ID,
-                'giftDescription1'  => $newGiftData['giftDescription']
+                'giftDescription1'  => $newGiftData['giftDescription'],
+                'giftDetails'       => $newGiftData['giftDetails']
             );
 
             // If something happens here, fail
