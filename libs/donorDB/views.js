@@ -821,8 +821,7 @@ editGiftView = (function($) {
 			$("#change_date_elts").css('margin-right', '67px');
 		}
 
-		// TEMP disable details until implemented
-		$("#gift_details_box").prop('disabled', 'true');
+		//$("#gift_details_box").prop('disabled', 'true');
 	};
 
 	addEvents = function() {
@@ -1095,7 +1094,7 @@ addGiftView = (function($) {
 		}
 
 		// TEMP disable details until implemented
-		$("#gift_details_box").prop('disabled', 'true');
+		//$("#gift_details_box").prop('disabled', 'true');
 	};
 
 	setNameString = function(name) {
