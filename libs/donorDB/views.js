@@ -2027,7 +2027,8 @@ statisticsView = (function($) {
 	createGiftTable = function(tableData) {
 
 		var results = '<table class="table table-bordered table-striped">',
-			total = 0;
+			total = 0,
+			totalDonations = 0;
 
 		if(typeof tableData == "object") {
 

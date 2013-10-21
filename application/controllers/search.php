@@ -188,8 +188,8 @@ class Search extends CI_Controller {
                 	if($searchType == "anonymous")
                 		$results = ($this->Search_model->anonymousGiftSearch($keyword,$fromDate,$toDate));
 
-	                else if($searchType == "gift")     	 
-	              	    $results = ($this->Search_model->giftSearch($keyword,$fromDate,$toDate,$fName));
+	                else if($searchType == "gift")  
+	                	$results = ($this->Search_model->giftSearch($keyword,$fromDate,$toDate,$fName));	
 
 	                else
 	                	echo json_encode("Search type error!");
