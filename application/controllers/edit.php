@@ -213,6 +213,9 @@ class Edit extends CI_Controller {
                 // New operation: giftDescription now is validated for data.  A gift must be entered with new donation info...
                 if($donorData['giftDescription'] != "")
                 {
+                  // Add donor form does not have a details field.  Must init empty variable to pass to model.
+                  $donorData['giftDetails'] = "";
+
                   $giftID = $this->Edit_model->createGiftRecord($donorID, $donorData);
                   if($giftID <= 0)
                   {
