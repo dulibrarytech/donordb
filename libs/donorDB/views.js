@@ -996,9 +996,16 @@ editGiftView = (function($) {
 
 	setDonorAddress = function(donorData) {
 
-		var address = donorData['addr1'] + ", " + donorData['addr2'] + " " + donorData['city'] + ", " + donorData['state'] + " " + donorData['zip'] + " " + donorData['country']; 
+		var address1 	= donorData['addr1'] == null ? "" : donorData['addr1'];
+			address2	= donorData['addr2'] == null ? "" : donorData['addr2']; 
+			city 		= donorData['city'] == null ? "" : donorData['city'] + ", ";
+			state       = donorData['state'] == null ? "" : donorData['state'];
+			zip 		= donorData['zip'] == null ? "" : donorData['zip'];
+			country 	= donorData['country'] == null ? "" : donorData['country'];
 
-		$("#donor-address-label").text(address);
+		var addressString = address1 + address2 + " " + city + state + " " + zip + " " + country; 
+
+		$("#donor-address-label").text(addressString);
 	};
 
 	return {
@@ -1358,13 +1365,13 @@ addNewDonorView = (function($) {
 
 			case 2: 	// Admin
 
-				$("#skip_letter_check").hide();
+				$("#skip-letter-check-box").hide();
 				
 				break;
 
 			case 3: 	// External Relations
 
-				$("#skip_letter_check").hide();
+				$("#skip-letter-check-box").hide();
 				
 				break;
 
@@ -1499,7 +1506,7 @@ addNewDonorView = (function($) {
 		$("#city_input_box").val('');
 		$("#state_input_box").val('');
 		$("#zip_input_box").val('');
-		$("#country_input_box").val('');
+		$("#country_input_box").val('USA');
 		$("#phone_input_box").val('');
 		$("#email_input_box").val('');
 		$("#description_area").val('');
