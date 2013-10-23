@@ -21,9 +21,9 @@ function sanitizePost($inputArray)
 
                 $sanitized = strip_tags($sanitized);
 
-                $specChars = array('@', '#', '$', '%', '&', '(', ')', '*', ';');
-                $sanitized = str_ireplace($specChars, '', $sanitized);
-
+                //$specChars = array('$', '%', '&', '(', ')', '*', ';');
+                //$sanitized = str_ireplace($specChars, '', $sanitized);
+                
                 $outputArray[$key] = $sanitized;
             }
         }
@@ -42,8 +42,8 @@ function sanitizeString($inputString)
 
         $sanitized = strip_tags($sanitized);
 
-        $specChars = array('$', '%', '&', '(', ')', '*', ';', '!', '?', '[', ']', '{', '}');  
-        $sanitized = str_ireplace($specChars, '', $sanitized);
+        //$specChars = array('$', '%', '&', '(', ')', '*', ';');  
+        //$sanitized = str_ireplace($specChars, '', $sanitized);
     }
 
     return $sanitized;

@@ -1192,6 +1192,7 @@ addGiftView = (function($) {
 
 		$("#gift_description_box").val("");
 		$("#gift_quantity_box").val("");
+		$("#gift_details_box").val("");
 	};
 
 	return {

@@ -23,6 +23,10 @@ class Edit_model extends CI_Model
     {
     	$ID = 0;
 
+        // Bug 500: Leave double and single quotes in the gift description and details fields.  Must leave other sanitization in place
+        $newDonorData['giftDescription'] = str_ireplace("&#039;", "'", $newDonorData['giftDescription']);
+        $newDonorData['giftDescription'] = str_ireplace('&quot;', '"', $newDonorData['giftDescription']);
+
         //$titleID = $this->Search_model->getTitleID($newDonorData['title']);
 
         $country = "USA";
@@ -58,6 +62,12 @@ class Edit_model extends CI_Model
     public function createGiftRecord($donorID, $newGiftData)
     {
     	$ID = 0;
+
+        // Bug #500: Leave double and single quotes in the gift description and details fields.  Must leave other sanitization in place
+        $newGiftData['giftDescription'] = str_ireplace("&#039;", "'", $newGiftData['giftDescription']);
+        $newGiftData['giftDescription'] = str_ireplace('&quot;', '"', $newGiftData['giftDescription']);
+        $newGiftData['giftDetails'] = str_ireplace("&#039;", "'", $newGiftData['giftDetails']);
+        $newGiftData['giftDetails'] = str_ireplace('&quot;', '"', $newGiftData['giftDetails']);
 
         if(!isset($newGiftData['letterFlag']))
             $newGiftData['letterFlag'] = 1;
@@ -95,6 +105,12 @@ class Edit_model extends CI_Model
     public function editGiftRecord($giftID, $giftData)
     {
         $success = 0;
+
+        // Bug #500: Leave double and single quotes in the gift description and details fields.  Must leave other sanitization in place
+        $giftData['giftDescription'] = str_ireplace("&#039;", "'", $giftData['giftDescription']);
+        $giftData['giftDescription'] = str_ireplace('&quot;', '"', $giftData['giftDescription']);
+        $giftData['giftDetails'] = str_ireplace("&#039;", "'", $giftData['giftDetails']);
+        $giftData['giftDetails'] = str_ireplace('&quot;', '"', $giftData['giftDetails']);
 
         // Build database update array
         $data = array(
