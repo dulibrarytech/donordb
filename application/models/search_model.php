@@ -369,16 +369,12 @@ class Search_model extends CI_Model
                 $newDonations[$index]['lastName']     = $results->LastName;
 
                 $index++;
-
-                log_message("info", "Found new donation: " . $results->LastName);
             }
         }
         else
         {
             $newDonations = "No new donations.";
-            log_message("info", "Found no new donations.");
-        }
-            
+        }           
 
         return $newDonations;
     }
@@ -416,7 +412,6 @@ class Search_model extends CI_Model
         else
         {
             $requests = "No requests at this time.";
-            log_message("info", "DB Transaction: getAllTypedLetterRequests(): no letter requests found");
         }
             
 

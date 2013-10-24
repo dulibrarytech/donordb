@@ -402,4 +402,9 @@ class Search extends CI_Controller {
 		$file = read_file(EXTERNAL_IMAGE_DIR);
 		echo $file;
 	}
+
+	public function getEmailAddressList($roleID)
+	{
+		
+	}
 }
