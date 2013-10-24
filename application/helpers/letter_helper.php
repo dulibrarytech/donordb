@@ -18,7 +18,7 @@ function generateLetter($data)
 
 	<div style='height: 75px;'>
 	<div style='float: right;'>
-		<img src='" . base_url() . "img/lheader.jpg' height = '85px' />
+		<img src='" . base_url() . "img/lheader.png' height = '85px' />
 	</div>
 	</div>
 
