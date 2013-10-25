@@ -98,12 +98,16 @@ class Edit extends CI_Controller {
 
             // Anonymous donor
             if($donorID == 1)
+            {
                 $giftData['letterFlag'] = 0;
+                $giftData['skipLetterFlag'] = 1;
+            }               
 
             $giftID = $this->Edit_model->createGiftRecord($donorID,$giftData);
 
             if($giftID > 0) 
             {
+                // Send notifications
                 if($donorID != 1 &&  $giftData['skipLetterFlag'] == 0 && $giftData['importantFlag'] == 0)
                 {
                   $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllNewDonations(),2); // role 2 admin
@@ -167,7 +171,19 @@ class Edit extends CI_Controller {
               $giftData = sanitizePost($postData);
 
               if($this->Edit_model->editGiftRecord($giftID,$giftData)) 
+              {
+                // Send notifications
+                if($giftData['skipLetterFlag'] == 0 && $giftData['importantFlag'] == 0)
+                {
+                  $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllNewDonations(),2); // role 2 admin
+                }
+                else if($giftData['skipLetterFlag'] == 0 && $giftData['importantFlag'] == 1)
+                {
+                  $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllTypedLetterRequests(),3); // role 3 external relations coordinator
+                }
+
                 echo "Database was successfully updated.";
+              }
               else
                 echo "Error in updating database.";
 

@@ -289,7 +289,6 @@ class Search extends CI_Controller {
 	{
 		if($giftID == null)
 			$giftID = $this->phpsessions->get('activeGiftID');
-		log_message('info', 'got giftID: ' . $giftID);
 
 		// Main gift data
 		$dataArray = $this->Search_model->getGiftData($giftID);

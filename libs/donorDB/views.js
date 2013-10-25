@@ -996,8 +996,8 @@ editGiftView = (function($) {
 
 	setDonorAddress = function(donorData) {
 
-		var address1 	= donorData['addr1'] == null ? "" : donorData['addr1'];
-			address2	= donorData['addr2'] == null ? "" : donorData['addr2']; 
+		var address1 	= donorData['addr1'] == null ? "" : donorData['addr1'] + ", ";
+			address2	= donorData['addr2'] == null ? "" : donorData['addr2'] + ", "; 
 			city 		= donorData['city'] == null ? "" : donorData['city'] + ", ";
 			state       = donorData['state'] == null ? "" : donorData['state'];
 			zip 		= donorData['zip'] == null ? "" : donorData['zip'];
@@ -1193,6 +1193,9 @@ addGiftView = (function($) {
 		$("#gift_description_box").val("");
 		$("#gift_quantity_box").val("");
 		$("#gift_details_box").val("");
+
+		$("#skip-letter-checkbox").prop('checked',false); 
+		$("#important-checkbox").prop('checked',false); 
 	};
 
 	return {
