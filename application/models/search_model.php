@@ -347,7 +347,7 @@ class Search_model extends CI_Model
         $index = 0;
 
         $this->db->trans_start();
-        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorgifts.donorID, tbl_donorgifts.bypassLetter, tbl_donorinfo.Organization, tbl_donorinfo.FirstName, tbl_donorinfo.LastName');
+        $this->db->select('tbl_donorgifts.giftsID, tbl_donorgifts.dateOfGift, tbl_donorgifts.donorID, tbl_donorgifts.donorID, tbl_donorgifts.bypassLetter, tbl_donorinfo.Organization, tbl_donorinfo.FirstName, tbl_donorinfo.LastName');
         $this->db->from('tbl_donorgifts');
         $this->db->join('tbl_donorinfo', 'tbl_donorgifts.donorID = tbl_donorinfo.donorID', 'inner');
         $this->db->where('tbl_donorgifts.letter', 1);
@@ -521,8 +521,6 @@ class Search_model extends CI_Model
     {
         $giftData = array();
 
-        log_message('info', 'in model: donoID: ' . $donorID);
-
         if($donorID != null)
         {
             $this->db->select();
@@ -530,14 +528,12 @@ class Search_model extends CI_Model
             $this->db->where('donorID', $donorID);
             if($donorID == 1)
             {
-              log_message('info', 'in model: anon block');
               $giftID = $this->phpsessions->get('activeGiftID');
               if($giftID != null)
                 $this->db->where('giftsID', $giftID);
             }
 
             $query = $this->db->get();
-            log_message('info', "rows returned: " . $query->num_rows());
 
             if ($query->num_rows() > 0)
             { 
@@ -617,6 +613,27 @@ class Search_model extends CI_Model
         return $ID;
     }
 
+    public function getGiftDescription($giftID)
+    {
+      $description = "";
+
+      if($giftID != null)
+        {
+            $this->db->select('giftDescription1');
+            $this->db->from('tbl_donorgiftdescriptions');
+            $this->db->where('giftsID',$giftID);
+
+            $query = $this->db->get();
+
+            foreach ($query->result() as $result)
+            {
+                $description = $result->giftDescription1;
+            }
+        }
+
+        return $description;
+    }
+
     public function getDonorOfGift($giftID)
     {
         $ID = 0;
@@ -658,4 +675,26 @@ class Search_model extends CI_Model
 
         return $title;
     }
+
+    public function getEmailAddressList($roleID)
+    {
+      $list = array();
+
+        if($roleID != null)
+        {
+            $this->db->select('email');
+            $this->db->from('tbl_donorusers');
+            $this->db->where('roleID',$roleID);
+
+            $query = $this->db->get();
+
+            foreach ($query->result() as $result)
+            {
+                array_push($list, $result->email);
+            }
+        }
+
+        return $list;
+    }
+
 } // Search_model

@@ -328,9 +328,7 @@ class Search extends CI_Controller {
 		if($donorID == null)
 			$donorID = $this->phpsessions->get('activeDonorID');
 
-		log_message('info', "controller: donorID" . $donorID);
 		$giftDataArray = $this->Search_model->getDonorGifts($donorID);
-		log_message('info', print_r($giftDataArray,true));
 
 		$activeGift = $this->phpsessions->get('activeGiftID');
 
@@ -401,10 +399,5 @@ class Search extends CI_Controller {
 	{
 		$file = read_file(EXTERNAL_IMAGE_DIR);
 		echo $file;
-	}
-
-	public function getEmailAddressList($roleID)
-	{
-		
 	}
 }

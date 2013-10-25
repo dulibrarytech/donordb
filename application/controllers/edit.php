@@ -24,6 +24,8 @@ class Edit extends CI_Controller {
 
 		    $this->load->model('Edit_model');
 		    $this->load->model('Search_model');
+
+        $this->load->model("Notifications_model");
     }
 
 	public function index()
@@ -102,6 +104,15 @@ class Edit extends CI_Controller {
 
             if($giftID > 0) 
             {
+                if($donorID != 1 &&  $giftData['skipLetterFlag'] == 0 && $giftData['importantFlag'] == 0)
+                {
+                  $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllNewDonations(),2); // role 2 admin
+                }
+                else if($donorID != 1  &&  $giftData['skipLetterFlag'] == 0 && $giftData['importantFlag'] == 1)
+                {
+                  $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllTypedLetterRequests(),3); // role 3 external relations coordinator
+                }
+
                 $this->phpsessions->set('activeGiftID', $giftID);
                 echo "Database was successfully updated.";
             }            	
@@ -225,7 +236,11 @@ class Edit extends CI_Controller {
                 }
                   
                 if($updateOK) 
-                	echo "Database was successfully updated.";
+                {
+                  // Send email
+
+                  echo "Database was successfully updated.";
+                }
                 else
                 	echo "Error in updating database";
 
