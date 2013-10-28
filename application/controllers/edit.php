@@ -250,11 +250,11 @@ class Edit extends CI_Controller {
                   else
                   {
                     // Send notifications
-                    if($donorID != 1 &&  $giftData['skipLetterFlag'] == 0 && $giftData['importantFlag'] == 0)
+                    if($donorData['skipLetterFlag'] == 0 && $donorData['importantFlag'] == 0)
                     {
                       $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllNewDonations(),2); // role 2 admin
                     }
-                    else if($donorID != 1  &&  $giftData['skipLetterFlag'] == 0 && $giftData['importantFlag'] == 1)
+                    else if($donorData['skipLetterFlag'] == 0 && $donorData['importantFlag'] == 1)
                     {
                       $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllTypedLetterRequests(),3); // role 3 external relations coordinator
                     }
