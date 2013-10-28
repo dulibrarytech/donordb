@@ -996,12 +996,12 @@ editGiftView = (function($) {
 
 	setDonorAddress = function(donorData) {
 
-		var address1 	= donorData['addr1'] == null ? "" : donorData['addr1'] + ", ";
-			address2	= donorData['addr2'] == null ? "" : donorData['addr2'] + ", "; 
-			city 		= donorData['city'] == null ? "" : donorData['city'] + ", ";
-			state       = donorData['state'] == null ? "" : donorData['state'];
-			zip 		= donorData['zip'] == null ? "" : donorData['zip'];
-			country 	= donorData['country'] == null ? "" : donorData['country'];
+		var address1 	= (donorData['addr1'] == null || donorData['addr1'] == "") ? "" : donorData['addr1'] + ", ";
+			address2	= (donorData['addr2'] == null || donorData['addr2'] == "") ? "" : donorData['addr2'] + ", "; 
+			city 		= (donorData['city'] == null  || donorData['city'] == "") ? "" : donorData['city'] + ", ";
+			state       = (donorData['state'] == null || donorData['state'] == "") ? "" : donorData['state'];
+			zip 		= (donorData['zip'] == null || donorData['zip'] == "") ? "" : donorData['zip'];
+			country 	= (donorData['country'] == null || donorData['country'] == "") ? "" : donorData['country'];
 
 		var addressString = address1 + address2 + " " + city + state + " " + zip + " " + country; 
 
