@@ -813,7 +813,7 @@ editGiftView = (function($) {
 
 		viewUtils.setUserLabel();
 
-		// ie kludge to reposition the date dropdown
+		// ie: reposition the date dropdown
 		if(isIE) {
 			
 			$("#select_date_elts").css('margin-right', '0px');
@@ -1324,33 +1324,6 @@ addNewDonorView = (function($) {
 
 	    	viewUtils.onClickBack();
 	    });
-
-		// Disable name constraints if an organization name has been entered
-		// $('#org_input_box').on('focusout',function(){
-
-		//     var orgText = $('#org_input_box').val();
-		//     if(orgText == "") {
-
-		//   //   	$( "#fName_input_box" ).rules( "add", {
-		// 		// 	required: true
-		// 		// });
-
-		// 		// $( "#lName_input_box" ).rules( "add", {
-		// 		// 	required: true
-		// 		// });
-		//     }
-		//     else {
-
-		//     	alert("removing");
-
-		// 		$( "#fName_input_box" ).rules( "remove", "max" );
-
-		// 		$( "#lName_input_box" ).rules( "remove", "max" );
-
-		// 		//alert($("#donor-input-form").valid());
-		// 		alert("post remove...");
-		//     }
-		// });
 	};
 
 	// Set layout for user status.

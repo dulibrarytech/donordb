@@ -27,7 +27,14 @@ form = (function($) {
 	addDonorDBEditFormValidation = function() {
 
 		$( "#fname_input_box" ).rules( "add", {
-			required: true,
+			required: {
+
+				depends: function(element) {
+		         
+		          	return ( $("#org_input_box").val() == "" );
+		        }
+				
+			},
 			maxlength: 35,
 			messages: { 
 				required: "Please enter a first name",
@@ -36,7 +43,14 @@ form = (function($) {
 		});
 
 		$( "#lName_input_box" ).rules( "add", {
-			required: true,
+			required: {
+
+				depends: function(element) {
+		         
+		          	return ( $("#org_input_box").val() == "" );
+		        }
+
+			},
 			maxlength: 35,
 			messages: {
 			    required: "Please enter a last name",
