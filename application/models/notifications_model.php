@@ -29,10 +29,18 @@ class Notifications_model extends CI_Model
      */
     public function sendDonationUpdate($newDonations,$roleID)
     {
-        $subject = "New Donation Update";
-
         $body = "*** Please do not reply to this message ***<br /><br />";
-    	$body .= "New donations as of " . getCurrentDate() . ":<br /><br /><br />";
+
+        if($roleID == 2)
+        {
+            $body .= "New donations as of " . getCurrentDate() . ":<br /><br /><br />";
+            $subject = "New Library Donation Update";
+        }
+        else if($roleID == 3)
+        {
+            $body .= "New hand-typed letter requests as of " . getCurrentDate() . ":<br /><br /><br />";
+            $subject = "New Library Donation: Hand-Typed Letter Request";
+        }
     	
     	if(gettype($newDonations) != 'string')
     	{
