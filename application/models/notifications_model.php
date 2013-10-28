@@ -46,7 +46,7 @@ class Notifications_model extends CI_Model
     	{
             foreach($newDonations as $donation)
 	    	{
-                $body .= $donation['giftDate'] . "&nbsp&nbsp&nbsp&nbsp";
+                $body .= $donation['giftDate'] . " : ";
 
                 if($donation['lastName'] == "" || $donation['lastName'] == null)
                     $body .= $donation['org'] . "<br />";
@@ -83,7 +83,7 @@ class Notifications_model extends CI_Model
             log_message('info', 'notification sent to: ' . $address);
 			$this->email->from('|5');
             $this->email->to($address);
-            $this->email->subject("New Library Donation Update");
+            $this->email->subject( $subject);
             $this->email->message($body);
             $this->email->send();
     	}
