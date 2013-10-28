@@ -227,8 +227,6 @@ class Edit extends CI_Controller {
 
                 $postData = $this->input->post();
                 $donorData = sanitizePost($postData);
-
-                log_message("info", "postdata: " . print_r($donorData, true));
                 
                 $donorID = $this->Edit_model->createDonorRecord($donorData);
                 if($donorID > 0)
@@ -248,6 +246,18 @@ class Edit extends CI_Controller {
                   {
                     $updateOK = FALSE;
                     log_message("info", "Error in updating database with new gift info (Add donor)");
+                  }
+                  else
+                  {
+                    // Send notifications
+                    if($donorID != 1 &&  $giftData['skipLetterFlag'] == 0 && $giftData['importantFlag'] == 0)
+                    {
+                      $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllNewDonations(),2); // role 2 admin
+                    }
+                    else if($donorID != 1  &&  $giftData['skipLetterFlag'] == 0 && $giftData['importantFlag'] == 1)
+                    {
+                      $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllTypedLetterRequests(),3); // role 3 external relations coordinator
+                    }
                   }
                 }
                   
