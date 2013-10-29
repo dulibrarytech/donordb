@@ -136,10 +136,13 @@ class Edit_model extends CI_Model
                 $prevImportantFlag = $result->important;
             }
         } 
-        if($prevImportantFlag == 0 && $giftData['importantFlag'] == 1) // Means that the typed flag has been updated here...
+        if($prevImportantFlag == 0 && $giftData['importantFlag'] == 1) 
         {
             $data['tbl_donorgifts.letter'] = 1;
-            log_message("info", "typed flag changed this op.  setting letter to 1 to have it sent to external...");
+        }
+        else if($prevImportantFlag == 1 && $giftData['importantFlag'] == 0)
+        {
+            $data['tbl_donorgifts.letter'] = 0;
         }
 
         // Update the database

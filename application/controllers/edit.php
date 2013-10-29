@@ -110,10 +110,12 @@ class Edit extends CI_Controller {
                 // Send notifications
                 if($donorID != 1 &&  $giftData['skipLetterFlag'] == 0 && $giftData['importantFlag'] == 0)
                 {
+                  log_message('info', 'add gift admin notification');
                   $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllNewDonations(),2); // role 2 admin
                 }
                 else if($donorID != 1  &&  $giftData['skipLetterFlag'] == 0 && $giftData['importantFlag'] == 1)
                 {
+                  log_message('info', 'add gift external relations notification');
                   $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllTypedLetterRequests(),3); // role 3 external relations coordinator
                 }
 
@@ -173,11 +175,12 @@ class Edit extends CI_Controller {
               if($this->Edit_model->editGiftRecord($giftID,$giftData)) 
               {
                 // Send notifications
-                if($giftData['skipLetterFlag'] == 0 && $giftData['importantFlag'] == 0)
+                $updatedGiftData = $this->Search_model->getGiftData($giftID);
+                if($updatedGiftData['letterFlag'] == 1 && $updatedGiftData['bypassLetter'] == 0 && $updatedGiftData['importantFlag'] == 0)
                 {
                   $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllNewDonations(),2); // role 2 admin
                 }
-                else if($giftData['skipLetterFlag'] == 0 && $giftData['importantFlag'] == 1)
+                else if($updatedGiftData['letterFlag'] == 1 && $updatedGiftData['bypassLetter'] == 0 && $updatedGiftData['importantFlag'] == 1)
                 {
                   $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllTypedLetterRequests(),3); // role 3 external relations coordinator
                 }
@@ -252,10 +255,12 @@ class Edit extends CI_Controller {
                     // Send notifications
                     if($donorData['skipLetterFlag'] == 0 && $donorData['importantFlag'] == 0)
                     {
+                      log_message('info', 'input donor info admin notification');
                       $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllNewDonations(),2); // role 2 admin
                     }
                     else if($donorData['skipLetterFlag'] == 0 && $donorData['importantFlag'] == 1)
                     {
+                      log_message('info', 'input donor info external relations notification');
                       $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllTypedLetterRequests(),3); // role 3 external relations coordinator
                     }
                   }
