@@ -1073,6 +1073,7 @@ addGiftView = (function($) {
 		$('#add_info_message').hide();
 		$("#change_date_elts").hide();
 		$("#add_anon_info_button").hide();
+		$("#gen_letter_button").hide();
 
 		// Crap!  Duct tape!
 		$("#gift_date_label").css('margin-right', '25px');
