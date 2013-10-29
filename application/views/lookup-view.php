@@ -30,8 +30,11 @@
 		#post-search-buttons	{ margin-left: 20px; margin-top: 30px; }
 		#data-section-1			{ margin-right: 50px; margin-top:30px }
 
-		#anon_check_label		{ margin-left: 320px; margin-top: 5px; }
+		#anon_check_label		{ margin-right: 20px; margin-top: 15px; }
 		#anonymous-gift-check	{ margin-left: 530px; margin-top: -25px; }
+		#details_search_label	{ margin-right: 20px; margin-top: 0px; }
+		#details-search-check	{ margin-left: 530px; margin-top: -25px; }
+
 		#add_info_message		{ margin-left: 650px; }
 		#username-label			{ margin-right: 20px; }
 	</style>
@@ -61,29 +64,39 @@
 		<!-- Menu Bar -->
 		<?php $this->load->view("partials/menu-bar.php"); ?>
 
-		<table style="width: 100%"><tr>
-			<td>
+		<table style="width: 100%">
+		<tr>
+			<td >
 				<div class="container generic-label" id="page-label"></div>	
 			</td>
 			<td align="right" style="text-align: right;">
 				<div class="small-label" id="username-label"></div>
 			</td>
-		</tr></table>
+		</tr>
+		</table>
 
 		<!-- Search Section -->
 		<form id="search-form" method="post">
 
 			<div class="well" id="search-form-name"> 
-				<table><tr>
-					<td>
+				<table>
+				<tr>
+					<td rowspan='2'>
 						<label for="lname_input_box" class="form-label-text" id="lname_label">Last Name or Organization:</label>  
 						<input type="text" class="input-xlarge" id="lname_input_box" placeholder="Leave blank to search all donors" name="searchTerm"/>   
 					</td>
-					<td>
+					<td align='right'>
 						<label for"anonymous-gift-check" class="form-label-text" id="anon_check_label">Search Anonymous Records</label> 
 						<input type="checkbox" class="checkbox" id="anonymous-gift-check" value="0" name="anonymousCheck"/>
 					</td>
-				</td></table>
+				</tr>
+				<tr>
+					<td align='right'>
+						<label for"details-search-check" class="form-label-text" id="details_search_label">Search Gift Details</label> 
+						<input type="checkbox" class="checkbox" id="details-search-check" value="0" name="detailsCheck"/>
+					</td>
+				</tr>
+				</table>
 
 				<label for="fname_input_box" class="form-label-text" id="fname_label">First Name:</label>  
 				<input type="text" class="input-medium" id="fname_input_box" placeholder="" name="searchTermFName"/>  

@@ -51,6 +51,14 @@ searchView = (function($) {
 
 		$("#anonymous-gift-check").prop('checked',false); // Bug 207: Hard remove of check with each page load...
 
+		if(isIE) {
+			
+			//$("#anon_check_label").css("margin-right", "40px");
+			// $("#anonymous-gift-check").css("margin-right", "25px");
+			// $("#details_search_label").css("margin-right", "40px");
+			// $("#details-search-check").css("margin-left", "15px");
+		}
+
 		addEvents();
 		form.addDonorDBSearchFormValidation();
 	};
