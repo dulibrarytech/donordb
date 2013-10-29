@@ -862,6 +862,11 @@ editGiftView = (function($) {
 
 	    	viewUtils.onClickBack();
 	    });
+
+	    $("#gen_letter_button").click( function() {
+
+	    	utils.getActiveGift(viewUtils.displayLetter);
+	    });
 	};
 
 	// Set layout for user status.
@@ -875,6 +880,7 @@ editGiftView = (function($) {
 				// TODO: Display any kind of message or task list in the table section.  Or 'DONOWT'
 
 				// set app title text: |5?
+				$("#gen_letter_button").hide();
 
 				break;
 
@@ -887,6 +893,7 @@ editGiftView = (function($) {
 			case 3: 	// External Relations
 
 				$("#skip_letter_check").hide();
+				$("#gen_letter_button").hide();
 				
 				break;
 
@@ -1562,11 +1569,6 @@ editDonorView = (function($) {
 		$("#important-checkbox").prop('disabled', 'true');
 		$("#skip-letter-checkbox").prop('disabled', 'true');
 
-		var profile = viewUtils.getProfile();
-		if(profile.roleID != 2) {
-			$("#gen_letter_button").hide();
-		}
-
 		// Set user-specific layout
 		setRole(viewUtils.getProfile().roleID);
 
@@ -1663,6 +1665,7 @@ editDonorView = (function($) {
 				// TODO: Display any kind of message or task list in the table section.  Or 'DONOWT'
 
 				// set app title text: |5?
+				$("#gen_letter_button").hide();
 
 				break;
 
@@ -1675,6 +1678,7 @@ editDonorView = (function($) {
 			case 3: 	// External Relations
 
 				$("#skip-letter-check-box").hide();
+				$("#gen_letter_button").hide();
 				
 				break;
 

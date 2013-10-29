@@ -158,7 +158,8 @@
 				<tr>
 					<td class="span1"><button type="submit" class="btn-grey button-table-item" id="gift_submit_button"></button></td>
 					<td class="span1"><button type="button" class="btn-grey" id="back_button">Back</button></td>
-					<td class="span10"><div id="add_info_message"></div></td>
+					<td class="span1"><button type="button" class="btn-grey" id="gen_letter_button">Letter</button></td>
+					<td class="span9"><div id="add_info_message"></div></td>
 				</tr>
 			</table>
 
