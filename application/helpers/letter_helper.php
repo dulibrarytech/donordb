@@ -63,7 +63,7 @@ function generateLetter($data)
 	</div>
 
 	<div style='padding-top: 10px;'>
-		<img src='" . base_url() . "img/lfooter.jpg' width = '400px'/>
+		<img src='" . base_url() . "img/lfooter.png' width = '400px'/>
 	</div>
 
 	</body>";
