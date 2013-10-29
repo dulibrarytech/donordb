@@ -22,6 +22,7 @@ searchView = (function($) {
 		setRole,
 		setQueue,
 		setAnonymousCheckState,
+		setSearchState,
 		getQueue,
 		resetSearch,
 		createAlertList,
@@ -106,12 +107,6 @@ searchView = (function($) {
 
 	addEvents = function() {
 
-		var fromDate, 
-			toDate,
-			anonymous,
-			keyword,
-			type;
-
 		$("#search-form").validate({
 
 	        // Handler
@@ -120,31 +115,74 @@ searchView = (function($) {
 	        onfocusout: false,
 	        submitHandler: function() {
 
-	        	fromDate	= $("#fromDate").val();
-	        	toDate 		= $("#toDate").val();
-	        	anonymous 	= $("#anonymous-gift-check").val();
-	        	keyword		= $("#lname_input_box").val();
+	        	var fromDate	= $("#fromDate").val(),
+	        		toDate 		= $("#toDate").val(),
+	        		anonymous 	= $("#anonymous-gift-check").val(),
+	        		keyword		= $("#lname_input_box").val(),
+	        		details 	= $("#details-search-check").val(),
+	        		state 		= anonymous + details,
+	        		type 		= "donor";
 
 	        	// Run search based on anonymous state and the presence of date terms
-	        	if(anonymous == '1') {
+	        	// if(anonymous == '1') {
 
-	        		type = "anonymous";
-	        		utils.submitSearch(createGiftTable,type);
-	        	}
-	        	else {
+	        	// 	type = "anonymous";
+	        	// 	utils.submitSearch(createGiftTable,type);
+	        	// }
+	        	// else {
 
-	        		//If a date field has been populated, search results should display gifts by date.  If not, display donor results
-		        	if(fromDate != "" || toDate != "") {
+	        	// 	//If a date field has been populated, search results should display gifts by date.  If not, display donor results
+		        // 	if(fromDate != "" || toDate != "") {
 
-		        		type = "gift";
-		        		utils.submitSearch(createGiftTable,type);
-		        	}
-		        	else {
+		        // 		type = "gift";
+		        // 		utils.submitSearch(createGiftTable,type);
+		        // 	}
+		        // 	else {
 
-		        		type = "donor";
-		        		utils.submitSearch(createDonorTable,type);
-		        	}
-	        	}
+		        // 		type = "donor";
+		        // 		utils.submitSearch(createDonorTable,type);
+		        // 	}
+	        	// }
+
+	        	switch(state) {
+
+					case '01':
+
+						type = "giftDetails";
+						utils.submitSearch(createGiftTable,type);
+
+						break;
+
+					case '10':
+
+	        		 	type = "anonymous";
+	        		 	utils.submitSearch(createGiftTable,type);
+
+						break;
+
+					case '11':
+
+						type = "anonymousDetails";
+						utils.submitSearch(createGiftTable,type);
+
+						break;
+
+					default:
+
+						//If a date field has been populated, search results should display gifts by date.  If not, display donor results
+			        	if(fromDate != "" || toDate != "") {
+
+			        		type = "gift";
+			        		utils.submitSearch(createGiftTable,type);
+			        	}
+			        	else {
+
+			        		type = "donor";
+			        		utils.submitSearch(createDonorTable,type);
+			        	}
+
+						break;
+				}
 
 	        	// Store the search terms for search reload purposes
 	        	var prevSearchTerms = {keyword:keyword, toDate:toDate, fromDate:fromDate, anonymous:anonymous, type:type};
@@ -161,12 +199,28 @@ searchView = (function($) {
 
 	    	if($("#anonymous-gift-check").val() == '0') {
 
-	    		setAnonymousCheckState('1');
+	    		setAnonymousCheckState('1'); // Placed in another function for 'return to search' use
 	    	}
 	    	else {
 
 	    		setAnonymousCheckState('0');
 	    	}
+	    });
+
+	    $("#details-search-check").click(function() { 
+
+	    	if($("#details-search-check").val() == '0') {
+
+	    		$("#details-search-check").val('1');
+    			$("#details-search-check").prop('checked',true);
+	    	}
+	    	else {
+
+	    		$("#details-search-check").val('0');
+    			$("#details-search-check").prop('checked',false);
+	    	}
+
+	    	setSearchState();
 	    });
 
 	    $("#search_return").click(function() { 
@@ -204,24 +258,58 @@ searchView = (function($) {
 		if(val == '1') {
 
     		$("#anonymous-gift-check").val('1');
-    		$("#lname_label").text('Search anonymous gift descriptions:');
-    		$("#lname_input_box").prop('placeholder', '');
     		$("#anonymous-gift-check").prop('checked',true);
     	}
     	else {
 
     		$("#anonymous-gift-check").val('0');
-    		$("#lname_label").text('Last Name or Organization:');
-    		$("#lname_input_box").prop('placeholder', 'Leave blank to search all donors');
     		$("#anonymous-gift-check").prop('checked',false);
     	}
+
+    	setSearchState();
+	};
+	
+	setSearchState = function() {
+
+		var state = $("#anonymous-gift-check").val() + $("#details-search-check").val();
+
+		switch(state) {
+
+			case '01':
+
+				$("#lname_label").text('Search gift details:');
+    			$("#lname_input_box").prop('placeholder', '');
+
+				break;
+
+			case '10':
+
+				$("#lname_label").text('Search anonymous gift descriptions:');
+    			$("#lname_input_box").prop('placeholder', '');
+
+				break;
+
+			case '11':
+
+				$("#lname_label").text('Search anonymous gift details:');
+    			$("#lname_input_box").prop('placeholder', '');
+
+				break;
+
+			default:
+
+				$("#lname_label").text('Last Name or Organization:');
+    			$("#lname_input_box").prop('placeholder', 'Leave blank to search all donors');
+
+				break;
+		}	
 	};
 
 	// Set layout for user status.
 	setRole = function(roleID) {
 
-		switch(roleID)
-		{
+		switch(roleID) {
+
 			case 1: 	// Acquisitions
 				
 				
@@ -880,8 +968,8 @@ editGiftView = (function($) {
 	// Set layout for user status.
 	setRole = function(roleID) {
 
-		switch(roleID)
-		{
+		switch(roleID) {
+
 			case 1: 	// Acquisitions
 				
 				
@@ -951,6 +1039,7 @@ editGiftView = (function($) {
 		$("#gift_quantity_box").val(giftData['giftQuantity']);
 
 		$("#gift_description_box").text(giftData['giftDescription']);
+		$("#gift_details_box").text(giftData['giftDetails']);
 
 		$("#letter-status").html("Letter Status: " + giftData['letterStatus']);
 
@@ -1165,8 +1254,8 @@ addGiftView = (function($) {
 	// Set layout for user status.
 	setRole = function(roleID) {
 
-		switch(roleID)
-		{
+		switch(roleID) {
+
 			case 1: 	// Acquisitions
 				
 				
@@ -1345,8 +1434,8 @@ addNewDonorView = (function($) {
 	// Set layout for user status.
 	setRole = function(roleID) {
 
-		switch(roleID)
-		{
+		switch(roleID) {
+
 			case 1: 	// Acquisitions
 				
 				
@@ -1666,8 +1755,8 @@ editDonorView = (function($) {
 	// Set layout for user status.
 	setRole = function(roleID) {
 
-		switch(roleID)
-		{
+		switch(roleID) {
+
 			case 1: 	// Acquisitions
 				
 				
@@ -1938,6 +2027,8 @@ statisticsView = (function($) {
 		$("#table-section").hide();
 		$("#post-search-buttons").hide();
 		$("#alert-section-label").hide();
+		$("#details-search-check").hide();
+		$("#details_search_label").hide();
 
 		$("#search_submit").text('Get Statistics');
 		$("#search_submit").css('margin-left', '425px');

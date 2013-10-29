@@ -100,11 +100,9 @@ form = (function($) {
 		});
 
 		$( "#zip_input_box" ).rules( "add", {
-			number: true,
 			maxlength: 50,
 			messages: {
-				maxlength: "Postal code: Character limit exceeded (50)",
-			    number: "Postal code: Must be a number"
+				maxlength: "Postal code: Character limit exceeded (50)"
 			}
 		});
 

@@ -85,10 +85,10 @@ class Search extends CI_Controller {
 
 	                	echo json_encode($resultArray);
 	                }	 
-	                else if($searchType == "gift")
+	                else 
 	                {
 	                	// Do gift search
-	                	$resultArray = $this->Search_model->giftSearch($keyword,$fromDate,$toDate); 
+	                	$resultArray = $this->Search_model->giftSearch($keyword,$fromDate,$toDate,$searchType); 
 
 	                	// Convert letter data from bit to human readable data, if result array is not an error string
 	                	if(gettype($resultArray) != 'string')
@@ -108,22 +108,13 @@ class Search extends CI_Controller {
 			                	else
 			                		$resultArray[$key]['letterStatus'] = "Error";
 		                	}
-	                	}
 
-	                	// Cache search results
-	                	$this->phpsessions->set('prevSearchResults', $resultArray);
+		                	// Cache search results
+	                		$this->phpsessions->set('prevSearchResults', $resultArray);
+	                	}
 
 	                	echo json_encode($resultArray);
 	                }
-	                else if($searchType == "anonymous") {
-
-	                	$resultArray = $this->Search_model->anonymousGiftSearch($keyword,$fromDate,$toDate);
-	                	$this->phpsessions->set('prevSearchResults', $resultArray);
-
-	                	echo json_encode($resultArray);
-	                } 	
-	                else
-	                	echo json_encode("Search type error!");
 	            }
 
                 break; // case POST
@@ -185,14 +176,7 @@ class Search extends CI_Controller {
                 }
                 else // Get statistics for post data
                 {
-                	if($searchType == "anonymous")
-                		$results = ($this->Search_model->anonymousGiftSearch($keyword,$fromDate,$toDate));
-
-	                else if($searchType == "gift")  
-	                	$results = ($this->Search_model->giftSearch($keyword,$fromDate,$toDate,$fName));	
-
-	                else
-	                	echo json_encode("Search type error!");
+	                $results = ($this->Search_model->giftSearch($keyword,$fromDate,$toDate,$searchType,$fName));	
 
 	                if(is_array($results))
 	                {
