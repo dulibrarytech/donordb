@@ -285,7 +285,7 @@ searchView = (function($) {
 			case '10':
 
 				$("#lname_label").text('Search anonymous gift descriptions:');
-    			$("#lname_input_box").prop('placeholder', '');
+    			$("#lname_input_box").prop('placeholder', 'Leave blank to show all donations');
 
 				break;
 

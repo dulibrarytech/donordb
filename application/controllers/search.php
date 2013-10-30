@@ -176,7 +176,7 @@ class Search extends CI_Controller {
                 }
                 else // Get statistics for post data
                 {
-	                $results = ($this->Search_model->giftSearch($keyword,$fromDate,$toDate,$searchType,$fName));	
+	                $results = $this->Search_model->giftSearch($keyword,$fromDate,$toDate,$searchType,$fName);	
 
 	                if(is_array($results))
 	                {

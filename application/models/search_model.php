@@ -115,18 +115,20 @@ class Search_model extends CI_Model
         else if($searchType == "anonymousDetails")
         {
             $this->db->where('tbl_donorinfo.donorID', 1);
-            if($keyword != "")
-              $this->db->like('tbl_donorgiftdescriptions.giftDetails', $keyword);
+            if($keyword == "")
+              $keyword = "abcdefg"; // Trick the db, or the "" will match all blank fields.  
+            $this->db->like('tbl_donorgiftdescriptions.giftDetails', $keyword);
         }
         else if($searchType == "giftDetails")
         {
             $this->db->where('tbl_donorinfo.donorID !=', 1);
-            if($keyword != "")
-              $this->db->like('tbl_donorgiftdescriptions.giftDetails', $keyword);
+            if($keyword == "")
+              $keyword = "abcdefg"; // Trick the db, or the "" will match all blank fields
+            $this->db->like('tbl_donorgiftdescriptions.giftDetails', $keyword);
         }
         else // Standard gift search
         {
-            $this->db->where('donorID !=', 1);
+            $this->db->where('tbl_donorinfo.donorID !=', 1);
 
             if($keyword != "")
             {
