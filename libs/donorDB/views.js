@@ -1106,10 +1106,13 @@ editGiftView = (function($) {
 			state       = (donorData['state'] == null || donorData['state'] == "") ? "" : donorData['state'];
 			zip 		= (donorData['zip'] == null || donorData['zip'] == "") ? "" : donorData['zip'];
 			country 	= (donorData['country'] == null || donorData['country'] == "") ? "" : donorData['country'];
+			email 		= (donorData['email'] == null || donorData['email'] == "") ? "" : donorData['email'];
 
 		var addressString = address1 + address2 + " " + city + state + " " + zip + " " + country; 
 
 		$("#donor-address-label").text(addressString);
+
+		$("#donor-email-label").text(email);
 	};
 
 	return {
@@ -1695,7 +1698,7 @@ editDonorView = (function($) {
 		$("#donor-input-form").validate({
 
 	        errorClass: "invalid",
-	        onkeyup: function(element) {$(element).valid()},
+	        onkeyup: function(element) {},
 	        onfocusout: false,
 	        submitHandler: function() {
 

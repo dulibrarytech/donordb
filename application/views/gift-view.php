@@ -49,6 +49,8 @@
 
 		.lower_controls				{ margin-top: -7px; }
 		#gift_form_table			{ width: 100%; }
+
+		
 	</style>
 
 </head>
@@ -99,7 +101,12 @@
 				</tr>
 				<tr>
 					<td>
-						<label class="left-edge-field" id="donor-address-label"></label>
+						<label class="left-edge-field address-field" id="donor-address-label"></label>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="left-edge-field address-field" id="donor-email-label"></label>
 					</td>
 				</tr></table>
 			</div>
