@@ -106,19 +106,25 @@ class Search_model extends CI_Model
         $this->db->where('tbl_donorgifts.dateOfGift <=', $toDate);
         
         // Options
-        if($searchType == "anonymous" && $keyword != "")
+        if($searchType == "anonymous")
         {
+            log_message('info', 'anon type');
             $this->db->where('tbl_donorinfo.donorID', 1);
-            $this->db->like('tbl_donorgiftdescriptions.giftDescription1', $keyword); 
+            if($keyword != "")
+              $this->db->like('tbl_donorgiftdescriptions.giftDescription1', $keyword); 
         }
-        else if($searchType == "anonymousDetails" && $keyword != "")
+        else if($searchType == "anonymousDetails")
         {
             $this->db->where('tbl_donorinfo.donorID', 1);  
+            if($keyword == "")
+              $keyword = "abcdefg";
             $this->db->like('tbl_donorgiftdescriptions.giftDetails', $keyword);
         }
-        else if($searchType == "giftDetails" && $keyword != "")
+        else if($searchType == "giftDetails")
         {
             $this->db->where('tbl_donorinfo.donorID !=', 1);
+            if($keyword == "")
+              $keyword = "abcdefg";
             $this->db->like('tbl_donorgiftdescriptions.giftDetails', $keyword);
         }
         else // Standard gift search
