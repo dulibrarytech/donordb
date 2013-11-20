@@ -174,15 +174,21 @@ class Edit extends CI_Controller {
 
               if($this->Edit_model->editGiftRecord($giftID,$giftData)) 
               {
-                // Send notifications
-                $updatedGiftData = $this->Search_model->getGiftData($giftID);
-                if($updatedGiftData['letterFlag'] == 1 && $updatedGiftData['bypassLetter'] == 0 && $updatedGiftData['importantFlag'] == 0)
+                $profile = $this->phpsessions->get("donorDB_profile");
+                $role = $profile['roleID'];
+
+                if($role == 1)
                 {
-                  $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllNewDonations(),2); // role 2 admin
-                }
-                else if($updatedGiftData['letterFlag'] == 1 && $updatedGiftData['bypassLetter'] == 0 && $updatedGiftData['importantFlag'] == 1)
-                {
-                  $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllTypedLetterRequests(),3); // role 3 external relations coordinator
+                  // Send notifications
+                  $updatedGiftData = $this->Search_model->getGiftData($giftID);
+                  if($updatedGiftData['letterFlag'] == 1 && $updatedGiftData['bypassLetter'] == 0 && $updatedGiftData['importantFlag'] == 0)
+                  {
+                    $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllNewDonations(),2); // role 2 admin
+                  }
+                  else if($updatedGiftData['letterFlag'] == 1 && $updatedGiftData['bypassLetter'] == 0 && $updatedGiftData['importantFlag'] == 1)
+                  {
+                    $this->Notifications_model->sendDonationUpdate($this->Search_model->getAllTypedLetterRequests(),3); // role 3 external relations coordinator
+                  }
                 }
 
                 echo "Database was successfully updated.";
