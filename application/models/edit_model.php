@@ -61,13 +61,13 @@ class Edit_model extends CI_Model
 
     public function createGiftRecord($donorID, $newGiftData)
     {
-    	$ID = 0;
+        $ID = 0;
 
         // Bug #500: Leave double and single quotes in the gift description and details fields.  Must leave other sanitization in place
-        $newGiftData['giftDescription'] = str_ireplace("&#039;", "'", $newGiftData['giftDescription']);
-        $newGiftData['giftDescription'] = str_ireplace('&quot;', '"', $newGiftData['giftDescription']);
-        $newGiftData['giftDetails'] = str_ireplace("&#039;", "'", $newGiftData['giftDetails']);
-        $newGiftData['giftDetails'] = str_ireplace('&quot;', '"', $newGiftData['giftDetails']);
+        // $newGiftData['giftDescription'] = str_ireplace("&#039;", "'", $newGiftData['giftDescription']);
+        // $newGiftData['giftDescription'] = str_ireplace('&quot;', '"', $newGiftData['giftDescription']);
+        // $newGiftData['giftDetails'] = str_ireplace("&#039;", "'", $newGiftData['giftDetails']);
+        // $newGiftData['giftDetails'] = str_ireplace('&quot;', '"', $newGiftData['giftDetails']);
 
         if(!isset($newGiftData['letterFlag']))
             $newGiftData['letterFlag'] = 1;
@@ -98,6 +98,8 @@ class Edit_model extends CI_Model
             if(!$this->db->insert('tbl_donorgiftdescriptions', $desc))
                 $ID = 0;
         }
+
+        log_message('info', 'model:newID: ' . $ID . ' data entered: ' . print_r($desc, true));
             
         return $ID;
     }

@@ -27,7 +27,6 @@ function sanitizePost($inputArray)
                 $outputArray[$key] = $sanitized;
             }
         }
-
         return $outputArray;
     }
 }
