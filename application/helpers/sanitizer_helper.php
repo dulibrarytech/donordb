@@ -56,3 +56,35 @@ function removeSQL($inputString)
 
     // return $sanitized;
 }
+
+function restoreQuotes($input)
+{
+    if(gettype($input) == "array")
+    {
+        $output = array();
+
+        while (list($key, $val) = each($input)) 
+        {
+            if(gettype($val) == "string")
+            {
+                $newVal = str_replace('&quot;', '"', $val);
+                $newVal = str_replace('&#039;', "'", $newVal);
+            }
+            else
+                $newVal = $val;
+
+            $output[$key] = $newVal;
+        }
+    }
+    else if(gettype($input) == "string")
+    {
+        $output = "";
+
+        $newVal = str_replace('&quot;', '"', $input);
+        $newVal = str_replace('&#039;', "'", $newVal);
+
+        $output = $newVal;
+    }
+
+    return $output;
+}

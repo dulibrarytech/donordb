@@ -16,7 +16,7 @@ class Search extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->helper('sanitizer');
+        $this->load->helper('sanitizer_helper');
 		$this->load->model('Search_model');
     }
 
@@ -303,7 +303,9 @@ class Search extends CI_Controller {
 		if($donorID == null)
 			$donorID = $this->phpsessions->get('activeDonorID');
 
-		echo json_encode($this->Search_model->getDonorData($donorID));
+		$data = restoreQuotes($this->Search_model->getDonorData($donorID));
+
+		echo json_encode($data);
 	}
 
 	public function queryDatabaseDonorGifts($donorID = null)
@@ -356,7 +358,7 @@ class Search extends CI_Controller {
 			}
 			else
 			{
-				$donorData = $this->Search_model->getDonorData($donorID);
+				$donorData = restoreQuotes($this->Search_model->getDonorData($donorID));
 
 				$giftData = $this->Search_model->getGiftData($giftID);
 
