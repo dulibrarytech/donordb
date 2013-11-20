@@ -275,7 +275,7 @@ class Search extends CI_Controller {
 			$giftID = $this->phpsessions->get('activeGiftID');
 
 		// Main gift data
-		$dataArray = $this->Search_model->getGiftData($giftID);
+		$dataArray = restoreQuotes($this->Search_model->getGiftData($giftID));
 
 		// Add namestring for view display
 		$dataArray['nameString'] = $this->phpsessions->get('activeDonorNameString');
@@ -360,7 +360,7 @@ class Search extends CI_Controller {
 			{
 				$donorData = restoreQuotes($this->Search_model->getDonorData($donorID));
 
-				$giftData = $this->Search_model->getGiftData($giftID);
+				$giftData = restoreQuotes($this->Search_model->getGiftData($giftID));
 
 				$data = array_merge($donorData,$giftData);
 				$data['titleString'] = $this->Search_model->getTitle($data['titleID']);  
