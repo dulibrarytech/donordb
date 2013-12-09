@@ -16,13 +16,13 @@ function truncateDateString($dateString)
 
 function getCurrentDate() 
 {
-	$date = date("m/d/Y");
+	$date = date("F j, Y");
 
-	if($date[3] == "0")
-		$date = substr_replace($date,"",3,1);
+	// if($date[3] == "0")
+	// 	$date = substr_replace($date,"",3,1);
 
-	if($date[0] == "0")
-		$date = ltrim($date,"0");
+	// if($date[0] == "0")
+	// 	$date = ltrim($date,"0");
 
 	return $date;
 }

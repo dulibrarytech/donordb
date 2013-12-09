@@ -40,17 +40,17 @@ function generateLetter($data)
 		$letterBody .= "<br/><br/>
 
 		Dear " . $data['titleString'] . " " . $data['lastName'] . ",<br/><br/>
-		I would like to thank you for your generous donation to the Penrose Library.
+		I would like to thank you for your generous donation to the University Library.
 		Your gift of " . $data['giftDescription'] . ", 
 		which we received on " . $data['giftDate'] . ", is much appreciated.
-		Penrose Library has not provided you with any payment, or services in exchange for your gift; 
+		The University Library has not provided you with any payment, or services in exchange for your gift; 
 		we do, however, convey our sincere appreciation for your contribution - it has enhanced the library's resources.
 		<br/><br/>
 		While academic departments in the University of Denver have support from parents and 
-		alumni, the Penrose Library relies on its friends.  We are pleased to count you among our 
+		alumni, the University Library relies on its friends.  We are pleased to count you among our 
 		friends, and we hope we can count on your friendship in future years.
 		<br/><br/>
-		Again, I thank you for your generous support of the University of Denver Penrose Library.
+		Again, I thank you for your generous support of the University of Denver Library.
 		<br/><br/>
 		Sincerely,
 		<br/><br/>
