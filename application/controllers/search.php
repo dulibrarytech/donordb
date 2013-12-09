@@ -365,7 +365,8 @@ class Search extends CI_Controller {
 				$data = array_merge($donorData,$giftData);
 				$data['titleString'] = $this->Search_model->getTitle($data['titleID']);  
 
-				$data['giftDate'] = convertDBDateToNormalFormat($data['giftDate']);
+				//$data['giftDate'] = convertDBDateToNormalFormat($data['giftDate']);
+				$data['giftDate'] = formatLetterDate($data['giftDate']);
 				$data['currentDate'] = getCurrentDate();
 			}			
 

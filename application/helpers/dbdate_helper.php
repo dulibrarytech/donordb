@@ -27,6 +27,19 @@ function getCurrentDate()
 	return $date;
 }
 
+function formatLetterDate($date)
+{
+	//return DateTime($date)->format("F j, Y");
+	$month 	= substr($date, 5, -3);
+	$day 	= substr($date, 8, 11);
+	$year 	= substr($date, 0, -6);
+
+	$datetime = new DateTime();
+	$datetime->setDate($year, $month, $day);
+	//$newDate = date("F j, Y", $date);
+	return $datetime->format("F j, Y");
+}
+
 function convertDBDateToNormalFormat($date)
 {
 	$month 	= substr($date, 5, -3);
