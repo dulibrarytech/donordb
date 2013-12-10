@@ -39,7 +39,8 @@ function generateLetter($data)
 
 		$letterBody .= "<br/><br/>
 
-		Dear " . $data['titleString'] . " " . $data['lastName'] . ",<br/><br/>
+		Dear " . 
+		($data['titleString'] != "" ? $data['titleString'] : $data['firstName']) . " " . $data['lastName'] . ",<br/><br/>
 		I would like to thank you for your generous donation to the University Library.
 		Your gift of " . $data['giftDescription'] . ", 
 		which we received on " . $data['giftDate'] . ", is much appreciated.
