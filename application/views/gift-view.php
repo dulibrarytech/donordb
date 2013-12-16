@@ -110,7 +110,7 @@
 								<td><label id="status-change-sent-label" for="status-change-sent" class="form-label-text">Sent&nbsp&nbsp&nbsp</label></td>
 								<td><input type="radio" name="status" id="status-change-pending" value="pending"></input></td>
 								<td><label id="status-change-pending-label" for="status-change-pending" class="form-label-text">Pending&nbsp&nbsp&nbsp</label></td></td>
-								<td><button type"input" id="status-change-button" onclick="viewUtils.updateLetterStatus(); return false;">Update</button></td>
+								<td><button type"input" id="status-change-button" onclick="viewUtils.updateLetterStatus(); return false;">Update Status</button></td>
 							</tr></table>
 						</div>
 					</td>
