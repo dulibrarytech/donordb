@@ -675,6 +675,11 @@ a:not([href]) {
 	padding-top: 5px;
 }
 
+#letter-status {
+
+	cursor: pointer;
+}
+
 
 
 

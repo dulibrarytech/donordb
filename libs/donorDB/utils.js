@@ -33,6 +33,7 @@ utils = (function($) {
 		getStatistics,
 		setActiveGift,
 		setLetterComplete,
+		setLetterStatus,
 		loadPreviousSearchResults;
 
 	doAjax = function(ajaxObj) {
@@ -442,6 +443,26 @@ utils = (function($) {
 		doAjax(requestObj);
 	};
 
+	setLetterStatus = function(status) {
+
+		requestObj = {
+
+			type: "POST", 
+			url: _editUrl + '/setLetterStatus/' + status,
+			dataType: "text",
+			cache: true,
+			success: function(response) {
+				
+				//alert("response: " + response);
+			},
+			error: function ( textStatus, errorThrown ) {
+                alert( "setLetterStatus error: " + errorThrown );
+            }
+		};
+		
+		doAjax(requestObj);
+	};
+
 	loadPreviousSearchResults = function(view) {
 
 		if(typeof view == "undefined" || view == null) {
@@ -553,6 +574,9 @@ utils = (function($) {
 		},
 		setLetterComplete: function(giftID) {
 			setLetterComplete(giftID);
+		},
+		setLetterStatus: function(status) {
+			setLetterStatus(status);
 		},
 		loadPreviousSearchResults: function(view) {
 			loadPreviousSearchResults(view);

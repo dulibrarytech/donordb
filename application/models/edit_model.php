@@ -208,6 +208,27 @@ class Edit_model extends CI_Model
         $this->db->where('tbl_donorgifts.giftsID', $giftID);
         $success = $this->db->update('tbl_donorgifts', $data);
 
+        if($success)
+            log_message('info', 'letter set as sent for giftID ' + $giftID);
+
+        return $success;
+    }
+
+    public function setLetterAsPending($giftID)
+    {
+        $success = 0;
+
+        $data = array(
+
+            'tbl_donorgifts.letter'          => 1
+        );
+
+        $this->db->where('tbl_donorgifts.giftsID', $giftID);
+        $success = $this->db->update('tbl_donorgifts', $data);
+
+        if($success)
+            log_message('info', 'letter set as pending for giftID ' + $giftID);
+
         return $success;
     }
 

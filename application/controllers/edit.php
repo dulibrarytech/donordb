@@ -435,4 +435,21 @@ class Edit extends CI_Controller {
       $this->Edit_model->setLetterAsSent($giftID);
     }
   }
+
+  public function setLetterStatus($status)
+  {
+    $giftID = $this->phpsessions->get('activeGiftID');
+
+    if($giftID != null)
+    {
+      if($status == 0)
+      {
+        $this->Edit_model->setLetterAsSent($giftID);
+      }
+      else if($status == 1)
+      {
+        $this->Edit_model->setLetterAsPending($giftID);
+      }
+    }
+  }
 }

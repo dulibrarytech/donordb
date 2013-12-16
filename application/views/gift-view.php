@@ -50,7 +50,7 @@
 		.lower_controls				{ margin-top: -7px; }
 		#gift_form_table			{ width: 100%; }
 
-		
+		#status-change-controls		{ margin-right: 28px; margin-top: 5px;}
 	</style>
 
 </head>
@@ -102,6 +102,17 @@
 				<tr>
 					<td>
 						<label class="left-edge-field address-field" id="donor-address-label"></label>
+					</td>
+					<td align="right">
+						<div id="status-change-controls">
+							<table><tr>
+								<td><input type="radio" name="status" id="status-change-sent" value="sent"></input></td>
+								<td><label id="status-change-sent-label" for="status-change-sent" class="form-label-text">Sent&nbsp&nbsp&nbsp</label></td>
+								<td><input type="radio" name="status" id="status-change-pending" value="pending"></input></td>
+								<td><label id="status-change-pending-label" for="status-change-pending" class="form-label-text">Pending&nbsp&nbsp&nbsp</label></td></td>
+								<td><button type"input" id="status-change-button" onclick="viewUtils.updateLetterStatus(); return false;">Update</button></td>
+							</tr></table>
+						</div>
 					</td>
 				</tr>
 				<tr>

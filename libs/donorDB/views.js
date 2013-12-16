@@ -882,6 +882,7 @@ editGiftView = (function($) {
 
 		$('#gift_submit_button').html("Update");
 
+		$("#status-change-controls").hide();
 		$('#add_info_message').hide();
 		$("#gift-date-box").hide();
 		$("#add_anon_info_button").hide();
@@ -963,6 +964,15 @@ editGiftView = (function($) {
 
 	    	utils.getActiveGift(viewUtils.displayLetter);
 	    });
+
+	    // If user is not acquisitions, add 'letter status change' functionality (Add click handler to show controls)
+	    if(viewUtils.getProfile().roleID != 1) {
+
+		    $("#letter-status").click( function() {
+
+				$("#status-change-controls").toggle();
+		    });
+	    }
 	};
 
 	// Set layout for user status.
@@ -1046,11 +1056,21 @@ editGiftView = (function($) {
 		if(giftData['letterStatus'] == "Sent") {
 
 			$('#skip_letter_check').hide();
+			$("#status-change-sent").prop('checked', 'true');
 		}
 		else {
 
-			if(giftData['bypassLetter'] == 1) 
+			if(giftData['letterStatus'] == "Pending") {
+				$("#status-change-pending").prop('checked', 'true');
+			}
+
+			if(giftData['bypassLetter'] == 1) {
+
 				$('#skip-letter-checkbox').prop('checked', true);
+
+				// Remove on-click handler if status is bypassed.  This status should not be reset by the admin user.
+				$("#letter-status").unbind();
+			}
 			else 
 				$('#skip-letter-checkbox').prop('checked', false);
 		}
@@ -1170,6 +1190,7 @@ addGiftView = (function($) {
 		$('#gift_submit_button').html("Add Gift");
 		$('#add_info_message').html("Adding new gift info...");
 
+		$("#status-change-controls").hide();
 		$('#add_info_message').hide();
 		$("#change_date_elts").hide();
 		$("#add_anon_info_button").hide();
@@ -2287,6 +2308,28 @@ viewUtils = (function($) {
 		$("#username-label").html("Welcome, " + profile.firstName + " " + profile.lastName);
 	};
 
+	updateLetterStatus = function() {
+
+		if($("#status-change-sent").attr("checked") === "checked") {
+
+			// Set to 'sent'
+			utils.setLetterStatus(0);
+			$("#letter-status").html("Letter Status: Sent");
+			$("#status-change-controls").hide();
+		}
+		else if($("#status-change-pending").attr("checked") === "checked") {
+
+			// Set to 'pending'
+			utils.setLetterStatus(1);
+			$("#letter-status").html("Letter Status: Pending");
+			$("#status-change-controls").hide();
+		}
+		else {
+
+			alert("Error updating letter status, status not changed.  Please contact systems support if this issue can not be resolved.");
+		}
+	};
+
 	displayLetter = function(id) {
 
 		letter.generateLetter(id);
@@ -2364,6 +2407,9 @@ viewUtils = (function($) {
 		},
 		setUserLabel : function() {
 			setUserLabel();
+		},
+		updateLetterStatus: function() {
+			updateLetterStatus();
 		},
 		displayLetter: function(id) {
 			displayLetter(id);
