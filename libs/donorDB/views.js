@@ -882,7 +882,7 @@ editGiftView = (function($) {
 
 		$('#gift_submit_button').html("Update");
 
-		$("#status-change-controls").hide();
+		//$("#status-change-controls").hide();
 		$('#add_info_message').hide();
 		$("#gift-date-box").hide();
 		$("#add_anon_info_button").hide();
@@ -970,7 +970,15 @@ editGiftView = (function($) {
 
 		    $("#letter-status").click( function() {
 
-				$("#status-change-controls").toggle();
+				//alert($("#status-change-controls").css('visibility'));
+				if($("#status-change-controls").css('visibility') == "hidden") {
+
+					$("#status-change-controls").css('visibility', 'visible');
+				}
+				else {
+
+					$("#status-change-controls").css('visibility', 'hidden');
+				}
 		    });
 	    }
 	};
@@ -1190,7 +1198,7 @@ addGiftView = (function($) {
 		$('#gift_submit_button').html("Add Gift");
 		$('#add_info_message').html("Adding new gift info...");
 
-		$("#status-change-controls").hide();
+		//$("#status-change-controls").hide();
 		$('#add_info_message').hide();
 		$("#change_date_elts").hide();
 		$("#add_anon_info_button").hide();

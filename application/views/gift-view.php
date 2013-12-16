@@ -104,7 +104,7 @@
 						<label class="left-edge-field address-field" id="donor-address-label"></label>
 					</td>
 					<td align="right">
-						<div id="status-change-controls">
+						<div id="status-change-controls" style="visibility: hidden;">
 							<table><tr>
 								<td><input type="radio" name="status" id="status-change-sent" value="sent"></input></td>
 								<td><label id="status-change-sent-label" for="status-change-sent" class="form-label-text">Sent&nbsp&nbsp&nbsp</label></td>
