@@ -133,7 +133,7 @@
 
 			<div id="post-search-buttons">
 				<button class="btn-grey" id="search_return">Return To Search</button>
-				<button class="btn-grey" id="search_new">New Search</button>
+				<button class="btn-grey" id="search_new" style="margin-left: 10px;">New Search</button>
 			</div>
 
 		</div>	
