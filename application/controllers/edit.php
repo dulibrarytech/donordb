@@ -53,7 +53,7 @@ class Edit extends CI_Controller {
           // If nameString arg is passed in, set it here.  Otherwise, set it based on the donorID
           if($nameString != "")
           {
-              $this->phpsessions->set('activeDonorNameString', restoreQuotes($nameString));
+              $this->phpsessions->set('activeDonorNameString', revertSanitizedString($nameString));
           }
           else
           {
@@ -66,7 +66,7 @@ class Edit extends CI_Controller {
               else
               {
                   $data['pageLoader'] = "<script>addGiftView.initPage(" . 0 . ");</script>";
-                  $this->phpsessions->set('activeDonorNameString', restoreQuotes($this->Search_model->getNameString($donorID)));
+                  $this->phpsessions->set('activeDonorNameString', revertSanitizedString($this->Search_model->getNameString($donorID)));
               }
           }          
 
@@ -145,7 +145,7 @@ class Edit extends CI_Controller {
       if($donorID != null)
       {
           $this->phpsessions->set('activeDonorID', $donorID);
-          $this->phpsessions->set('activeDonorNameString', restoreQuotes($this->Search_model->getNameString($donorID)));
+          $this->phpsessions->set('activeDonorNameString', revertSanitizedString($this->Search_model->getNameString($donorID)));
       }
       if($giftID != null)
           $this->phpsessions->set('activeGiftID', $giftID);
@@ -296,7 +296,7 @@ class Edit extends CI_Controller {
       $data['pageLoader'] = "<script>editDonorView.initPage();</script>";
 
       $this->phpsessions->set('activeDonorID', $donorID);
-      $this->phpsessions->set('activeDonorNameString', restoreQuotes($this->Search_model->getNameString($donorID)));
+      $this->phpsessions->set('activeDonorNameString', revertSanitizedString($this->Search_model->getNameString($donorID)));
 
       // If a giftID arg is passed in, set the active gift now.  If not, this is a general donor info view, no active gift yet
       if($giftID != null)

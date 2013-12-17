@@ -275,7 +275,8 @@ class Search extends CI_Controller {
 			$giftID = $this->phpsessions->get('activeGiftID');
 
 		// Main gift data
-		$dataArray = restoreQuotes($this->Search_model->getGiftData($giftID));
+		//$dataArray = restoreQuotes($this->Search_model->getGiftData($giftID));
+		$dataArray = revertSanitizedPost($this->Search_model->getGiftData($giftID));
 
 		// Add namestring for view display
 		$dataArray['nameString'] = $this->phpsessions->get('activeDonorNameString');
@@ -303,7 +304,7 @@ class Search extends CI_Controller {
 		if($donorID == null)
 			$donorID = $this->phpsessions->get('activeDonorID');
 
-		$data = restoreQuotes($this->Search_model->getDonorData($donorID));
+		$data = revertSanitizedPost($this->Search_model->getDonorData($donorID));
 
 		echo json_encode($data);
 	}
@@ -358,9 +359,9 @@ class Search extends CI_Controller {
 			}
 			else
 			{
-				$donorData = restoreQuotes($this->Search_model->getDonorData($donorID));
+				$donorData = revertSanitizedPost($this->Search_model->getDonorData($donorID));
 
-				$giftData = restoreQuotes($this->Search_model->getGiftData($giftID));
+				$giftData = revertSanitizedPost($this->Search_model->getGiftData($giftID));
 
 				$data = array_merge($donorData,$giftData);
 				$data['titleString'] = $this->Search_model->getTitle($data['titleID']);  

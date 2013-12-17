@@ -1,9 +1,9 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * sanitizes string data 
- * @param $value
- * @return string $sanitized
+ * sanitizes post data 
+ * @param $inputArray post array
+ * @return array $sanitized
  *
  */
 function sanitizePost($inputArray) 
@@ -12,6 +12,7 @@ function sanitizePost($inputArray)
     {
         $outputArray = array();
         $sanitized = "";
+        log_message('info', 'san: pre: ' . print_r($inputArray,true));
 
         foreach($inputArray as $key => $postValue)
         {
@@ -27,6 +28,35 @@ function sanitizePost($inputArray)
                 $outputArray[$key] = $sanitized;
             }
         }
+        log_message('info', 'san: post (returning): ' . print_r($outputArray,true));
+        return $outputArray;
+    }
+}
+
+/**
+ * reverts sanitized post data 
+ * @param $inputArray post array
+ * @return array $sanitized
+ *
+ */
+function revertSanitizedPost($inputArray) 
+{
+    if(is_array($inputArray))
+    {
+        $outputArray = array();
+        $reverted = "";
+
+        log_message('info', 'revert: pre: ' . print_r($inputArray,true));
+        foreach($inputArray as $key => $postValue)
+        {
+            if(is_string($postValue))
+            {
+                $reverted = htmlspecialchars_decode($postValue, ENT_QUOTES);
+                //$reverted = restoreQuotes($reverted); // 12/16/13 htmlspecialchars_decode is not decoding single quotes!
+                $outputArray[$key] = $reverted;
+            }
+        }
+        log_message('info', 'revert: post (returning): ' . print_r($outputArray,true));
         return $outputArray;
     }
 }
@@ -46,6 +76,18 @@ function sanitizeString($inputString)
     }
 
     return $sanitized;
+}
+
+function revertSanitizedString($inputString)
+{
+    $sanitized = "";
+
+    if(is_string($inputString))
+    {
+        $reverted = htmlspecialchars_decode($inputString, ENT_QUOTES);
+    }
+
+    return $reverted;
 }
 
 function removeSQL($inputString)
