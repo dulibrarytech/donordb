@@ -1078,6 +1078,7 @@ editGiftView = (function($) {
 
 				// Remove on-click handler if status is bypassed.  This status should not be reset by the admin user.
 				$("#letter-status").unbind();
+				$("#letter-status").css('cursor', 'default');
 			}
 			else 
 				$('#skip-letter-checkbox').prop('checked', false);
