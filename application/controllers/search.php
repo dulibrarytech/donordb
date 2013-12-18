@@ -98,12 +98,12 @@ class Search extends CI_Controller {
 		                		$resultArray[$key]['letterStatus'] = "";
 
 		                		if($result['letter'] == null)
-									$resultArray['letterStatus'] = "Error";
+									$resultArray['letterStatus'] = "null Error";
 		                		else if($result['letter'] == 1 && $result['bypassLetter'] == 0)
 			                		$resultArray[$key]['letterStatus'] = "Pending";
-			                	else if($result['letter'] == 0)
+			                	else if($result['letter'] == 0 && $result['bypassLetter'] == 0)
 			                		$resultArray[$key]['letterStatus'] = "Sent";
-			                	else if($result['letter'] == 1 && $result['bypassLetter'] == 1)
+			                	else if(/*$result['letter'] == 1 && */$result['bypassLetter'] == 1)
 			                		$resultArray[$key]['letterStatus'] = "Bypassed";
 			                	else
 			                		$resultArray[$key]['letterStatus'] = "Error";
@@ -285,12 +285,12 @@ class Search extends CI_Controller {
 		if(gettype($dataArray) != 'string')
 	    {
 			if($dataArray['letterFlag'] == null)
-				$dataArray['letterStatus'] = "Error";
+				$dataArray['letterStatus'] = "null Error";
 			else if($dataArray['letterFlag'] == 1 && $dataArray['bypassLetter'] == 0)
 				$dataArray['letterStatus'] = "Pending";
-			else if($dataArray['letterFlag'] == 0)
+			else if($dataArray['letterFlag'] == 0 && $dataArray['bypassLetter'] == 0)
 				$dataArray['letterStatus'] = "Sent";
-			else if($dataArray['letterFlag'] == 1 && $dataArray['bypassLetter'] == 1)
+			else if(/*$dataArray['letterFlag'] == 1 && */$dataArray['bypassLetter'] == 1)
 				$dataArray['letterStatus'] = "Bypassed";
 			else
 				$dataArray['letterStatus'] = "Error";

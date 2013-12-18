@@ -1063,28 +1063,24 @@ editGiftView = (function($) {
 
 		if(giftData['letterStatus'] == "Sent") {
 
-			$('#skip_letter_check').hide();
+			//$('#skip_letter_check').hide();
 			$("#status-change-sent").prop('checked', 'true');
 		}
-		else {
-
-			if(giftData['letterStatus'] == "Pending") {
-				$("#status-change-pending").prop('checked', 'true');
-			}
-
-			if(giftData['bypassLetter'] == 1) {
-
-				$('#skip-letter-checkbox').prop('checked', true);
-
-				// Remove on-click handler if status is bypassed.  This status should not be reset by the admin user.
-				$("#letter-status").unbind();
-				$("#letter-status").css('cursor', 'default');
-			}
-			else 
-				$('#skip-letter-checkbox').prop('checked', false);
+		else if(giftData['letterStatus'] == "Pending") {
+			$("#status-change-pending").prop('checked', 'true');
 		}
 
-		
+		if(giftData['bypassLetter'] == 1) {
+
+			$('#skip-letter-checkbox').prop('checked', true);
+
+			// Remove on-click handler if status is bypassed.  This status should not be reset by the admin user.
+			$("#letter-status").unbind();
+			$("#letter-status").css('cursor', 'default');
+		}
+		else 
+			$('#skip-letter-checkbox').prop('checked', false);
+
 		if(giftData['importantFlag'] == 1) 
 			$('#important-checkbox').prop('checked', true);
 		else 
