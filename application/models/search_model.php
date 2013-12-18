@@ -108,7 +108,6 @@ class Search_model extends CI_Model
         // Options
         if($searchType == "anonymous")
         {
-            log_message('info', 'anon type');
             $this->db->where('tbl_donorinfo.donorID', 1);
             if($keyword != "")
               $this->db->like('tbl_donorgiftdescriptions.giftDescription1', $keyword); 

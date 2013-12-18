@@ -99,8 +99,6 @@ class Edit_model extends CI_Model
                 $ID = 0;
         }
 
-        log_message('info', 'model:newID: ' . $ID . ' data entered: ' . print_r($desc, true));
-            
         return $ID;
     }
 
@@ -124,10 +122,18 @@ class Edit_model extends CI_Model
             'tbl_donorgifts.bypassLetter'       => $giftData['skipLetterFlag']
         );
 
-        // Bug 303 side issue: Add letter flag if 'hand-typed letter' is updated to 1, and letter has been sent (set to 0).  
-        // Need to have letter=1 to have typed letter request sent to external relations user 
+        /* Letter Automation 
+         *
+         * With a gift data edit, updates need to be made based not only on user input (giftData), but on the state of existing database variables:
+         *
+         * 1. If the important flag is being set on this edit, and was previously not set, make sure the letter flag is set, so external relations will get a notification
+         * 
+         * 2. If the bypass letter flag is being set on this edit, and was not previously set, the letter flag should go to 1.
+         *     this way, if the bypass is ever removed, a letter request will be sent
+         */
         $prevImportantFlag = 1;
-        $this->db->select('important');
+        $prevBypassFlag = 1;
+        $this->db->select('important, bypassLetter');
         $this->db->from('tbl_donorgifts');
         $this->db->where('giftsID', $giftID);
         $query = $this->db->get();
@@ -136,15 +142,15 @@ class Edit_model extends CI_Model
             foreach ($query->result() as $result)
             {
                 $prevImportantFlag = $result->important;
+                $prevBypassFlag = $result->bypassLetter;
             }
         } 
-        if($prevImportantFlag == 0 && $giftData['importantFlag'] == 1) 
+        $importantFlagSet = ($prevImportantFlag == 0 && $giftData['importantFlag'] == 1);
+        $bypassFlagSet = ($prevBypassFlag == 0 && $giftData['skipLetterFlag'] == 1);    
+        if($importantFlagSet || $bypassFlagSet) 
         {
             $data['tbl_donorgifts.letter'] = 1;
-        }
-        else if($prevImportantFlag == 1 && $giftData['importantFlag'] == 0)
-        {
-            $data['tbl_donorgifts.letter'] = 0;
+            log_message('info', 'flag update: gift record ' . $giftID . ' updated, letter request being sent.');
         }
 
         // Update the database
@@ -200,16 +206,33 @@ class Edit_model extends CI_Model
     {
         $success = 0;
 
-        $data = array(
+        // Only set letter as 'sent' if it has not been bypassed.  This enables generating a letter on a bypassed gift, for any purpose, without changing the sent status of a gift.
+        $bypassFlag = 0;
+        $this->db->select('bypassLetter');
+        $this->db->from('tbl_donorgifts');
+        $this->db->where('giftsID', $giftID);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+        {   
+            foreach ($query->result() as $result)
+            {
+                $bypassFlag = $result->bypassLetter;
+            }
+        } 
 
-            'tbl_donorgifts.letter'          => 0
-        );
+        if($bypassFlag == 0)
+        {
+            $data = array(
 
-        $this->db->where('tbl_donorgifts.giftsID', $giftID);
-        $success = $this->db->update('tbl_donorgifts', $data);
+                'tbl_donorgifts.letter'          => 0
+            );
 
-        if($success)
-            log_message('info', 'letter set as sent for giftID ' + $giftID);
+            $this->db->where('tbl_donorgifts.giftsID', $giftID);
+            $success = $this->db->update('tbl_donorgifts', $data);
+
+            if($success)
+                log_message('info', 'letter set as sent for giftID ' + $giftID);
+        }
 
         return $success;
     }
