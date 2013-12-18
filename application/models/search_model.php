@@ -379,18 +379,18 @@ class Search_model extends CI_Model
         {
             foreach ($query->result() as $result)
             {
-                $donorInfo['titleID']     = $result->titleID;
-                $donorInfo['firstName']   = $result->FirstName;
-                $donorInfo['lastName']    = $result->LastName;
-                $donorInfo['org']         = $result->Organization;
-                $donorInfo['addr1']       = $result->Address1;
-                $donorInfo['addr2']       = $result->Address2;
-                $donorInfo['city']        = $result->City;
-                $donorInfo['state']       = $result->State;
-                $donorInfo['country']     = $result->Country;
-                $donorInfo['zip']         = $result->PostalCode;
-                $donorInfo['phone']       = $result->phone;
-                $donorInfo['email']       = $result->email;
+                $donorInfo['titleID']     = $result->titleID === null ? "" : $result->titleID;
+                $donorInfo['firstName']   = $result->FirstName === null ? "" : $result->FirstName;
+                $donorInfo['lastName']    = $result->LastName === null ? "" : $result->LastName;
+                $donorInfo['org']         = $result->Organization === null ? "" : $result->Organization;
+                $donorInfo['addr1']       = $result->Address1 === null ? "" : $result->Address1;
+                $donorInfo['addr2']       = $result->Address2 === null ? "" : $result->Address2;
+                $donorInfo['city']        = $result->City === null ? "" : $result->City;
+                $donorInfo['state']       = $result->State === null ? "" : $result->State;
+                $donorInfo['country']     = $result->Country === null ? "" : $result->Country;
+                $donorInfo['zip']         = $result->PostalCode === null ? "" : $result->PostalCode;
+                $donorInfo['phone']       = $result->phone === null ? "" : $result->phone;
+                $donorInfo['email']       = $result->email === null ? "" : $result->email;
             }
         }
         else
@@ -421,12 +421,12 @@ class Search_model extends CI_Model
                 foreach ($query->result() as $result)
                 {
                     $giftInfo['giftQuantity']     = $result->numberOfGifts;
-                    $giftInfo['giftDescription']  = $result->giftDescription1;
+                    $giftInfo['giftDescription']  = $result->giftDescription1 === null ? "" : $result->giftDescription1;
                     $giftInfo['giftDate']         = truncateDateString($result->dateOfGift); 
                     $giftInfo['letterFlag']       = $result->letter;
                     $giftInfo['importantFlag']    = $result->important;
                     $giftInfo['bypassLetter']     = $result->bypassLetter;
-                    $giftInfo['giftDetails']      = $result->giftDetails;
+                    $giftInfo['giftDetails']      = $result->giftDetails === null ? "" : $result->giftDetails;
                 }
             }
             else 
