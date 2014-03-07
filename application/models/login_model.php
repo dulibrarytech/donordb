@@ -31,17 +31,10 @@ class Login_model extends CI_Model
         $userName = strip_tags(trim($login["userName"]));
         $passWord = strip_tags(trim($login["passWord"]));
         $profile  = array('isValid' => FALSE, 'userName' => $userName);
-        $remoteAuth = FALSE;                                                                            
-    
-        // Demo Accounts:  Bypass remote authorization                                                     
-        if($userName == "acq" || $userName == "admin" || $userName == "external")
-        {
-            if($passWord === "d3c3mb3r")
-                $remoteAuth = TRUE;
-        }     
+        $remoteAuth = FALSE;  
 
         // Detect ldap and ad usernames
-        else if (ctype_digit($userName)) 
+        if (ctype_digit($userName)) 
         {
             try 
             {   
@@ -51,7 +44,6 @@ class Login_model extends CI_Model
             catch(Exception $e) 
             {
                 log_message("error", "LDAP refused: " . $e->getMessage());
-
             }
         } 
         else 

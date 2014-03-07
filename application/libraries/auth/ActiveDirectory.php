@@ -2,8 +2,8 @@
 
 class ActiveDirectory  
 {
-    private $primary = "curly.cair.du.edu";
-    private $secondary = "moe.cair.du.edu";
+    private $primary = "moe.cair.du.edu";
+    private $secondary = "curly.cair.du.edu";
     private $tertiary = "larry.cair.du.edu";
     private $domain = "du.edu";
     private $baseDn = "DC=du,DC=du.edu";
@@ -43,6 +43,7 @@ class ActiveDirectory
             try 
             {
                 $ldap->bind($userName, $passWord);
+		log_message("info", "BIND SUCCESS: options" . print_r($options, true));
                 return TRUE;
             } 
             catch (Zend\Ldap\Exception\LdapException $zle) 
