@@ -31,7 +31,7 @@ class Login_model extends CI_Model
         $userName = strip_tags(trim($login["userName"]));
         $passWord = strip_tags(trim($login["passWord"]));
         $profile  = array('isValid' => FALSE, 'userName' => $userName);
-        $remoteAuth = FALSE;  
+        $remoteAuth = FALSE;                                                                            
 
         // Detect ldap and ad usernames
         if (ctype_digit($userName)) 
@@ -64,7 +64,7 @@ class Login_model extends CI_Model
         {
             $this->load->model("Users_model");
             $id = $this->Users_model->validateUser($userName);
-            
+
             if($id > 0)
             {
                 $profile = $this->Users_model->getProfile($id);

@@ -2,9 +2,9 @@
 
 class ActiveDirectory  
 {
-    private $primary = "moe.cair.du.edu";
-    private $secondary = "curly.cair.du.edu";
-    private $tertiary = "larry.cair.du.edu";
+    private $primary = "dc01du.du.edu";
+    private $secondary = "dc02du.du.edu";
+    private $tertiary = "dc03du.du.edu";
     private $domain = "du.edu";
     private $baseDn = "DC=du,DC=du.edu";
 
