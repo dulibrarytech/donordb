@@ -80,12 +80,15 @@ class Notifications_model extends CI_Model
        
     	foreach($emailList as $address)  
     	{
-            log_message('info', 'notification sent to: ' . $address);
-			$this->email->from('|5');
-            $this->email->to($address);
-            $this->email->subject( $subject);
-            $this->email->message($body);
-            $this->email->send();
+            if($address != "")
+            {
+                log_message('info', 'notification sent to: ' . $address);
+                $this->email->from('|5');
+                $this->email->to($address);
+                $this->email->subject( $subject);
+                $this->email->message($body);
+                $this->email->send();
+            }
     	}
     }
 }
