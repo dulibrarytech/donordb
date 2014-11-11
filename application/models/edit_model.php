@@ -76,7 +76,7 @@ class Edit_model extends CI_Model
 
             'donorID'           => $donorID,
             'dateOfGift'        => $newGiftData['giftDate'],
-            'numberOfGifts'     => $newGiftData['giftQuantity'],
+            'numberOfGifts'     => removeNonNumericChars($newGiftData['giftQuantity']),
             'letter'            => $newGiftData['letterFlag'],
             'important'         => $newGiftData['importantFlag'],
             'bypassLetter'      => $newGiftData['skipLetterFlag']
@@ -94,7 +94,7 @@ class Edit_model extends CI_Model
                 'giftDetails'       => $newGiftData['giftDetails']
             );
 
-            // If something happens here, fail
+            // If something happens here, bail
             if(!$this->db->insert('tbl_donorgiftdescriptions', $desc))
                 $ID = 0;
         }

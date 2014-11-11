@@ -129,3 +129,14 @@ function restoreQuotes($input)
 
     return $output;
 }
+
+/**
+ * Removes ALL non-numeric chars from input string 
+ * @param string $string: a string with non-numeric chars such as ',''
+ * @return string $numericString: string with all non-numeric chars removed completely
+ */
+function removeNonNumericChars($string)
+{
+    $numericString = preg_replace("/[^0-9]/", "", $string);
+    return $numericString;
+}
