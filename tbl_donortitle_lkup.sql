@@ -23,19 +23,14 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_donorusers`
+-- Table structure for table `tbl_donortitle_lkup`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_donorusers` (
-  `userID` int(3) NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `roleID` int(3) NOT NULL,
-  `firstname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `lastname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`userID`),
-  UNIQUE KEY `id` (`userID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+CREATE TABLE IF NOT EXISTS `tbl_donortitle_lkup` (
+  `titleID` int(10) NOT NULL AUTO_INCREMENT,
+  `title` varchar(20) DEFAULT 'None',
+  PRIMARY KEY (`titleID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1545 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

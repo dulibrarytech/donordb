@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 11, 2014 at 07:37 PM
+-- Generation Time: Nov 11, 2014 at 07:38 PM
 -- Server version: 5.5.40
 -- PHP Version: 5.3.10-1ubuntu3.15
 
@@ -23,19 +23,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_donorusers`
+-- Table structure for table `tbl_donorgifts`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_donorusers` (
-  `userID` int(3) NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `roleID` int(3) NOT NULL,
-  `firstname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `lastname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`userID`),
-  UNIQUE KEY `id` (`userID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+CREATE TABLE IF NOT EXISTS `tbl_donorgifts` (
+  `giftsID` int(10) NOT NULL AUTO_INCREMENT,
+  `donorID` int(10) NOT NULL,
+  `Cdate` datetime DEFAULT NULL,
+  `dateOfGift` datetime DEFAULT NULL,
+  `numberOfGifts` int(10) DEFAULT NULL,
+  `important` tinyint(1) NOT NULL DEFAULT '0',
+  `letter` tinyint(1) NOT NULL DEFAULT '0',
+  `bypassLetter` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`giftsID`),
+  KEY `FK_tbl_donorGifts_tbl_donorInfo` (`donorID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4052 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

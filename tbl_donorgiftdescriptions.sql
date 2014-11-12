@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 11, 2014 at 07:37 PM
+-- Generation Time: Nov 11, 2014 at 07:38 PM
 -- Server version: 5.5.40
 -- PHP Version: 5.3.10-1ubuntu3.15
 
@@ -23,19 +23,17 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_donorusers`
+-- Table structure for table `tbl_donorgiftdescriptions`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_donorusers` (
-  `userID` int(3) NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `roleID` int(3) NOT NULL,
-  `firstname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `lastname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`userID`),
-  UNIQUE KEY `id` (`userID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+CREATE TABLE IF NOT EXISTS `tbl_donorgiftdescriptions` (
+  `giftDescriptionID` int(10) NOT NULL AUTO_INCREMENT,
+  `giftsID` int(10) DEFAULT NULL,
+  `giftDescription1` varchar(255) DEFAULT NULL,
+  `giftDetails` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`giftDescriptionID`),
+  KEY `FK_tbl_donorGiftdescriptions_tbl_donorGifts` (`giftsID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2378 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
