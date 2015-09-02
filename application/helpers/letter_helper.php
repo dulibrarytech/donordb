@@ -57,9 +57,9 @@ function generateLetter($data)
 		<br/><br/>
 
 		<img src='" . base_url() . SIG_IMG_READER . "' height = '85px' /><br/>
-		Nancy Allen
+		Michael Levine-Clark
 		<br/>
-		Dean and Director
+		Interim Dean and Director
 
 	</div>
 
