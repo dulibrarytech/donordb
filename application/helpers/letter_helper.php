@@ -29,11 +29,11 @@ function generateLetter($data)
 
 		if($data['org'] != "") { $letterBody .= $data['org'] . "<br />"; }
 
-		$letterBody .= $data['addr1'] . "<br />";
+		if($data['addr1'] != "") { $letterBody .= $data['addr1'] . "<br />"; }
 
 		if($data['addr2'] != "") { $letterBody .= $data['addr2'] . "<br />"; }
 
-		$letterBody .= $data['city'] . ", " . $data['state'] . " " . $data['zip'] . "<br />"; 
+		if($data['city'] != "" && $data['state'] != "" && $data['zip'] != "") { $letterBody .= $data['city'] . ", " . $data['state'] . " " . $data['zip'] . "<br />"; }
 
 		if($data['country'] != "" && $data['country'] != "USA") { $letterBody .= $data['country'] . "<br />"; }
 

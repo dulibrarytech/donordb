@@ -66,10 +66,10 @@ form = (function($) {
 		});
 
 		$( "#addr1_input_box" ).rules( "add", {
-			required: true,
+			// required: true,
 			maxlength: 255,
 			messages: {
-			    required: "Please enter an address",
+			    // required: "Please enter an address",
 			    maxlength: "Address 1: Character limit exceeded (255)"
 			}
 		});
@@ -82,19 +82,19 @@ form = (function($) {
 		});
 
 		$( "#city_input_box" ).rules( "add", {
-			required: true,
+			// required: true,
 			maxlength: 75,
 			messages: {
-			    required: "Please enter a city",
+			    // required: "Please enter a city",
 			    maxlength: "City: Character limit exceeded (75)"
 			}
 		});
 
 		$( "#state_input_box" ).rules( "add", {
-			required: true,
+			// required: true,
 			maxlength: 75,
 			messages: {
-			    required: "Please enter a state",
+			    // required: "Please enter a state",
 			    maxlength: "State: Character limit exceeded (75)"
 			}
 		});
