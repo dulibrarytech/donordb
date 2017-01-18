@@ -33,7 +33,8 @@ function generateLetter($data)
 
 		if($data['addr2'] != "") { $letterBody .= $data['addr2'] . "<br />"; }
 
-		if($data['city'] != "" && $data['state'] != "" && $data['zip'] != "") { $letterBody .= $data['city'] . ", " . $data['state'] . " " . $data['zip'] . "<br />"; }
+		//if($data['city'] != "" && $data['state'] != "" && $data['zip'] != "") { $letterBody .= $data['city'] . ", " . $data['state'] . " " . $data['zip'] . "<br />"; }
+		if($data['city'] != "" && $data['state'] != "") { $letterBody .= $data['city'] . ", " . $data['state'] . " " . $data['zip'] . "<br />"; }
 
 		if($data['country'] != "" && $data['country'] != "USA") { $letterBody .= $data['country'] . "<br />"; }
 
