@@ -24,8 +24,9 @@ function generateLetter($data)
 
 	<div style = 'height: 740px;'>
 
-		" . $data['currentDate'] . " <br /><br />"
-		. $data['titleString'] . " " . $data['firstName'] . " " . $data['lastName'] . "<br />";
+		" . $data['currentDate'] . " <br /><br />";
+
+		if($data['org'] != "" || $data['addr1'] != "") { $letterBody .= $data['titleString'] . " " . $data['firstName'] . " " . $data['lastName'] . "<br />"; }
 
 		if($data['org'] != "") { $letterBody .= $data['org'] . "<br />"; }
 
