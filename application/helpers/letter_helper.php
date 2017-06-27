@@ -61,7 +61,7 @@ function generateLetter($data)
 		<img src='" . base_url() . SIG_IMG_READER . "' height = '85px' /><br/>
 		Michael Levine-Clark
 		<br/>
-		Interim Dean and Director
+		Dean
 
 	</div>
 
