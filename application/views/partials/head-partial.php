@@ -1,5 +1,5 @@
 <!-- App title text -->
-<link href='http://fonts.googleapis.com/css?family=Lusitana' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lusitana' rel='stylesheet' type='text/css'>
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/main.css" />
