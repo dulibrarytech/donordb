@@ -33,13 +33,15 @@ authentication = (function($) {
             	if(response == null || response.isValid === "false") {
             		loginForm.doModal();
             	}
+            	else if() { // if not 200
+
+            	}
             	else {
             		searchView.initSession();
             	}
             },
             error: function ( textStatus, errorThrown ) {
                 alert( "validateSession error: " + errorThrown + " See console log for status");
-                console.log(textStatus);
                 window.location.replace(_serverErrorView);
             }
         };

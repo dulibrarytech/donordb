@@ -49,8 +49,8 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'libappsuser';
-$db['default']['password'] = 'A@Cl1bW3b@pp50nm00n';
+$db['default']['username'] = 'root';
+$db['default']['password'] = 'jryn003@';
 $db['default']['database'] = 'donordb';
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
