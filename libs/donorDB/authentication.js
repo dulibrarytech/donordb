@@ -30,12 +30,14 @@ authentication = (function($) {
             cache: true,
             success: function (response) { 
 
+            	console.log("response", response);
+
             	if(response == null || response.isValid === "false") {
             		loginForm.doModal();
             	}
-            	else if() { // if not 200
+            	// else if() { // if not 200
 
-            	}
+            	// }
             	else {
             		searchView.initSession();
             	}
