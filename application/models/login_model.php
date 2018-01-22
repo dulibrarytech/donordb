@@ -33,6 +33,8 @@ class Login_model extends CI_Model
         $profile  = array('isValid' => FALSE, 'userName' => $userName);
         $remoteAuth = FALSE;                                                                            
 
+
+
         // Detect ldap and ad usernames
         if (ctype_digit($userName)) 
         {

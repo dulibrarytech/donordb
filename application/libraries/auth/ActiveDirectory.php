@@ -2,9 +2,10 @@
 
 class ActiveDirectory  
 {
-    private $primary = "dc01du.du.edu";
-    private $secondary = "dc02du.du.edu";
-    private $tertiary = "dc03du.du.edu";
+    // private $primary = "dc01du.du.edu";
+    // private $secondary = "dc02du.du.edu";
+    // private $tertiary = "dc03du.du.edu";
+    private $primary = "dcdunlb.du.edu";
     private $domain = "du.edu";
     private $baseDn = "DC=du,DC=du.edu";
 
@@ -16,22 +17,30 @@ class ActiveDirectory
      */
     public function authenticate($userName, $passWord) 
     {
+        // $adOptions = array(
+        //     'larry' => array(
+        //         'host'=>$this->primary,
+        //         'accountDomainName'=>$this->domain,
+        //         'baseDn'=>$this->baseDn,
+        //     ),
+        //     'curly' => array(
+        //         'host'=>$this->secondary,
+        //         'accountDomainName'=>$this->domain,
+        //         'baseDn'=>$this->baseDn,
+        //     ),
+        //     'moe' => array(
+        //         'host'=>$this->tertiary,
+        //         'accountDomainName'=>$this->domain,
+        //         'baseDn'=>$this->baseDn,
+        //     ),
+        // );
+
         $adOptions = array(
             'larry' => array(
                 'host'=>$this->primary,
                 'accountDomainName'=>$this->domain,
                 'baseDn'=>$this->baseDn,
-            ),
-            'curly' => array(
-                'host'=>$this->secondary,
-                'accountDomainName'=>$this->domain,
-                'baseDn'=>$this->baseDn,
-            ),
-            'moe' => array(
-                'host'=>$this->tertiary,
-                'accountDomainName'=>$this->domain,
-                'baseDn'=>$this->baseDn,
-            ),
+            )
         );
 
         $ldap = new Zend\Ldap\Ldap();

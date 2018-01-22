@@ -2,8 +2,8 @@
 
 class Ldap 
 {
-    private $host = "goldpioneerweb.du.edu";
-    private $port = "389";
+    private $host = "ldap://ldap.du.edu";
+    private $port = "636";
     private $baseDn = "ou=people,o=du.edu,o=universityofdenver";
 
     /**
