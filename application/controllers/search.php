@@ -375,7 +375,7 @@ class Search extends CI_Controller {
 			//$this->Edit_model->setLetterAsSent($giftID);
 
 			// Read external file
-
+			// Test properties here for "undefined index" errors upon letter generation
 			echo json_encode(generateLetter($data));
 		}
 		else
