@@ -3,7 +3,7 @@
 $config = array(
 					'mailpath'		=> '',
 					'protocol'		=> 'smtp',
-					'smtp_host'		=> 'mailout.du.edu',
+					'smtp_host'		=> '',
 					'smtp_port'		=> 25,
 					'validate'		=> true,
 					'mailtype'		=> 'html'
