@@ -38,7 +38,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 
 //define('EXTERNAL_IMAGE_DIR', 'C:\\xampp\\htdocs\\external-images\\testsig.jpg'); // Local
-define('EXTERNAL_IMAGE_DIR', '/usr/I5app/si.jpg'); // server
+define('EXTERNAL_IMAGE_DIR', './application/img/si.jpg'); // server
 
 define('SIG_IMG_READER', 'index.php/search/getSigImage');
 
