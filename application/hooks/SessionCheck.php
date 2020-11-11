@@ -22,7 +22,15 @@ class SessionCheck
     function isSessionValid() 
     {
     	$CI =& get_instance();
-    	if($CI->router->class == 'login' || $CI->router->class == 'codetest' || ($CI->router->class == 'search' && $CI->router->method == 'index'))
+	require 'SimpleLogger.php';
+	$logger = new SimpleLogger();
+        $logger->log("Class: " . $CI->router->class);
+        $logger->log("Method: " . $CI->router->method);
+
+    	if($CI->router->class == 'login' || 
+            $CI->router->class == 'codetest' || 
+            ($CI->router->class == 'search' && $CI->router->method == 'index') ||
+	    $CI->router->class == 'livinglibrary')
     	{
     		return;
     	}
@@ -33,9 +41,14 @@ class SessionCheck
 
     		if($userProfile == null || $userProfile["isValid"] === false)
     		{
-    			//header("HTTP/1.1 403 Forbidden");    // TODO: redirect to search?  Test it first
-        		//die();
-                redirect('search');
+    		    //if($CI->router->class == 'livinglibrary' && $CI->router->method != 'index') 
+                    //{
+                    //    redirect('livinglibrary');
+                    //}
+                    //else if($CI->router->class != 'livinglibrary') 
+                    //{
+                    redirect('search');
+                    //}
     		}	
     	}
     }

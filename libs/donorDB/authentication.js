@@ -22,8 +22,8 @@ authentication = (function($) {
 	 * Runs initPage().  If session active and valid, will then run setRole() on the page based on the session roleID.
 	 * If the session is null or invalid, loads the login dialog
 	 */
-	validateSession = function() {
-
+	validateSession = function(callback=null) {
+			console.log("TEST val session: cb:", callback)
 	  	requestObj = {
             url: _loginUrl + "/getSessionProfile",
             dataType: "json",
@@ -33,12 +33,15 @@ authentication = (function($) {
             	console.log("response", response);
 
             	if(response == null || response.isValid === "false") {
-            		loginForm.doModal();
+				console.log("TEST calling loginform.domodal()", callback)
+            		loginForm.doModal(callback);
             	}
-            	// else if() { // if not 200
-
-            	// }
+            	else if(callback) {
+				console.log("TEST hits cb")
+            		callback(true);
+            	}
             	else {
+				console.log("TEST hits searchview init")
             		searchView.initSession();
             	}
             },
@@ -58,8 +61,8 @@ authentication = (function($) {
 		return (profile != null && profile['isValid'] == true)
 	};
 
-	authenticate = function(loginData) {
-
+	authenticate = function(loginData, callback=null) {
+			console.log("TEST on auth cb in", callback)
 	  	var qstring = "userName=" + loginData.userName + "&passWord=" + loginData.passWord;
 
 	  	requestObj = {
@@ -72,7 +75,12 @@ authentication = (function($) {
 
                 if(validateResponse(response)) {
                 	sessionStorage.setItem("donorDB_profile", JSON.stringify(response));
-                	searchView.initSession();
+                	if(callback) {
+                		callback(true);
+                	}
+                	else {
+                		searchView.initSession();
+                	}
      				loginForm.closeDlg();
                 }
                 else {
@@ -127,14 +135,14 @@ authentication = (function($) {
 
 	return {
 
-		validateSession: function() {
-			validateSession();
+		validateSession: function(callback) {
+			validateSession(callback);
 		},
 		validateLocalSession: function() {
 			return validateLocalSession();
 		},
-		authenticate: function(loginData) {
-			authenticate(loginData);
+		authenticate: function(loginData, callback) {
+			authenticate(loginData, callback);
 		},
 		setUserRole: function() {
 			setUserRole();

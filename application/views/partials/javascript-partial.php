@@ -20,11 +20,14 @@
 <!-- Page Load Scripts -->
 <script src="<?php echo base_url();?>libs/donorDB/views.js"></script>
 
+<!-- Living Library integration -->
+<script type="text/javascript" src="<?php echo base_url();?>assets/DataTables/datatables.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/DataTables/range_dates.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>libs/livingLibrary/config.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>libs/livingLibrary/helper.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>libs/livingLibrary/get.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>libs/livingLibrary/postPutDelete.js"></script>
+
 <!-- External Libs -->
 <script src="<?php echo base_url();?>libs/dateUtils.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>libs/fancyBox/source/jquery.fancybox.pack.js"></script>
-
-
-
-
-

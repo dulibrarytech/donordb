@@ -7,6 +7,7 @@ loginForm = (function($) {
       email = $( "#email" ),
       password = $( "#password" ),
       allFields = $( [] ).add( name ).add( email ).add( password ),
+      onAuthenticateCallback = null,
       tips = $( ".validateTips" );
  
     function updateTips( t ) {
@@ -39,8 +40,10 @@ loginForm = (function($) {
       }
     }
 
-    function doModal() {
-      
+    function doModal(callback=null) {
+	console.log("TEST doModal()val of oac", onAuthenticateCallback)
+      onAuthenticateCallback = callback;
+	console.log("TEST doModal() assigned val to oac", onAuthenticateCallback)
       $( "#dialog-form" ).dialog( "open" );
     }
 
@@ -102,9 +105,9 @@ loginForm = (function($) {
         Submit: function() {
 
             allFields.removeClass( "ui-state-error" );
-
+		console.log("TEST dialog() oac val is", onAuthenticateCallback)
             if(authenticateFormData()) {
-              authentication.authenticate({userName: userName, passWord: passWord}); 
+              authentication.authenticate({userName: userName, passWord: passWord}, onAuthenticateCallback); 
             }         
           }
         }
@@ -115,7 +118,7 @@ loginForm = (function($) {
         if ( event.which == 13 ) { 
 
            if(authenticateFormData()) {
-              authentication.authenticate({userName: userName, passWord: passWord}); 
+              authentication.authenticate({userName: userName, passWord: passWord}, onAuthenticateCallback); 
            }
             
         }
@@ -123,8 +126,8 @@ loginForm = (function($) {
 
     return {
 
-      doModal: function() {          
-          doModal();
+      doModal: function(callback) {          
+          doModal(callback);
       },
       closeDlg: function() {          
           closeDlg();

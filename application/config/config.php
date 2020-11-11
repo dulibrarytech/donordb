@@ -14,7 +14,8 @@
 | path to your installation.
 |
 */
-$config['base_url']	= '';
+$config['base_url'] = '';
+//$config['base_url']	= 'https://localhost/donordb/';
 //$config['base_url']	= 'lib-devmoon.du.edu';
 
 /*
@@ -357,6 +358,16 @@ $config['rewrite_short_tags'] = FALSE;
 |
 */
 $config['proxy_ips'] = '';
+
+/*
+|--------------------------------------------------------------------------
+| Living Library API URL
+|--------------------------------------------------------------------------
+|
+| URL of the Living Library API.
+|
+*/
+$config['living_library_api_url'] = getenv('API_URL');
 
 
 /* End of file config.php */
