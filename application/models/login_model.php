@@ -23,8 +23,8 @@ class Login_model extends CI_Model
      */
     public function authenticate($login) 
     {
-    	if (!is_array($login) || empty($login)) 
-    	{
+    if (!is_array($login) || empty($login)) 
+        {
             return header("HTTP/1.1 404 Not Found");
         }
 
@@ -32,8 +32,6 @@ class Login_model extends CI_Model
         $passWord = strip_tags(trim($login["passWord"]));
         $profile  = array('isValid' => FALSE, 'userName' => $userName);
         $remoteAuth = FALSE;                                                                            
-
-
 
         // Detect ldap and ad usernames
         if (ctype_digit($userName)) 
