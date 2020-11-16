@@ -23,25 +23,18 @@ authentication = (function($) {
 	 * If the session is null or invalid, loads the login dialog
 	 */
 	validateSession = function(callback=null) {
-			console.log("TEST val session: cb:", callback)
 	  	requestObj = {
             url: _loginUrl + "/getSessionProfile",
             dataType: "json",
             cache: true,
             success: function (response) { 
-
-            	console.log("response", response);
-
             	if(response == null || response.isValid === "false") {
-				console.log("TEST calling loginform.domodal()", callback)
             		loginForm.doModal(callback);
             	}
             	else if(callback) {
-				console.log("TEST hits cb")
             		callback(true);
             	}
             	else {
-				console.log("TEST hits searchview init")
             		searchView.initSession();
             	}
             },
@@ -62,7 +55,6 @@ authentication = (function($) {
 	};
 
 	authenticate = function(loginData, callback=null) {
-			console.log("TEST on auth cb in", callback)
 	  	var qstring = "userName=" + loginData.userName + "&passWord=" + loginData.passWord;
 
 	  	requestObj = {

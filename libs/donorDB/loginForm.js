@@ -41,9 +41,7 @@ loginForm = (function($) {
     }
 
     function doModal(callback=null) {
-	console.log("TEST doModal()val of oac", onAuthenticateCallback)
       onAuthenticateCallback = callback;
-	console.log("TEST doModal() assigned val to oac", onAuthenticateCallback)
       $( "#dialog-form" ).dialog( "open" );
     }
 
