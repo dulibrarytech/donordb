@@ -374,6 +374,14 @@ const create_donation = function () {
 
     if (form_content_element) {
         form_content_element.innerHTML = form_html;
+
+        $( "#gift-date-box" ).datepicker({
+            altField: "#gift-date-box",
+            altFormat: "yy-mm-dd",
+            changeYear: true,
+            changeMonth: true,
+            yearRange: "c-100:c+10"
+        });
     }
 
     living_library_helper.fetch_with_timeout(living_library_api_url, {
