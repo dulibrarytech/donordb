@@ -41,7 +41,6 @@ class Login extends CI_Controller
      */
     public function logout() 
     {
-        // Log the logout
         $profile = $this->phpsessions->get("donorDB_profile");
         $userName = $profile['userName'];
         log_message("info", "logout: " . $userName);

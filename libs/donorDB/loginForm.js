@@ -103,7 +103,6 @@ loginForm = (function($) {
         Submit: function() {
 
             allFields.removeClass( "ui-state-error" );
-		console.log("TEST dialog() oac val is", onAuthenticateCallback)
             if(authenticateFormData()) {
               authentication.authenticate({userName: userName, passWord: passWord}, onAuthenticateCallback); 
             }         

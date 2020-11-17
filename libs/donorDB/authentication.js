@@ -23,7 +23,7 @@ authentication = (function($) {
 	 * If the session is null or invalid, loads the login dialog
 	 */
 	validateSession = function(callback=null) {
-	  	requestObj = {
+		requestObj = {
             url: _loginUrl + "/getSessionProfile",
             dataType: "json",
             cache: true,
@@ -31,11 +31,17 @@ authentication = (function($) {
             	if(response == null || response.isValid === "false") {
             		loginForm.doModal(callback);
             	}
-            	else if(callback) {
-            		callback(true);
-            	}
             	else {
-            		searchView.initSession();
+            		if(validateLocalSession() == false) {
+	            		sessionStorage.setItem("donorDB_profile", JSON.stringify(response));
+	            	}
+
+	            	if(callback) {
+	            		callback(true);
+	            	}
+	            	else {
+	            		searchView.initSession();
+	            	}
             	}
             },
             error: function ( textStatus, errorThrown ) {
