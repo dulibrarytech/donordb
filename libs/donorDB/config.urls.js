@@ -8,15 +8,16 @@
  * University of Denver, June 2013
  */
 
+const protocol = "http";
+
 var pathArray = window.location.href.split( '/' );
 var baseUrl = "";
+
 if(pathArray[2] == "localhost") {
-	// baseUrl     = "http://" + document.domain + "/donordb/";
-	baseUrl     = "https://" + document.domain + "/donordb/";
+	baseUrl     = protocol + "://" + document.domain + "/donordb/";
 }
 else {
-
-	baseUrl     = "https://" + document.domain + "/";
+	baseUrl     = protocol + "://" + document.domain + "/";
 }
 
 var _editUrl   			= baseUrl + "index.php/edit";
