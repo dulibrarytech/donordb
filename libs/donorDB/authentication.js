@@ -33,14 +33,16 @@ authentication = (function($) {
             	}
             	else {
             		if(validateLocalSession() == false) {
-	            		sessionStorage.setItem("donorDB_profile", JSON.stringify(response));
-	            	}
-
-	            	if(callback) {
-	            		callback(true);
+	            		//sessionStorage.setItem("donorDB_profile", JSON.stringify(response));
+	            		logout();
 	            	}
 	            	else {
-	            		searchView.initSession();
+	            		if(callback) {
+		            		callback(true);
+		            	}
+		            	else {
+		            		searchView.initSession();
+		            	}
 	            	}
             	}
             },

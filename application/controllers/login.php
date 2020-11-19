@@ -51,7 +51,13 @@ class Login extends CI_Controller
         $this->phpsessions->delete("activeDonorID");
         $this->phpsessions->delete("prevSearchResults");
         
-        redirect('search');
+        $referrer = $_SERVER['HTTP_REFERER'];
+        $protocol = strpos($referrer, "https://") === FALSE ? "http://" : "https://";
+        $domain = $_SERVER['HTTP_HOST'];
+        $baseUri = $protocol . $domain . "/index.php/";
+        $redirectPath = str_replace($baseUri, "", $referrer);
+
+        redirect($redirectPath);
     }
 
     public function getSessionProfile() 
