@@ -16,7 +16,6 @@
 */
 $config['base_url'] = '';
 //$config['base_url']	= 'https://localhost/donordb/';
-//$config['base_url']	= 'lib-devmoon.du.edu';
 
 /*
 |--------------------------------------------------------------------------
